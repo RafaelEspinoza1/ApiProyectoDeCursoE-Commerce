@@ -1,0 +1,6 @@
+@ApiProyectoDeCursoE_Commerce_HostAddress = http://localhost:5028
+
+GET {{ApiProyectoDeCursoE_Commerce_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
