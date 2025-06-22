@@ -1,4 +1,5 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,65 +24,94 @@ namespace APIProyectoDeCursoE_commerce.Controllers
 
         // GET: api/IngresosECommerces
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IngresosECommerce>>> GetIngresosECommerce()
+        public async Task<ActionResult<IEnumerable<IngresosECommerceReadDTO>>> GetIngresosECommerce()
         {
-            return await _context.IngresosECommerce.ToListAsync();
+                            return await _context.IngresosECommerce
+                 .Include(i => i.Usuario)
+                 .Select(i => new IngresosECommerceReadDTO
+                 {
+                     IngresoId = i.IngresoId,
+                     Cantidad = i.Cantidad,
+                     Tipo = i.Tipo,
+                     Fecha = i.Fecha,
+                     UsuarioId = i.UsuarioId,
+                     NombreUsuario = i.Usuario.Nombre,
+                     ApellidoUsuario = i.Usuario.Apellido
+                 })
+                 .ToListAsync();
         }
 
         // GET: api/IngresosECommerces/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IngresosECommerce>> GetIngresosECommerce(int id)
+        public async Task<ActionResult<IngresosECommerceReadDTO>> GetIngresosECommerce(int id)
         {
-            var ingresosECommerce = await _context.IngresosECommerce.FindAsync(id);
+            var ingreso = await _context.IngresosECommerce
+             .Include(i => i.Usuario)
+             .FirstOrDefaultAsync(i => i.IngresoId == id);
+                if (ingreso == null)
+                    return NotFound();
 
-            if (ingresosECommerce == null)
+            return new IngresosECommerceReadDTO
             {
-                return NotFound();
-            }
-
-            return ingresosECommerce;
+                IngresoId = ingreso.IngresoId,
+                Cantidad = ingreso.Cantidad,
+                Tipo = ingreso.Tipo,
+                Fecha = ingreso.Fecha,
+                UsuarioId = ingreso.UsuarioId,
+                NombreUsuario = ingreso.Usuario.Nombre,
+                ApellidoUsuario = ingreso.Usuario.Apellido
+            };
         }
 
         // PUT: api/IngresosECommerces/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngresosECommerce(int id, IngresosECommerce ingresosECommerce)
+        public async Task<IActionResult> PutIngresosECommerce(int id, IngresosECommerceUpdateDTO dto)
         {
-            if (id != ingresosECommerce.IngresoId)
-            {
-                return BadRequest();
-            }
+            var ingreso = await _context.IngresosECommerce.FindAsync(id);
+            if (ingreso == null)
+                return NotFound();
 
-            _context.Entry(ingresosECommerce).State = EntityState.Modified;
+            ingreso.Cantidad = dto.Cantidad;
+            ingreso.Tipo = dto.Tipo;
+            ingreso.Fecha = dto.Fecha;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IngresosECommerceExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _context.SaveChangesAsync();
             return NoContent();
         }
 
         // POST: api/IngresosECommerces
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<IngresosECommerce>> PostIngresosECommerce(IngresosECommerce ingresosECommerce)
+        public async Task<ActionResult<IngresosECommerceReadDTO>> PostIngresosECommerce(IngresosECommerceCreateDTO dto)
         {
-            _context.IngresosECommerce.Add(ingresosECommerce);
+            var usuarioExiste = await _context.Usuarios.AnyAsync(u => u.UsuarioId == dto.UsuarioId);
+            if (!usuarioExiste)
+                return BadRequest("El usuario no existe.");
+
+            var nuevoIngreso = new IngresosECommerce
+            {
+                Cantidad = dto.Cantidad,
+                Tipo = dto.Tipo,
+                Fecha = dto.Fecha,
+                UsuarioId = dto.UsuarioId
+            };
+
+            _context.IngresosECommerce.Add(nuevoIngreso);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetIngresosECommerce), new { id = ingresosECommerce.IngresoId }, ingresosECommerce);
+            await _context.Entry(nuevoIngreso).Reference(i => i.Usuario).LoadAsync();
+
+            return CreatedAtAction(nameof(GetIngresosECommerce), new { id = nuevoIngreso.IngresoId }, new IngresosECommerceReadDTO
+            {
+                IngresoId = nuevoIngreso.IngresoId,
+                Cantidad = nuevoIngreso.Cantidad,
+                Tipo = nuevoIngreso.Tipo,
+                Fecha = nuevoIngreso.Fecha,
+                UsuarioId = nuevoIngreso.UsuarioId,
+                NombreUsuario = nuevoIngreso.Usuario.Nombre,
+                ApellidoUsuario = nuevoIngreso.Usuario.Apellido
+            });
         }
 
         // DELETE: api/IngresosECommerces/5

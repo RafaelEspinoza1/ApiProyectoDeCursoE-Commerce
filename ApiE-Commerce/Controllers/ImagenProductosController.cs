@@ -1,11 +1,14 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.DTOs.ImagenProductoDTOS;
 using ApiProyectoDeCursoE_Commerce.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace APIProyectoDeCursoE_commerce.Controllers
@@ -23,52 +26,58 @@ namespace APIProyectoDeCursoE_commerce.Controllers
 
         // GET: api/ImagenProductoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ImagenProducto>>> GetImagenesProducto()
+        public async Task<ActionResult<IEnumerable<ImagenProductoReadDTO>>> GetImagenesProducto()
         {
-            return await _context.ImagenesProducto.ToListAsync();
+            return await _context.ImagenesProducto
+                .Select(img => new ImagenProductoReadDTO
+                {
+                    ImagenId = img.ImagenId,
+                    ImagenUrl = img.ImagenUrl,
+                    ProductoId = img.ProductoId
+                })
+                .ToListAsync();
         }
 
         // GET: api/ImagenProductoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ImagenProducto>> GetImagenProducto(int id)
+        public async Task<ActionResult<ImagenProductoReadDTO>> GetImagenProducto(int id)
         {
-            var imagenProducto = await _context.ImagenesProducto.FindAsync(id);
+            var img = await _context.ImagenesProducto.FindAsync(id);
 
-            if (imagenProducto == null)
-            {
+            if (img == null)
                 return NotFound();
-            }
 
-            return imagenProducto;
+            return new ImagenProductoReadDTO
+            {
+                ImagenId = img.ImagenId,
+                ImagenUrl = img.ImagenUrl,
+                ProductoId = img.ProductoId
+            };
         }
 
         // PUT: api/ImagenProductoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutImagenProducto(int id, ImagenProducto imagenProducto)
+        public async Task<IActionResult> PutImagenProducto(int id, ImagenProductoUpdateDTO dto)
         {
-            if (id != imagenProducto.ImagenId)
+            var imagen = await _context.ImagenesProducto.FindAsync(id);
+
+            if (imagen == null)
+                return NotFound();
+
+            imagen.ImagenUrl = dto.ImagenUrl;
+            if (!Regex.IsMatch(dto.ImagenUrl, @"\.(jpg|jpeg|png|gif)$", RegexOptions.IgnoreCase))
             {
-                return BadRequest();
+                return BadRequest("La URL debe ser de una imagen válida (.jpg, .png, .jpeg o .gif).");
+            }
+            if (imagen.ImagenUrl == dto.ImagenUrl)
+            {
+                return BadRequest("La URL de la imagen es igual a la actual.");
             }
 
-            _context.Entry(imagenProducto).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ImagenProductoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -76,12 +85,42 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         // POST: api/ImagenProductoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ImagenProducto>> PostImagenProducto(ImagenProducto imagenProducto)
+        public async Task<ActionResult<ImagenProductoReadDTO>> PostImagenProducto(ImagenProductoCreateDTO dto)
         {
-            _context.ImagenesProducto.Add(imagenProducto);
+            var productoExiste = await _context.Productos.AnyAsync(p => p.ProductoId == dto.ProductoId);
+            if (!productoExiste)
+                return BadRequest("El producto especificado no existe.");
+            if (!Regex.IsMatch(dto.ImagenUrl, @"\.(jpg|jpeg|png|gif)$", RegexOptions.IgnoreCase))
+            {
+                return BadRequest("La URL debe ser de una imagen válida (.jpg, .png, .jpeg o .gif).");
+            }
+            bool urlDuplicada = await _context.ImagenesProducto
+                    .AnyAsync(i => i.ProductoId == dto.ProductoId && i.ImagenUrl == dto.ImagenUrl);
+
+            if (urlDuplicada)
+            {
+                return BadRequest("Ya existe esta imagen para el producto.");
+            }
+
+
+            var nuevaImagen = new ImagenProducto
+            {
+                ImagenUrl = dto.ImagenUrl,
+                ProductoId = dto.ProductoId
+            };
+
+            _context.ImagenesProducto.Add(nuevaImagen);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetImagenProducto), new { id = imagenProducto.ImagenId }, imagenProducto);
+            var readDTO = new ImagenProductoReadDTO
+            {
+                ImagenId = nuevaImagen.ImagenId,
+                ImagenUrl = nuevaImagen.ImagenUrl,
+                ProductoId = nuevaImagen.ProductoId
+            };
+
+            return CreatedAtAction(nameof(GetImagenProducto), new { id = nuevaImagen.ImagenId }, readDTO);
+
         }
 
         // DELETE: api/ImagenProductoes/5

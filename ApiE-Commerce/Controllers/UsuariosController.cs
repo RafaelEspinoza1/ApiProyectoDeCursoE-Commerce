@@ -124,16 +124,53 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuarios(int id)
         {
-            var usuarios = await _context.Usuarios.FindAsync(id);
-            if (usuarios == null)
+            try
             {
-                return NotFound();
+                var usuario = await _context.Usuarios.FindAsync(id);
+                if (usuario == null)
+                {
+                    return NotFound();
+                }
+
+                // Verificar si es vendedor
+                var vendedor = await _context.Vendedores
+                    .FirstOrDefaultAsync(v => v.UsuarioId == id);
+
+                if (vendedor != null)
+                {
+                    // Buscar productos del vendedor
+                    var productos = await _context.Productos
+                        .Where(p => p.VendedorId == vendedor.VendedorId)
+                        .ToListAsync();
+
+                    // Obtener IDs de productos
+                    var productosIds = productos.Select(p => p.ProductoId).ToList();
+
+                    // Eliminar imágenes relacionadas a esos productos
+                    var imagenes = await _context.ImagenesProducto
+                        .Where(img => productosIds.Contains(img.ProductoId))
+                        .ToListAsync();
+
+                    _context.ImagenesProducto.RemoveRange(imagenes);
+
+                    // Eliminar productos
+                    _context.Productos.RemoveRange(productos);
+
+                    // Eliminar vendedor
+                    _context.Vendedores.Remove(vendedor);
+                }
+
+                // Eliminar usuario
+                _context.Usuarios.Remove(usuario);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Usuarios.Remove(usuarios);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar el usuario con ID {id}: {ex.Message}");
+                return StatusCode(500, "Error interno al intentar eliminar el usuario.");
+            }
         }
 
         private bool UsuariosExists(int id)

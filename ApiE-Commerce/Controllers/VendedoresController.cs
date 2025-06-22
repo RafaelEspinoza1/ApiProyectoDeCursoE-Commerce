@@ -177,16 +177,51 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVendedores(int id)
         {
-            var vendedores = await _context.Vendedores.FindAsync(id);
-            if (vendedores == null)
+            try
             {
-                return NotFound();
+                var vendedor = await _context.Vendedores.FindAsync(id);
+                if (vendedor == null)
+                {
+                    Console.WriteLine($"Vendedor con ID {id} no encontrado.");
+                    return NotFound($"Vendedor con ID {id} no encontrado.");
+                }
+
+                // Buscar productos del vendedor
+                var productos = await _context.Productos
+                    .Where(p => p.VendedorId == id)
+                    .ToListAsync();
+
+                var productosIds = productos.Select(p => p.ProductoId).ToList();
+
+                // Buscar imágenes de esos productos
+                var imagenes = await _context.ImagenesProducto
+                    .Where(img => productosIds.Contains(img.ProductoId))
+                    .ToListAsync();
+
+                if (imagenes.Any())
+                {
+                    _context.ImagenesProducto.RemoveRange(imagenes);
+                    Console.WriteLine($"Se eliminaron {imagenes.Count} imágenes de productos del vendedor {id}.");
+                }
+
+                if (productos.Any())
+                {
+                    _context.Productos.RemoveRange(productos);
+                    Console.WriteLine($"Se eliminaron {productos.Count} productos del vendedor {id}.");
+                }
+
+                _context.Vendedores.Remove(vendedor);
+                Console.WriteLine($"Se eliminó el vendedor con ID {id}.");
+
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Vendedores.Remove(vendedores);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar el vendedor con ID {id}: {ex.Message}");
+                return StatusCode(500, "Error interno al intentar eliminar el vendedor.");
+            }
         }
 
         private bool VendedoresExists(int id)
