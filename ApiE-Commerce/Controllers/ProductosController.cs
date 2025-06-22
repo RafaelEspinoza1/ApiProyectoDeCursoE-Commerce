@@ -27,19 +27,24 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         public async Task<ActionResult<IEnumerable<ProductoReadDTO>>> GetProductosConImagenes()
         {
             var productos = await _context.Productos
-                    .Include(p => p.Imagenes)
-                    .Select(p => new ProductoReadDTO
-                    {
-                        ProductoId = p.ProductoId,
-                        NombreProducto = p.NombreProducto,
-                        Descripcion = p.Descripcion,
-                        Precio = p.Precio,
-                        Cantidad = p.Cantidad,
-                        Tipo = p.Tipo,
-                        Estado = p.Estado,
-                        VendedorId = p.VendedorId,
-                        Imagenes = p.Imagenes.Select(i => i.ImagenUrl).ToList()
-                    }).ToListAsync();
+                .Include(p => p.Imagenes)
+                .Include(p => p.Vendedor)
+                    .ThenInclude(v => v.Usuario)
+                .Select(p => new ProductoReadDTO
+                {
+                    ProductoId = p.ProductoId,
+                    NombreProducto = p.NombreProducto,
+                    Descripcion = p.Descripcion,
+                    Precio = p.Precio,
+                    Cantidad = p.Cantidad,
+                    Tipo = p.Tipo,
+                    Estado = p.Estado,
+                    VendedorId = p.VendedorId,
+                    VendedorNombre = p.Vendedor.Usuario.Nombre,
+                    VendedorApellido = p.Vendedor.Usuario.Apellido,
+                    Imagenes = p.Imagenes.Select(i => i.ImagenUrl).ToList()
+                }).ToListAsync();
+
 
             return productos;
         }
@@ -49,20 +54,24 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         public async Task<ActionResult<ProductoReadDTO>> GetProductos(int id)
         {
             var producto = await _context.Productos
-        .Include(p => p.Imagenes)
-        .Where(p => p.ProductoId == id)
-        .Select(p => new ProductoReadDTO
-        {
-            ProductoId = p.ProductoId,
-            NombreProducto = p.NombreProducto,
-            Descripcion = p.Descripcion,
-            Precio = p.Precio,
-            Cantidad = p.Cantidad,
-            Tipo = p.Tipo,
-            Estado = p.Estado,
-            VendedorId = p.VendedorId,
-            Imagenes = p.Imagenes.Select(i => i.ImagenUrl).ToList()
-        }).FirstOrDefaultAsync();
+                .Include(p => p.Imagenes)
+                .Include(p => p.Vendedor)
+                    .ThenInclude(v => v.Usuario)
+                .Where(p => p.ProductoId == id)
+                .Select(p => new ProductoReadDTO
+                {
+                    ProductoId = p.ProductoId,
+                    NombreProducto = p.NombreProducto,
+                    Descripcion = p.Descripcion,
+                    Precio = p.Precio,
+                    Cantidad = p.Cantidad,
+                    Tipo = p.Tipo,
+                    Estado = p.Estado,
+                    VendedorId = p.VendedorId,
+                    VendedorNombre = p.Vendedor.Usuario.Nombre,
+                    VendedorApellido = p.Vendedor.Usuario.Apellido,
+                    Imagenes = p.Imagenes.Select(i => i.ImagenUrl).ToList()
+                }).FirstOrDefaultAsync();
 
             if (producto == null)
             {
@@ -75,31 +84,28 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         // PUT: api/Productos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProductos(int id, Productos productos)
+        public async Task<IActionResult> PutProductos(int id, ProductoUpdateDTO dto)
         {
-            if (id != productos.ProductoId)
+            var producto = await _context.Productos.FindAsync(id);
+            if (producto == null)
             {
-                return BadRequest();
+                return NotFound();
+            }
+            
+            if (!EstadosPermitidos.Contains(dto.Estado))
+            {
+                return BadRequest("Estado de producto no válido. Solo se permiten: Nuevo, Como nuevo, Buen estado, Aceptable.");
             }
 
-            _context.Entry(productos).State = EntityState.Modified;
+            producto.NombreProducto = dto.NombreProducto;
+            producto.Descripcion = dto.Descripcion;
+            producto.Precio = dto.Precio;
+            producto.Cantidad = dto.Cantidad;
+            producto.Tipo = dto.Tipo;
+            producto.Estado = dto.Estado;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductosExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _context.SaveChangesAsync();
+            
             return NoContent();
         }
 
@@ -118,10 +124,39 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 Estado = dto.Estado,
                 VendedorId = dto.VendedorId
             };
+            if (!EstadosPermitidos.Contains(dto.Estado))
+            {
+                return BadRequest("Estado de producto no válido. Solo se permiten: Nuevo, Como nuevo, Buen estado, Aceptable.");
+            }
+            var vendedorExiste = await _context.Vendedores.AnyAsync(v => v.VendedorId == dto.VendedorId);
+            if (!vendedorExiste)
+            {
+                return BadRequest("El ID del vendedor no existe.");
+            }
             _context.Productos.Add(nuevoProducto);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProductos), new { id = nuevoProducto.ProductoId }, nuevoProducto);
+            var vendedorUsuario = await _context.Vendedores
+                                .Include(v => v.Usuario)
+                                .Where(v => v.VendedorId == nuevoProducto.VendedorId)
+                                .Select(v => new { v.Usuario.Nombre, v.Usuario.Apellido })
+                                .FirstOrDefaultAsync();
+
+            return CreatedAtAction(nameof(GetProductos), new { id = nuevoProducto.ProductoId }, new ProductoReadDTO
+            {
+                ProductoId = nuevoProducto.ProductoId,
+                NombreProducto = nuevoProducto.NombreProducto,
+                Descripcion = nuevoProducto.Descripcion,
+                Precio = nuevoProducto.Precio,
+                Cantidad = nuevoProducto.Cantidad,
+                Tipo = nuevoProducto.Tipo,
+                Estado = nuevoProducto.Estado,
+                VendedorId = nuevoProducto.VendedorId,
+                VendedorNombre = vendedorUsuario?.Nombre,
+                VendedorApellido = vendedorUsuario?.Apellido,
+                Imagenes = new List<string>()
+            });
+
         }
 
         // DELETE: api/Productos/5
@@ -144,5 +179,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         {
             return _context.Productos.Any(e => e.ProductoId == id);
         }
+        private static readonly string[] EstadosPermitidos = { "Nuevo", "Como nuevo", "Buen estado", "Aceptable" };
+
     }
 }

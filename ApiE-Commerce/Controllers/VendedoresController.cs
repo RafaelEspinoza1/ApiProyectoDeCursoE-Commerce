@@ -177,13 +177,23 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVendedores(int id)
         {
-            var vendedores = await _context.Vendedores.FindAsync(id);
-            if (vendedores == null)
+            var vendedor = await _context.Vendedores.FindAsync(id);
+            if (vendedor == null)
             {
                 return NotFound();
             }
 
-            _context.Vendedores.Remove(vendedores);
+            // Buscar productos asociados al vendedor
+            var productosDelVendedor = await _context.Productos
+                .Where(p => p.VendedorId == id)
+                .ToListAsync();
+
+            // Eliminar productos
+            _context.Productos.RemoveRange(productosDelVendedor);
+
+            // Eliminar vendedor
+            _context.Vendedores.Remove(vendedor);
+
             await _context.SaveChangesAsync();
 
             return NoContent();
