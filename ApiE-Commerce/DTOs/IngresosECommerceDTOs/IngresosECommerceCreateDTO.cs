@@ -1,6 +1,19 @@
-﻿namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
+﻿using ApiProyectoDeCursoE_Commerce.Enums;
+using System.ComponentModel.DataAnnotations;
+
+namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
 {
     public class IngresosECommerceCreateDTO
     {
+        [Required]
+        [Range(0.01, 999999.99, ErrorMessage = "La cantidad debe ser mayor que 0.")]
+        public decimal Cantidad { get; set; }
+        [Required]
+        [Range(1, 2, ErrorMessage = "Solo se puede ingresar 1 0 2, tipo 1 = ComisionDeVenta , tipo 2 = Envio")]
+        public TipoIngreso Tipo { get; set; }
+        [Required]
+        public DateTime Fecha { get; set; } = DateTime.Now;
+
+        public int UsuarioId { get; set; } // Clave foránea a la tabla Vendedores
     }
 }
