@@ -163,16 +163,34 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductos(int id)
         {
-            var productos = await _context.Productos.FindAsync(id);
-            if (productos == null)
+            try
             {
-                return NotFound();
+                var producto = await _context.Productos
+             .Include(p => p.Imagenes)
+             .FirstOrDefaultAsync(p => p.ProductoId == id);
+
+                if (producto == null)
+                {
+                    return NotFound();
+                }
+
+                // Eliminar imágenes relacionadas al producto
+                if (producto.Imagenes != null && producto.Imagenes.Any())
+                {
+                    _context.ImagenesProducto.RemoveRange(producto.Imagenes);
+                }
+
+                // Eliminar el producto
+                _context.Productos.Remove(producto);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Productos.Remove(productos);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar el producto con ID {id}: {ex.Message}");
+                return StatusCode(500, "Error interno al intentar eliminar el producto.");
+            }
         }
 
         private bool ProductosExists(int id)
