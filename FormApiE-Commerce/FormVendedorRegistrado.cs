@@ -16,11 +16,13 @@ namespace FormApiE_Commerce
         public string ProductoUrl = "https://localhost:7221/api/Productos";
         public string ImagenProductoUrl = "https://localhost:7221/api/ImagenProductos";
         public string IngresosEcommerceUrl = "https://localhost:7221/api/IngresosECommerce";
-        public FormVendedorRegistrado()
-
+        private int _usuarioId;
+        private int _vendedorId;
+        public FormVendedorRegistrado(int usuarioId, int vendedorId)
         {
             InitializeComponent();
-            
+            _usuarioId = usuarioId;
+            _vendedorId = vendedorId;
         }
 
     }
