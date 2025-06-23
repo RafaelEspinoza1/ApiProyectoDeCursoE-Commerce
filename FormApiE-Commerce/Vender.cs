@@ -248,6 +248,8 @@ namespace FormApiE_Commerce
 
                 int usuarioId = FormInicio.UsuarioId;
 
+                
+               
                 var nuevoVendedor = new
                 {
                     NumeroDeCuenta = txtNumeroDeCuenta.Text,
