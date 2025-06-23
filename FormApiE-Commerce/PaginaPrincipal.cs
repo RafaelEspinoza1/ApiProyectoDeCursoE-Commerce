@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using FormApiE_Commerce.VerificacionVendedorDTOs;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
@@ -22,7 +21,7 @@ namespace FormApiE_Commerce
     public partial class PaginaPrincipal : Form
     {
 
-        
+
         public Vendedores vendedor = new Vendedores();
         public PaginaPrincipal()
         {
@@ -74,10 +73,9 @@ namespace FormApiE_Commerce
             try
             {
                 int usuarioId = FormInicio.UsuarioId;
-                var api = new ApiService();
 
                 // Llamar a la API para obtener si es vendedor
-                var vendedor = await api.ObtenerVendedorPorUsuarioIdAsync(usuarioId);
+
 
                 tabPageVender.Controls.Clear();
 
@@ -102,29 +100,6 @@ namespace FormApiE_Commerce
             }
         }
 
-        public class ApiService
-        {
-            private readonly HttpClient client;
-
-            public ApiService()
-            {
-                client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:5001/"); // cambia a tu base real
-            }
-
-            public async Task<VerificacioVendedorDTO> ObtenerVendedorPorUsuarioIdAsync(int usuarioId)
-            {
-                var response = await client.GetAsync($"api/vendedores/usuario/{usuarioId}");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<VerificacioVendedorDTO>();
-                }
-
-                return null;
-            }
-        }
-
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
 
@@ -135,7 +110,7 @@ namespace FormApiE_Commerce
 
         }
 
-        private void pictureBox2_DoubleClick(object sender, EventArgs e)
+        private void btnChatBot_Click(object sender, EventArgs e)
         {
             Chatbot chatbot = new Chatbot();
             chatbot.Show();

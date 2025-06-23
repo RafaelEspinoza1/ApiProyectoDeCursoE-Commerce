@@ -181,7 +181,7 @@ namespace FormApiE_Commerce
             // 
             // btnCerrar
             // 
-            
+            btnCerrar.BackgroundImage = Properties.Resources.cerrar;
             btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrar.Location = new Point(246, 9);
             btnCerrar.Name = "btnCerrar";
@@ -397,7 +397,7 @@ namespace FormApiE_Commerce
             // 
             // btnRefrescar
             // 
-           
+            btnRefrescar.BackgroundImage = Properties.Resources.reinciar;
             btnRefrescar.BackgroundImageLayout = ImageLayout.Stretch;
             btnRefrescar.Location = new Point(539, 1);
             btnRefrescar.Name = "btnRefrescar";

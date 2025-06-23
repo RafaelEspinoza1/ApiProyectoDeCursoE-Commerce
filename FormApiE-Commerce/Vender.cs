@@ -19,7 +19,6 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 using System.Net.Http.Json;
 using FormApiE_Commerce.Models;
-using FormApiE_Commerce.VerificacionVendedorDTO;
 
 
 namespace FormApiE_Commerce
@@ -263,21 +262,7 @@ namespace FormApiE_Commerce
                     client.BaseAddress = new Uri("https://localhost:5001/"); // Asegúrate de usar el puerto correcto
                     var response = await client.PostAsJsonAsync("api/vendedores", nuevoVendedor);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var resultado = await response.Content.ReadFromJsonAsync<VendedorRegistradoDTOs>();
-
-                        MessageBox.Show("¡Registro exitoso como vendedor!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        // Actualizar interfaz
-                        var pagina = this.FindForm() as PaginaPrincipal;
-                        pagina?.MostrarFormularioEnTabPage();
-                    }
-                    else
-                    {
-                        string error = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show($"No se pudo registrar:\n{error}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    
                 }
             }
             catch (Exception ex)

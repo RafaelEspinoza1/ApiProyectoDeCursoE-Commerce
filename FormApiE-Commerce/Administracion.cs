@@ -1,4 +1,8 @@
-﻿
+﻿using FormApiE_Commerce.DTOs.ComprasDTOs;
+using FormApiE_Commerce.DTOs.IngresosECommerceDTOs;
+using FormApiE_Commerce.DTOs.ProductoDTOs;
+using FormApiE_Commerce.DTOs.UsuariosDTOs;
+using FormApiE_Commerce.DTOs.VendedoresDTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,7 +20,15 @@ namespace FormApiE_Commerce
 {
     public partial class Administracion : Form
     {
-        
+        public string UsuariosUrl = "https://localhost:7221/api/Usuarios";
+        public string VendedoresUrl = "https://localhost:7221/api/Vendedores";
+        public string ProductosUrl = "https://localhost:7221/api/Productos";
+        public string ImagenProducto = "https://localhost:7221/api/ImagenProductos";
+        public string ComprasUrl = "https://localhost:7221/api/Compras";
+        public string IngresosEcommerceUrl = "https://localhost:7221/api/IngresosECommerce";
+        public string AdministradorUrl = "https://localhost:7221/api/Administrador";
+
+        HttpClient client = new HttpClient();
         public Administracion()
         {
             InitializeComponent();
@@ -29,79 +42,22 @@ namespace FormApiE_Commerce
 
 
         }
-        private void CargarDatos()
+        private async void CargarDatos()
         {
-            //dgvUsuarios.DataSource = db.Usuarios.ToList();
+            var usuarios = await client.GetFromJsonAsync<List<UsuariosReadDTO>>(UsuariosUrl);
+            dgvUsuarios.DataSource = usuarios;
 
-            //var vendedor = db.Vendedores.
-            //        Include(v => v.Usuario).
-            //        Select(v => new
-            //        {
-            //            v.VendedorId,
-            //            v.NumeroDeCuenta,
-            //            v.Ingresos,
-            //            v.UsuarioId,
-            //            v.Usuario.Nombre,
-            //            v.direccionOrigen,
-            //            v.LatitudOrigen,
-            //            v.LongitudOrigen
-            //        }
+            var vendedores = await client.GetFromJsonAsync<List<VendedoresReadDTO>>(VendedoresUrl);
+            dgvVendedores.DataSource = vendedores;
 
+            var productos = await client.GetFromJsonAsync<List<ProductoReadDTO>>(ProductosUrl);
+            dgvProductos.DataSource = productos;
 
-            //        ).ToList();
-            //dgvVendedores.DataSource = vendedor;
+            var compras = await client.GetFromJsonAsync<List<ComprasReadDTO>>(ComprasUrl);
+            dgvCompras.DataSource = compras;
 
-            //var productos = db.Productos.
-            //        Include(p => p.Vendedor).
-            //        Select(p => new
-            //        {
-            //            p.ProductoId,
-            //            p.NombreProducto,
-            //            p.Descripcion,
-            //            p.Precio,
-            //            p.Tipo,
-            //            p.Cantidad,
-            //            p.Estado,
-            //            p.Vendedor.VendedorId,
-            //            p.Vendedor.NumeroDeCuenta,
-            //        }).ToList();
-            //dgvProductos.DataSource = productos;
-
-            //var compras = db.Compras.
-            //        Select(c => new
-            //        {
-            //            c.CompraId,
-            //            c.UsuarioId,
-            //            c.CuentaUsuario,
-            //            c.precio,
-            //            c.Cantidad,
-            //            c.Envio,
-            //            c.PrecioTotal,
-            //            c.Fecha,
-            //            c.ProductoId,
-            //            c.VendedorId,
-            //            c.DireccionOrigen,
-            //            c.LatitudOrigen,
-            //            c.LongitudOrigen,
-            //            c.DireccionDestino,
-            //            c.LatitudDestino,
-            //            c.LongitudDestino
-            //        }).ToList();
-            //dgvCompras.DataSource = compras;
-
-            //var ingresosECommerce = db.IngresosECommerce.
-            //        Include(i => i.Usuario).
-            //        Select(i => new
-            //        {
-            //            i.IngresoId,
-            //            i.Cantidad,
-            //            i.Descripcion,
-            //            i.UsuarioId,
-            //            i.Fecha,
-            //            i.Usuario.Nombre
-            //        }).ToList();
-            //dgvIngresosECommerce.DataSource = ingresosECommerce;
-            //lblIngresosECommece.Text = "Ingresos totales de E-Commerce: " + db.IngresosECommerce.Sum(i => i.Cantidad).ToString("C2");
+            var ingresos = await client.GetFromJsonAsync<List<IngresosECommerceReadDTO>>(IngresosEcommerceUrl);
+            dgvIngresosECommerce.DataSource = ingresos;
         }
 
         private void btnContraseña1_Click(object sender, EventArgs e)
@@ -157,22 +113,22 @@ namespace FormApiE_Commerce
             //    }
             //    MessageBox.Show("Cargando datos, espere un momento...", "Cargando", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            //    progressBarCarga.Visible = true;
+                progressBarCarga.Visible = true;
 
-            //    await Task.Run(() =>
-            //    {
-            //        // Llamamos al método que ya tenés
-            //        CargarDatos();
-            //        Invoke((MethodInvoker)CargarDatos); // Esto asegura que los DataGridView se actualicen en el hilo de la UI
-            //    });
+                await Task.Run(() =>
+                {
+                    // Llamamos al método que ya tenés
+                    CargarDatos();
+                    Invoke((MethodInvoker)CargarDatos); // Esto asegura que los DataGridView se actualicen en el hilo de la UI
+                });
 
-            //    progressBarCarga.Visible = false;
+                progressBarCarga.Visible = false;
 
-            //    MessageBox.Show("Datos cargados exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    this.Size = new Size(1386, 671);
-            //    groupBoxIngresar.Visible = false;
-            //    btnCerrar.Visible = false;
-            //    tabControl1.Visible = true;
+                MessageBox.Show("Datos cargados exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Size = new Size(1386, 671);
+               groupBoxIngresar.Visible = false;
+               btnCerrar.Visible = false;
+               tabControl1.Visible = true;
             //}
             //catch (Exception ex)
             //{

@@ -93,6 +93,7 @@
             // 
             // pictureBoxLogo
             // 
+            pictureBoxLogo.Image = Properties.Resources.LogoEcommerce2;
             pictureBoxLogo.Location = new Point(134, 33);
             pictureBoxLogo.Name = "pictureBoxLogo";
             pictureBoxLogo.Size = new Size(100, 100);
@@ -150,7 +151,7 @@
             // 
             // btnCerrarInicioSesion
             // 
-            
+            btnCerrarInicioSesion.BackgroundImage = Properties.Resources.cerrar;
             btnCerrarInicioSesion.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrarInicioSesion.Location = new Point(186, 9);
             btnCerrarInicioSesion.Name = "btnCerrarInicioSesion";
@@ -226,7 +227,7 @@
             // 
             // btnCerrarRegistro
             // 
-           
+            btnCerrarRegistro.BackgroundImage = Properties.Resources.cerrar;
             btnCerrarRegistro.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrarRegistro.Location = new Point(186, 9);
             btnCerrarRegistro.Name = "btnCerrarRegistro";
@@ -362,7 +363,7 @@
             // 
             // btnCerrarOpciones
             // 
-           
+            btnCerrarOpciones.BackgroundImage = Properties.Resources.cerrar;
             btnCerrarOpciones.BackgroundImageLayout = ImageLayout.Stretch;
             btnCerrarOpciones.Location = new Point(59, 3);
             btnCerrarOpciones.Name = "btnCerrarOpciones";
@@ -373,7 +374,7 @@
             // 
             // btnAdmin
             // 
-           
+            btnAdmin.BackgroundImage = Properties.Resources.hacker;
             btnAdmin.BackgroundImageLayout = ImageLayout.Stretch;
             btnAdmin.Location = new Point(0, 2);
             btnAdmin.Name = "btnAdmin";
@@ -434,7 +435,7 @@
             // btnConfig
             // 
             btnConfig.BackColor = SystemColors.ButtonHighlight;
-           
+            btnConfig.BackgroundImage = Properties.Resources.config;
             btnConfig.BackgroundImageLayout = ImageLayout.Stretch;
             btnConfig.Location = new Point(324, 364);
             btnConfig.Name = "btnConfig";
@@ -445,7 +446,7 @@
             // 
             // pictureBoxMascotaSaluda
             // 
-            
+            pictureBoxMascotaSaluda.Image = Properties.Resources.SaludoMascoteE_Commerce;
             pictureBoxMascotaSaluda.Location = new Point(0, 33);
             pictureBoxMascotaSaluda.Name = "pictureBoxMascotaSaluda";
             pictureBoxMascotaSaluda.Size = new Size(139, 140);

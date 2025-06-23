@@ -34,6 +34,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 Nombre = u.Nombre,
                 Apellido = u.Apellido,
                 Correo = u.Correo,
+                Contraseña = u.Contraseña,
                 Telefono = u.Telefono
             }).ToListAsync();
         }
@@ -55,6 +56,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 Nombre = usuarios.Nombre,
                 Apellido = usuarios.Apellido,
                 Correo = usuarios.Correo,
+                Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
             };
         }

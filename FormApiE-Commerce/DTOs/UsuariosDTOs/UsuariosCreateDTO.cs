@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs
+namespace FormApiE_Commerce.DTOs.UsuariosDTOs
 {
     public class UsuariosCreateDTO
     {

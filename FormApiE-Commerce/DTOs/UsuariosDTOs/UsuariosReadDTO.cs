@@ -1,4 +1,6 @@
-﻿namespace ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs
+﻿using System.Text.Json.Serialization;
+
+namespace FormApiE_Commerce.DTOs.UsuariosDTOs
 {
     public class UsuariosReadDTO
     {
@@ -6,6 +8,8 @@
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
+        [JsonPropertyName("contraseña")]
+        public string Contrasena { get; set; }
         public string Telefono { get; set; }
     }
 }

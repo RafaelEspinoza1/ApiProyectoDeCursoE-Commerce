@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.ComprasDTOs
+namespace FormApiE_Commerce.DTOs.ComprasDTOs
 {
     public class ComprasCreateDTO
     {

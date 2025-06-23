@@ -1,4 +1,4 @@
-﻿namespace ApiProyectoDeCursoE_Commerce.DTOs.ImagenProductoDTOS
+﻿namespace FormApiE_Commerce.DTOs.ImagenProductoDTOS
 {
     public class ImagenProductoReadDTO
     {

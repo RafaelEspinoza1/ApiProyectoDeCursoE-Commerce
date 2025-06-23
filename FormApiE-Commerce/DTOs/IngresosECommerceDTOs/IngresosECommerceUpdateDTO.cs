@@ -1,7 +1,7 @@
 ﻿using FormApiE_Commerce.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
+namespace FormApiE_Commerce.DTOs.IngresosECommerceDTOs
 {
     public class IngresosECommerceUpdateDTO
     {

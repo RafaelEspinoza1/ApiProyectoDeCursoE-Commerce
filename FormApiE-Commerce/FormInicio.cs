@@ -1,13 +1,12 @@
-
-using FormApiE_Commerce.Models;
+using FormApiE_Commerce.DTOs.UsuariosDTOs;
 using System.Net.Http.Json;
 
 namespace FormApiE_Commerce
 {
     public partial class FormInicio : Form
     {
-        
-        public Usuarios NuevoUsuario { get; private set; }
+        public string UsuariosUrl = "https://localhost:7221/api/Usuarios"; // URL de la API de usuarios
+        HttpClient client = new HttpClient();
         public static int UsuarioId { get; private set; } // Para almacenar el ID del usuario actual
 
         public FormInicio()
@@ -90,64 +89,59 @@ namespace FormApiE_Commerce
         // Cierra el formulario y abre el formulario PaginaPrincipal.
         private async void btnEntrar_Click(object sender, EventArgs e)
         {
-            string correo = txtCorreo.Text.Trim();
-            string contraseña = txtContraseña.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
-            {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-
-            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
-            {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Validación: Formato general de correo con expresión regular
-            var regexCorreo = new System.Text.RegularExpressions.Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-            if (!regexCorreo.IsMatch(correo))
-            {
-                MessageBox.Show("El formato del correo no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCorreo.Focus();
-                return;
-            }
-
-            // Validación: Dominio permitido
-            string[] dominiosPermitidos = { "@gmail.com", "@hotmail.com", "@yahoo.com" };
-            bool dominioValido = dominiosPermitidos.Any(d => correo.EndsWith(d, StringComparison.OrdinalIgnoreCase));
-            if (!dominioValido)
-            {
-                MessageBox.Show("Solo se permiten correos de @gmail.com, @hotmail.com o @yahoo.com", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCorreo.Focus();
-                return;
-            }
-
-            // Validación: Que haya texto antes del @
-            if (correo.IndexOf('@') <= 0)
-            {
-                MessageBox.Show("Correo no válido. Falta el nombre de usuario antes del dominio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCorreo.Focus();
-                return;
-            }
-
-            var api = new ApiService();
             try
             {
-                var usuario = await api.LoginAsync(correo, contraseña);
-                if (usuario == null)
+                string correo = txtCorreo.Text.Trim();
+                string contraseña = txtContraseña.Text.Trim();
+                if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
                 {
-                    MessageBox.Show("Correo o contraseña incorrectos.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                // Lista de dominios válidos
+                string[] dominiosPermitidos = { "@gmail.com", "@hotmail.com", "@yahoo.com" };
+
+                // Verificar si el correo termina en alguno de los dominios permitidos
+                bool esValido = dominiosPermitidos.Any(d => correo.EndsWith(d));
+
+                if (!esValido)
+                {
+                    MessageBox.Show("Correo no válido. Solo se permiten dominios: @gmail.com, @hotmail.com o @yahoo.com", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCorreo.Focus();
                     return;
                 }
 
-                FormInicio.UsuarioId = usuario.UsuarioId;
-                MessageBox.Show($"Bienvenido {usuario.Nombre}", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Tag = "PaginaPrincipal";
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                // También puedes validar que tenga algo antes del dominio
+                int posicionArroba = correo.IndexOf('@');
+                if (posicionArroba <= 0)
+                {
+                    MessageBox.Show("Correo no válido. Falta nombre de usuario antes del dominio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCorreo.Focus();
+                    return;
+                }
+
+                // Consultar en la base de datos usando Entity Framework
+                var usuario = await client.GetFromJsonAsync<List<UsuariosReadDTO>>(UsuariosUrl); 
+
+                if (usuario == null)
+                {
+                    MessageBox.Show("Usuario no existente.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                // Buscar usuario que coincida con correo y contraseña
+                var usuarioEncontrado = usuario.FirstOrDefault(u => u.Correo == correo && u.Contrasena == contraseña);
+
+                if (usuarioEncontrado != null)
+                {
+                    MessageBox.Show($"Bienvenido a E-Commerce", "Inicio de Sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Tag = "PaginaPrincipal";
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Correo o contraseña incorrectos.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
@@ -155,38 +149,74 @@ namespace FormApiE_Commerce
             }
         }
 
-
-
-
         private async void btnTerminarRegistro_Click(object sender, EventArgs e)
         {
+            // Obtener los valores de los campos de texto y los guarda en variables
             string nombre = txtNombre.Text.Trim();
             string apellido = txtApellido.Text.Trim();
             string correo = txtCorreoRegistro.Text.Trim();
             string contraseña = txtContraseñaRegistro.Text.Trim();
-            string telefono = mtxtTelefono.Text.Trim();
+            string telefono = mtxtTelefono.Text.Replace("-", "").Trim();
 
-            // Validaciones locales (como campos vacíos, longitud, dominio del correo, etc.)
-
-            // Pregunta por términos y condiciones
-            var aceptar = MessageBox.Show("¿Aceptas los términos y condiciones?", "Términos y Condiciones", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (aceptar != DialogResult.Yes) return;
-
-            var nuevoUsuario = new Usuarios
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(apellido) || string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña) || string.IsNullOrWhiteSpace(telefono))
             {
-                Nombre = nombre,
-                Apellido = apellido,
-                Correo = correo,
-                Contraseña = contraseña,
-                Telefono = telefono
-            };
+                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            // Validar que la contraseña tenga al menos 8 caracteres
+            if (contraseña.Length <= 8)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 8 caracteres.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtContraseñaRegistro.Focus();
+                return;
+            }
 
+            // Validar el formato del correo electrónico
+            string[] dominiosPermitidos = { "@gmail.com", "@hotmail.com", "@yahoo.com" };
+
+            // Verificar si el correo termina en alguno de los dominios permitidos
+            bool esValido = dominiosPermitidos.Any(d => correo.EndsWith(d));
+
+            if (!esValido)
+            {
+                MessageBox.Show("Correo no válido. Solo se permiten dominios: @gmail.com, @hotmail.com o @yahoo.com", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCorreo.Focus();
+                return;
+            }
+
+            // También puedes validar que tenga algo antes del dominio
+            int posicionArroba = correo.IndexOf('@');
+            if (posicionArroba <= 0)
+            {
+                MessageBox.Show("Correo no válido. Falta nombre de usuario antes del dominio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCorreo.Focus();
+                return;
+            }
+            var usuario = await client.GetFromJsonAsync<List<UsuariosReadDTO>>(UsuariosUrl);
+            if (usuario.Any(u => u.Correo == correo) || usuario.Any(u => u.Telefono == telefono))
+            {
+                MessageBox.Show("Ya hay un usuario con ese correo o numero de telefono, ingrese otros. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCorreoRegistro.Focus();
+                return;
+            }
+
+            var result = MessageBox.Show("Aceptas los terminos y condiciones... si no los aceptas no puedes registrarte.", "Terminos y condiciones.", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (result != DialogResult.Yes) return;
             try
             {
-                var api = new ApiService();
-                bool registrado = await api.RegistroAsync(nuevoUsuario);
+                var nuevoUsuario = new UsuariosCreateDTO
+                {
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    Correo = correo,
+                    Contraseña = contraseña,
+                    Telefono = telefono
+                };
 
-                if (registrado)
+                var response = await client.PostAsJsonAsync(UsuariosUrl, nuevoUsuario);
+
+                if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Registro exitoso. Bienvenido a E-Commerce", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Tag = "PaginaPrincipal";
@@ -195,13 +225,13 @@ namespace FormApiE_Commerce
                 }
                 else
                 {
-                    MessageBox.Show("El correo o número de teléfono ya están registrados.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtCorreoRegistro.Focus();
+                    var error = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Error al registrar: " + error, "Registro fallido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al conectar con la API: " + ex.Message);
             }
         }
             
@@ -262,38 +292,6 @@ namespace FormApiE_Commerce
                 txtContraseña.UseSystemPasswordChar = true;
             }
         }
-
-        public class ApiService
-        {
-            private readonly HttpClient client;
-
-            public ApiService()
-            {
-                client = new HttpClient();
-                client.BaseAddress = new Uri("https://localhost:7221/api/Usuarios"); // tu URL base
-            }
-
-            public async Task<Usuarios> LoginAsync(string correo, string contraseña)
-            {
-                var loginData = new { correo, contraseña };
-                var response = await client.PostAsJsonAsync("api/usuarios/login", loginData);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return await response.Content.ReadFromJsonAsync<Usuarios>();
-                }
-
-                return null;
-            }
-
-            public async Task<bool> RegistroAsync(Usuarios usuario)
-            {
-                var response = await client.PostAsJsonAsync("api/usuarios", usuario);
-                return response.IsSuccessStatusCode;
-            }
-        }
-
-
     }
 }
  
