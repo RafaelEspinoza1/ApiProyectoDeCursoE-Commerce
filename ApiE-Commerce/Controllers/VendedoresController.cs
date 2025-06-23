@@ -117,6 +117,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         [HttpPost]
         public async Task<ActionResult<VendedoresReadDTO>> PostVendedores(VendedoresCreateDTO dto)
         {
+            dto.NumeroDeCuenta = Regex.Replace(dto.NumeroDeCuenta ?? "", @"[^\d]", "").Trim();
             if (!Regex.IsMatch(dto.NumeroDeCuenta, @"^\d{16}$"))
             {
                 return BadRequest("El número de cuenta debe tener exactamente 16 dígitos numéricos.");

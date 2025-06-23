@@ -1,4 +1,5 @@
 using FormApiE_Commerce.DTOs.UsuariosDTOs;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 
 namespace FormApiE_Commerce
@@ -193,12 +194,32 @@ namespace FormApiE_Commerce
                 txtCorreo.Focus();
                 return;
             }
-            var usuario = await client.GetFromJsonAsync<List<UsuariosReadDTO>>(UsuariosUrl);
-            if (usuario.Any(u => u.Correo == correo) || usuario.Any(u => u.Telefono == telefono))
+
+            try
             {
-                MessageBox.Show("Ya hay un usuario con ese correo o numero de telefono, ingrese otros. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCorreoRegistro.Focus();
-                return;
+                var usuario = await client.GetFromJsonAsync<List<UsuariosReadDTO>>(UsuariosUrl);
+                if (usuario.Any(u => u.Correo == correo) || usuario.Any(u => u.Telefono == telefono))
+                {
+                    MessageBox.Show("Ya hay un usuario con ese correo o número de teléfono, ingrese otros.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCorreoRegistro.Focus();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Todo ha salido bien, ahora inicie sesión con su correo y contraseña.");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Error de conexión con el servidor: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (NotSupportedException ex)
+            {
+                MessageBox.Show($"El contenido no es válido: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (JsonException ex)
+            {
+                MessageBox.Show($"Error al deserializar la respuesta: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             var result = MessageBox.Show("Aceptas los terminos y condiciones... si no los aceptas no puedes registrarte.", "Terminos y condiciones.", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -218,6 +239,8 @@ namespace FormApiE_Commerce
 
                 if (response.IsSuccessStatusCode)
                 {
+                    var usuario = await response.Content.ReadFromJsonAsync<UsuariosReadDTO>();
+                    FormInicio.UsuarioId = usuario.UsuarioId;
                     MessageBox.Show("Registro exitoso. Bienvenido a E-Commerce", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Tag = "PaginaPrincipal";
                     this.DialogResult = DialogResult.OK;
