@@ -12,7 +12,6 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
         [Range(1, 2, ErrorMessage = "Solo se puede ingresar 1 0 2, tipo 1 = ComisionDeVenta , tipo 2 = Envio")]
         public TipoIngreso Tipo { get; set; }
         [Required]
-        public DateTime Fecha { get; set; } = DateTime.Now;
 
         public int UsuarioId { get; set; } // Clave foránea a la tabla Vendedores
     }

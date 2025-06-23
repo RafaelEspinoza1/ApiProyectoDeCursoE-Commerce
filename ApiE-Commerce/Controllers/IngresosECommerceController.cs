@@ -74,7 +74,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
 
             ingreso.Cantidad = dto.Cantidad;
             ingreso.Tipo = dto.Tipo;
-            ingreso.Fecha = dto.Fecha;
+            ingreso.Fecha = DateTime.Now;
 
             await _context.SaveChangesAsync();
             return NoContent();
@@ -93,7 +93,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             {
                 Cantidad = dto.Cantidad,
                 Tipo = dto.Tipo,
-                Fecha = dto.Fecha,
+                Fecha = DateTime.Now,
                 UsuarioId = dto.UsuarioId
             };
 
