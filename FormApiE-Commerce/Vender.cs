@@ -258,8 +258,11 @@ namespace FormApiE_Commerce
                     return;
                 }
 
+                
+               
                 int usuarioId = FormInicio.UsuarioId;
                 MessageBox.Show($"Usuario ID: {FormInicio.UsuarioId}");
+//>>>>>>> master
                 var nuevoVendedor = new
                 {
                     NumeroDeCuenta = cuenta,
