@@ -68,7 +68,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             imagen.ImagenUrl = dto.ImagenUrl;
             if (!Regex.IsMatch(dto.ImagenUrl, @"\.(jpg|jpeg|png|gif)$", RegexOptions.IgnoreCase))
             {
-                return BadRequest("La URL debe ser de una imagen válida (.jpg, .png, .jpeg o .gif).");
+                return BadRequest("La URL debe ser de una imagen válida (.jpg, .png, .jpeg, o .gif).");
             }
             if (imagen.ImagenUrl == dto.ImagenUrl)
             {

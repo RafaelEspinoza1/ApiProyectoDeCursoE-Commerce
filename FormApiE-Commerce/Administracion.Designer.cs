@@ -217,9 +217,9 @@ namespace FormApiE_Commerce
             btnCerrarSesion.AutoSize = true;
             btnCerrarSesion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCerrarSesion.ForeColor = Color.Firebrick;
-            btnCerrarSesion.Location = new Point(576, 5);
+            btnCerrarSesion.Location = new Point(1252, 1);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(114, 27);
+            btnCerrarSesion.Size = new Size(114, 31);
             btnCerrarSesion.TabIndex = 20;
             btnCerrarSesion.Text = "Cerrar sesión";
             btnCerrarSesion.UseVisualStyleBackColor = true;
@@ -409,7 +409,7 @@ namespace FormApiE_Commerce
             // 
             btnRefrescar.BackgroundImage = Properties.Resources.reinciar;
             btnRefrescar.BackgroundImageLayout = ImageLayout.Stretch;
-            btnRefrescar.Location = new Point(539, 1);
+            btnRefrescar.Location = new Point(1215, 2);
             btnRefrescar.Name = "btnRefrescar";
             btnRefrescar.Size = new Size(31, 31);
             btnRefrescar.TabIndex = 34;
