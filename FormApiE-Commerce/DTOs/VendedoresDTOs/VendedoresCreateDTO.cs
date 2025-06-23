@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FormApiE_Commerce.VendedoresDTOs
+namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs
 {
     public class VendedoresCreateDTO
     {
@@ -12,9 +12,11 @@ namespace FormApiE_Commerce.VendedoresDTOs
         public string DireccionOrigen { get; set; }
 
         [Required(ErrorMessage = "La latitud es obligatoria.")]
+        [Range(-90, 90, ErrorMessage = "La latitud debe estar entre -90 y 90.")]
         public double LatitudOrigen { get; set; }
 
         [Required(ErrorMessage = "La longitud es obligatoria.")]
+        [Range(-180, 180, ErrorMessage = "La longitud debe estar entre -180 y 180.")]
         public double LongitudOrigen { get; set; }
 
         public int UsuarioId { get; set; }

@@ -1,6 +1,6 @@
-﻿namespace FormApiE_Commerce.VerificacionVendedorDTO
+﻿namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs
 {
-    public class VendedorRegistradoDTOs
+    public class VendedoresReadDTO
     {
         public int VendedorId { get; set; }
         public string NumeroDeCuenta { get; set; }
@@ -8,6 +8,7 @@
         public string DireccionOrigen { get; set; }
         public double LatitudOrigen { get; set; }
         public double LongitudOrigen { get; set; }
+
         public int UsuarioId { get; set; }
         public string UsuarioNombre { get; set; }
         public string UsuarioApellido { get; set; }

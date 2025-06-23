@@ -1,4 +1,4 @@
-﻿namespace FormApiE_Commerce.UsuariosDTOs
+﻿namespace ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs
 {
     public class UsuariosReadDTO
     {
