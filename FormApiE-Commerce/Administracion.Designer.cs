@@ -229,7 +229,9 @@ namespace FormApiE_Commerce
             // 
             dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvUsuarios.Location = new Point(8, 21);
+            dgvUsuarios.MultiSelect = false;
             dgvUsuarios.Name = "dgvUsuarios";
+            dgvUsuarios.ReadOnly = true;
             dgvUsuarios.Size = new Size(651, 180);
             dgvUsuarios.TabIndex = 21;
             // 
@@ -237,15 +239,19 @@ namespace FormApiE_Commerce
             // 
             dgvVendedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVendedores.Location = new Point(8, 222);
+            dgvVendedores.MultiSelect = false;
             dgvVendedores.Name = "dgvVendedores";
-            dgvVendedores.Size = new Size(852, 180);
+            dgvVendedores.ReadOnly = true;
+            dgvVendedores.Size = new Size(1050, 180);
             dgvVendedores.TabIndex = 23;
             // 
             // dgvCompras
             // 
             dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCompras.Location = new Point(8, 21);
+            dgvCompras.MultiSelect = false;
             dgvCompras.Name = "dgvCompras";
+            dgvCompras.ReadOnly = true;
             dgvCompras.Size = new Size(1346, 180);
             dgvCompras.TabIndex = 24;
             // 
@@ -255,10 +261,11 @@ namespace FormApiE_Commerce
             dgvProductos.Location = new Point(8, 21);
             dgvProductos.MultiSelect = false;
             dgvProductos.Name = "dgvProductos";
+            dgvProductos.ReadOnly = true;
             dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProductos.Size = new Size(955, 180);
+            dgvProductos.Size = new Size(1050, 180);
             dgvProductos.TabIndex = 25;
-            dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
+            dgvProductos.CellDoubleClick += dgvProductos_CellDoubleClick;
             // 
             // lblVendedores
             // 
@@ -291,8 +298,10 @@ namespace FormApiE_Commerce
             // 
             dgvIngresosECommerce.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvIngresosECommerce.Location = new Point(8, 222);
+            dgvIngresosECommerce.MultiSelect = false;
             dgvIngresosECommerce.Name = "dgvIngresosECommerce";
-            dgvIngresosECommerce.Size = new Size(651, 180);
+            dgvIngresosECommerce.ReadOnly = true;
+            dgvIngresosECommerce.Size = new Size(750, 180);
             dgvIngresosECommerce.TabIndex = 30;
             // 
             // lblIngresos
@@ -356,9 +365,10 @@ namespace FormApiE_Commerce
             // 
             // flpImagenes
             // 
+            flpImagenes.BackColor = SystemColors.ControlLight;
             flpImagenes.Location = new Point(8, 245);
             flpImagenes.Name = "flpImagenes";
-            flpImagenes.Size = new Size(522, 145);
+            flpImagenes.Size = new Size(635, 127);
             flpImagenes.TabIndex = 29;
             // 
             // tabPage3

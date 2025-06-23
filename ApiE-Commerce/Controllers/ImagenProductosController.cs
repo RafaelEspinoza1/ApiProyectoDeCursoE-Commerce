@@ -138,6 +138,26 @@ namespace APIProyectoDeCursoE_commerce.Controllers
 
             return NoContent();
         }
+        // GET: api/ImagenProductos/PorProducto/3
+        [HttpGet("PorProducto/{productoId}")]
+        public async Task<ActionResult<IEnumerable<ImagenProductoReadDTO>>> GetImagenesPorProducto(int productoId)
+        {
+            var imagenes = await _context.ImagenesProducto
+                .Where(i => i.ProductoId == productoId)
+                .Select(i => new ImagenProductoReadDTO
+                {
+                    ImagenId = i.ImagenId,
+                    ImagenUrl = i.ImagenUrl,
+                    ProductoId = i.ProductoId
+                })
+                .ToListAsync();
+
+            if (imagenes == null || !imagenes.Any())
+                return NotFound("Este producto no tiene imágenes asociadas.");
+
+            return imagenes;
+        }
+
 
         private bool ImagenProductoExists(int id)
         {

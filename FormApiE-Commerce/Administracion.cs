@@ -1,4 +1,6 @@
-﻿using FormApiE_Commerce.DTOs.ComprasDTOs;
+﻿using FormApiE_Commerce.DTOs.AdministradorDTOs;
+using FormApiE_Commerce.DTOs.ComprasDTOs;
+using FormApiE_Commerce.DTOs.ImagenProductoDTOS;
 using FormApiE_Commerce.DTOs.IngresosECommerceDTOs;
 using FormApiE_Commerce.DTOs.ProductoDTOs;
 using FormApiE_Commerce.DTOs.UsuariosDTOs;
@@ -39,10 +41,10 @@ namespace FormApiE_Commerce
             txtContraseñaAdmin.ContextMenuStrip = null; // Desactiva click derecho
             txtContraseñaAdmin.ShortcutsEnabled = false; // Desactiva Ctrl+C, Ctrl+X, Ctrl+V
             flpImagenes.AutoScroll = true;
-
-
+            client.DefaultRequestHeaders.Remove("admin-password");
+            client.DefaultRequestHeaders.Add("admin-password", "12345678");
         }
-        private async void CargarDatos()
+        private async Task CargarDatos()
         {
             var usuarios = await client.GetFromJsonAsync<List<UsuariosReadDTO>>(UsuariosUrl);
             dgvUsuarios.DataSource = usuarios;
@@ -58,6 +60,8 @@ namespace FormApiE_Commerce
 
             var ingresos = await client.GetFromJsonAsync<List<IngresosECommerceReadDTO>>(IngresosEcommerceUrl);
             dgvIngresosECommerce.DataSource = ingresos;
+
+            lblIngresosECommece.Text = "Ingresos E-Commerce: " + ingresos.Sum(i => i.Cantidad).ToString("C");
         }
 
         private void btnContraseña1_Click(object sender, EventArgs e)
@@ -98,45 +102,45 @@ namespace FormApiE_Commerce
 
         private async void btnIngresar_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    var administrador = db.Administrador.FirstOrDefault(a => a.Contraseña == txtContraseñaAdmin.Text && a.Correo == txtCorreoAdmin.Text);
-            //    if (string.IsNullOrWhiteSpace(txtContraseñaAdmin.Text)|| string.IsNullOrWhiteSpace(txtCorreoAdmin.Text))
-            //    {
-            //        MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        return;
-            //    }
-            //    if (administrador == null)
-            //    {
-            //        MessageBox.Show("Correo o contraseña incorrectos. Si no es el admin no va a lograr entrar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
-            //    MessageBox.Show("Cargando datos, espere un momento...", "Cargando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string correo = txtCorreoAdmin.Text.Trim();
+            string contraseña = txtContraseñaAdmin.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Traer todos los administradores (o hacer un endpoint de login si lo tenés)
+                var admins = await client.GetFromJsonAsync<List<AdministradorReadDTO>>(AdministradorUrl);
+
+                var adminEncontrado = admins.FirstOrDefault(a => a.Correo == correo && a.Contraseña == contraseña);
+
+                if (adminEncontrado == null)
+                {
+                    MessageBox.Show("Correo o contraseña incorrectos. Solo el administrador puede ingresar.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                MessageBox.Show("Cargando datos, espere un momento...", "Cargando", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 progressBarCarga.Visible = true;
 
-                await Task.Run(() =>
-                {
-                    // Llamamos al método que ya tenés
-                    CargarDatos();
-                    Invoke((MethodInvoker)CargarDatos); // Esto asegura que los DataGridView se actualicen en el hilo de la UI
-                });
+                await CargarDatos();
 
                 progressBarCarga.Visible = false;
 
                 MessageBox.Show("Datos cargados exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Size = new Size(1386, 671);
-               groupBoxIngresar.Visible = false;
-               btnCerrar.Visible = false;
-               tabControl1.Visible = true;
-            //}
-            //catch (Exception ex)
-            //{
-            //    progressBarCarga.Visible = false;
-            //    MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-
-            
+                groupBoxIngresar.Visible = false;
+                btnCerrar.Visible = false;
+                tabControl1.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con la API: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
         private void checkBoxContraseña1Visible_CheckedChanged(object sender, EventArgs e)
@@ -168,77 +172,73 @@ namespace FormApiE_Commerce
 
         private async void btnRefrescar_Click(object sender, EventArgs e)
         {
-            CargarDatos();
+            progressBarCarga.Visible = true;
+            await CargarDatos();
+            progressBarCarga.Visible = false;
+            MessageBox.Show("Datos cargados exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void dgvProductos_SelectionChanged(object sender, EventArgs e)
+        private async void MostrarImagenesProducto(int productoId)
         {
-            if (dgvProductos.SelectedRows.Count > 0)
+            try
             {
-                // Obtener el ID del producto seleccionado
-                int productoId = Convert.ToInt32(dgvProductos.SelectedRows[0].Cells["ProductoId"].Value);
+                flpImagenes.Controls.Clear(); // Limpiar las imágenes anteriores
 
-                // Llamar método para mostrar imágenes
-                MostrarImagenesProducto(productoId);
-                lblImagenesProducto.Text = "Imágenes del producto seleccionado:"; 
-            }
-        }
-        private void MostrarImagenesProducto(int productoId)
-        {
-            // Limpiar imágenes anteriores
-            flpImagenes.Controls.Clear();
+                // Obtener la lista de imágenes del producto desde la API
+                var imagenes = await client.GetFromJsonAsync<List<ImagenProductoReadDTO>>($"{ImagenProducto}/PorProducto/{productoId}");
 
-            // Obtener las imágenes del producto desde la base de datos
-            //var imagenes = db.ImagenesProducto
-            //                 .Where(img => img.ProductoId == productoId)
-            //                 .ToList();
 
-            //foreach (var imagen in imagenes)
-            //{
-            //    PictureBox pic = new PictureBox();
-            //    pic.SizeMode = PictureBoxSizeMode.Zoom;
-            //    pic.Width = 120;
-            //    pic.Height = 120;
-
-            //    // Cargar imagen desde byte[]
-            //    using (var ms = new MemoryStream(imagen.Imagen))
-            //    {
-            //        pic.Image = Image.FromStream(ms);
-            //    }
-
-            //    // Guardar los bytes en el Tag para mostrarlos ampliados al hacer clic
-            //    pic.Tag = imagen.Imagen;
-            //    pic.Cursor = Cursors.Hand;
-            //    pic.Click += Pic_Click;
-
-            //    flpImagenes.Controls.Add(pic);
-            //}
-        }
-        private void Pic_Click(object sender, EventArgs e)
-        {
-            PictureBox pic = sender as PictureBox;
-            if (pic?.Tag is byte[] imagenBytes)
-            {
-                using (var ms = new MemoryStream(imagenBytes))
+                foreach (var img in imagenes)
                 {
-                    Image imagenGrande = Image.FromStream(ms);
+                    PictureBox pic = new PictureBox();
+                    pic.SizeMode = PictureBoxSizeMode.Zoom;
+                    pic.Width = 120;
+                    pic.Height = 120;
+                    pic.Cursor = Cursors.Hand;
 
-                    Form frmImagen = new Form();
-                    frmImagen.Text = "Vista ampliada";
-                    frmImagen.Width = 800;
-                    frmImagen.Height = 600;
+                    // Cargar imagen desde la URL
+                    pic.LoadAsync(img.ImagenUrl);
 
-                    PictureBox picGrande = new PictureBox();
-                    picGrande.Dock = DockStyle.Fill;
-                    picGrande.SizeMode = PictureBoxSizeMode.Zoom;
-                    picGrande.Image = imagenGrande;
+                    // Guardar la URL en el Tag para mostrar en grande después
+                    pic.Tag = img.ImagenUrl;
+                    pic.Click += Pic_Click;
 
-                    frmImagen.Controls.Add(picGrande);
-                    frmImagen.ShowDialog();
+                    flpImagenes.Controls.Add(pic);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar imágenes: " + ex.Message);
+            }
         }
 
+        private void Pic_Click(object sender, EventArgs e)
+        {
+            if (sender is PictureBox pic && pic.Tag is string url)
+            {
+                Form frmImagen = new Form();
+                frmImagen.Text = "Vista ampliada";
+                frmImagen.Width = 800;
+                frmImagen.Height = 600;
+
+                PictureBox picGrande = new PictureBox();
+                picGrande.Dock = DockStyle.Fill;
+                picGrande.SizeMode = PictureBoxSizeMode.Zoom;
+                picGrande.Load(url);
+
+                frmImagen.Controls.Add(picGrande);
+                frmImagen.ShowDialog();
+            }
+        }
+
+        private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int productoId = Convert.ToInt32(dgvProductos.Rows[e.RowIndex].Cells["ProductoId"].Value);
+                MostrarImagenesProducto(productoId);
+                lblImagenesProducto.Text = "Imágenes del producto seleccionado:";
+            }
+        }
 
     }
 }
