@@ -27,16 +27,26 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuariosReadDTO>>> GetUsuarios()
         {
-            return await _context.Usuarios
-            .Select(u => new UsuariosReadDTO
+            try
             {
+                return await _context.Usuarios
+                .Select(u => new UsuariosReadDTO
+                {
                 UsuarioId = u.UsuarioId,
                 Nombre = u.Nombre,
                 Apellido = u.Apellido,
                 Correo = u.Correo,
                 Contraseña = u.Contraseña,
                 Telefono = u.Telefono
-            }).ToListAsync();
+                }).ToListAsync();
+
+            }
+            catch
+            {
+                Console.WriteLine("Error interno:");
+                return StatusCode(500, "Error interno en el servidor.");
+            }
+            
         }
 
         // GET: api/Usuarios/5
@@ -122,6 +132,8 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             });
         }
 
+       
+
         // DELETE: api/Usuarios/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuarios(int id)
@@ -174,6 +186,8 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return StatusCode(500, "Error interno al intentar eliminar el usuario.");
             }
         }
+
+
 
         private bool UsuariosExists(int id)
         {

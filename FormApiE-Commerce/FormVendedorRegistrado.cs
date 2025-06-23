@@ -13,9 +13,13 @@ namespace FormApiE_Commerce
 {
     public partial class FormVendedorRegistrado : UserControl
     {
-        public FormVendedorRegistrado()
+        private int _usuarioId;
+        private int _vendedorId;
+        public FormVendedorRegistrado(int usuarioId, int vendedorId )
         {
             InitializeComponent();
+            _usuarioId = usuarioId;
+            _vendedorId = vendedorId;
         }
 
         private void FormVendedorRegistrado_Load(object sender, EventArgs e)
