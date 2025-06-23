@@ -133,7 +133,7 @@
             // 
             // pictureBox1
             // 
-           
+            pictureBox1.Image = Properties.Resources.MascotaE_CommerceRegistroVendedor;
             pictureBox1.Location = new Point(12, 20);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";

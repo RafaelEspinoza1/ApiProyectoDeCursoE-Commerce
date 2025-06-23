@@ -13,6 +13,7 @@ using GMap.NET.WindowsForms;
 using GMap.NET;
 using System.Net.Http.Json;
 using FormApiE_Commerce.Models;
+using FormApiE_Commerce.DTOs.UsuariosDTOs;
 
 
 
@@ -20,13 +21,17 @@ namespace FormApiE_Commerce
 {
     public partial class PaginaPrincipal : Form
     {
-
-
+        public string UsuariosUrl = "https://localhost:7221/api/Usuarios";
+        HttpClient client = new HttpClient();
+       
         public Vendedores vendedor = new Vendedores();
-        public PaginaPrincipal()
+
+        private int _usuarioId;
+        public PaginaPrincipal(int usuarioId)
         {
             InitializeComponent();
             MostrarFormularioEnTabPage();
+            _usuarioId = usuarioId;
         }
         // Cierra el formulario y abre el formulario FormInicio.
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -64,6 +69,9 @@ namespace FormApiE_Commerce
         }
         public async void MostrarFormularioEnTabPage()
         {
+            var vendedores = await client.GetFromJsonAsync<List<Vendedores>>("https://localhost:7221/api/Vendedores");
+            var vendedorActual = vendedores.FirstOrDefault(v => v.UsuarioId == _usuarioId);
+
             FormComprar formComprar = new FormComprar();
             formComprar.Dock = DockStyle.Fill;
             tabPageComprar.Controls.Clear();
@@ -72,24 +80,24 @@ namespace FormApiE_Commerce
 
             try
             {
-                int usuarioId = FormInicio.UsuarioId;
+                
 
                 // Llamar a la API para obtener si es vendedor
 
 
                 tabPageVender.Controls.Clear();
 
-                if (vendedor != null)
+                if (vendedorActual != null)
                 {
                     // Ya es vendedor
-                    FormVendedorRegistrado interfaz = new FormVendedorRegistrado(); // este es un UserControl
+                    FormVendedorRegistrado interfaz = new FormVendedorRegistrado(_usuarioId, vendedorActual.VendedorId);
                     interfaz.Dock = DockStyle.Fill;
                     tabPageVender.Controls.Add(interfaz);
                 }
                 else
                 {
-                    // No es vendedor
-                    Vender registro = new Vender(); // este es el formulario de registro
+                    // No es vendedor aún
+                    Vender registro = new Vender(_usuarioId);
                     registro.Dock = DockStyle.Fill;
                     tabPageVender.Controls.Add(registro);
                 }
