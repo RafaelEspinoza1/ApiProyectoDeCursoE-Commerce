@@ -11,14 +11,19 @@ namespace FormApiE_Commerce
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
             string siguienteForm = "FormInicio";
+
+            
+            int usuarioId = 0;
+
 
             while (true)
             {
                 Form formularioActual = siguienteForm switch
                 {
                     "FormInicio" => new FormInicio(),
-                    "PaginaPrincipal" => new PaginaPrincipal(),
+                    "PaginaPrincipal" => new PaginaPrincipal(FormInicio.UsuarioId),
                     "Administracion" => new Administracion(),
                     _ => null
                 };
@@ -32,6 +37,10 @@ namespace FormApiE_Commerce
 
                 DialogResult resultado = formularioActual.ShowDialog();
 
+                if (formularioActual is FormInicio formInicio)
+                {
+                    usuarioId = FormInicio.UsuarioId; // Captura el ID que se guardó estáticamente
+                }
                 // Si el formulario indica cuál sigue, lo tomamos
                 if (formularioActual.Tag is string siguiente && !string.IsNullOrEmpty(siguiente))
                 {
