@@ -11,7 +11,5 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
         [Required]
         [Range(1,2, ErrorMessage = "Solo se puede ingresar 1 0 2, tipo 1 = ComisionDeVenta , tipo 2 = Envio")]
         public TipoIngreso Tipo { get; set; }
-        [Required]
-        public DateTime Fecha { get; set; } = DateTime.Now;
     }
 }
