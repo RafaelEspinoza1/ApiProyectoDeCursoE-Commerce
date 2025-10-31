@@ -167,7 +167,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return BadRequest("Producto no encontrado.");
             }
 
-            var compra = new Compras
+            var compra = new Transaccion
             {
                 CuentaUsuario = cuentaFormateada,
                 Cantidad = dto.Cantidad,

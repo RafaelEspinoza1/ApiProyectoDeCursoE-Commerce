@@ -111,7 +111,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return BadRequest("El correo ya está registrado.");
             }
             var telefono = string.IsNullOrWhiteSpace(dto.Telefono) ? "00000000" : dto.Telefono;
-            var nuevoUsuario = new Usuarios
+            var nuevoUsuario = new Usuario
             {
                 Nombre = dto.Nombre,
                 Apellido = dto.Apellido,

@@ -1,18 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiProyectoDeCursoE_Commerce.Models
 {
     public class Administrador
     {
         [Key]
-        public int AdministradorId { get; set; }
+        public int IdAdministrador { get; set; }
         [Required]
-        public string Nombre { get; set; }
-        [Required]
-        public string Apellido { get; set; }
-        [EmailAddress]
-        public string Correo { get; set; }
-        [Required]
-        public string Contraseña { get; set; }
+        public int IdUsuario { set; get; }
+        // Relación con Usuario
+        [ForeignKey("IdUsuario")]
+        public Usuario Usuario { get; set; } = null!;
     }
 }

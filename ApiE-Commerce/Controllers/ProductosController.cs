@@ -112,9 +112,9 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         // POST: api/Productos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Productos>> PostProductos(ProductoCreateDTO dto)
+        public async Task<ActionResult<Producto>> PostProductos(ProductoCreateDTO dto)
         {
-            var nuevoProducto = new Productos
+            var nuevoProducto = new Producto
             {
                 NombreProducto = dto.NombreProducto,
                 Descripcion = dto.Descripcion,

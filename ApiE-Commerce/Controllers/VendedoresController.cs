@@ -143,7 +143,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             {
                 return BadRequest("Ya existe un vendedor con ese número de cuenta.");
             }
-            var nuevoVendedor = new Vendedores
+            var nuevoVendedor = new Vendedor
             {
                 NumeroDeCuenta = cuentaFormateada,
                 DireccionOrigen = dto.DireccionOrigen,

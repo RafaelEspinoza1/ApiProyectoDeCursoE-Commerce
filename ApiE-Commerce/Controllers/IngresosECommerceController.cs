@@ -89,7 +89,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             if (!usuarioExiste)
                 return BadRequest("El usuario no existe.");
 
-            var nuevoIngreso = new IngresosECommerce
+            var nuevoIngreso = new Ingreso
             {
                 Cantidad = dto.Cantidad,
                 Tipo = dto.Tipo,
