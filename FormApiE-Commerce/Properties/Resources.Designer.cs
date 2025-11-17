@@ -63,9 +63,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cerrar {
+        internal static System.Drawing.Bitmap browser_735828 {
             get {
-                object obj = ResourceManager.GetObject("cerrar", resourceCulture);
+                object obj = ResourceManager.GetObject("browser_735828", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap config {
+        internal static System.Drawing.Bitmap gmail_2991151 {
             get {
-                object obj = ResourceManager.GetObject("config", resourceCulture);
+                object obj = ResourceManager.GetObject("gmail_2991151", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hacker {
+        internal static System.Drawing.Bitmap LRR_removebg_preview {
             get {
-                object obj = ResourceManager.GetObject("hacker", resourceCulture);
+                object obj = ResourceManager.GetObject("LRR-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ImagenChatBot {
+        internal static System.Drawing.Bitmap mail_4542248 {
             get {
-                object obj = ResourceManager.GetObject("ImagenChatBot", resourceCulture);
+                object obj = ResourceManager.GetObject("mail_4542248", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LogoEcommerce2 {
+        internal static System.Drawing.Bitmap sms_1864952 {
             get {
-                object obj = ResourceManager.GetObject("LogoEcommerce2", resourceCulture);
+                object obj = ResourceManager.GetObject("sms_1864952", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MascotaE_CommerceRegistroVendedor {
+        internal static System.Drawing.Bitmap sms_2499478 {
             get {
-                object obj = ResourceManager.GetObject("MascotaE-CommerceRegistroVendedor", resourceCulture);
+                object obj = ResourceManager.GetObject("sms_2499478", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,29 +123,9 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Menu {
+        internal static System.Drawing.Bitmap tokens_5172584 {
             get {
-                object obj = ResourceManager.GetObject("Menu", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap reinciar {
-            get {
-                object obj = ResourceManager.GetObject("reinciar", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SaludoMascoteE_Commerce {
-            get {
-                object obj = ResourceManager.GetObject("SaludoMascoteE-Commerce", resourceCulture);
+                object obj = ResourceManager.GetObject("tokens_5172584", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
