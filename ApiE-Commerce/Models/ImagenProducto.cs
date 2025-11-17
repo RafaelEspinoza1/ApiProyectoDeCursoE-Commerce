@@ -3,15 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiProyectoDeCursoE_Commerce.Models
 {
+    [Table("ImagenProductos")]
     public class ImagenProducto
     {
         [Key]
-        public int ImagenId { get; set; }
+        public int IdImagenProducto { get; set; }
         [Required]
-        public string ImagenUrl { get; set; } // Ruta a la imagen, ej: "/imagenes/producto123_img1.jpg"
+        public int IdProducto { get; set; }
+        [Required, MaxLength(255)]
+        public string URLImagen { get; set; } = null!;// Ruta a la imagen, ej: "/imagenes/producto123_img1.jpg"
 
-        public int ProductoId { get; set; } // clave foránea
+         // clave foránea
         [ForeignKey("ProductoId")]
-        public Productos Producto { get; set; }
+        public Producto Producto { get; set; } = null!;
     }
 }

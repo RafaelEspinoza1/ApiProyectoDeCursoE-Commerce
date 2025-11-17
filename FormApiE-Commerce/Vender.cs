@@ -19,8 +19,8 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 using System.Net.Http.Json;
 using FormApiE_Commerce.Models;
-using FormApiE_Commerce.VerificacionVendedorDTO;
-
+using FormApiE_Commerce.DTOs.VendedoresDTOs;
+using System.Text.RegularExpressions;
 
 namespace FormApiE_Commerce
 {
@@ -39,11 +39,14 @@ namespace FormApiE_Commerce
         int filaseleccionada = 0;
         double latDefault = 12.1368;
         double lngDefault = -86.230020000;
-        public Vender()
+
+        private int _usuarioId;
+        public Vender(int usuarioId)
         {
             InitializeComponent();
             gMapControl1.Visible = false;
-            pictureBox1.Image = Image.FromFile("Resources\\MascotaE-CommerceRegistroVendedor.png");
+            pictureBox1.Image = Properties.Resources.MascotaE_CommerceRegistroVendedor;
+            _usuarioId = usuarioId;
         }
 
         private void Vender_Load(object sender, EventArgs e)
@@ -246,38 +249,54 @@ namespace FormApiE_Commerce
                     MessageBox.Show("Por favor, completa todos los campos.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                string cuenta = Regex.Replace(txtNumeroDeCuenta.Text ?? "", @"[^\d]", "").Trim();
+
+                if (!Regex.IsMatch(cuenta, @"^\d{16}$"))
+                {
+                    MessageBox.Show("El número de cuenta debe tener exactamente 16 dígitos numéricos, sin letras ni símbolos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtNumeroDeCuenta.Focus();
+                    return;
+                }
 
                 int usuarioId = FormInicio.UsuarioId;
-
+                MessageBox.Show($"Usuario ID: {FormInicio.UsuarioId}");
                 var nuevoVendedor = new
                 {
-                    NumeroDeCuenta = txtNumeroDeCuenta.Text,
+                    NumeroDeCuenta = cuenta,
                     DireccionOrigen = txtDireccion.Text,
                     LatitudOrigen = double.TryParse(txtLatitud.Text, out double lat) ? lat : 0,
                     LongitudOrigen = double.TryParse(txtLongitud.Text, out double lng) ? lng : 0,
                     UsuarioId = usuarioId
                 };
-
+               
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("https://localhost:5001/"); // Asegúrate de usar el puerto correcto
-                    var response = await client.PostAsJsonAsync("api/vendedores", nuevoVendedor);
+                    
+                    var response = await client.PostAsJsonAsync("https://localhost:7221/api/Vendedores", nuevoVendedor);
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var resultado = await response.Content.ReadFromJsonAsync<VendedorRegistradoDTOs>();
-
                         MessageBox.Show("¡Registro exitoso como vendedor!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var vendedorCreado = await response.Content.ReadFromJsonAsync<VendedoresReadDTO>();
+                        int vendedorId = vendedorCreado.VendedorId;
+                        // Buscar el TabPage donde estás
+                        TabPage parentTab = this.Parent as TabPage;
+                        if (parentTab != null)
+                        {
+                            parentTab.Controls.Clear();
 
-                        // Actualizar interfaz
-                        var pagina = this.FindForm() as PaginaPrincipal;
-                        pagina?.MostrarFormularioEnTabPage();
+                            // Puedes llamar al nuevo UserControl pasando el usuarioId
+                            var nuevoForm = new FormVendedorRegistrado(usuarioId, vendedorId); // asegúrate que tenga ese constructor
+                            nuevoForm.Dock = DockStyle.Fill;
+                            parentTab.Controls.Add(nuevoForm);
+                        }
                     }
                     else
                     {
-                        string error = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show($"No se pudo registrar:\n{error}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        var error = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show("Error al registrar: " + error, "Registro fallido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
                 }
             }
             catch (Exception ex)

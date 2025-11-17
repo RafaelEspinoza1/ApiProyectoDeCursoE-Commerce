@@ -1,4 +1,5 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,15 +24,28 @@ namespace APIProyectoDeCursoE_commerce.Controllers
 
         // GET: api/Administradors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Administrador>>> GetAdministrador()
+        public async Task<ActionResult<IEnumerable<AdministradorReadDTO>>> GetAdministrador([FromHeader(Name = "admin-password")] string password)
         {
-            return await _context.Administrador.ToListAsync();
+            if (password != "12345678")
+                return Unauthorized("Contraseña incorrecta.");
+
+            return await _context.Administrador
+                .Select(a => new AdministradorReadDTO
+                {
+                    AdministradorId = a.AdministradorId,
+                    Nombre = a.Nombre,
+                    Apellido = a.Apellido,
+                    Correo = a.Correo,
+                    Contraseña = a.Contraseña
+                }).ToListAsync();
         }
 
         // GET: api/Administradors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Administrador>> GetAdministrador(int id)
+        public async Task<ActionResult<AdministradorReadDTO>> GetAdministrador(int id, [FromHeader(Name = "admin-password")] string password)
         {
+            if (password != "12345678")
+                return Unauthorized("Contraseña incorrecta.");
             var administrador = await _context.Administrador.FindAsync(id);
 
             if (administrador == null)
@@ -39,36 +53,34 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return NotFound();
             }
 
-            return administrador;
+            return new AdministradorReadDTO
+            {
+                AdministradorId = administrador.AdministradorId,
+                Nombre = administrador.Nombre,
+                Apellido = administrador.Apellido,
+                Correo = administrador.Correo,
+                Contraseña = administrador.Contraseña
+            };
         }
 
         // PUT: api/Administradors/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdministrador(int id, Administrador administrador)
+        public async Task<IActionResult> PutAdministrador(int id, [FromHeader(Name = "admin-password")] string password, AdministradorUpdateDTO dto)
         {
-            if (id != administrador.AdministradorId)
-            {
-                return BadRequest();
-            }
+            if (password != "12345678")
+                return Unauthorized("Contraseña incorrecta.");
 
-            _context.Entry(administrador).State = EntityState.Modified;
+            var admin = await _context.Administrador.FindAsync(id);
+            if (admin == null)
+                return NotFound();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AdministradorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            admin.Nombre = dto.Nombre;
+            admin.Apellido = dto.Apellido;
+            admin.Correo = dto.Correo;
+            admin.Contraseña = dto.Contraseña;
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -76,18 +88,39 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         // POST: api/Administradors
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Administrador>> PostAdministrador(Administrador administrador)
+        public async Task<ActionResult<AdministradorReadDTO>> PostAdministrador([FromHeader(Name = "admin-password")] string password, AdministradorCreateDTO dto)
         {
-            _context.Administrador.Add(administrador);
+            if (password != "12345678")
+                return Unauthorized("Contraseña incorrecta.");
+
+            var nuevo = new Administrador
+            {
+                Nombre = dto.Nombre,
+                Apellido = dto.Apellido,
+                Correo = dto.Correo,
+                Contraseña = dto.Contraseña
+            };
+
+            _context.Administrador.Add(nuevo);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAdministrador", new { id = administrador.AdministradorId }, administrador);
+            return CreatedAtAction(nameof(GetAdministrador), new { id = nuevo.AdministradorId }, new AdministradorReadDTO
+            {
+                AdministradorId = nuevo.AdministradorId,
+                Nombre = nuevo.Nombre,
+                Apellido = nuevo.Apellido,
+                Correo = nuevo.Correo,
+                Contraseña = nuevo.Contraseña
+            });
         }
 
         // DELETE: api/Administradors/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAdministrador(int id)
+        public async Task<IActionResult> DeleteAdministrador(int id, [FromHeader(Name = "admin-password")] string password)
         {
+            if (password != "12345678")
+                return Unauthorized("Contraseña incorrecta.");
+
             var administrador = await _context.Administrador.FindAsync(id);
             if (administrador == null)
             {

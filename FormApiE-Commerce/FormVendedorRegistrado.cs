@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,22 +12,18 @@ namespace FormApiE_Commerce
 {
     public partial class FormVendedorRegistrado : UserControl
     {
-        public FormVendedorRegistrado()
+
+        public string ProductoUrl = "https://localhost:7221/api/Productos";
+        public string ImagenProductoUrl = "https://localhost:7221/api/ImagenProductos";
+        public string IngresosEcommerceUrl = "https://localhost:7221/api/IngresosECommerce";
+        private int _usuarioId;
+        private int _vendedorId;
+        public FormVendedorRegistrado(int usuarioId, int vendedorId)
         {
             InitializeComponent();
+            _usuarioId = usuarioId;
+            _vendedorId = vendedorId;
         }
 
-        private void FormVendedorRegistrado_Load(object sender, EventArgs e)
-        {
-            //using (var db = new ECommerceContext())
-            //{
-            //    var usuario = db.Usuarios.FirstOrDefault(u => u.UsuarioId == FormInicio.UsuarioId);
-            //    if (usuario != null)
-            //    {
-            //        lblSaludo.Text = $"HOLA DE NUEVO, {usuario.Nombre}!";
-            //    }
-            //}
-
-        }
     }
 }
