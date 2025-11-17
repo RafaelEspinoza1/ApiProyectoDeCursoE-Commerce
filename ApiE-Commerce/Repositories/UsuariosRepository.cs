@@ -1,6 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Security.Cryptography;
-using ApiProyectoDeCursoE_Commerce.Data;
+﻿using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -45,6 +43,8 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                     PrimerApellido = reader.GetString(reader.GetOrdinal("PrimerApellido")),
                     SegundoApellido = reader.IsDBNull(reader.GetOrdinal("SegundoApellido")) ? null : reader.GetString(reader.GetOrdinal("SegundoApellido")),
                     Telefono = reader.GetString(reader.GetOrdinal("Telefono")),
+                    Correo = reader.GetString(reader.GetOrdinal("Correo")),
+                    Contraseña = reader.GetString(reader.GetOrdinal("Contraseña")),
                 };
             }
 
