@@ -8,6 +8,8 @@ namespace ApiProyectoDeCursoE_Commerce.Models
     {
         [Key]
         public int IdUsuario { get; set; }
+        [Required]
+        public required int IdRol { get; set; }
         [Required, MaxLength(30)]
         public required string PrimerNombre { get; set; }
         [MaxLength(30)]

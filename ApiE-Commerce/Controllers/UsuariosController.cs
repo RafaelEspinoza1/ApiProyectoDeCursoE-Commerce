@@ -1,12 +1,19 @@
-﻿using ApiProyectoDeCursoE_Commerce.Data;
+﻿using ApiProyectoDeCursoE_Commerce.Configuration;
+using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.Guards;
 using ApiProyectoDeCursoE_Commerce.Models;
+using ApiProyectoDeCursoE_Commerce.Models.Enums;
+using ApiProyectoDeCursoE_Commerce.Repositories;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Internal;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,30 +23,28 @@ namespace APIProyectoDeCursoE_commerce.Controllers
     [ApiController]
     public class UsuariosController : ControllerBase
     {
-        private readonly ECommerceContext _context;
+        private readonly UsuariosRepository _usuariosRepository;
+        private readonly JwtService _jwtService;
 
-        public UsuariosController(ECommerceContext context)
+        public UsuariosController(UsuariosRepository usuariosRepository, JwtService jwtService)
         {
-            _context = context;
+            _usuariosRepository = usuariosRepository;
+            _jwtService = jwtService;
         }
 
         // GET: api/Usuarios
         [HttpGet]
+        [Authorize]
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
         public async Task<ActionResult<IEnumerable<UsuariosReadDTO>>> GetUsuarios()
         {
+            // Obtener todos los usuarios
             try
             {
-                return await _context.Usuarios
-                .Select(u => new UsuariosReadDTO
-                {
-                UsuarioId = u.UsuarioId,
-                Nombre = u.Nombre,
-                Apellido = u.Apellido,
-                Correo = u.Correo,
-                Contraseña = u.Contraseña,
-                Telefono = u.Telefono
-                }).ToListAsync();
-
+                // Llamar al repositorio para obtener los usuarios
+                var usuario = await _usuariosRepository.GetAll();
+                if (usuario == null) return NotFound();
+                return Ok(usuario);
             }
             catch
             {
@@ -51,20 +56,25 @@ namespace APIProyectoDeCursoE_commerce.Controllers
 
         // GET: api/Usuarios/5
         [HttpGet("{id}")]
+        [Authorize]
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuarios(int id)
         {
-            var usuarios = await _context.Usuarios.FindAsync(id);
+            // Obtener usuario por ID
+            var usuarios = await _usuariosRepository.GetById(id);
 
+            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
+            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
-                UsuarioId = usuarios.UsuarioId,
-                Nombre = usuarios.Nombre,
-                Apellido = usuarios.Apellido,
+                UsuarioId = usuarios.IdUsuario,
+                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -74,124 +84,113 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         // PUT: api/Usuarios/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsuarios(int id, UsuariosUpdateDTO dto)
+        [Authorize]
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
+        public async Task<IActionResult> PutUsuarios(UsuariosUpdateDTO dto, int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
+            // Verificar si el usuario existe
+            var usuario = await _usuariosRepository.GetById(id);
+
             if (usuario == null)
             {
                 return NotFound();
             }
+
             // Validar que el correo no exista en otro usuario
-            bool correoExistente = await _context.Usuarios.AnyAsync(u => u.Correo == dto.Correo && u.UsuarioId != id);
-            if (correoExistente)
+            var usuarioConCorreo = await _usuariosRepository.GetByEmail(usuario.Correo);
+
+            if (usuarioConCorreo != null)
             {
                 return BadRequest("El correo ya está registrado por otro usuario.");
             }
 
-            usuario.Nombre = dto.Nombre;
-            usuario.Apellido = dto.Apellido;
-            usuario.Correo = dto.Correo;
-            usuario.Contraseña = dto.Contraseña;
-            var telefono = string.IsNullOrWhiteSpace(dto.Telefono) ? "00000000" : dto.Telefono;
-            usuario.Telefono = $"{dto.Telefono.Substring(0, 4)}-{dto.Telefono.Substring(4, 4)}";
+            // Actualizar los datos del usuario
+            try
+            {
+                var filasAfectadas = await _usuariosRepository.Update(dto, id);
+            }
+            catch
+            {
+                return StatusCode(500, "Error interno en el servidor.");
+            }
 
-            await _context.SaveChangesAsync();
+
             return NoContent();
         }
 
-        // POST: api/Usuarios
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UsuariosCreateDTO>> PostUsuarios(UsuariosCreateDTO dto)
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
+        // POST: api/Usuarios/register
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<ActionResult<string>> Login(int id)
         {
-            // Validar que el correo no exista ya en la base de datos
-            bool correoExistente = await _context.Usuarios.AnyAsync(u => u.Correo == dto.Correo);
-            if (correoExistente)
-            {
-                return BadRequest("El correo ya está registrado.");
-            }
-            var telefono = string.IsNullOrWhiteSpace(dto.Telefono) ? "00000000" : dto.Telefono;
-            var nuevoUsuario = new Usuario
-            {
-                Nombre = dto.Nombre,
-                Apellido = dto.Apellido,
-                Correo = dto.Correo,
-                Contraseña = dto.Contraseña,
-                Telefono = $"{dto.Telefono.Substring(0, 4)}-{dto.Telefono.Substring(4, 4)}"
-            };
-            _context.Usuarios.Add(nuevoUsuario);
-            await _context.SaveChangesAsync();
+            var usuario = await _usuariosRepository.GetById(id);
 
-            return CreatedAtAction(nameof(GetUsuarios), new { id = nuevoUsuario.UsuarioId }, new UsuariosReadDTO
-            {
-                UsuarioId = nuevoUsuario.UsuarioId,
-                Nombre = nuevoUsuario.Nombre,
-                Apellido = nuevoUsuario.Apellido,
-                Correo = nuevoUsuario.Correo,
-                Telefono = nuevoUsuario.Telefono
-            });
+            // IMPLEMENTAR VERIFICACIÓN DE CONTRASEÑA
+
+            //if (usuario == null || !VerifyPassword(usuario, loginDto.Password))
+            //    return Unauthorized("Usuario o contraseña inválidos");
+
+            var token = _jwtService.GenerateToken(usuario!);
+            return Ok(token);
         }
 
-       
+        // POST: api/Usuarios/login
+        [HttpPost("login")]
+        [AllowAnonymous]
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
+        public async Task<ActionResult<string>> Login(int id, string contraseña)
+        {
+            // Validar las credenciales del usuario
+            var usuario = await _usuariosRepository.LoginUser(id, contraseña);
 
-        // DELETE: api/Usuarios/5
+            // Verificar si el usuario es válido
+            if (usuario == null)
+            {
+                return Unauthorized("Acceso no autorizado: Usuario o contraseña inválidos");
+            }
+
+            // Generar el token JWT para el usuario autenticado
+            var token = _jwtService.GenerateToken(usuario!);
+            return Ok(token);
+        }
+
+        // POST: api/Usuarios/register
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
+        [HttpPost("register")]
+        [Authorize]
+        public async Task<ActionResult<string>> Register(UsuariosCreateDTO usuario)
+        {
+            // Registrar el usuario validando que el correo no exista ya en la base de datos
+            var usuarioRegistrado = await _usuariosRepository.RegisterUser(usuario);
+
+            // Verificar si el registro fue exitoso
+            if (usuarioRegistrado == null)
+            {
+                return BadRequest("Error al registrar el usuario.");
+            }
+
+            // Generar el token JWT para el usuario registrado
+            var token = _jwtService.GenerateToken(usuarioRegistrado!);
+            return Ok(token);
+        }
+
+        // DELETE api/Usuarios/5
+        [AuthGuard([RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador], "X-Auth-Buyers")]
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteUsuarios(int id)
         {
             try
             {
-                var usuario = await _context.Usuarios.FindAsync(id);
-                if (usuario == null)
-                {
-                    return NotFound();
-                }
-
-                // Verificar si es vendedor
-                var vendedor = await _context.Vendedores
-                    .FirstOrDefaultAsync(v => v.UsuarioId == id);
-
-                if (vendedor != null)
-                {
-                    // Buscar productos del vendedor
-                    var productos = await _context.Productos
-                        .Where(p => p.VendedorId == vendedor.VendedorId)
-                        .ToListAsync();
-
-                    // Obtener IDs de productos
-                    var productosIds = productos.Select(p => p.ProductoId).ToList();
-
-                    // Eliminar imágenes relacionadas a esos productos
-                    var imagenes = await _context.ImagenesProducto
-                        .Where(img => productosIds.Contains(img.ProductoId))
-                        .ToListAsync();
-
-                    _context.ImagenesProducto.RemoveRange(imagenes);
-
-                    // Eliminar productos
-                    _context.Productos.RemoveRange(productos);
-
-                    // Eliminar vendedor
-                    _context.Vendedores.Remove(vendedor);
-                }
-
-                // Eliminar usuario
-                _context.Usuarios.Remove(usuario);
-                await _context.SaveChangesAsync();
+                int filasAfectadas = await _usuariosRepository.Delete(id);
 
                 return NoContent();
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"Error al eliminar el usuario con ID {id}: {ex.Message}");
                 return StatusCode(500, "Error interno al intentar eliminar el usuario.");
             }
-        }
-
-
-
-        private bool UsuariosExists(int id)
-        {
-            return _context.Usuarios.Any(e => e.UsuarioId == id);
         }
     }
 }

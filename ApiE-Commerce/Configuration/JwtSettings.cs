@@ -2,6 +2,7 @@
 {
     public class JwtSettings
     {
+        // Configuración del JWT
         public string key { get; set; } = string.Empty;
         public string issuer { get; set; } = string.Empty;
         public string audience { get; set; } = string.Empty;
