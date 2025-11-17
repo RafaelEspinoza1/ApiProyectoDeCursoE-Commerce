@@ -233,7 +233,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                     Contraseña = @Contraseña
                 WHERE IdUsuario = @IdUsuario";
             
-            cmd.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+            cmd.Parameters.AddWithValue("@IdUsuario", id);
             cmd.Parameters.AddWithValue("@PrimerNombre", usuario.PrimerNombre);
             cmd.Parameters.AddWithValue("@SegundoNombre", usuario.SegundoNombre);
             cmd.Parameters.AddWithValue("@PrimerApellido", usuario.PrimerApellido);

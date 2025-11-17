@@ -5,16 +5,13 @@ using ApiProyectoDeCursoE_Commerce.Guards;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Models.Enums;
 using ApiProyectoDeCursoE_Commerce.Repositories;
-using Humanizer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Internal;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace APIProyectoDeCursoE_commerce.Controllers
@@ -25,18 +22,23 @@ namespace APIProyectoDeCursoE_commerce.Controllers
     {
         private readonly UsuariosRepository _usuariosRepository;
         private readonly JwtService _jwtService;
+        private readonly JwtSettings _jwtSettings;
 
-        public UsuariosController(UsuariosRepository usuariosRepository, JwtService jwtService)
+        public UsuariosController(
+            UsuariosRepository usuariosRepository,
+            JwtService jwtService,
+            JwtSettings jwtSettings)
         {
             _usuariosRepository = usuariosRepository;
             _jwtService = jwtService;
+            _jwtSettings = jwtSettings;
         }
 
         // GET: api/Usuarios
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UsuariosReadDTO>>> GetUsuarios()
         {
@@ -52,14 +54,13 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             {
                 return StatusCode(500, "Error interno en el servidor.");
             }
-            
         }
 
         // GET: api/Usuarios/5
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
+        })]
         [HttpGet("{id}")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosById(int id)
         {
@@ -76,8 +77,8 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -85,28 +86,25 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         }
 
         // GET: api/Usuarios/primerNombre
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet("primerNombre")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByFirstName(string primerNombre)
         {
-            // Obtener usuario por ID
             var usuarios = await _usuariosRepository.GetByFirstName(primerNombre);
 
-            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
-            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -114,28 +112,25 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         }
 
         // GET: api/Usuarios/segundoNombre
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet("segundoNombre")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosBySecondName(string segundoNombre)
         {
-            // Obtener usuario por ID
-            var usuarios = await _usuariosRepository.GetByFirstName(segundoNombre);
+            var usuarios = await _usuariosRepository.GetBySecondName(segundoNombre);
 
-            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
-            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -143,28 +138,25 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         }
 
         // GET: api/Usuarios/primerApellido
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet("primerApellido")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByFirstSurname(string firstSurname)
         {
-            // Obtener usuario por ID
-            var usuarios = await _usuariosRepository.GetByFirstName(firstSurname);
+            var usuarios = await _usuariosRepository.GetByFirstSurname(firstSurname);
 
-            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
-            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -172,86 +164,77 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         }
 
         // GET: api/Usuarios/segundoApellido
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet("segundoApellido")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosBySecondSurname(string secondSurname)
         {
-            // Obtener usuario por ID
-            var usuarios = await _usuariosRepository.GetBySecondName(secondSurname);
+            var usuarios = await _usuariosRepository.GetBySecondSurname(secondSurname);
 
-            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
-            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
             };
         }
 
-        // GET: api/Usuarios/primerApellido
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
+        // GET: api/Usuarios/telefono
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet("telefono")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByTelephone(string telephone)
         {
-            // Obtener usuario por ID
             var usuarios = await _usuariosRepository.GetByTelephone(telephone);
 
-            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
-            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
             };
         }
 
-        // GET: api/Usuarios/primerApellido
-        [AuthGuard(
-            allowedRoles: new RolesEnum[] { RolesEnum.Administrador }
-        )]
+        // GET: api/Usuarios/correo
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet("correo")]
         public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByCorreo(string correo)
         {
-            // Obtener usuario por ID
             var usuarios = await _usuariosRepository.GetByEmail(correo);
 
-            // Verificar si el usuario existe
             if (usuarios == null)
             {
                 return NotFound();
             }
 
-            // Mapear a DTO y retornar
             return new UsuariosReadDTO
             {
                 UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} + {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} + {usuarios.SegundoApellido}",
+                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
+                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -259,8 +242,10 @@ namespace APIProyectoDeCursoE_commerce.Controllers
         }
 
         // PUT: api/Usuarios/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
+        })]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuarios(UsuariosUpdateDTO dto, int id)
         {
@@ -290,39 +275,60 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return StatusCode(500, "Error interno en el servidor.");
             }
 
-
             return NoContent();
         }
 
         // POST: api/Usuarios/login
-        [HttpPost("login")]
         [AllowAnonymous]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[]
-        {
-            "X-Auth-Buyers"
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
         })]
-        public async Task<ActionResult<string>> Login(int id, string contraseña)
+        [HttpPost("login")]
+        public async Task<ActionResult<string>> Login(int id, string contraseña, string? token)
         {
-            // Validar las credenciales del usuario
+            // Validar usuario
             var usuario = await _usuariosRepository.LoginUser(id, contraseña);
 
-            // Verificar si el usuario es válido
             if (usuario == null)
             {
                 return Unauthorized("Acceso no autorizado: Usuario o contraseña inválidos");
             }
 
-            // Generar el token JWT para el usuario autenticado
-            var token = _jwtService.GenerateToken(usuario!);
-            return Ok(token);
+            // Validar el token recibido
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                var handler = new JwtSecurityTokenHandler();
+
+                try
+                {
+                    // Validar el token
+                    handler.ValidateToken(token, new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = _jwtSettings.issuer,
+                        ValidAudience = _jwtSettings.audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.key))
+                    }, out _);
+
+                    return Ok(token);
+                }
+                catch {}
+            }
+
+            // Generar un nuevo token JWT
+            var nuevoToken = _jwtService.GenerateToken(usuario);
+
+            return Ok(nuevoToken);
         }
 
         // POST: api/Usuarios/register
         [HttpPost("register")]
         [Authorize]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[]
-        {
-            "X-Auth-Buyers"
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
         })]
         public async Task<ActionResult<string>> Register(UsuariosCreateDTO usuario)
         {
@@ -335,18 +341,17 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return BadRequest("Error al registrar el usuario.");
             }
 
-            // Generar el token JWT para el usuario registrado
+            // Generar el token JWT
             var token = _jwtService.GenerateToken(usuarioRegistrado!);
             return Ok(token);
         }
 
         // DELETE api/Usuarios/5
-        [HttpDelete("{id}")]
         [Authorize]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[]
-        {
-            "X-Auth-Buyers"
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
         })]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUsuarios(int id)
         {
             try
