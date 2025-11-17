@@ -10,11 +10,14 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         public int IdVendedor { set; get; }
         [Required]
         public int IdUsuario { set; get; }
+        [MaxLength(100)]
+        public string? NombreNegocio { set; get; }
+        [Required, MaxLength(255)]
+        public string? LogoNegocio { set; get; }
+        [MaxLength(300)]
+        public string? DescripcionNegocio { set; get; }
         [Required]
-        [Column(TypeName = "decimal(10,2)")]
-        public decimal Ingresos { set; get; } = 0;
-        [Required, MaxLength(25)]
-        public string NumeroDeCuentaVendedor { set; get; }
+        public required bool EsContribuyente { get; set; }
 
         // Relación con Usuario
         [ForeignKey("IdUsuario")]

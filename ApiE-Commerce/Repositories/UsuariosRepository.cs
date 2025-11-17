@@ -198,8 +198,10 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
-                INSERT IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña
-                VALUES (@PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
+                INSERT INTO Usuarios
+                (IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña)
+                VALUES
+                (@PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
 
             cmd.Parameters.AddWithValue("@PrimerNombre", usuario.PrimerNombre);
             cmd.Parameters.AddWithValue("@SegundoNombre", usuario.SegundoNombre);
