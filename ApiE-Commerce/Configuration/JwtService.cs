@@ -21,7 +21,7 @@ namespace ApiProyectoDeCursoE_Commerce.Configuration
         // Genera un token JWT para el usuario dado
         public string GenerateToken(Usuario usuario)
         {
-            // Define el rol del usuario
+            // Define el rol del usuario usando el enum
             var rol = (RolesEnum)usuario.IdRol;
 
             // Crea los claims del token

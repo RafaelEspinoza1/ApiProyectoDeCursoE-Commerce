@@ -12,9 +12,6 @@ builder.Services.AddDbContext<ECommerceContext>(options => options.UseSqlServer(
 // Inyección de dependencias de autenticación JWT
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
-// Inyección de dependencias de guards
-builder.Services.AddScoped<AuthGuard>();
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,6 +30,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+// Middleware de autenticación y autorización
+app.UseAuthentication();
 
 app.UseAuthorization();
 
