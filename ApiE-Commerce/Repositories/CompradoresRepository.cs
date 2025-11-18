@@ -113,7 +113,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
 
         // Crea nuevo comprador
-        public async Task<int> Create(UsuariosCreateDTO usuario)
+        public async Task<int> Create(int id)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -122,7 +122,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                 (IdUsuario)
                 VALUES
                 (@IdUsuario)";
-            cmd.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+            cmd.Parameters.AddWithValue("@IdUsuario", id);
 
             return await ExecuteNonQuery(cmd);
         }

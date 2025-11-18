@@ -24,6 +24,6 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
 
         // Comandos de autenticación
         Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario);
-        Task<Usuario?> LoginUser(int id, string password);
+        Task<Usuario?> LoginUser(string correo, string password);
     }
 }

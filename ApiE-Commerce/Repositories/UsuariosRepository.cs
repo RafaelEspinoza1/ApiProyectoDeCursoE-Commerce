@@ -3,11 +3,10 @@ using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories
 {
-    public class UsuariosRepository: IUsuariosRepository
+    public class UsuariosRepository : IUsuariosRepository
     {
         // Contexto de la base de datos
         private readonly ECommerceContext _context;
@@ -18,9 +17,6 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             _context = context;
         }
 
-
-
-
         // Filtra la búsqueda a partir del comando
         // SOLO ACCESIBLE DESDE EL REPOSITORIO
         private async Task<Usuario?> Get(SqlCommand cmd)
@@ -28,13 +24,10 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             using var conn = _context.GetConnection();
             await conn.OpenAsync();
 
-            // Asigna la conexión al comando
             cmd.Connection = conn;
 
-            // Ejecuta el comando
             using var reader = await cmd.ExecuteReaderAsync();
 
-            // Si hay resultados, crea el objeto Usuario
             if (await reader.ReadAsync())
             {
                 return new Usuario
@@ -54,17 +47,14 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             return null;
         }
 
-
-
-
         // Filtro de búsqueda
         public async Task<Usuario?> GetAll()
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios";
 
             return await Get(cmd);
@@ -73,110 +63,107 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
         // Filtro de búsqueda
         public async Task<Usuario?> GetById(int id)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE IdUsuario = @Id";
-            cmd.Parameters.AddWithValue("@Id", id);
 
+            cmd.Parameters.AddWithValue("@Id", id);
             return await Get(cmd);
         }
 
         // Filtro de búsqueda
         public async Task<Usuario?> GetByFirstName(string firstName)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE PrimerNombre = @FirstName";
-            cmd.Parameters.AddWithValue("@FirstName", firstName);
 
+            cmd.Parameters.AddWithValue("@FirstName", firstName);
             return await Get(cmd);
         }
 
         // Filtro de búsqueda
         public async Task<Usuario?> GetBySecondName(string secondName)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE SegundoNombre = @SecondName";
-            cmd.Parameters.AddWithValue("@SecondName", secondName);
 
+            cmd.Parameters.AddWithValue("@SecondName", secondName);
             return await Get(cmd);
         }
 
         // Filtro de búsqueda
         public async Task<Usuario?> GetByFirstSurname(string firstSurname)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE PrimerApellido = @FirstSurname";
-            cmd.Parameters.AddWithValue("@FirstSurname", firstSurname);
 
+            cmd.Parameters.AddWithValue("@FirstSurname", firstSurname);
             return await Get(cmd);
         }
 
         // Filtro de búsqueda
         public async Task<Usuario?> GetBySecondSurname(string secondSurname)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE SegundoApellido = @SecondSurname";
-            cmd.Parameters.AddWithValue("@SecondSurname", secondSurname);
 
+            cmd.Parameters.AddWithValue("@SecondSurname", secondSurname);
             return await Get(cmd);
         }
 
         // Filtro de búsqueda
         public async Task<Usuario?> GetByTelephone(string telephone)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE Telefono = @Telephone";
-            cmd.Parameters.AddWithValue("@Telephone", telephone);
 
+            cmd.Parameters.AddWithValue("@Telephone", telephone);
             return await Get(cmd);
         }
 
         // Filtro de búsqueda
         public async Task<Usuario?> GetByEmail(string email)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
-                IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña, FechaRegistro
+                    IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
+                    Telefono, Correo, Contraseña, FechaRegistro
                 FROM Usuarios
                 WHERE Correo = @Email";
-            cmd.Parameters.AddWithValue("@Email", email);
 
+            cmd.Parameters.AddWithValue("@Email", email);
             return await Get(cmd);
         }
-
-
-
 
         // Ejecuta comandos que no retornan datos
         // SOLO ACCESIBLE DESDE EL REPOSITORIO
@@ -185,27 +172,22 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             using var conn = _context.GetConnection();
             await conn.OpenAsync();
 
-            // Asigna la conexión al comando
             cmd.Connection = conn;
 
-            // Ejecuta el comando y devuelve el número de filas afectadas
             return await cmd.ExecuteNonQueryAsync();
         }
-
-
-
 
         // Crea nuevo usuario
         public async Task<int> Create(UsuariosCreateDTO usuario)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 INSERT INTO Usuarios
-                (IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña)
+                (IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña)
                 VALUES
-                (@PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
+                (@IdRol, @PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
 
+            cmd.Parameters.AddWithValue("@IdRol", usuario.IdRol);
             cmd.Parameters.AddWithValue("@PrimerNombre", usuario.PrimerNombre);
             cmd.Parameters.AddWithValue("@SegundoNombre", usuario.SegundoNombre);
             cmd.Parameters.AddWithValue("@PrimerApellido", usuario.PrimerApellido);
@@ -220,7 +202,6 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
         // Actualiza usuario
         public async Task<int> Update(UsuariosUpdateDTO usuario, int id)
         {
-            // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 UPDATE Usuarios
@@ -232,7 +213,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                     Correo = @Correo,
                     Contraseña = @Contraseña
                 WHERE IdUsuario = @IdUsuario";
-            
+
             cmd.Parameters.AddWithValue("@IdUsuario", id);
             cmd.Parameters.AddWithValue("@PrimerNombre", usuario.PrimerNombre);
             cmd.Parameters.AddWithValue("@SegundoNombre", usuario.SegundoNombre);
@@ -255,37 +236,32 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             return await ExecuteNonQuery(cmd);
         }
 
-
-
-
         // Registra usuario
         public async Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario)
         {
-            // Ejecuta el comando SQL para crear el usuario
             int filasAfectadas = await Create(usuario);
             if (filasAfectadas > 0)
             {
-                // Si la creación fue exitosa, obtiene el usuario recién creado por su correo
                 return await GetByEmail(usuario.Correo);
             }
             return null;
         }
 
-
-
         // Inicia sesión y verifica la contraseña
         public async Task<Usuario?> LoginUser(string correo, string contraseña)
         {
-           var usuarioEnDb = await GetByEmail(correo);
+            var usuarioEnDb = await GetByEmail(correo);
 
-           if (usuarioEnDb != null)
-           {
+            if (usuarioEnDb != null)
+            {
                 if (usuarioEnDb.Contraseña == contraseña)
                 {
                     return usuarioEnDb;
                 }
             }
-           return null;
+            return null;
         }
     }
 }
+
+

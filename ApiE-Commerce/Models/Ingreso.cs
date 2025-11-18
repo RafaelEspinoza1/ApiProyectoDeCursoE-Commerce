@@ -1,5 +1,4 @@
-﻿using ApiProyectoDeCursoE_Commerce.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiProyectoDeCursoE_Commerce.Models

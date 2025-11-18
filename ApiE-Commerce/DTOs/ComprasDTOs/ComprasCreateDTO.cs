@@ -8,7 +8,7 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.ComprasDTOs
     {
         [Required(ErrorMessage = "El numero de cuenta es obligatorio.")]
         [RegularExpression(@"^\d{16}$", ErrorMessage = "El número de cuenta debe tener exactamente 16 dígitos.")]
-        public string CuentaUsuario { get; set; }
+        public required string CuentaUsuario { get; set; }
         [Required(ErrorMessage = "La cantidad es obligatorio.")]
         [Range(0, int.MaxValue, ErrorMessage = "La cantidad no puede ser negativa.")]
         public decimal Cantidad { get; set; } = 1;
@@ -23,7 +23,7 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.ComprasDTOs
         [Range(-180, 180, ErrorMessage = "La longitud debe estar entre -180 y 180.")]
         public double LongitudDestino { get; set; }
         [Required(ErrorMessage = "La direccion es obligatoria.")]
-        public string NombreDireccionDestino { get; set; }
+        public required string NombreDireccionDestino { get; set; }
 
         [Required(ErrorMessage = "El ID del usuario es obligatorio.")]
         public int UsuarioId { get; set; }
