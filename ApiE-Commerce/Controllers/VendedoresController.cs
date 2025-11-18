@@ -1,4 +1,5 @@
-﻿using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
 using ApiProyectoDeCursoE_Commerce.Guards;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Models.Enums;
@@ -45,24 +46,6 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             var vendedor = await _vendedoresRepository.GetById(id);
             if (vendedor == null) return NotFound();
             return vendedor;
-        }
-
-        // POST: api/Vendedores
-        // Esta ruta se llama después de registrar el usuario en UsuariosController
-        [Authorize]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
-            new RolesEnum[] { RolesEnum.Administrador }
-        })]
-        [HttpPost]
-        public async Task<ActionResult<Vendedor>> CrearCuentaVendedor(VendedoresCreateDTO dto)
-        {
-            // Aquí ya se asume que el usuario principal existe
-            var filasAfectadas = await _vendedoresRepository.Create(dto);
-
-            var vendedorCreado = await _vendedoresRepository.GetById(dto.IdVendedor);
-            if (vendedorCreado == null) return BadRequest();
-
-            return vendedorCreado;
         }
 
         // PUT: api/Vendedores/{id}

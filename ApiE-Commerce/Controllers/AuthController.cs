@@ -9,8 +9,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ApiProyectoDeCursoE_Commerce.Controllers
 {
     [Route("api/[controller]")]
@@ -46,30 +44,23 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
         // POST: api/Auth/login
         [AllowAnonymous]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
-            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
-        })]
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(string correo, string contraseña, string? token)
         {
             // Validar usuario
             var usuario = await _usuariosRepository.LoginUser(correo, contraseña);
 
-            // Verificar si el usuario es válido
             if (usuario == null)
             {
                 return Unauthorized("Acceso no autorizado: Usuario o contraseña inválidos");
             }
 
-            // Validar el token recibido
+            // Validar token recibido
             if (!string.IsNullOrWhiteSpace(token))
             {
-                // Crear el manejador de tokens JWT
                 var handler = new JwtSecurityTokenHandler();
-
                 try
                 {
-                    // Validar el token
                     handler.ValidateToken(token, new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -88,52 +79,44 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
             // Generar un nuevo token JWT
             var nuevoToken = _jwtService.GenerateToken(usuario);
-
             return Ok(nuevoToken);
         }
 
         // POST: api/Auth/register
+        [AllowAnonymous]
         [HttpPost("register")]
-        [Authorize]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
-            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
-        })]
         public async Task<ActionResult<string>> Register(UsuariosCreateDTO usuario)
         {
-            // Registrar el usuario validando que el correo no exista ya en la base de datos
+            // Registrar usuario validando que no exista ya en la base de datos
             var usuarioRegistrado = await _usuariosRepository.RegisterUser(usuario);
 
-            // Verificar si el registro fue exitoso
             if (usuarioRegistrado == null)
             {
                 return BadRequest("Error al registrar el usuario.");
             }
 
-            // Crear la cuenta según el rol
             var rol = (RolesEnum)usuario.IdRol;
 
             switch (rol)
             {
-                // Crear cuenta de comprador
                 case RolesEnum.Comprador:
-                    await _compradoresRepository.Create(usuario);
+                    // Usar el IdUsuario creado
+                    await _compradoresRepository.Create(usuarioRegistrado.IdUsuario);
                     break;
-                // Crear cuenta de vendedor
                 case RolesEnum.Vendedor:
-                    await _vendedoresRepository.Create(usuario);
+                    await _vendedoresRepository.Create(usuario, usuarioRegistrado.IdUsuario);
                     break;
-                // Crear cuenta de administrador
                 case RolesEnum.Administrador:
-                    await _administradoresRepository.Create(usuario);
+                    await _administradoresRepository.Create(usuarioRegistrado.IdUsuario);
                     break;
                 default:
                     return BadRequest("No existe el rol específicado.");
             }
 
-            // Generar el token JWT
-            // GUARDAR EN TIEMPO DE APP
-            var token = _jwtService.GenerateToken(usuarioRegistrado!);
+            // Generar token JWT
+            var token = _jwtService.GenerateToken(usuarioRegistrado);
             return Ok(token);
         }
+
     }
 }

@@ -1,26 +1,51 @@
+using ApiProyectoDeCursoE_Commerce.Configuration;
 using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.Extensions;
 using ApiProyectoDeCursoE_Commerce.Guards;
-using Microsoft.EntityFrameworkCore;
+using ApiProyectoDeCursoE_Commerce.Repositories;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<ECommerceContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// ======= Servicios =======
 
+// Inyectar ECommerceContext (ADO.NET)
+builder.Services.AddSingleton(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("DefaultConnection")!;
+    return new ECommerceContext(connectionString);
+});
 
-// Inyección de dependencias de autenticación JWT
+// Repositorios
+builder.Services.AddScoped<UsuariosRepository>();
+builder.Services.AddScoped<VendedoresRepository>();
+builder.Services.AddScoped<CompradoresRepository>();
+builder.Services.AddScoped<AdministradoresRepository>();
+
+// Cargar configuración de JwtSettings desde appsettings.json
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+
+// Registrar JwtService inyectando JwtSettings
+builder.Services.AddSingleton<JwtService>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<JwtSettings>>().Value;
+    return new JwtService(settings);
+});
+
+// Autenticación JWT
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
-
+// Controladores
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+// Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// ======= Middleware =======
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -28,12 +53,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 
-// Middleware de autenticación y autorización
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();

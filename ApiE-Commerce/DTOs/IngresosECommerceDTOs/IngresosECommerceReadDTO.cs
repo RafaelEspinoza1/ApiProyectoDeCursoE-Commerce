@@ -1,5 +1,4 @@
-﻿using ApiProyectoDeCursoE_Commerce.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
 {
@@ -7,11 +6,11 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.IngresosECommerceDTOs
     {
         public int IngresoId { get; set; }
         public decimal Cantidad { get; set; }
-        public TipoIngreso Tipo { get; set; }
+        //public TipoIngreso Tipo { get; set; }
         public DateTime Fecha { get; set; } = DateTime.Now;
 
         public int UsuarioId { get; set; } // Clave foránea a la tabla Vendedores
-        public string NombreUsuario { get; set; }
-        public string ApellidoUsuario { get; set; }
+        public required string NombreUsuario { get; set; }
+        public required string ApellidoUsuario { get; set; }
     }
 }

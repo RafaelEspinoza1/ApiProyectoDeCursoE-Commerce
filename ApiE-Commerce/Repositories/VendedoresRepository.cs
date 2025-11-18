@@ -133,7 +133,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
 
         // Crea nuevo vendedor
-        public async Task<int> Create(UsuariosCreateDTO usuario)
+        public async Task<int> Create(UsuariosCreateDTO usuario, int id)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -142,7 +142,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                 (IdUsuario, NombreNegocio, DescripcionNegocio, LogoNegocio, EsContribuyente)
                 VALUES
                 (@IdUsuario, @NombreNegocio, @DescripcionNegocio, @LogoNegocio, @EsContribuyente)";
-            cmd.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+            cmd.Parameters.AddWithValue("@IdUsuario", id);
             cmd.Parameters.AddWithValue("@NombreNegocio", usuario.NombreNegocio);
             cmd.Parameters.AddWithValue("@DescripcionNegocio", usuario.DescripcionNegocio);
             cmd.Parameters.AddWithValue("@LogoNegocio", usuario.LogoNegocio);

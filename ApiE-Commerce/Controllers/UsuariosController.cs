@@ -22,15 +22,9 @@ namespace APIProyectoDeCursoE_commerce.Controllers
     {
         private readonly UsuariosRepository _usuariosRepository;
 
-        public UsuariosController(
-            UsuariosRepository usuariosRepository,
-            JwtService jwtService,
-            JwtSettings jwtSettings)
+        public UsuariosController(UsuariosRepository usuariosRepository)
         {
             _usuariosRepository = usuariosRepository;
-
-            _jwtService = jwtService;
-            _jwtSettings = jwtSettings;
         }
 
         // GET: api/Usuarios

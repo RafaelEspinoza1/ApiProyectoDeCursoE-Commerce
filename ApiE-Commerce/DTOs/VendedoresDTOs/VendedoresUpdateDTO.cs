@@ -4,7 +4,7 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs
 {
     public class VendedoresUpdateDTO
     {
-        [[Key]
+        [Key]
         public int IdVendedor { get; set; }
         [Required]
         public int IdUsuario { get; set; }

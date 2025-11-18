@@ -12,7 +12,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
 
         // Comandos de inserción, actualización o eliminación
         // Devuelven el número de filas afectadas
-        Task<int> Create(UsuariosCreateDTO vendedor);
+        Task<int> Create(int id);
         Task<int> Delete(int id);
     }
 }
