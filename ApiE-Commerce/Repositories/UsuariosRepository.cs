@@ -274,9 +274,9 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
 
         // Inicia sesión y verifica la contraseña
-        public async Task<Usuario?> LoginUser(int id, string contraseña)
+        public async Task<Usuario?> LoginUser(string correo, string contraseña)
         {
-           var usuarioEnDb = await GetById(id);
+           var usuarioEnDb = await GetByEmail(correo);
 
            if (usuarioEnDb != null)
            {

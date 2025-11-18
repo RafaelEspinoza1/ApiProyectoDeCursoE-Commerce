@@ -1,14 +1,11 @@
-﻿using ApiProyectoDeCursoE_Commerce.Data;
-using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
+using ApiProyectoDeCursoE_Commerce.Guards;
 using ApiProyectoDeCursoE_Commerce.Models;
-using Humanizer;
-using Microsoft.AspNetCore.Http;
+using ApiProyectoDeCursoE_Commerce.Models.Enums;
+using ApiProyectoDeCursoE_Commerce.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace APIProyectoDeCursoE_commerce.Controllers
@@ -17,221 +14,84 @@ namespace APIProyectoDeCursoE_commerce.Controllers
     [ApiController]
     public class VendedoresController : ControllerBase
     {
-        private readonly ECommerceContext _context;
+        private readonly VendedoresRepository _vendedoresRepository;
 
-        public VendedoresController(ECommerceContext context)
+        public VendedoresController(VendedoresRepository vendedoresRepository)
         {
-            _context = context;
+            _vendedoresRepository = vendedoresRepository;
         }
 
         // GET: api/Vendedores
+        [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VendedoresReadDTO>>> GetVendedores()
+        public async Task<ActionResult<IEnumerable<Vendedor>>> GetVendedores()
         {
-            return await _context.Vendedores
-                .Include(v => v.Usuario)
-                .Select(v => new VendedoresReadDTO
-                {
-                    VendedorId = v.VendedorId,
-                    NumeroDeCuenta = v.NumeroDeCuenta,
-                    Ingresos = v.Ingresos,
-                    DireccionOrigen = v.DireccionOrigen,
-                    LatitudOrigen = v.LatitudOrigen,
-                    LongitudOrigen = v.LongitudOrigen,
-                    UsuarioId = v.UsuarioId,
-                    UsuarioNombre = v.Usuario.Nombre,
-                    UsuarioApellido = v.Usuario.Apellido,
-                    UsuarioCorreo = v.Usuario.Correo
-                })
-                .ToListAsync();
+            var vendedores = await _vendedoresRepository.GetAll();
+            if (vendedores == null) return NotFound();
+            return Ok(vendedores);
         }
 
-        // GET: api/Vendedores/5
+        // GET: api/Vendedores/{id}
+        [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador, RolesEnum.Vendedor }
+        })]
         [HttpGet("{id}")]
-        public async Task<ActionResult<VendedoresReadDTO>> GetVendedores(int id)
+        public async Task<ActionResult<Vendedor>> GetVendedorById(int id)
         {
-            var vendedor = await _context.Vendedores
-                .Include(v => v.Usuario)
-                .Where(v => v.VendedorId == id)
-                .Select(v => new VendedoresReadDTO
-                {
-                    VendedorId = v.VendedorId,
-                    NumeroDeCuenta = v.NumeroDeCuenta,
-                    Ingresos = v.Ingresos,
-                    DireccionOrigen = v.DireccionOrigen,
-                    LatitudOrigen = v.LatitudOrigen,
-                    LongitudOrigen = v.LongitudOrigen,
-                    UsuarioId = v.UsuarioId,
-                    UsuarioNombre = v.Usuario.Nombre,
-                    UsuarioApellido = v.Usuario.Apellido,
-                    UsuarioCorreo = v.Usuario.Correo
-                })
-                .FirstOrDefaultAsync();
-
-            if (vendedor == null)
-            {
-                return NotFound();
-            }
-
+            var vendedor = await _vendedoresRepository.GetById(id);
+            if (vendedor == null) return NotFound();
             return vendedor;
         }
 
-        // PUT: api/Vendedores/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVendedores(int id, VendedoresUpdateDTO dto)
+        // POST: api/Vendedores
+        // Esta ruta se llama después de registrar el usuario en UsuariosController
+        [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
+        [HttpPost]
+        public async Task<ActionResult<Vendedor>> CrearCuentaVendedor(VendedoresCreateDTO dto)
         {
-            if (!Regex.IsMatch(dto.NumeroDeCuenta, @"^\d{16}$"))
-            {
-                return BadRequest("El número de cuenta debe tener exactamente 16 dígitos numéricos.");
-            }
-            var vendedor = await _context.Vendedores.FindAsync(id);
-            if (vendedor == null)
-            {
-                return NotFound();
-            }
-            string cuentaFormateada = FormatearCuenta(dto.NumeroDeCuenta);
+            // Aquí ya se asume que el usuario principal existe
+            var filasAfectadas = await _vendedoresRepository.Create(dto);
 
-            bool cuentaExiste = await _context.Vendedores
-                .AnyAsync(v => v.NumeroDeCuenta == cuentaFormateada && v.VendedorId != id);
+            var vendedorCreado = await _vendedoresRepository.GetById(dto.IdVendedor);
+            if (vendedorCreado == null) return BadRequest();
 
-            if (cuentaExiste)
-            {
-                return BadRequest("Ya existe un vendedor con ese número de cuenta.");
-            }
+            return vendedorCreado;
+        }
 
+        // PUT: api/Vendedores/{id}
+        [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador, RolesEnum.Vendedor }
+        })]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> ActualizarVendedor(int id, VendedoresUpdateDTO dto)
+        {
+            var vendedorExistente = await _vendedoresRepository.GetById(id);
+            if (vendedorExistente == null) return NotFound();
 
-            vendedor.NumeroDeCuenta = cuentaFormateada;
-            vendedor.DireccionOrigen = dto.DireccionOrigen;
-            vendedor.LatitudOrigen = dto.LatitudOrigen;
-            vendedor.LongitudOrigen = dto.LongitudOrigen;
-
-
-            await _context.SaveChangesAsync();
+            var filasAfectadas = await _vendedoresRepository.Update(dto, id);
 
             return NoContent();
         }
 
-        // POST: api/Vendedores
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<VendedoresReadDTO>> PostVendedores(VendedoresCreateDTO dto)
-        {
-            dto.NumeroDeCuenta = Regex.Replace(dto.NumeroDeCuenta ?? "", @"[^\d]", "").Trim();
-            if (!Regex.IsMatch(dto.NumeroDeCuenta, @"^\d{16}$"))
-            {
-                return BadRequest("El número de cuenta debe tener exactamente 16 dígitos numéricos.");
-            }
-            string cuentaFormateada = FormatearCuenta(dto.NumeroDeCuenta);
-            var usuario = await _context.Usuarios.FindAsync(dto.UsuarioId);
-            if (usuario == null)
-            {
-                return BadRequest("El usuario asociado no existe.");
-            }
-            // Verificar si el usuario ya es vendedor
-            var vendedorExistente = await _context.Vendedores
-                .AnyAsync(v => v.UsuarioId == dto.UsuarioId);
-
-            if (vendedorExistente)
-            {
-                return BadRequest("Este usuario ya está registrado como vendedor. Si desea volver a registrarse, primero elimine su cuenta de vendedor actual.");
-            }
-            bool cuentaExiste = await _context.Vendedores
-                .AnyAsync(v => v.NumeroDeCuenta == cuentaFormateada);
-
-            if (cuentaExiste)
-            {
-                return BadRequest("Ya existe un vendedor con ese número de cuenta.");
-            }
-            var nuevoVendedor = new Vendedor
-            {
-                NumeroDeCuenta = cuentaFormateada,
-                DireccionOrigen = dto.DireccionOrigen,
-                LatitudOrigen = dto.LatitudOrigen,
-                LongitudOrigen = dto.LongitudOrigen,
-                UsuarioId = dto.UsuarioId
-            };
-
-
-
-
-            _context.Vendedores.Add(nuevoVendedor);
-            await _context.SaveChangesAsync();
-
-            // Opcional: devolver el DTO completo o solo lo necesario
-            return CreatedAtAction(nameof(GetVendedores), new { id = nuevoVendedor.VendedorId }, new VendedoresReadDTO
-            {
-                VendedorId = nuevoVendedor.VendedorId,
-                NumeroDeCuenta = nuevoVendedor.NumeroDeCuenta,
-                Ingresos = nuevoVendedor.Ingresos,
-                DireccionOrigen = nuevoVendedor.DireccionOrigen,
-                LatitudOrigen = nuevoVendedor.LatitudOrigen,
-                LongitudOrigen = nuevoVendedor.LongitudOrigen,
-                UsuarioId = nuevoVendedor.UsuarioId,
-                UsuarioNombre = usuario.Nombre,
-                UsuarioApellido = usuario.Apellido,
-                UsuarioCorreo = usuario.Correo
-            });
-        }
-
-        // DELETE: api/Vendedores/5
+        // DELETE: api/Vendedores/{id}
+        [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVendedores(int id)
+        public async Task<IActionResult> EliminarVendedor(int id)
         {
-            try
-            {
-                var vendedor = await _context.Vendedores.FindAsync(id);
-                if (vendedor == null)
-                {
-                    Console.WriteLine($"Vendedor con ID {id} no encontrado.");
-                    return NotFound($"Vendedor con ID {id} no encontrado.");
-                }
-
-                // Buscar productos del vendedor
-                var productos = await _context.Productos
-                    .Where(p => p.VendedorId == id)
-                    .ToListAsync();
-
-                var productosIds = productos.Select(p => p.ProductoId).ToList();
-
-                // Buscar imágenes de esos productos
-                var imagenes = await _context.ImagenesProducto
-                    .Where(img => productosIds.Contains(img.ProductoId))
-                    .ToListAsync();
-
-                if (imagenes.Any())
-                {
-                    _context.ImagenesProducto.RemoveRange(imagenes);
-                    Console.WriteLine($"Se eliminaron {imagenes.Count} imágenes de productos del vendedor {id}.");
-                }
-
-                if (productos.Any())
-                {
-                    _context.Productos.RemoveRange(productos);
-                    Console.WriteLine($"Se eliminaron {productos.Count} productos del vendedor {id}.");
-                }
-
-                _context.Vendedores.Remove(vendedor);
-                Console.WriteLine($"Se eliminó el vendedor con ID {id}.");
-
-                await _context.SaveChangesAsync();
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al eliminar el vendedor con ID {id}: {ex.Message}");
-                return StatusCode(500, "Error interno al intentar eliminar el vendedor.");
-            }
-        }
-
-        private bool VendedoresExists(int id)
-        {
-            return _context.Vendedores.Any(e => e.VendedorId == id);
-        }
-        private string FormatearCuenta(string numero)
-        {
-            return $"{numero.Substring(0, 4)}-{numero.Substring(4, 4)}-{numero.Substring(8, 4)}-{numero.Substring(12, 4)}";
+            var filasAfectadas = await _vendedoresRepository.Delete(id);
+            
+            return NoContent();
         }
     }
 }

@@ -4,8 +4,16 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs
 {
     public class UsuariosCreateDTO
     {
+        [Required]
+        public required int IdUsuario { get; set; }
+        [Required]
+        public required int IdComprador { get; set; }
+        [Required]
+        public required int IdVendedor { get; set; }
+        [Required]
+        public required int IdAdministrador { get; set; }
         [Required(ErrorMessage = "El rol es obligatorio")]
-        public required int RolId { get; set; }
+        public required int IdRol { get; set; }
         [Required(ErrorMessage = "El primer nombre es obligatorio")]
         public required string PrimerNombre { get; set; }
         public string? SegundoNombre { get; set; }
@@ -24,6 +32,14 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs
 
         [Required(ErrorMessage = "El teléfono es obligatorio")]
         [RegularExpression(@"^[1-9][0-9]{7}$", ErrorMessage = "El número debe tener 8 dígitos y no puede iniciar con 0.")]
-        public required string Telefono { get; set; } 
+        public required string Telefono { get; set; }
+        [MaxLength(100)]
+        public string? NombreNegocio { get; set; }
+        [MaxLength(255)]
+        public string? LogoNegocio { get; set; }
+        [MaxLength(300)]
+        public string? DescripcionNegocio { get; set; }
+        [Required]
+        public bool EsContribuyente { get; set; }
     }
 }

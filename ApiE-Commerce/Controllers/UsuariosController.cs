@@ -21,8 +21,6 @@ namespace APIProyectoDeCursoE_commerce.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly UsuariosRepository _usuariosRepository;
-        private readonly JwtService _jwtService;
-        private readonly JwtSettings _jwtSettings;
 
         public UsuariosController(
             UsuariosRepository usuariosRepository,
@@ -30,6 +28,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             JwtSettings jwtSettings)
         {
             _usuariosRepository = usuariosRepository;
+
             _jwtService = jwtService;
             _jwtSettings = jwtSettings;
         }
@@ -40,7 +39,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador }
         })]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuariosReadDTO>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuarios()
         {
             // Obtener todos los usuarios
             try
@@ -62,7 +61,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
         })]
         [HttpGet("{id}")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosById(int id)
+        public async Task<ActionResult<Usuario>> GetUsuariosById(int id)
         {
             // Obtener usuario por ID
             var usuarios = await _usuariosRepository.GetById(id);
@@ -74,11 +73,14 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             }
 
             // Mapear a DTO y retornar
-            return new UsuariosReadDTO
+            return new Usuario
             {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -91,7 +93,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador }
         })]
         [HttpGet("primerNombre")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByFirstName(string primerNombre)
+        public async Task<ActionResult<Usuario>> GetUsuariosByFirstName(string primerNombre)
         {
             var usuarios = await _usuariosRepository.GetByFirstName(primerNombre);
 
@@ -100,11 +102,14 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return NotFound();
             }
 
-            return new UsuariosReadDTO
+            return new Usuario
             {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -117,7 +122,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador }
         })]
         [HttpGet("segundoNombre")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosBySecondName(string segundoNombre)
+        public async Task<ActionResult<Usuario>> GetUsuariosBySecondName(string segundoNombre)
         {
             var usuarios = await _usuariosRepository.GetBySecondName(segundoNombre);
 
@@ -126,11 +131,14 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return NotFound();
             }
 
-            return new UsuariosReadDTO
+            return new Usuario
             {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -143,7 +151,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador }
         })]
         [HttpGet("primerApellido")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByFirstSurname(string firstSurname)
+        public async Task<ActionResult<Usuario>> GetUsuariosByFirstSurname(string firstSurname)
         {
             var usuarios = await _usuariosRepository.GetByFirstSurname(firstSurname);
 
@@ -152,11 +160,14 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return NotFound();
             }
 
-            return new UsuariosReadDTO
+            return new Usuario
             {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -169,7 +180,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador }
         })]
         [HttpGet("segundoApellido")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosBySecondSurname(string secondSurname)
+        public async Task<ActionResult<Usuario>> GetUsuariosBySecondSurname(string secondSurname)
         {
             var usuarios = await _usuariosRepository.GetBySecondSurname(secondSurname);
 
@@ -178,37 +189,14 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return NotFound();
             }
 
-            return new UsuariosReadDTO
+            return new Usuario
             {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
-                Correo = usuarios.Correo,
-                Contraseña = usuarios.Contraseña,
-                Telefono = usuarios.Telefono
-            };
-        }
-
-        // GET: api/Usuarios/telefono
-        [Authorize]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
-            new RolesEnum[] { RolesEnum.Administrador }
-        })]
-        [HttpGet("telefono")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByTelephone(string telephone)
-        {
-            var usuarios = await _usuariosRepository.GetByTelephone(telephone);
-
-            if (usuarios == null)
-            {
-                return NotFound();
-            }
-
-            return new UsuariosReadDTO
-            {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -221,7 +209,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador }
         })]
         [HttpGet("correo")]
-        public async Task<ActionResult<UsuariosReadDTO>> GetUsuariosByCorreo(string correo)
+        public async Task<ActionResult<Usuario>> GetUsuariosByCorreo(string correo)
         {
             var usuarios = await _usuariosRepository.GetByEmail(correo);
 
@@ -230,11 +218,43 @@ namespace APIProyectoDeCursoE_commerce.Controllers
                 return NotFound();
             }
 
-            return new UsuariosReadDTO
+            return new Usuario
             {
-                UsuarioId = usuarios.IdUsuario,
-                Nombre = $"{usuarios.PrimerNombre} {usuarios.SegundoNombre}",
-                Apellido = $"{usuarios.PrimerApellido} {usuarios.SegundoApellido}",
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
+                Correo = usuarios.Correo,
+                Contraseña = usuarios.Contraseña,
+                Telefono = usuarios.Telefono
+            };
+        }
+
+        // GET: api/Usuarios/telefono
+        [Authorize]
+        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
+            new RolesEnum[] { RolesEnum.Administrador }
+        })]
+        [HttpGet("telefono")]
+        public async Task<ActionResult<Usuario>> GetUsuariosByTelephone(string telephone)
+        {
+            var usuarios = await _usuariosRepository.GetByTelephone(telephone);
+
+            if (usuarios == null)
+            {
+                return NotFound();
+            }
+
+            return new Usuario
+            {
+                IdUsuario = usuarios.IdUsuario,
+                IdRol = usuarios.IdRol,
+                PrimerNombre = usuarios.PrimerNombre,
+                SegundoNombre = usuarios.SegundoNombre,
+                PrimerApellido = usuarios.PrimerApellido,
+                SegundoApellido = usuarios.SegundoApellido,
                 Correo = usuarios.Correo,
                 Contraseña = usuarios.Contraseña,
                 Telefono = usuarios.Telefono
@@ -278,73 +298,7 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             return NoContent();
         }
 
-        // POST: api/Usuarios/login
-        [AllowAnonymous]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
-            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
-        })]
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(int id, string contraseña, string? token)
-        {
-            // Validar usuario
-            var usuario = await _usuariosRepository.LoginUser(id, contraseña);
-
-            if (usuario == null)
-            {
-                return Unauthorized("Acceso no autorizado: Usuario o contraseña inválidos");
-            }
-
-            // Validar el token recibido
-            if (!string.IsNullOrWhiteSpace(token))
-            {
-                var handler = new JwtSecurityTokenHandler();
-
-                try
-                {
-                    // Validar el token
-                    handler.ValidateToken(token, new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = _jwtSettings.issuer,
-                        ValidAudience = _jwtSettings.audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.key))
-                    }, out _);
-
-                    return Ok(token);
-                }
-                catch {}
-            }
-
-            // Generar un nuevo token JWT
-            var nuevoToken = _jwtService.GenerateToken(usuario);
-
-            return Ok(nuevoToken);
-        }
-
-        // POST: api/Usuarios/register
-        [HttpPost("register")]
-        [Authorize]
-        [TypeFilter(typeof(AuthGuard), Arguments = new object[] {
-            new RolesEnum[] { RolesEnum.Comprador, RolesEnum.Vendedor, RolesEnum.Administrador }
-        })]
-        public async Task<ActionResult<string>> Register(UsuariosCreateDTO usuario)
-        {
-            // Registrar el usuario validando que el correo no exista ya en la base de datos
-            var usuarioRegistrado = await _usuariosRepository.RegisterUser(usuario);
-
-            // Verificar si el registro fue exitoso
-            if (usuarioRegistrado == null)
-            {
-                return BadRequest("Error al registrar el usuario.");
-            }
-
-            // Generar el token JWT
-            var token = _jwtService.GenerateToken(usuarioRegistrado!);
-            return Ok(token);
-        }
+        
 
         // DELETE api/Usuarios/5
         [Authorize]

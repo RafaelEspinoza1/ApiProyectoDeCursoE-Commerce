@@ -1,4 +1,5 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
@@ -131,8 +132,8 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
 
 
-        // Crea nuevo usuario
-        public async Task<int> Create(Vendedor vendedor)
+        // Crea nuevo vendedor
+        public async Task<int> Create(UsuariosCreateDTO usuario)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -141,17 +142,17 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                 (IdUsuario, NombreNegocio, DescripcionNegocio, LogoNegocio, EsContribuyente)
                 VALUES
                 (@IdUsuario, @NombreNegocio, @DescripcionNegocio, @LogoNegocio, @EsContribuyente)";
-            cmd.Parameters.AddWithValue("@IdUsuario", vendedor.IdUsuario);
-            cmd.Parameters.AddWithValue("@NombreNegocio", vendedor.NombreNegocio);
-            cmd.Parameters.AddWithValue("@DescripcionNegocio", vendedor.DescripcionNegocio);
-            cmd.Parameters.AddWithValue("@LogoNegocio", vendedor.LogoNegocio);
-            cmd.Parameters.AddWithValue("@EsContribuyente", vendedor.EsContribuyente);
+            cmd.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+            cmd.Parameters.AddWithValue("@NombreNegocio", usuario.NombreNegocio);
+            cmd.Parameters.AddWithValue("@DescripcionNegocio", usuario.DescripcionNegocio);
+            cmd.Parameters.AddWithValue("@LogoNegocio", usuario.LogoNegocio);
+            cmd.Parameters.AddWithValue("@EsContribuyente", usuario.EsContribuyente);
 
             return await ExecuteNonQuery(cmd);
         }
 
-        // Actualiza usuario
-        public async Task<int> Update(Vendedor vendedor)
+        // Actualiza vendedor
+        public async Task<int> Update(VendedoresUpdateDTO vendedor, int id)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -175,7 +176,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             return await ExecuteNonQuery(cmd);
         }
 
-        // Elimina usuario
+        // Elimina vendedor
         public async Task<int> Delete(int id)
         {
             using var cmd = new SqlCommand();
