@@ -1,4 +1,5 @@
-﻿using ApiProyectoDeCursoE_Commerce.Models;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.Models;
 using Microsoft.Data.SqlClient;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
@@ -17,8 +18,12 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
 
         // Comandos de inserción, actualización o eliminación
         // Devuelven el número de filas afectadas
-        Task<int> Create(Usuario usuario);
-        Task<int> Update(Usuario usuario);
+        Task<int> Create(UsuariosCreateDTO usuario);
+        Task<int> Update(UsuariosUpdateDTO usuario, int id);
         Task<int> Delete(int id);
+
+        // Comandos de autenticación
+        Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario);
+        Task<Usuario?> LoginUser(int id, string password);
     }
 }

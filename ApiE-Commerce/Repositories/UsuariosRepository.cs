@@ -1,7 +1,9 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories
 {
@@ -38,6 +40,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                 return new Usuario
                 {
                     IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario")),
+                    IdRol = reader.GetInt32(reader.GetOrdinal("IdRol")),
                     PrimerNombre = reader.GetString(reader.GetOrdinal("PrimerNombre")),
                     SegundoNombre = reader.IsDBNull(reader.GetOrdinal("SegundoNombre")) ? null : reader.GetString(reader.GetOrdinal("SegundoNombre")),
                     PrimerApellido = reader.GetString(reader.GetOrdinal("PrimerApellido")),
@@ -193,13 +196,15 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
 
         // Crea nuevo usuario
-        public async Task<int> Create(Usuario usuario)
+        public async Task<int> Create(UsuariosCreateDTO usuario)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
-                INSERT IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña
-                VALUES (@PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
+                INSERT INTO Usuarios
+                (IdUsuario, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña)
+                VALUES
+                (@PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
 
             cmd.Parameters.AddWithValue("@PrimerNombre", usuario.PrimerNombre);
             cmd.Parameters.AddWithValue("@SegundoNombre", usuario.SegundoNombre);
@@ -213,7 +218,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
         }
 
         // Actualiza usuario
-        public async Task<int> Update(Usuario usuario)
+        public async Task<int> Update(UsuariosUpdateDTO usuario, int id)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -228,7 +233,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                     Contraseña = @Contraseña
                 WHERE IdUsuario = @IdUsuario";
             
-            cmd.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+            cmd.Parameters.AddWithValue("@IdUsuario", id);
             cmd.Parameters.AddWithValue("@PrimerNombre", usuario.PrimerNombre);
             cmd.Parameters.AddWithValue("@SegundoNombre", usuario.SegundoNombre);
             cmd.Parameters.AddWithValue("@PrimerApellido", usuario.PrimerApellido);
@@ -248,6 +253,39 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.Parameters.AddWithValue("@IdUsuario", id);
 
             return await ExecuteNonQuery(cmd);
+        }
+
+
+
+
+        // Registra usuario
+        public async Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario)
+        {
+            // Ejecuta el comando SQL para crear el usuario
+            int filasAfectadas = await Create(usuario);
+            if (filasAfectadas > 0)
+            {
+                // Si la creación fue exitosa, obtiene el usuario recién creado por su correo
+                return await GetByEmail(usuario.Correo);
+            }
+            return null;
+        }
+
+
+
+        // Inicia sesión y verifica la contraseña
+        public async Task<Usuario?> LoginUser(string correo, string contraseña)
+        {
+           var usuarioEnDb = await GetByEmail(correo);
+
+           if (usuarioEnDb != null)
+           {
+                if (usuarioEnDb.Contraseña == contraseña)
+                {
+                    return usuarioEnDb;
+                }
+            }
+           return null;
         }
     }
 }

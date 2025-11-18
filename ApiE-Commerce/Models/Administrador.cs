@@ -9,8 +9,8 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         public int IdAdministrador { get; set; }
         [Required]
         public int IdUsuario { set; get; }
-        // Relación con Usuario
-        [ForeignKey("IdUsuario")]
-        public Usuario Usuario { get; set; } = null!;
+        //// Relación con Usuario
+        //[ForeignKey("IdUsuario")]
+        //public Usuario Usuario { get; set; } = null!;
     }
 }
