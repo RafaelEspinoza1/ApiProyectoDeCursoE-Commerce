@@ -1,11 +1,86 @@
 
 using FormApiE_Commerce.Models;
 using System.Net.Http.Json;
+using System.Text;
 
 namespace FormApiE_Commerce
 {
     public partial class FormInicio : Form
     {
+        private ApiClient apiClient = new ApiClient();
+
+        public FormInicio()
+        {
+            InitializeComponent();
+        }
+
+        private async Task<string?> LoginUser(string correo, string contraseña, string? token)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var url = "http://localhost:5028/api/Auth/login";
+
+                var loginData = new
+                {
+                    Correo = correo,
+                    Contraseña = contraseña,
+                    Token = token
+                };
+
+                MessageBox.Show(correo, contraseña);
+
+                var json = System.Text.Json.JsonSerializer.Serialize(loginData);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    var response = await httpClient.PostAsync(url, content);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show($"Credenciales incorrectas o error: {response.StatusCode}");
+                        return null;
+                    }
+
+                    var nuevoToken = await response.Content.ReadAsStringAsync();
+                    return nuevoToken.Replace("\"", ""); // Limpiar comillas
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Vuelve a intentar nuevamente.\n{ex.Message}", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+        }
+
+
+
+        private async void btnLogin_Click(object sender, EventArgs e)
+        {
+            var correo = txtCorreo.contentTextField.Text;
+            var contraseña = txtContraseña.contentTextField.Text;
+
+            string? token = await LoginUser(correo, contraseña, apiClient.Token);
+
+            if (token != null)
+            {
+                apiClient.EstablecerToken(token);
+                MessageBox.Show("Login exitoso!");
+            }
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            // ABRIR UN NUEVO FORMULARIO PARA REGISTRARSE
+            // 
+            //string? token = await RegistrarUsuario(correo, contraseña, apiClient.Token);
+
+            //if (token != null)
+            //{
+            //    apiClient.EstablecerToken(token);
+            //    MessageBox.Show("Login exitoso!");
+            //}
+        }
 
         //public Usuarios NuevoUsuario { get; private set; }
         //public static int UsuarioId { get; private set; } // Para almacenar el ID del usuario actual

@@ -235,32 +235,6 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
             return await ExecuteNonQuery(cmd);
         }
-
-        // Registra usuario
-        public async Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario)
-        {
-            int filasAfectadas = await Create(usuario);
-            if (filasAfectadas > 0)
-            {
-                return await GetByEmail(usuario.Correo);
-            }
-            return null;
-        }
-
-        // Inicia sesión y verifica la contraseña
-        public async Task<Usuario?> LoginUser(string correo, string contraseña)
-        {
-            var usuarioEnDb = await GetByEmail(correo);
-
-            if (usuarioEnDb != null)
-            {
-                if (usuarioEnDb.Contraseña == contraseña)
-                {
-                    return usuarioEnDb;
-                }
-            }
-            return null;
-        }
     }
 }
 

@@ -21,9 +21,5 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
         Task<int> Create(UsuariosCreateDTO usuario);
         Task<int> Update(UsuariosUpdateDTO usuario, int id);
         Task<int> Delete(int id);
-
-        // Comandos de autenticación
-        Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario);
-        Task<Usuario?> LoginUser(string correo, string password);
     }
 }

@@ -12,45 +12,46 @@ namespace FormApiE_Commerce
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            string siguienteForm = "FormInicio";
+            //string siguienteForm = "FormInicio";
 
             
-            int usuarioId = 0;
+            //int usuarioId = 0;
 
 
-            while (true)
-            {
-                Form formularioActual = siguienteForm switch
-                {
-                    "FormInicio" => new FormInicio(),
-                    "PaginaPrincipal" => new PaginaPrincipal(FormInicio.UsuarioId),
-                    "Administracion" => new Administracion(),
-                    _ => null
-                };
+            //while (true)
+            //{
+            //    Form formularioActual = siguienteForm switch
+            //    {
+            //        "FormInicio" => new FormInicio(),
+            //        "PaginaPrincipal" => new PaginaPrincipal(FormInicio.UsuarioId),
+            //        "Administracion" => new Administracion(),
+            //        _ => null
+            //    };
 
-                if (formularioActual == null)
-                    break;
-                if (siguienteForm == "Administracion")
-                {
-                    formularioActual.Size = new Size(309, 184); // Tamaño especial para Administrador
-                }
+            //    if (formularioActual == null)
+            //        break;
+            //    if (siguienteForm == "Administracion")
+            //    {
+            //        formularioActual.Size = new Size(309, 184); // Tamaño especial para Administrador
+            //    }
 
-                DialogResult resultado = formularioActual.ShowDialog();
+            //    DialogResult resultado = formularioActual.ShowDialog();
 
-                if (formularioActual is FormInicio formInicio)
-                {
-                    usuarioId = FormInicio.UsuarioId; // Captura el ID que se guardó estáticamente
-                }
-                // Si el formulario indica cuál sigue, lo tomamos
-                if (formularioActual.Tag is string siguiente && !string.IsNullOrEmpty(siguiente))
-                {
-                    siguienteForm = siguiente;
-                }
-                else
-                {
-                    break; // salir de la aplicación
-                }
-            }
+            //    if (formularioActual is FormInicio formInicio)
+            //    {
+            //        usuarioId = FormInicio.UsuarioId; // Captura el ID que se guardó estáticamente
+            //    }
+            //    // Si el formulario indica cuál sigue, lo tomamos
+            //    if (formularioActual.Tag is string siguiente && !string.IsNullOrEmpty(siguiente))
+            //    {
+            //        siguienteForm = siguiente;
+            //    }
+            //    else
+            //    {
+            //        break; // salir de la aplicación
+            //    }
+            //}
+            Application.Run(new FormInicio());
         }
     }
 

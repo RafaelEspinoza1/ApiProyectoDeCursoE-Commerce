@@ -1,4 +1,5 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Configuration;
+using ApiProyectoDeCursoE_Commerce.DTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.Guards;
 using ApiProyectoDeCursoE_Commerce.Models.Enums;
@@ -15,11 +16,8 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        // Repositorios
-        private readonly UsuariosRepository _usuariosRepository;
-        private readonly VendedoresRepository _vendedoresRepository;
-        private readonly CompradoresRepository _compradoresRepository;
-        private readonly AdministradoresRepository _administradoresRepository;
+        // Repositorio de autenticación
+        private readonly AuthRepository _authRepository;
 
         // Servicios JWT
         private readonly JwtService _jwtService;
@@ -27,17 +25,11 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
         // Constructor
         public AuthController(
-            UsuariosRepository usuariosRepository,
-            VendedoresRepository vendedoresRepository,
-            CompradoresRepository compradoresRepository,
-            AdministradoresRepository administradoresRepository,
+            AuthRepository authRepository,
             JwtService jwtService,
             JwtSettings jwtSettings)
         {
-            _usuariosRepository = usuariosRepository;
-            _vendedoresRepository = vendedoresRepository;
-            _compradoresRepository = compradoresRepository;
-            _administradoresRepository = administradoresRepository;
+            _authRepository = authRepository;
             _jwtService = jwtService;
             _jwtSettings = jwtSettings;
         }
@@ -45,10 +37,10 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
         // POST: api/Auth/login
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(string correo, string contraseña, string? token)
+        public async Task<ActionResult<string>> Login([FromBody] LoginDTO login)
         {
             // Validar usuario
-            var usuario = await _usuariosRepository.LoginUser(correo, contraseña);
+            var usuario = await _authRepository.LoginUser(login.Correo, login.Contraseña, login.Rol);
 
             if (usuario == null)
             {
@@ -56,12 +48,12 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
             }
 
             // Validar token recibido
-            if (!string.IsNullOrWhiteSpace(token))
+            if (!string.IsNullOrWhiteSpace(login.Token))
             {
                 var handler = new JwtSecurityTokenHandler();
                 try
                 {
-                    handler.ValidateToken(token, new TokenValidationParameters
+                    handler.ValidateToken(login.Token, new TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
@@ -72,7 +64,7 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.key))
                     }, out _);
 
-                    return Ok(token);
+                    return Ok(login.Token);
                 }
                 catch { }
             }
@@ -88,29 +80,11 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
         public async Task<ActionResult<string>> Register(UsuariosCreateDTO usuario)
         {
             // Registrar usuario validando que no exista ya en la base de datos
-            var usuarioRegistrado = await _usuariosRepository.RegisterUser(usuario);
+            var usuarioRegistrado = await _authRepository.RegisterUser(usuario);
 
             if (usuarioRegistrado == null)
             {
                 return BadRequest("Error al registrar el usuario.");
-            }
-
-            var rol = (RolesEnum)usuario.IdRol;
-
-            switch (rol)
-            {
-                case RolesEnum.Comprador:
-                    // Usar el IdUsuario creado
-                    await _compradoresRepository.Create(usuarioRegistrado.IdUsuario);
-                    break;
-                case RolesEnum.Vendedor:
-                    await _vendedoresRepository.Create(usuario, usuarioRegistrado.IdUsuario);
-                    break;
-                case RolesEnum.Administrador:
-                    await _administradoresRepository.Create(usuarioRegistrado.IdUsuario);
-                    break;
-                default:
-                    return BadRequest("No existe el rol específicado.");
             }
 
             // Generar token JWT

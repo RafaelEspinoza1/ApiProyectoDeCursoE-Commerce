@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using FormApiE_Commerce.VerificacionVendedorDTOs;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
@@ -21,6 +20,13 @@ namespace FormApiE_Commerce
 {
     public partial class PaginaPrincipal : Form
     {
+        //private object usuarioId;
+
+        //public PaginaPrincipal()
+        //{
+        //    InitializeComponent();
+        //}
+
         private void cuiPictureBox1_Load(object sender, EventArgs e)
         {
 

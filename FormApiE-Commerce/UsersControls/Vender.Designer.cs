@@ -11,14 +11,14 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing && (components != null))
+        //    {
+        //        components.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
         #region Windows Form Designer generated code
 
@@ -49,7 +49,7 @@
             txtBuscar = new TextBox();
             label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            SuspendLayout();
+            //SuspendLayout();
             // 
             // gMapControl1
             // 
@@ -76,7 +76,7 @@
             gMapControl1.Size = new Size(508, 267);
             gMapControl1.TabIndex = 32;
             gMapControl1.Zoom = 0D;
-            gMapControl1.MouseDoubleClick += Mostrarubicacion;
+            //gMapControl1.MouseDoubleClick += Mostrarubicacion;
             // 
             // label6
             // 
@@ -186,7 +186,7 @@
             btnRegistrarse.TabIndex = 19;
             btnRegistrarse.Text = "Registrarse";
             btnRegistrarse.UseVisualStyleBackColor = true;
-            btnRegistrarse.Click += btnRegistrarse_Click;
+            //btnRegistrarse.Click += btnRegistrarse_Click;
             // 
             // textBox1
             // 
@@ -212,7 +212,7 @@
             btnUbicacion.TabIndex = 29;
             btnUbicacion.Text = "Agrega tu ubicacion aqui";
             btnUbicacion.UseVisualStyleBackColor = true;
-            btnUbicacion.Click += btnUbicacion_Click;
+            //btnUbicacion.Click += btnUbicacion_Click;
             // 
             // label7
             // 
@@ -250,36 +250,36 @@
             // 
             // Vender
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            Controls.Add(label8);
-            Controls.Add(txtBuscar);
-            Controls.Add(btnBuscar);
-            Controls.Add(label7);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
-            Controls.Add(gMapControl1);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(btnUbicacion);
-            Controls.Add(label4);
-            Controls.Add(txtLatitud);
-            Controls.Add(label2);
-            Controls.Add(txtLongitud);
-            Controls.Add(pictureBox1);
-            Controls.Add(label3);
-            Controls.Add(lblNumCuenta);
-            Controls.Add(txtNumeroDeCuenta);
-            Controls.Add(txtDireccion);
-            Controls.Add(btnRegistrarse);
-            Margin = new Padding(3, 4, 3, 4);
-            Name = "Vender";
-            Size = new Size(914, 546);
-            Load += Vender_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            //AutoScaleDimensions = new SizeF(8F, 20F);
+            //AutoScaleMode = AutoScaleMode.Font;
+            //AutoScroll = true;
+            //Controls.Add(label8);
+            //Controls.Add(txtBuscar);
+            //Controls.Add(btnBuscar);
+            //Controls.Add(label7);
+            //Controls.Add(label1);
+            //Controls.Add(textBox1);
+            //Controls.Add(gMapControl1);
+            //Controls.Add(label6);
+            //Controls.Add(label5);
+            //Controls.Add(btnUbicacion);
+            //Controls.Add(label4);
+            //Controls.Add(txtLatitud);
+            //Controls.Add(label2);
+            //Controls.Add(txtLongitud);
+            //Controls.Add(pictureBox1);
+            //Controls.Add(label3);
+            //Controls.Add(lblNumCuenta);
+            //Controls.Add(txtNumeroDeCuenta);
+            //Controls.Add(txtDireccion);
+            //Controls.Add(btnRegistrarse);
+            //Margin = new Padding(3, 4, 3, 4);
+            //Name = "Vender";
+            //Size = new Size(914, 546);
+            //Load += Vender_Load;
+            //((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            //ResumeLayout(false);
+            //PerformLayout();
         }
 
         #endregion
