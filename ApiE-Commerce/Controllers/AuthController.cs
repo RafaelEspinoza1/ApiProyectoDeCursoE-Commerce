@@ -84,7 +84,11 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
             if (usuarioRegistrado == null)
             {
-                return BadRequest("Error al registrar el usuario.");
+                return BadRequest("" +
+                    "El usuario proporcionado no puede registrarse.\n" +
+                    "El correo ya está siendo utilizado o ha ocurrido un error al registrarlo.\n" +
+                    "Por favor, verifique los datos.\n\n" +
+                    "Si el problema persiste, contactenos a ecommerce@contact.com");
             }
 
             // Generar token JWT

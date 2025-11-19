@@ -37,6 +37,13 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
         // Registra usuario
         public async Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario)
         {
+            var usuarioEnDb = await _usuariosRepository.GetByEmail(usuario.Correo);
+            
+            if (usuarioEnDb != null)
+            {
+                return null;
+            }
+
             // Obtener el rol del usuario
             string rol = ((RolesEnum)usuario.IdRol).ToString();
 
