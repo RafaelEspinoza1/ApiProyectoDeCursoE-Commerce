@@ -77,7 +77,7 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
         // POST: api/Auth/register
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(UsuariosCreateDTO usuario)
+        public async Task<ActionResult<string>> Register([FromBody] UsuariosCreateDTO usuario)
         {
             // Registrar usuario validando que no exista ya en la base de datos
             var usuarioRegistrado = await _authRepository.RegisterUser(usuario);
