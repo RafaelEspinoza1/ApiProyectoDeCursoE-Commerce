@@ -16,5 +16,10 @@ namespace FormApiE_Commerce.UsersControls
         {
             InitializeComponent();
         }
+
+        private void cuiLabel1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -71,16 +71,13 @@ namespace FormApiE_Commerce
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            // ABRIR UN NUEVO FORMULARIO PARA REGISTRARSE
-            // 
-            //string? token = await RegistrarUsuario(correo, contraseña, apiClient.Token);
-
-            //if (token != null)
-            //{
-            //    apiClient.EstablecerToken(token);
-            //    MessageBox.Show("Login exitoso!");
-            //}
+           
         }
+
+
+
+
+
 
         //public Usuarios NuevoUsuario { get; private set; }
         //public static int UsuarioId { get; private set; } // Para almacenar el ID del usuario actual
