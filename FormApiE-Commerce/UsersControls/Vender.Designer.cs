@@ -48,8 +48,13 @@
             btnBuscar = new Button();
             txtBuscar = new TextBox();
             label8 = new Label();
+            cuiPictureBox1 = new CuoreUI.Controls.cuiPictureBox();
+            cuiLabel1 = new CuoreUI.Controls.cuiLabel();
+            cuiPanel1 = new CuoreUI.Controls.cuiPanel();
+            cuiGroupBox1 = new CuoreUI.Controls.cuiGroupBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            //SuspendLayout();
+            cuiPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // gMapControl1
             // 
@@ -76,7 +81,6 @@
             gMapControl1.Size = new Size(508, 267);
             gMapControl1.TabIndex = 32;
             gMapControl1.Zoom = 0D;
-            //gMapControl1.MouseDoubleClick += Mostrarubicacion;
             // 
             // label6
             // 
@@ -133,7 +137,6 @@
             // 
             // pictureBox1
             // 
-           
             pictureBox1.Location = new Point(12, 20);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
@@ -186,7 +189,6 @@
             btnRegistrarse.TabIndex = 19;
             btnRegistrarse.Text = "Registrarse";
             btnRegistrarse.UseVisualStyleBackColor = true;
-            //btnRegistrarse.Click += btnRegistrarse_Click;
             // 
             // textBox1
             // 
@@ -212,7 +214,6 @@
             btnUbicacion.TabIndex = 29;
             btnUbicacion.Text = "Agrega tu ubicacion aqui";
             btnUbicacion.UseVisualStyleBackColor = true;
-            //btnUbicacion.Click += btnUbicacion_Click;
             // 
             // label7
             // 
@@ -247,6 +248,72 @@
             label8.Size = new Size(185, 40);
             label8.TabIndex = 38;
             label8.Text = "Coloca aqui el nombre de \r\ntu barrio o lugar conocido";
+            // 
+            // cuiPictureBox1
+            // 
+            cuiPictureBox1.Content = Properties.Resources.LRR_removebg_preview;
+            cuiPictureBox1.ImageTint = Color.White;
+            cuiPictureBox1.Location = new Point(354, 17);
+            cuiPictureBox1.Margin = new Padding(4, 5, 4, 5);
+            cuiPictureBox1.Name = "cuiPictureBox1";
+            cuiPictureBox1.OutlineThickness = 1F;
+            cuiPictureBox1.PanelOutlineColor = Color.Empty;
+            cuiPictureBox1.Rotation = 0;
+            cuiPictureBox1.Rounding = new Padding(8);
+            cuiPictureBox1.Size = new Size(226, 235);
+            cuiPictureBox1.TabIndex = 0;
+            // 
+            // cuiLabel1
+            // 
+            cuiLabel1.BackColor = Color.Transparent;
+            cuiLabel1.Content = "Añadir\\ productos";
+            cuiLabel1.Font = new Font("Garamond", 22.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            cuiLabel1.ForeColor = SystemColors.Control;
+            cuiLabel1.HorizontalAlignment = StringAlignment.Center;
+            cuiLabel1.Location = new Point(31, 27);
+            cuiLabel1.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel1.Name = "cuiLabel1";
+            cuiLabel1.Size = new Size(304, 37);
+            cuiLabel1.TabIndex = 2;
+            cuiLabel1.VerticalAlignment = StringAlignment.Near;
+            // 
+            // cuiPanel1
+            // 
+            cuiPanel1.Controls.Add(cuiLabel1);
+            cuiPanel1.Dock = DockStyle.Top;
+            cuiPanel1.Location = new Point(0, 0);
+            cuiPanel1.Name = "cuiPanel1";
+            cuiPanel1.OutlineThickness = 5F;
+            cuiPanel1.PanelColor = Color.SaddleBrown;
+            cuiPanel1.PanelOutlineColor = Color.Chocolate;
+            cuiPanel1.Rounding = new Padding(0, 0, 10, 10);
+            cuiPanel1.Size = new Size(603, 89);
+            cuiPanel1.TabIndex = 3;
+            // 
+            // cuiGroupBox1
+            // 
+            cuiGroupBox1.BorderColor = Color.DarkGoldenrod;
+            cuiGroupBox1.Content = "Especificaciones del producto";
+            cuiGroupBox1.Font = new Font("Garamond", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cuiGroupBox1.ForeColor = Color.DarkOliveGreen;
+            cuiGroupBox1.Location = new Point(31, 177);
+            cuiGroupBox1.Name = "cuiGroupBox1";
+            cuiGroupBox1.Padding = new Padding(10, 34, 10, 15);
+            cuiGroupBox1.Rounding = new Padding(10, 10, 10, 15);
+            cuiGroupBox1.Size = new Size(531, 355);
+            cuiGroupBox1.TabIndex = 12;
+            cuiGroupBox1.Paint += cuiGroupBox1_Paint;
+            // 
+            // Vender
+            // 
+            Controls.Add(cuiGroupBox1);
+            Controls.Add(cuiPanel1);
+            Controls.Add(cuiPictureBox1);
+            Name = "Vender";
+            Size = new Size(603, 701);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            cuiPanel1.ResumeLayout(false);
+            ResumeLayout(false);
             // 
             // Vender
             // 
@@ -304,5 +371,9 @@
         private Button btnBuscar;
         private TextBox txtBuscar;
         private Label label8;
+        private CuoreUI.Controls.cuiPictureBox cuiPictureBox1;
+        private CuoreUI.Controls.cuiLabel cuiLabel1;
+        private CuoreUI.Controls.cuiPanel cuiPanel1;
+        private CuoreUI.Controls.cuiGroupBox cuiGroupBox1;
     }
 }
