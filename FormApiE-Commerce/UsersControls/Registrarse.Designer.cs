@@ -75,19 +75,21 @@
             cuiGroupBox1.Controls.Add(txtP_Apellido_Regis);
             cuiGroupBox1.Controls.Add(txtP_Nombre_Regis);
             cuiGroupBox1.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiGroupBox1.Location = new Point(19, 128);
+            cuiGroupBox1.Location = new Point(24, 160);
+            cuiGroupBox1.Margin = new Padding(4, 4, 4, 4);
             cuiGroupBox1.Name = "cuiGroupBox1";
-            cuiGroupBox1.Padding = new Padding(10, 31, 10, 15);
+            cuiGroupBox1.Padding = new Padding(10, 35, 10, 15);
             cuiGroupBox1.Rounding = new Padding(10, 10, 10, 15);
-            cuiGroupBox1.Size = new Size(405, 683);
+            cuiGroupBox1.Size = new Size(506, 854);
             cuiGroupBox1.TabIndex = 0;
             // 
             // cmbRol
             // 
             cmbRol.FormattingEnabled = true;
-            cmbRol.Location = new Point(14, 618);
+            cmbRol.Location = new Point(18, 772);
+            cmbRol.Margin = new Padding(4, 4, 4, 4);
             cmbRol.Name = "cmbRol";
-            cmbRol.Size = new Size(341, 30);
+            cmbRol.Size = new Size(425, 35);
             cmbRol.TabIndex = 18;
             // 
             // cuiLabel9
@@ -95,10 +97,10 @@
             cuiLabel9.Content = "Selecciona\\ el\\ rol\\ deseado";
             cuiLabel9.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel9.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel9.Location = new Point(14, 589);
-            cuiLabel9.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel9.Location = new Point(18, 736);
+            cuiLabel9.Margin = new Padding(5, 6, 5, 6);
             cuiLabel9.Name = "cuiLabel9";
-            cuiLabel9.Size = new Size(205, 21);
+            cuiLabel9.Size = new Size(256, 26);
             cuiLabel9.TabIndex = 17;
             cuiLabel9.VerticalAlignment = StringAlignment.Near;
             cuiLabel9.Load += cuiLabel9_Load;
@@ -108,10 +110,10 @@
             cuiLabel8.Content = "Confirmar\\ contraseña";
             cuiLabel8.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel8.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel8.Location = new Point(14, 517);
-            cuiLabel8.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel8.Location = new Point(18, 646);
+            cuiLabel8.Margin = new Padding(5, 6, 5, 6);
             cuiLabel8.Name = "cuiLabel8";
-            cuiLabel8.Size = new Size(205, 21);
+            cuiLabel8.Size = new Size(256, 26);
             cuiLabel8.TabIndex = 15;
             cuiLabel8.VerticalAlignment = StringAlignment.Near;
             // 
@@ -127,18 +129,18 @@
             txtConfim_contra_Regis.Image = null;
             txtConfim_contra_Regis.ImageExpand = new Point(0, 0);
             txtConfim_contra_Regis.ImageOffset = new Point(0, 0);
-            txtConfim_contra_Regis.Location = new Point(14, 544);
-            txtConfim_contra_Regis.Margin = new Padding(4);
+            txtConfim_contra_Regis.Location = new Point(18, 680);
+            txtConfim_contra_Regis.Margin = new Padding(5, 5, 5, 5);
             txtConfim_contra_Regis.Multiline = false;
             txtConfim_contra_Regis.Name = "txtConfim_contra_Regis";
             txtConfim_contra_Regis.NormalImageTint = Color.White;
             txtConfim_contra_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtConfim_contra_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtConfim_contra_Regis.Padding = new Padding(22, 11, 22, 0);
             txtConfim_contra_Regis.PasswordChar = false;
             txtConfim_contra_Regis.PlaceholderColor = SystemColors.WindowText;
             txtConfim_contra_Regis.PlaceholderText = "";
             txtConfim_contra_Regis.Rounding = new Padding(8);
-            txtConfim_contra_Regis.Size = new Size(231, 35);
+            txtConfim_contra_Regis.Size = new Size(289, 44);
             txtConfim_contra_Regis.TabIndex = 14;
             txtConfim_contra_Regis.TextOffset = new Size(0, 0);
             txtConfim_contra_Regis.UnderlinedStyle = true;
@@ -148,10 +150,10 @@
             cuiLabel7.Content = "Segundo\\ apellido";
             cuiLabel7.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel7.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel7.Location = new Point(14, 246);
-            cuiLabel7.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel7.Location = new Point(18, 308);
+            cuiLabel7.Margin = new Padding(5, 6, 5, 6);
             cuiLabel7.Name = "cuiLabel7";
-            cuiLabel7.Size = new Size(145, 26);
+            cuiLabel7.Size = new Size(181, 32);
             cuiLabel7.TabIndex = 13;
             cuiLabel7.VerticalAlignment = StringAlignment.Near;
             // 
@@ -167,18 +169,18 @@
             txtS_Apellido_Regis.Image = null;
             txtS_Apellido_Regis.ImageExpand = new Point(0, 0);
             txtS_Apellido_Regis.ImageOffset = new Point(0, 0);
-            txtS_Apellido_Regis.Location = new Point(14, 272);
-            txtS_Apellido_Regis.Margin = new Padding(4);
+            txtS_Apellido_Regis.Location = new Point(18, 340);
+            txtS_Apellido_Regis.Margin = new Padding(5, 5, 5, 5);
             txtS_Apellido_Regis.Multiline = false;
             txtS_Apellido_Regis.Name = "txtS_Apellido_Regis";
             txtS_Apellido_Regis.NormalImageTint = Color.White;
             txtS_Apellido_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtS_Apellido_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtS_Apellido_Regis.Padding = new Padding(22, 11, 22, 0);
             txtS_Apellido_Regis.PasswordChar = false;
             txtS_Apellido_Regis.PlaceholderColor = SystemColors.WindowText;
             txtS_Apellido_Regis.PlaceholderText = "";
             txtS_Apellido_Regis.Rounding = new Padding(8);
-            txtS_Apellido_Regis.Size = new Size(332, 35);
+            txtS_Apellido_Regis.Size = new Size(415, 44);
             txtS_Apellido_Regis.TabIndex = 12;
             txtS_Apellido_Regis.TextOffset = new Size(0, 0);
             txtS_Apellido_Regis.UnderlinedStyle = true;
@@ -188,10 +190,10 @@
             cuiLabel6.Content = "Segundo\\ nombre";
             cuiLabel6.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel6.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel6.Location = new Point(14, 106);
-            cuiLabel6.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel6.Location = new Point(18, 132);
+            cuiLabel6.Margin = new Padding(5, 6, 5, 6);
             cuiLabel6.Name = "cuiLabel6";
-            cuiLabel6.Size = new Size(145, 19);
+            cuiLabel6.Size = new Size(181, 24);
             cuiLabel6.TabIndex = 11;
             cuiLabel6.VerticalAlignment = StringAlignment.Near;
             // 
@@ -207,18 +209,18 @@
             txtS_Nombre_Regis.Image = null;
             txtS_Nombre_Regis.ImageExpand = new Point(0, 0);
             txtS_Nombre_Regis.ImageOffset = new Point(0, 0);
-            txtS_Nombre_Regis.Location = new Point(14, 132);
-            txtS_Nombre_Regis.Margin = new Padding(4);
+            txtS_Nombre_Regis.Location = new Point(18, 165);
+            txtS_Nombre_Regis.Margin = new Padding(5, 5, 5, 5);
             txtS_Nombre_Regis.Multiline = false;
             txtS_Nombre_Regis.Name = "txtS_Nombre_Regis";
             txtS_Nombre_Regis.NormalImageTint = Color.White;
             txtS_Nombre_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtS_Nombre_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtS_Nombre_Regis.Padding = new Padding(22, 11, 22, 0);
             txtS_Nombre_Regis.PasswordChar = false;
             txtS_Nombre_Regis.PlaceholderColor = SystemColors.WindowText;
             txtS_Nombre_Regis.PlaceholderText = "";
             txtS_Nombre_Regis.Rounding = new Padding(8);
-            txtS_Nombre_Regis.Size = new Size(332, 35);
+            txtS_Nombre_Regis.Size = new Size(415, 44);
             txtS_Nombre_Regis.TabIndex = 10;
             txtS_Nombre_Regis.TextOffset = new Size(0, 0);
             txtS_Nombre_Regis.UnderlinedStyle = true;
@@ -228,10 +230,10 @@
             cuiLabel5.Content = "Contraseña";
             cuiLabel5.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel5.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel5.Location = new Point(14, 449);
-            cuiLabel5.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel5.Location = new Point(18, 561);
+            cuiLabel5.Margin = new Padding(5, 6, 5, 6);
             cuiLabel5.Name = "cuiLabel5";
-            cuiLabel5.Size = new Size(145, 21);
+            cuiLabel5.Size = new Size(181, 26);
             cuiLabel5.TabIndex = 9;
             cuiLabel5.VerticalAlignment = StringAlignment.Near;
             // 
@@ -247,18 +249,18 @@
             txtContraseña_Regis.Image = null;
             txtContraseña_Regis.ImageExpand = new Point(0, 0);
             txtContraseña_Regis.ImageOffset = new Point(0, 0);
-            txtContraseña_Regis.Location = new Point(14, 473);
-            txtContraseña_Regis.Margin = new Padding(4);
+            txtContraseña_Regis.Location = new Point(18, 591);
+            txtContraseña_Regis.Margin = new Padding(5, 5, 5, 5);
             txtContraseña_Regis.Multiline = false;
             txtContraseña_Regis.Name = "txtContraseña_Regis";
             txtContraseña_Regis.NormalImageTint = Color.White;
             txtContraseña_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtContraseña_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtContraseña_Regis.Padding = new Padding(22, 11, 22, 0);
             txtContraseña_Regis.PasswordChar = false;
             txtContraseña_Regis.PlaceholderColor = SystemColors.WindowText;
             txtContraseña_Regis.PlaceholderText = "";
             txtContraseña_Regis.Rounding = new Padding(8);
-            txtContraseña_Regis.Size = new Size(231, 35);
+            txtContraseña_Regis.Size = new Size(289, 44);
             txtContraseña_Regis.TabIndex = 8;
             txtContraseña_Regis.TextOffset = new Size(0, 0);
             txtContraseña_Regis.UnderlinedStyle = true;
@@ -268,10 +270,10 @@
             cuiLabel4.Content = "Email";
             cuiLabel4.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel4.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel4.Location = new Point(14, 381);
-            cuiLabel4.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel4.Location = new Point(18, 476);
+            cuiLabel4.Margin = new Padding(5, 6, 5, 6);
             cuiLabel4.Name = "cuiLabel4";
-            cuiLabel4.Size = new Size(145, 21);
+            cuiLabel4.Size = new Size(181, 26);
             cuiLabel4.TabIndex = 7;
             cuiLabel4.VerticalAlignment = StringAlignment.Near;
             // 
@@ -280,10 +282,10 @@
             cuiLabel3.Content = "Telefono";
             cuiLabel3.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel3.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel3.Location = new Point(14, 316);
-            cuiLabel3.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel3.Location = new Point(18, 395);
+            cuiLabel3.Margin = new Padding(5, 6, 5, 6);
             cuiLabel3.Name = "cuiLabel3";
-            cuiLabel3.Size = new Size(145, 22);
+            cuiLabel3.Size = new Size(181, 28);
             cuiLabel3.TabIndex = 6;
             cuiLabel3.VerticalAlignment = StringAlignment.Near;
             // 
@@ -292,10 +294,10 @@
             cuiLabel2.Content = "Primer\\ apellido";
             cuiLabel2.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel2.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel2.Location = new Point(14, 176);
-            cuiLabel2.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel2.Location = new Point(18, 220);
+            cuiLabel2.Margin = new Padding(5, 6, 5, 6);
             cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(145, 26);
+            cuiLabel2.Size = new Size(181, 32);
             cuiLabel2.TabIndex = 5;
             cuiLabel2.VerticalAlignment = StringAlignment.Near;
             // 
@@ -304,10 +306,10 @@
             cuiLabel1.Content = "Primer\\ nombre";
             cuiLabel1.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel1.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel1.Location = new Point(14, 36);
-            cuiLabel1.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel1.Location = new Point(18, 45);
+            cuiLabel1.Margin = new Padding(5, 6, 5, 6);
             cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(145, 19);
+            cuiLabel1.Size = new Size(181, 24);
             cuiLabel1.TabIndex = 4;
             cuiLabel1.VerticalAlignment = StringAlignment.Near;
             // 
@@ -323,18 +325,18 @@
             txtCorreo_Regis.Image = null;
             txtCorreo_Regis.ImageExpand = new Point(0, 0);
             txtCorreo_Regis.ImageOffset = new Point(0, 0);
-            txtCorreo_Regis.Location = new Point(14, 405);
-            txtCorreo_Regis.Margin = new Padding(4);
+            txtCorreo_Regis.Location = new Point(18, 506);
+            txtCorreo_Regis.Margin = new Padding(5, 5, 5, 5);
             txtCorreo_Regis.Multiline = false;
             txtCorreo_Regis.Name = "txtCorreo_Regis";
             txtCorreo_Regis.NormalImageTint = Color.White;
             txtCorreo_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtCorreo_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtCorreo_Regis.Padding = new Padding(22, 11, 22, 0);
             txtCorreo_Regis.PasswordChar = false;
             txtCorreo_Regis.PlaceholderColor = SystemColors.WindowText;
             txtCorreo_Regis.PlaceholderText = "";
             txtCorreo_Regis.Rounding = new Padding(8);
-            txtCorreo_Regis.Size = new Size(332, 35);
+            txtCorreo_Regis.Size = new Size(415, 44);
             txtCorreo_Regis.TabIndex = 3;
             txtCorreo_Regis.TextOffset = new Size(0, 0);
             txtCorreo_Regis.UnderlinedStyle = true;
@@ -351,18 +353,18 @@
             txtTelefono_Regis.Image = null;
             txtTelefono_Regis.ImageExpand = new Point(0, 0);
             txtTelefono_Regis.ImageOffset = new Point(0, 0);
-            txtTelefono_Regis.Location = new Point(14, 340);
-            txtTelefono_Regis.Margin = new Padding(4);
+            txtTelefono_Regis.Location = new Point(18, 425);
+            txtTelefono_Regis.Margin = new Padding(5, 5, 5, 5);
             txtTelefono_Regis.Multiline = false;
             txtTelefono_Regis.Name = "txtTelefono_Regis";
             txtTelefono_Regis.NormalImageTint = Color.White;
             txtTelefono_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtTelefono_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtTelefono_Regis.Padding = new Padding(22, 11, 22, 0);
             txtTelefono_Regis.PasswordChar = false;
             txtTelefono_Regis.PlaceholderColor = SystemColors.WindowText;
             txtTelefono_Regis.PlaceholderText = "";
             txtTelefono_Regis.Rounding = new Padding(8);
-            txtTelefono_Regis.Size = new Size(205, 35);
+            txtTelefono_Regis.Size = new Size(256, 44);
             txtTelefono_Regis.TabIndex = 2;
             txtTelefono_Regis.TextOffset = new Size(0, 0);
             txtTelefono_Regis.UnderlinedStyle = true;
@@ -379,18 +381,18 @@
             txtP_Apellido_Regis.Image = null;
             txtP_Apellido_Regis.ImageExpand = new Point(0, 0);
             txtP_Apellido_Regis.ImageOffset = new Point(0, 0);
-            txtP_Apellido_Regis.Location = new Point(14, 202);
-            txtP_Apellido_Regis.Margin = new Padding(4);
+            txtP_Apellido_Regis.Location = new Point(18, 252);
+            txtP_Apellido_Regis.Margin = new Padding(5, 5, 5, 5);
             txtP_Apellido_Regis.Multiline = false;
             txtP_Apellido_Regis.Name = "txtP_Apellido_Regis";
             txtP_Apellido_Regis.NormalImageTint = Color.White;
             txtP_Apellido_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtP_Apellido_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtP_Apellido_Regis.Padding = new Padding(22, 11, 22, 0);
             txtP_Apellido_Regis.PasswordChar = false;
             txtP_Apellido_Regis.PlaceholderColor = SystemColors.WindowText;
             txtP_Apellido_Regis.PlaceholderText = "";
             txtP_Apellido_Regis.Rounding = new Padding(8);
-            txtP_Apellido_Regis.Size = new Size(332, 35);
+            txtP_Apellido_Regis.Size = new Size(415, 44);
             txtP_Apellido_Regis.TabIndex = 1;
             txtP_Apellido_Regis.TextOffset = new Size(0, 0);
             txtP_Apellido_Regis.UnderlinedStyle = true;
@@ -407,34 +409,35 @@
             txtP_Nombre_Regis.Image = null;
             txtP_Nombre_Regis.ImageExpand = new Point(0, 0);
             txtP_Nombre_Regis.ImageOffset = new Point(0, 0);
-            txtP_Nombre_Regis.Location = new Point(14, 62);
-            txtP_Nombre_Regis.Margin = new Padding(4);
+            txtP_Nombre_Regis.Location = new Point(18, 78);
+            txtP_Nombre_Regis.Margin = new Padding(5, 5, 5, 5);
             txtP_Nombre_Regis.Multiline = false;
             txtP_Nombre_Regis.Name = "txtP_Nombre_Regis";
             txtP_Nombre_Regis.NormalImageTint = Color.White;
             txtP_Nombre_Regis.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtP_Nombre_Regis.Padding = new Padding(18, 8, 18, 0);
+            txtP_Nombre_Regis.Padding = new Padding(22, 11, 22, 0);
             txtP_Nombre_Regis.PasswordChar = false;
             txtP_Nombre_Regis.PlaceholderColor = SystemColors.WindowText;
             txtP_Nombre_Regis.PlaceholderText = "";
             txtP_Nombre_Regis.Rounding = new Padding(8);
-            txtP_Nombre_Regis.Size = new Size(332, 35);
+            txtP_Nombre_Regis.Size = new Size(415, 44);
             txtP_Nombre_Regis.TabIndex = 0;
             txtP_Nombre_Regis.TextOffset = new Size(0, 0);
             txtP_Nombre_Regis.UnderlinedStyle = true;
+            txtP_Nombre_Regis.ContentChanged += txtP_Nombre_Regis_ContentChanged;
             // 
             // cuiPictureBox1
             // 
             cuiPictureBox1.Content = Properties.Resources.LRR_removebg_preview;
             cuiPictureBox1.ImageTint = Color.White;
             cuiPictureBox1.Location = new Point(0, 0);
-            cuiPictureBox1.Margin = new Padding(4, 5, 4, 5);
+            cuiPictureBox1.Margin = new Padding(5, 6, 5, 6);
             cuiPictureBox1.Name = "cuiPictureBox1";
             cuiPictureBox1.OutlineThickness = 1F;
             cuiPictureBox1.PanelOutlineColor = Color.Empty;
             cuiPictureBox1.Rotation = 0;
             cuiPictureBox1.Rounding = new Padding(8);
-            cuiPictureBox1.Size = new Size(178, 178);
+            cuiPictureBox1.Size = new Size(222, 222);
             cuiPictureBox1.TabIndex = 1;
             // 
             // btnRegistrarse
@@ -457,7 +460,8 @@
             btnRegistrarse.ImageAutoCenter = true;
             btnRegistrarse.ImageExpand = new Point(0, 0);
             btnRegistrarse.ImageOffset = new Point(0, 0);
-            btnRegistrarse.Location = new Point(115, 830);
+            btnRegistrarse.Location = new Point(144, 1038);
+            btnRegistrarse.Margin = new Padding(4, 4, 4, 4);
             btnRegistrarse.Name = "btnRegistrarse";
             btnRegistrarse.NormalBackground = Color.Peru;
             btnRegistrarse.NormalForeColor = Color.Black;
@@ -469,7 +473,7 @@
             btnRegistrarse.PressedImageTint = Color.White;
             btnRegistrarse.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnRegistrarse.Rounding = new Padding(10);
-            btnRegistrarse.Size = new Size(309, 39);
+            btnRegistrarse.Size = new Size(386, 49);
             btnRegistrarse.TabIndex = 2;
             btnRegistrarse.TextAlignment = StringAlignment.Center;
             btnRegistrarse.TextOffset = new Point(0, 0);
@@ -477,14 +481,15 @@
             // 
             // Registrarse
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             Controls.Add(btnRegistrarse);
             Controls.Add(cuiGroupBox1);
             Controls.Add(cuiPictureBox1);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "Registrarse";
-            Size = new Size(444, 895);
+            Size = new Size(555, 1119);
             cuiGroupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }

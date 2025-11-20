@@ -32,7 +32,36 @@ public class AuthController : ControllerBase
         Usuario? user;
 
         // -----------------------------------------
-        // 0. Login rápido con refresh token
+        // 0. Login rápido con JWT válido
+        // -----------------------------------------
+        if (!string.IsNullOrWhiteSpace(login.Token))
+        {
+            // Verificar si el JWT es válido y no ha expirado
+            var principal = _jwtService.ValidateToken(login.Token);
+            if (principal != null)
+            {
+                // Extraer IdUsuario del JWT
+                var idUsuarioClaim = principal.FindFirst("id")?.Value;
+                if (int.TryParse(idUsuarioClaim, out int idUsuarioJwt))
+                {
+                    user = await _authRepository.LoginUserById(idUsuarioJwt);
+
+                    if (user != null)
+                    {
+                        return Ok(new AuthResponseDTO
+                        {
+                            IdUsuario = user.IdUsuario,
+                            JwtToken = login.Token, // JWT aún válido, se retorna igual
+                            RefreshToken = null     // Aquí no necesitamos refresh token
+                        });
+                    }
+                }
+            }
+            // Si JWT inválido, continuar al login normal
+        }
+
+        // -----------------------------------------
+        // 1. Login rápido con refresh token
         // -----------------------------------------
         if (!string.IsNullOrWhiteSpace(login.RefreshToken))
         {
@@ -51,8 +80,7 @@ public class AuthController : ControllerBase
                 return Unauthorized("Refresh token expirado. Inicia sesión con correo y contraseña.");
             }
 
-
-            // Token válido → login rápido
+            // Token válido → login rápido usando refresh
             user = await _authRepository.LoginUserById(login.IdUsuario);
 
             if (user == null)
@@ -60,7 +88,7 @@ public class AuthController : ControllerBase
 
             var jwt = _jwtService.GenerateToken(user);
 
-            // Renovar expiración del token
+            // Renovar expiración del refresh token
             refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
             await _refreshRepository.Update(refreshToken);
 
@@ -73,7 +101,7 @@ public class AuthController : ControllerBase
         }
 
         // -----------------------------------------
-        // 1. Login normal con correo y contraseña
+        // 2. Login normal con correo y contraseña
         // -----------------------------------------
         if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
             return BadRequest("Correo y contraseña son requeridos.");
@@ -83,7 +111,7 @@ public class AuthController : ControllerBase
             return Unauthorized("Usuario o contraseña incorrectos.");
 
         // -----------------------------------------
-        // 2. Manejo del refresh token
+        // 3. Manejo del refresh token
         // -----------------------------------------
         var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
 
@@ -114,7 +142,7 @@ public class AuthController : ControllerBase
         }
 
         // -----------------------------------------
-        // 3. Generar JWT
+        // 4. Generar JWT
         // -----------------------------------------
         var jwtNormal = _jwtService.GenerateToken(user);
 
@@ -125,6 +153,7 @@ public class AuthController : ControllerBase
             RefreshToken = refreshToUse.Token.ToString()
         });
     }
+
 
 
 

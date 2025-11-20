@@ -47,7 +47,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
             switch (rol)
             {
-                case "Administradores":
+                case "Administrador":
                     filasAfectadasRol = await _administradoresRepository.Create(usuarioCreado.IdUsuario);
                     break;
                 case "Vendedor":
@@ -91,7 +91,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
             bool existe = rol switch
             {
-                "Administradores" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
+                "Administrador" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
                 "Vendedor" => await _vendedoresRepository.GetById(usuarioEnDb.IdUsuario) != null,
                 "Comprador" => await _compradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
                 _ => false
@@ -109,7 +109,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
             bool existe = rol switch
             {
-                "Administradores" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
+                "Administrador" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
                 "Vendedor" => await _vendedoresRepository.GetById(usuarioEnDb.IdUsuario) != null,
                 "Comprador" => await _compradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
                 _ => false

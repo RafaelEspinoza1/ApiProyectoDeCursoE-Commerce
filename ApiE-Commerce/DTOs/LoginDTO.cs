@@ -10,6 +10,5 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs
         public string? Contraseña { get; set; }
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
-
     }
 }

@@ -19,21 +19,30 @@ namespace FormApiE_Commerce
         {
             using (var httpClient = new HttpClient())
             {
-                var url = "http://localhost:5028/api/Auth/login";;
+                var url = "http://localhost:5028/api/Auth/login";
 
                 var tokenData = TokenStorage.Load();
+
+                var idUsuario = tokenData?.IdUsuario;
                 var jwtToken = tokenData?.JwtToken;
+                var refreshToken = tokenData?.RefreshToken;
 
-                if (!string.IsNullOrEmpty(jwtToken))
+                // --------------------------------------------------
+                // Inicio rápido: JWT solo, o Refresh Token + IdUsuario
+                // --------------------------------------------------
+                if (!string.IsNullOrEmpty(jwtToken) ||
+                    (!string.IsNullOrEmpty(refreshToken) && idUsuario != null && idUsuario > 0))
                 {
-                    MessageBox.Show($"Token en memoria: {jwtToken}");
+                    var loginData = new Dictionary<string, object>();
 
-                    var loginData = new
+                    if (!string.IsNullOrEmpty(jwtToken))
+                        loginData["Token"] = jwtToken;
+
+                    if (!string.IsNullOrEmpty(refreshToken) && idUsuario != null && idUsuario > 0)
                     {
-                        Correo = "",       // Si no hay credenciales porque ya hay token, puede quedar vacío
-                        Contraseña = "",
-                        Token = jwtToken
-                    };
+                        loginData["IdUsuario"] = idUsuario;
+                        loginData["RefreshToken"] = refreshToken;
+                    }
 
                     var json = JsonSerializer.Serialize(loginData);
                     var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -45,31 +54,41 @@ namespace FormApiE_Commerce
                         if (response.IsSuccessStatusCode)
                         {
                             var nuevoToken = await response.Content.ReadAsStringAsync();
-
                             var authResponse = JsonSerializer.Deserialize<AuthResponse>(nuevoToken);
 
                             if (authResponse == null)
                             {
-                                MessageBox.Show("Error al deserializar la respuesta del token.");
+                                MessageBox.Show("Error al obtener credenciales.");
                                 return;
                             }
 
                             // Guardar el nuevo token
-                            TokenStorage.Save(
-                                authResponse
-                            );
+                            TokenStorage.Save(authResponse);
 
-                            MessageBox.Show($"Token nuevo guardado: {nuevoToken.Replace("\"", "")}");
+                            MessageBox.Show("¡Bienvenido de nuevo!");
+
+                            PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+                            var formInicio = this.FindForm();
+                            if (formInicio != null)
+                            {
+                                paginaPrincipal.FormClosed += (s, args) => formInicio.Close();
+                            }
+                            paginaPrincipal.Show();
+                            formInicio?.Hide();
                         }
                         else
                         {
-                            MessageBox.Show("No se pudo refrescar el token. Código: " + response.StatusCode);
+                            MessageBox.Show("Error al leer credenciales. ERROR: " + response.StatusCode);
                         }
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error de conexión: " + ex.Message);
+                    }
                 }
             }
         }
+
 
         private async Task<AuthResponse?> LoginUser(string correo, string contraseña)
         {
@@ -92,18 +111,21 @@ namespace FormApiE_Commerce
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"Credenciales incorrectas o error: {response.StatusCode}");
+                    MessageBox.Show($"Inicio de sesión fallido. ERROR: {response.StatusCode}");
                     return null;
                 }
 
                 var responseJson = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonSerializer.Deserialize<AuthResponse>(responseJson);
+                var authResponse = JsonSerializer.Deserialize<AuthResponse>(
+                    responseJson,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
 
-                return loginResponse;
+                return authResponse;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Vuelve a intentar nuevamente.\n{ex.Message}", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No hay conexión, intente nuevamente.\n{ex.Message}", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -125,7 +147,16 @@ namespace FormApiE_Commerce
                     tokenData
                 );
 
-                MessageBox.Show("Login exitoso!");
+                MessageBox.Show("Inicio de sesión exitoso. ¡Bienvenido de nuevo!");
+
+                PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+                var formInicio = this.FindForm();
+                if (formInicio != null)
+                {
+                    paginaPrincipal.FormClosed += (s, args) => formInicio.Close();
+                }
+                paginaPrincipal.Show();
+                formInicio?.Hide();
 
                 //var token = TokenStorage.Load();
 

@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -112,7 +113,11 @@ namespace FormApiE_Commerce.UsersControls
                 }
 
                 // Deserializar la respuesta correctamente
-                var authResponse = JsonConvert.DeserializeObject<AuthResponse>(responseJson);
+                var authResponse = System.Text.Json.JsonSerializer.Deserialize<AuthResponse>(
+                    responseJson,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
+
                 return authResponse;
             }
             catch (Exception ex)
@@ -122,7 +127,7 @@ namespace FormApiE_Commerce.UsersControls
             }
         }
 
-        
+
 
         private async void btnRegistrarse_Click(object sender, EventArgs e)
         {
@@ -142,7 +147,7 @@ namespace FormApiE_Commerce.UsersControls
             // Construir objeto con los datos que pide el backend
             var data = new UsuariosCreateDTO
             {
-                IdRol = idRol, // Ajusta según tus roles
+                IdRol = idRol,
                 PrimerNombre = txtP_Nombre_Regis.Content.Trim(),
                 SegundoNombre = string.IsNullOrWhiteSpace(txtS_Nombre_Regis.Content) ? null : txtS_Nombre_Regis.Content.Trim(),
                 PrimerApellido = txtP_Apellido_Regis.Content.Trim(),
@@ -178,6 +183,9 @@ namespace FormApiE_Commerce.UsersControls
 
         }
 
-        
+        private void txtP_Nombre_Regis_ContentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
