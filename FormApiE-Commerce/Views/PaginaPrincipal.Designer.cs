@@ -31,7 +31,7 @@
             cuiPanel1 = new CuoreUI.Controls.cuiPanel();
             cuiButton4 = new CuoreUI.Controls.cuiButton();
             cuiButton3 = new CuoreUI.Controls.cuiButton();
-            cuiButton2 = new CuoreUI.Controls.cuiButton();
+            BtnRegistro_Vendedor = new CuoreUI.Controls.cuiButton();
             MenuIconButton = new FontAwesome.Sharp.IconButton();
             cuiButton1 = new CuoreUI.Controls.cuiButton();
             cuiPanel2 = new CuoreUI.Controls.cuiPanel();
@@ -41,11 +41,11 @@
             cuiSeparator1 = new CuoreUI.Controls.cuiSeparator();
             cuiPanel3 = new CuoreUI.Controls.cuiPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             cuiPanel4 = new CuoreUI.Controls.cuiPanel();
             cuiPanel5 = new CuoreUI.Controls.cuiPanel();
             cuiPanel6 = new CuoreUI.Controls.cuiPanel();
             cuiPanel7 = new CuoreUI.Controls.cuiPanel();
+            cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             cuiPanel1.SuspendLayout();
             cuiPanel2.SuspendLayout();
             cuiPanel3.SuspendLayout();
@@ -56,7 +56,7 @@
             // 
             cuiPanel1.Controls.Add(cuiButton4);
             cuiPanel1.Controls.Add(cuiButton3);
-            cuiPanel1.Controls.Add(cuiButton2);
+            cuiPanel1.Controls.Add(BtnRegistro_Vendedor);
             cuiPanel1.Controls.Add(MenuIconButton);
             cuiPanel1.Controls.Add(cuiButton1);
             cuiPanel1.Dock = DockStyle.Top;
@@ -80,6 +80,7 @@
             cuiButton4.CheckedOutline = Color.FromArgb(255, 106, 0);
             cuiButton4.Content = "Configuracion";
             cuiButton4.DialogResult = DialogResult.None;
+            cuiButton4.Dock = DockStyle.Right;
             cuiButton4.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiButton4.ForeColor = Color.Black;
             cuiButton4.HoverBackground = Color.White;
@@ -90,7 +91,7 @@
             cuiButton4.ImageAutoCenter = true;
             cuiButton4.ImageExpand = new Point(0, 0);
             cuiButton4.ImageOffset = new Point(0, 0);
-            cuiButton4.Location = new Point(1007, 21);
+            cuiButton4.Location = new Point(1019, 0);
             cuiButton4.Name = "cuiButton4";
             cuiButton4.NormalBackground = Color.White;
             cuiButton4.NormalForeColor = Color.Black;
@@ -102,7 +103,7 @@
             cuiButton4.PressedImageTint = Color.White;
             cuiButton4.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton4.Rounding = new Padding(8);
-            cuiButton4.Size = new Size(170, 36);
+            cuiButton4.Size = new Size(170, 74);
             cuiButton4.TabIndex = 4;
             cuiButton4.TextAlignment = StringAlignment.Center;
             cuiButton4.TextOffset = new Point(0, 0);
@@ -128,7 +129,7 @@
             cuiButton3.ImageAutoCenter = true;
             cuiButton3.ImageExpand = new Point(0, 0);
             cuiButton3.ImageOffset = new Point(0, 0);
-            cuiButton3.Location = new Point(521, 21);
+            cuiButton3.Location = new Point(217, 21);
             cuiButton3.Name = "cuiButton3";
             cuiButton3.NormalBackground = Color.White;
             cuiButton3.NormalForeColor = Color.Black;
@@ -145,43 +146,45 @@
             cuiButton3.TextAlignment = StringAlignment.Center;
             cuiButton3.TextOffset = new Point(0, 0);
             // 
-            // cuiButton2
+            // BtnRegistro_Vendedor
             // 
-            cuiButton2.BackColor = Color.Transparent;
-            cuiButton2.CheckButton = false;
-            cuiButton2.Checked = false;
-            cuiButton2.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton2.CheckedForeColor = Color.White;
-            cuiButton2.CheckedImageTint = Color.White;
-            cuiButton2.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton2.Content = "Categorias";
-            cuiButton2.DialogResult = DialogResult.None;
-            cuiButton2.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiButton2.ForeColor = Color.Black;
-            cuiButton2.HoverBackground = Color.White;
-            cuiButton2.HoverForeColor = Color.Black;
-            cuiButton2.HoverImageTint = Color.White;
-            cuiButton2.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            cuiButton2.Image = null;
-            cuiButton2.ImageAutoCenter = true;
-            cuiButton2.ImageExpand = new Point(0, 0);
-            cuiButton2.ImageOffset = new Point(0, 0);
-            cuiButton2.Location = new Point(284, 19);
-            cuiButton2.Name = "cuiButton2";
-            cuiButton2.NormalBackground = Color.White;
-            cuiButton2.NormalForeColor = Color.Black;
-            cuiButton2.NormalImageTint = Color.White;
-            cuiButton2.NormalOutline = Color.White;
-            cuiButton2.OutlineThickness = 1F;
-            cuiButton2.PressedBackground = Color.WhiteSmoke;
-            cuiButton2.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton2.PressedImageTint = Color.White;
-            cuiButton2.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton2.Rounding = new Padding(8);
-            cuiButton2.Size = new Size(137, 36);
-            cuiButton2.TabIndex = 2;
-            cuiButton2.TextAlignment = StringAlignment.Center;
-            cuiButton2.TextOffset = new Point(0, 0);
+            BtnRegistro_Vendedor.Anchor = AnchorStyles.Right;
+            BtnRegistro_Vendedor.BackColor = Color.Transparent;
+            BtnRegistro_Vendedor.CheckButton = false;
+            BtnRegistro_Vendedor.Checked = false;
+            BtnRegistro_Vendedor.CheckedBackground = Color.FromArgb(255, 106, 0);
+            BtnRegistro_Vendedor.CheckedForeColor = Color.White;
+            BtnRegistro_Vendedor.CheckedImageTint = Color.White;
+            BtnRegistro_Vendedor.CheckedOutline = Color.FromArgb(255, 106, 0);
+            BtnRegistro_Vendedor.Content = "Quieres ser vendedor ?";
+            BtnRegistro_Vendedor.DialogResult = DialogResult.None;
+            BtnRegistro_Vendedor.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnRegistro_Vendedor.ForeColor = Color.FromArgb(192, 0, 0);
+            BtnRegistro_Vendedor.HoverBackground = Color.White;
+            BtnRegistro_Vendedor.HoverForeColor = Color.Navy;
+            BtnRegistro_Vendedor.HoverImageTint = Color.White;
+            BtnRegistro_Vendedor.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            BtnRegistro_Vendedor.Image = null;
+            BtnRegistro_Vendedor.ImageAutoCenter = true;
+            BtnRegistro_Vendedor.ImageExpand = new Point(0, 0);
+            BtnRegistro_Vendedor.ImageOffset = new Point(0, 0);
+            BtnRegistro_Vendedor.Location = new Point(596, 15);
+            BtnRegistro_Vendedor.Name = "BtnRegistro_Vendedor";
+            BtnRegistro_Vendedor.NormalBackground = Color.White;
+            BtnRegistro_Vendedor.NormalForeColor = Color.FromArgb(192, 0, 0);
+            BtnRegistro_Vendedor.NormalImageTint = Color.White;
+            BtnRegistro_Vendedor.NormalOutline = Color.White;
+            BtnRegistro_Vendedor.OutlineThickness = 1F;
+            BtnRegistro_Vendedor.PressedBackground = Color.WhiteSmoke;
+            BtnRegistro_Vendedor.PressedForeColor = Color.FromArgb(32, 32, 32);
+            BtnRegistro_Vendedor.PressedImageTint = Color.White;
+            BtnRegistro_Vendedor.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnRegistro_Vendedor.Rounding = new Padding(8);
+            BtnRegistro_Vendedor.Size = new Size(324, 36);
+            BtnRegistro_Vendedor.TabIndex = 2;
+            BtnRegistro_Vendedor.TextAlignment = StringAlignment.Center;
+            BtnRegistro_Vendedor.TextOffset = new Point(0, 0);
+            BtnRegistro_Vendedor.Click += BtnRegistro_Vendedor_Click;
             // 
             // MenuIconButton
             // 
@@ -305,7 +308,6 @@
             cuiPictureBox1.Rounding = new Padding(8);
             cuiPictureBox1.Size = new Size(316, 299);
             cuiPictureBox1.TabIndex = 0;
-            cuiPictureBox1.Load += cuiPictureBox1_Load;
             // 
             // cuiSeparator1
             // 
@@ -345,19 +347,6 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(1116, 391);
             flowLayoutPanel1.TabIndex = 1;
-            // 
-            // cuiLabel2
-            // 
-            cuiLabel2.BackColor = Color.Transparent;
-            cuiLabel2.Content = "Productos\\ destacados";
-            cuiLabel2.Font = new Font("Garamond", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            cuiLabel2.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel2.Location = new Point(13, 10);
-            cuiLabel2.Margin = new Padding(4, 5, 4, 5);
-            cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(301, 36);
-            cuiLabel2.TabIndex = 0;
-            cuiLabel2.VerticalAlignment = StringAlignment.Near;
             // 
             // cuiPanel4
             // 
@@ -403,6 +392,19 @@
             cuiPanel7.Size = new Size(273, 385);
             cuiPanel7.TabIndex = 3;
             // 
+            // cuiLabel2
+            // 
+            cuiLabel2.BackColor = Color.Transparent;
+            cuiLabel2.Content = "Productos\\ destacados";
+            cuiLabel2.Font = new Font("Garamond", 19.8000011F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            cuiLabel2.HorizontalAlignment = StringAlignment.Center;
+            cuiLabel2.Location = new Point(13, 10);
+            cuiLabel2.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel2.Name = "cuiLabel2";
+            cuiLabel2.Size = new Size(301, 36);
+            cuiLabel2.TabIndex = 0;
+            cuiLabel2.VerticalAlignment = StringAlignment.Near;
+            // 
             // PaginaPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -427,7 +429,7 @@
         private CuoreUI.Controls.cuiPanel cuiPanel1;
         private CuoreUI.Controls.cuiButton cuiButton1;
         private CuoreUI.Controls.cuiButton cuiButton3;
-        private CuoreUI.Controls.cuiButton cuiButton2;
+        private CuoreUI.Controls.cuiButton BtnRegistro_Vendedor;
         private FontAwesome.Sharp.IconButton MenuIconButton;
         private CuoreUI.Controls.cuiButton cuiButton4;
         private CuoreUI.Controls.cuiPanel cuiPanel2;

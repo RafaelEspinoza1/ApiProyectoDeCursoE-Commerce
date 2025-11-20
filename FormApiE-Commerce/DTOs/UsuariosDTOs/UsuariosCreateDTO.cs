@@ -4,23 +4,35 @@ namespace FormApiE_Commerce.DTOs.UsuariosDTOs
 {
     public class UsuariosCreateDTO
     {
-        [Required(ErrorMessage = "El nombre es obligatorio")]
-        public string Nombre { get; set; }
+        [Required(ErrorMessage = "El rol es obligatorio")]
+        public required int IdRol { get; set; }
 
-        [Required(ErrorMessage = "El apellido es obligatorio")]
-        public string Apellido { get; set; }
+        // Datos del usuario
+        [Required(ErrorMessage = "El primer nombre es obligatorio")]
+        [MaxLength(30)]
+        public required string PrimerNombre { get; set; }
 
-        [Required(ErrorMessage = "El correo es obligatorio")]   
-        [RegularExpression(@"^[^@\s]+@(gmail|yahoo|hotmail)\.com$",
-    ErrorMessage = "Solo se permiten correos @gmail.com, @yahoo.com o @hotmail.com")]
-        public string Correo { get; set; } 
+        [MaxLength(30)]
+        public string? SegundoNombre { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es obligatoria")]
-        [MinLength(8, ErrorMessage = "La contraseña debe tener al menos 8 caracteres.")]
-        public string Contraseña { get; set; }
+        [Required(ErrorMessage = "El primer apellido es obligatorio")]
+        [MaxLength(30)]
+        public required string PrimerApellido { get; set; }
+
+        [MaxLength(30)]
+        public string? SegundoApellido { get; set; }
 
         [Required(ErrorMessage = "El teléfono es obligatorio")]
-        [RegularExpression(@"^[1-9][0-9]{7}$", ErrorMessage = "El número debe tener 8 dígitos y no puede iniciar con 0.")]
-        public string Telefono { get; set; } 
+        [MaxLength(20)]
+        public required string Telefono { get; set; }
+
+        [Required(ErrorMessage = "El correo es obligatorio")]
+        [MaxLength(50)]
+        [EmailAddress(ErrorMessage = "Correo no válido")]
+        public required string Correo { get; set; }
+
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        public required string Contraseña { get; set; }
     }
 }
+

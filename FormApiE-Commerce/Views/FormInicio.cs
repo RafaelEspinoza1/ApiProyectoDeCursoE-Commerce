@@ -1,5 +1,6 @@
 
 using FormApiE_Commerce.Models;
+using FormApiE_Commerce.UsersControls;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Json;
 using System.Text;
@@ -143,7 +144,12 @@ namespace FormApiE_Commerce
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-           
+            var registro = new Registrarse();
+            registro.Dock = DockStyle.Fill;
+
+            // Limpiar panel y agregar el nuevo
+            pnlForms_Login_Regis.Controls.Clear();
+            pnlForms_Login_Regis.Controls.Add(registro);
         }
 
 

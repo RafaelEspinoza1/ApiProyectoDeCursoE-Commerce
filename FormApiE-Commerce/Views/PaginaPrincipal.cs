@@ -20,53 +20,19 @@ namespace FormApiE_Commerce
 {
     public partial class PaginaPrincipal : Form
     {
-        //private object usuarioId;
 
-        //public PaginaPrincipal()
-        //{
-        //    InitializeComponent();
-        //}
 
-        private void cuiPictureBox1_Load(object sender, EventArgs e)
+        public PaginaPrincipal()
+        {
+            InitializeComponent();
+        }
+
+
+        private void BtnRegistro_Vendedor_Click(object sender, EventArgs e)
         {
 
         }
 
-
-        //public Vendedores vendedor = new Vendedores();
-        //public PaginaPrincipal()
-        //{
-        //    InitializeComponent();
-        //    MostrarFormularioEnTabPage();
-        //}
-        //// Cierra el formulario y abre el formulario FormInicio.
-        //private void btnCerrarSesion_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        var cerrar = MessageBox.Show("Seguro que desea cerrar seción?", "Información", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-        //        if (cerrar == DialogResult.Yes)
-        //        {
-        //            MessageBox.Show("E-Commerce le desea buen dia, vuelva pronto.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            this.Tag = "FormInicio";
-        //            this.DialogResult = DialogResult.OK;
-        //            this.Close();
-        //            return;
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error inesperado al cerrar sesión: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-
-        //}
-
-        //private void btnMenu_Click(object sender, EventArgs e)
-        //{
-        //    flowLayoutPanel1.Visible = true;
-        //    btnMenu.Visible = false;
-        //}
 
         //private void btnCerrar_Click(object sender, EventArgs e)
         //{
