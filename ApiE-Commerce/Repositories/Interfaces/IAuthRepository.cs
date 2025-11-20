@@ -6,7 +6,8 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
     public interface IAuthRepository
     {
         // Comandos de autenticación
-        Task<Usuario?> LoginUser(string correo, string password, string rol);
+        Task<Usuario?> LoginUser(string correo, string password);
+        Task<Usuario?> LoginUserById(int idUsuario);
         Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario);   
     }
 }

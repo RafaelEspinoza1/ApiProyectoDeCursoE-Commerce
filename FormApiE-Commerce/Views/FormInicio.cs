@@ -1,57 +1,112 @@
 
 using FormApiE_Commerce.Models;
+using Newtonsoft.Json.Linq;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 
 namespace FormApiE_Commerce
 {
     public partial class FormInicio : Form
     {
-        private ApiClient apiClient = new ApiClient();
-
         public FormInicio()
         {
             InitializeComponent();
         }
 
-        private async Task<string?> LoginUser(string correo, string contraseña, string? token)
+        private async void FormInicio_Load(object sender, EventArgs e)
         {
             using (var httpClient = new HttpClient())
             {
-                var url = "http://localhost:5028/api/Auth/login";
+                var url = "http://localhost:5028/api/Auth/login";;
 
-                var loginData = new
+                var tokenData = TokenStorage.Load();
+                var jwtToken = tokenData?.JwtToken;
+
+                if (!string.IsNullOrEmpty(jwtToken))
                 {
-                    Correo = correo,
-                    Contraseña = contraseña,
-                    Token = token
-                };
+                    MessageBox.Show($"Token en memoria: {jwtToken}");
 
-                MessageBox.Show(correo, contraseña);
-
-                var json = System.Text.Json.JsonSerializer.Serialize(loginData);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                try
-                {
-                    var response = await httpClient.PostAsync(url, content);
-
-                    if (!response.IsSuccessStatusCode)
+                    var loginData = new
                     {
-                        MessageBox.Show($"Credenciales incorrectas o error: {response.StatusCode}");
-                        return null;
-                    }
+                        Correo = "",       // Si no hay credenciales porque ya hay token, puede quedar vacío
+                        Contraseña = "",
+                        Token = jwtToken
+                    };
 
-                    var nuevoToken = await response.Content.ReadAsStringAsync();
-                    return nuevoToken.Replace("\"", ""); // Limpiar comillas
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Vuelve a intentar nuevamente.\n{ex.Message}", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
+                    var json = JsonSerializer.Serialize(loginData);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    try
+                    {
+                        var response = await httpClient.PostAsync(url, content);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var nuevoToken = await response.Content.ReadAsStringAsync();
+
+                            var authResponse = JsonSerializer.Deserialize<AuthResponse>(nuevoToken);
+
+                            if (authResponse == null)
+                            {
+                                MessageBox.Show("Error al deserializar la respuesta del token.");
+                                return;
+                            }
+
+                            // Guardar el nuevo token
+                            TokenStorage.Save(
+                                authResponse
+                            );
+
+                            MessageBox.Show($"Token nuevo guardado: {nuevoToken.Replace("\"", "")}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo refrescar el token. Código: " + response.StatusCode);
+                        }
+                    }
+                    catch { }
                 }
             }
         }
+
+        private async Task<AuthResponse?> LoginUser(string correo, string contraseña)
+        {
+            using var httpClient = new HttpClient();
+            var url = "http://localhost:5028/api/Auth/login";
+
+            var loginData = new
+            {
+                Correo = correo,
+                Contraseña = contraseña,
+                Token = "" // En este flujo, no usamos token previo
+            };
+
+            var json = JsonSerializer.Serialize(loginData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await httpClient.PostAsync(url, content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show($"Credenciales incorrectas o error: {response.StatusCode}");
+                    return null;
+                }
+
+                var responseJson = await response.Content.ReadAsStringAsync();
+                var loginResponse = JsonSerializer.Deserialize<AuthResponse>(responseJson);
+
+                return loginResponse;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Vuelve a intentar nuevamente.\n{ex.Message}", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
 
 
 
@@ -60,14 +115,31 @@ namespace FormApiE_Commerce
             var correo = txtCorreo.contentTextField.Text;
             var contraseña = txtContraseña.contentTextField.Text;
 
-            string? token = await LoginUser(correo, contraseña, apiClient.Token);
+            var tokenData = await LoginUser(correo, contraseña);
 
-            if (token != null)
+            if (tokenData != null)
             {
-                apiClient.EstablecerToken(token);
+                // Guardar IdUsuario y token
+                TokenStorage.Save(
+                    tokenData
+                );
+
                 MessageBox.Show("Login exitoso!");
+
+                //var token = TokenStorage.Load();
+
+                //if (token != null)
+                //{
+                //    MessageBox.Show(token.JwtToken);
+                //}
+            }
+            else
+            {
+                MessageBox.Show("Correo o contraseña incorrectos.");
             }
         }
+
+
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {

@@ -3,6 +3,8 @@ using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories
 {
@@ -40,8 +42,10 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                     SegundoApellido = reader.IsDBNull(reader.GetOrdinal("SegundoApellido")) ? null : reader.GetString(reader.GetOrdinal("SegundoApellido")),
                     Telefono = reader.GetString(reader.GetOrdinal("Telefono")),
                     Correo = reader.GetString(reader.GetOrdinal("Correo")),
-                    Contraseña = reader.GetString(reader.GetOrdinal("Contraseña")),
-                };
+                    Contraseña = reader.IsDBNull(reader.GetOrdinal("Contraseña"))
+                        ? Array.Empty<byte>()
+                        : (byte[])reader["Contraseña"]
+                        };
             }
 
             return null;
@@ -54,7 +58,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios";
 
             return await Get(cmd);
@@ -67,7 +71,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE IdUsuario = @Id";
 
@@ -82,7 +86,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE PrimerNombre = @FirstName";
 
@@ -97,7 +101,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE SegundoNombre = @SecondName";
 
@@ -112,7 +116,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE PrimerApellido = @FirstSurname";
 
@@ -127,7 +131,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE SegundoApellido = @SecondSurname";
 
@@ -142,7 +146,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE Telefono = @Telephone";
 
@@ -157,7 +161,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.CommandText = @"
                 SELECT
                     IdUsuario, IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido,
-                    Telefono, Correo, Contraseña, FechaRegistro
+                    Telefono, Correo, Contraseña
                 FROM Usuarios
                 WHERE Correo = @Email";
 
@@ -194,7 +198,12 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.Parameters.AddWithValue("@SegundoApellido", usuario.SegundoApellido);
             cmd.Parameters.AddWithValue("@Telefono", usuario.Telefono);
             cmd.Parameters.AddWithValue("@Correo", usuario.Correo);
-            cmd.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+            byte[] hashedPassword;
+            using (var sha = SHA256.Create())
+            {
+                hashedPassword = sha.ComputeHash(Encoding.UTF8.GetBytes(usuario.Contraseña));
+            }
+            cmd.Parameters.AddWithValue("@Contraseña", hashedPassword);
 
             return await ExecuteNonQuery(cmd);
         }
@@ -221,7 +230,12 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.Parameters.AddWithValue("@SegundoApellido", usuario.SegundoApellido);
             cmd.Parameters.AddWithValue("@Telefono", usuario.Telefono);
             cmd.Parameters.AddWithValue("@Correo", usuario.Correo);
-            cmd.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+            byte[] hashedPassword;
+            using (var sha = SHA256.Create())
+            {
+                hashedPassword = sha.ComputeHash(Encoding.UTF8.GetBytes(usuario.Contraseña));
+            }
+            cmd.Parameters.AddWithValue("@Contraseña", hashedPassword);
 
             return await ExecuteNonQuery(cmd);
         }

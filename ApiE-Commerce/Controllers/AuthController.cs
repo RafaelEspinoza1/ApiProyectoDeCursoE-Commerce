@@ -1,100 +1,167 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Configuration;
 using ApiProyectoDeCursoE_Commerce.DTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
-using ApiProyectoDeCursoE_Commerce.Guards;
-using ApiProyectoDeCursoE_Commerce.Models.Enums;
+using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
-namespace ApiProyectoDeCursoE_Commerce.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class AuthController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthController : ControllerBase
+    private readonly AuthRepository _authRepository;
+    private readonly RefreshTokenRepository _refreshRepository;
+    private readonly JwtService _jwtService;
+
+    public AuthController(
+        AuthRepository authRepository,
+        RefreshTokenRepository resfreshRepository,
+        JwtService jwtService)
     {
-        // Repositorio de autenticación
-        private readonly AuthRepository _authRepository;
+        _authRepository = authRepository;
+        _refreshRepository = resfreshRepository;
+        _jwtService = jwtService;
+    }
 
-        // Servicios JWT
-        private readonly JwtService _jwtService;
-        private readonly JwtSettings _jwtSettings;
+    [AllowAnonymous]
+    [HttpPost("login")]
+    public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] LoginDTO login)
+    {
+        RefreshToken refreshToUse;
+        Usuario? user;
 
-        // Constructor
-        public AuthController(
-            AuthRepository authRepository,
-            JwtService jwtService,
-            JwtSettings jwtSettings)
+        // -----------------------------------------
+        // 0. Login rápido con refresh token
+        // -----------------------------------------
+        if (!string.IsNullOrWhiteSpace(login.RefreshToken))
         {
-            _authRepository = authRepository;
-            _jwtService = jwtService;
-            _jwtSettings = jwtSettings;
-        }
+            if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
+                return Unauthorized("Refresh token inválido");
 
-        // POST: api/Auth/login
-        [AllowAnonymous]
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] LoginDTO login)
-        {
-            // Validar usuario
-            var usuario = await _authRepository.LoginUser(login.Correo, login.Contraseña, login.Rol);
+            var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
 
-            if (usuario == null)
+            if (refreshToken == null || refreshToken.Revoked)
+                return Unauthorized("Refresh token inválido o revocado");
+
+            if (refreshToken.FechaExpiracion < DateTime.UtcNow)
             {
-                return Unauthorized("Acceso no autorizado: Usuario o contraseña inválidos");
+                refreshToken.Revoked = true;
+                await _refreshRepository.Update(refreshToken);
+                return Unauthorized("Refresh token expirado. Inicia sesión con correo y contraseña.");
             }
 
-            // Validar token recibido
-            if (!string.IsNullOrWhiteSpace(login.Token))
+
+            // Token válido → login rápido
+            user = await _authRepository.LoginUserById(login.IdUsuario);
+
+            if (user == null)
+                return NotFound("Usuario no encontrado.");
+
+            var jwt = _jwtService.GenerateToken(user);
+
+            // Renovar expiración del token
+            refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+            await _refreshRepository.Update(refreshToken);
+
+            return Ok(new AuthResponseDTO
             {
-                var handler = new JwtSecurityTokenHandler();
-                try
-                {
-                    handler.ValidateToken(login.Token, new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = _jwtSettings.issuer,
-                        ValidAudience = _jwtSettings.audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.key))
-                    }, out _);
-
-                    return Ok(login.Token);
-                }
-                catch { }
-            }
-
-            // Generar un nuevo token JWT
-            var nuevoToken = _jwtService.GenerateToken(usuario);
-            return Ok(nuevoToken);
+                IdUsuario = user.IdUsuario,
+                JwtToken = jwt,
+                RefreshToken = refreshToken.Token.ToString()
+            });
         }
 
-        // POST: api/Auth/register
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<ActionResult<string>> Register([FromBody] UsuariosCreateDTO usuario)
+        // -----------------------------------------
+        // 1. Login normal con correo y contraseña
+        // -----------------------------------------
+        if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
+            return BadRequest("Correo y contraseña son requeridos.");
+
+        user = await _authRepository.LoginUser(login.Correo, login.Contraseña);
+        if (user == null)
+            return Unauthorized("Usuario o contraseña incorrectos.");
+
+        // -----------------------------------------
+        // 2. Manejo del refresh token
+        // -----------------------------------------
+        var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
+
+        if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
         {
-            // Registrar usuario validando que no exista ya en la base de datos
-            var usuarioRegistrado = await _authRepository.RegisterUser(usuario);
-
-            if (usuarioRegistrado == null)
-            {
-                return BadRequest("" +
-                    "El usuario proporcionado no puede registrarse.\n" +
-                    "El correo ya está siendo utilizado o ha ocurrido un error al registrarlo.\n" +
-                    "Por favor, verifique los datos.\n\n" +
-                    "Si el problema persiste, contactenos a ecommerce@contact.com");
-            }
-
-            // Generar token JWT
-            var token = _jwtService.GenerateToken(usuarioRegistrado);
-            return Ok(token);
+            existingToken.Revoked = true;
+            await _refreshRepository.Update(existingToken);
+            existingToken = null;
         }
 
+        if (existingToken == null)
+        {
+            refreshToUse = new RefreshToken
+            {
+                IdUsuario = user.IdUsuario,
+                Token = Guid.NewGuid(),
+                FechaCreacion = DateTime.UtcNow,
+                FechaExpiracion = DateTime.UtcNow.AddDays(7),
+                Revoked = false
+            };
+            await _refreshRepository.Create(refreshToUse);
+        }
+        else
+        {
+            existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+            await _refreshRepository.Update(existingToken);
+            refreshToUse = existingToken;
+        }
+
+        // -----------------------------------------
+        // 3. Generar JWT
+        // -----------------------------------------
+        var jwtNormal = _jwtService.GenerateToken(user);
+
+        return Ok(new AuthResponseDTO
+        {
+            IdUsuario = user.IdUsuario,
+            JwtToken = jwtNormal,
+            RefreshToken = refreshToUse.Token.ToString()
+        });
+    }
+
+
+
+
+
+    // ============================================================
+    // REGISTRO
+    // ============================================================
+    [AllowAnonymous]
+    [HttpPost("register")]
+    public async Task<ActionResult<AuthResponseDTO>> Register([FromBody] UsuariosCreateDTO usuario)
+    {
+        var registeredUser = await _authRepository.RegisterUser(usuario);
+
+        if (registeredUser == null)
+            return BadRequest("El correo ya está siendo utilizado.");
+
+        // Crear ambos tokens
+        var jwt = _jwtService.GenerateToken(registeredUser);
+
+        var refresh = new RefreshToken
+        {
+            IdUsuario = registeredUser.IdUsuario,
+            Token = Guid.NewGuid(),
+            FechaCreacion = DateTime.UtcNow,
+            FechaExpiracion = DateTime.UtcNow.AddDays(7),
+            Revoked = false
+        };
+
+        await _refreshRepository.Create(refresh);
+
+        return Ok(new AuthResponseDTO
+        {
+            IdUsuario = registeredUser.IdUsuario,
+            JwtToken = jwt,
+            RefreshToken = refresh.Token.ToString()
+        });
     }
 }
+

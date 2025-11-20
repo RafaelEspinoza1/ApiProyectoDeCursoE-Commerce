@@ -1,47 +1,39 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json.Nodes;
-using Newtonsoft.Json;
 
-public class TokenStorage
+namespace FormApiE_Commerce
 {
-    private static readonly string FilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-        "ecommerce_tokens.json");
-
-    public string? JwtToken { get; set; }
-    public string? RefreshToken { get; set; }
-    public DateTime JwtExpiry { get; set; }
-    public DateTime RefreshExpiry { get; set; }
-
-    // Guardar tokens cifrados
-    public void Save()
+    public static class TokenStorage
     {
-        var json = JsonConvert.SerializeObject(this);
-        var encrypted = ProtectedData.Protect(
-            Encoding.UTF8.GetBytes(json),
-            null,
-            DataProtectionScope.CurrentUser);
-        File.WriteAllBytes(FilePath, encrypted);
-    }
+        // Guardar tokens en Properties.Settings
+        public static void Save(AuthResponse authResponse)
+        {
+            Properties.Settings.Default.IdUsuario = authResponse.idUsuario;
+            Properties.Settings.Default.JwtToken = authResponse.jwtToken;
+            Properties.Settings.Default.RefreshToken = authResponse.refreshToken;
 
-    // Cargar tokens cifrados
-    public static TokenStorage? Load()
-    {
-        if (!File.Exists(FilePath)) return null;
+            Properties.Settings.Default.Save();
+        }
 
-        var encrypted = File.ReadAllBytes(FilePath);
-        var jsonBytes = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
-        var json = Encoding.UTF8.GetString(jsonBytes);
 
-        return JsonConvert.DeserializeObject<TokenStorage>(json)!;
-    }
+        public static TokenData? Load()
+        {
+            return new TokenData
+            {
+                IdUsuario = Properties.Settings.Default.IdUsuario,
+                JwtToken = Properties.Settings.Default.JwtToken ?? "",
+                RefreshToken = Properties.Settings.Default.RefreshToken ?? "",
+            };
+        }
 
-    // Limpiar tokens
-    public static void Clear()
-    {
-        if (File.Exists(FilePath)) File.Delete(FilePath);
+
+        // Limpiar tokens del sistema
+        public static void Clear()
+        {
+            Properties.Settings.Default.IdUsuario = 0;
+            Properties.Settings.Default.JwtToken = null;
+            Properties.Settings.Default.RefreshToken = null;
+
+            Properties.Settings.Default.Save();
+        }
     }
 }

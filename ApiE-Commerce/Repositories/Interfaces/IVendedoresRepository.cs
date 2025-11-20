@@ -1,21 +1,22 @@
-﻿using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
-using ApiProyectoDeCursoE_Commerce.Models;
+﻿using ApiProyectoDeCursoE_Commerce.Models;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
 {
     public interface IVendedoresRepository
     {
-        // Comandos de filtro de búsqueda
-        Task<Vendedor?> GetAll();
-        Task<Vendedor?> GetById(int id);
-        Task<Vendedor?> GetByBusinessName(string businessName);
-        Task<Vendedor?> GetIfIsContributor(bool isContributor);
+        // Obtener todos los vendedores
+        Task<IEnumerable<Vendedor>> GetAll();
 
-        // Comandos de inserción, actualización o eliminación
-        // Devuelven el número de filas afectadas
-        Task<int> Create(UsuariosCreateDTO usuario, int id);
-        Task<int> Update(VendedoresUpdateDTO vendedor, int id);
+        // Obtener vendedor por Id
+        Task<Vendedor?> GetById(int id);
+
+        // Crear nuevo vendedor con solo IdUsuario
+        Task<int> Create(int idUsuario);
+
+        // Actualizar ingresos del vendedor
+        Task<int> UpdateIngresos(int idVendedor, decimal ingresos);
+
+        // Eliminar vendedor
         Task<int> Delete(int id);
     }
 }

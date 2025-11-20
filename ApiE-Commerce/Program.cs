@@ -1,7 +1,6 @@
 using ApiProyectoDeCursoE_Commerce.Configuration;
 using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.Extensions;
-using ApiProyectoDeCursoE_Commerce.Guards;
 using ApiProyectoDeCursoE_Commerce.Repositories;
 using Microsoft.Extensions.Options;
 
@@ -16,6 +15,10 @@ builder.Services.AddSingleton(sp =>
     var connectionString = configuration.GetConnectionString("DefaultConnection")!;
     return new ECommerceContext(connectionString);
 });
+
+// Repositorios de autenticación
+builder.Services.AddScoped<AuthRepository>();
+builder.Services.AddScoped<RefreshTokenRepository>();
 
 // Repositorios
 builder.Services.AddScoped<UsuariosRepository>();

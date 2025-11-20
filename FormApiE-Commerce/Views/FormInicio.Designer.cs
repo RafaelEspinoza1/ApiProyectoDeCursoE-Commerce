@@ -371,6 +371,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormInicio";
             Text = "Incio de sesión";
+            this.Load += FormInicio_Load;
             pnlForms_Login_Regis.ResumeLayout(false);
             cuiGroupBox2.ResumeLayout(false);
             cuiGroupBox1.ResumeLayout(false);

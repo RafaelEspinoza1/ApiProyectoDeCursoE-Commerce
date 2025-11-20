@@ -12,8 +12,6 @@ namespace FormApiE_Commerce.UsersControls
 {
     public partial class Inicio_de_Sesion : UserControl
     {
-        private ApiClient apiClient = new ApiClient();
-
         // Evento para notificar al formulario principal
         public event Action<string>? OnLoginSuccess;
         public Inicio_de_Sesion()
@@ -67,14 +65,11 @@ namespace FormApiE_Commerce.UsersControls
             var correo = txtCorreo.contentTextField.Text;
             var contraseña = txtContraseña.contentTextField.Text;
 
-            string? token = await LoginUser(correo, contraseña, apiClient.Token);
+            string? token = await LoginUser(correo, contraseña, "");
 
             if (token != null)
             {
-                apiClient.EstablecerToken(token);
-
-                // Avisamos al formulario que fue exitoso
-                OnLoginSuccess?.Invoke(token);
+                
             }
         }
     }

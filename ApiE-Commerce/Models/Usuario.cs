@@ -23,8 +23,8 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         [Required, MaxLength(50)]
         [EmailAddress]
         public required string Correo { get; set; }
-        [Required, MaxLength(128)]
-        public required string Contraseña { get; set; }
+        [Required]
+        public byte[] Contraseña { get; set; } = null!;
         // Relaciones
         public ICollection<Vendedor>? Vendedores { get; set; }
         public ICollection<Comprador>? Compradores { get; set; }

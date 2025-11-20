@@ -27,26 +27,32 @@ namespace ApiProyectoDeCursoE_Commerce.Configuration
             // Crea los claims del token
             var claims = new List<Claim>
             {
+                new Claim(JwtRegisteredClaimNames.Sub, usuario.IdUsuario.ToString()),
                 new Claim("id", usuario.IdUsuario.ToString()),
                 new Claim("email", usuario.Correo),
                 new Claim("role", rol.ToString())
             };
 
             // Crea la clave de seguridad y las credenciales de firma
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.key));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             // Crea el token JWT
             var token = new JwtSecurityToken(
-                issuer: _settings.issuer,
-                audience: _settings.audience,
+                issuer: _settings.Issuer,
+                audience: _settings.Audience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(_settings.ExpirationInMinutes),
+                expires: DateTime.Now.AddMinutes(_settings.ExpireMinutes),
                 signingCredentials: creds
             );
 
             // Devuelve el token como una cadena
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string GenerateRefreshToken()
+        {
+            return Guid.NewGuid().ToString(); // Refresh token único
         }
     }
 }

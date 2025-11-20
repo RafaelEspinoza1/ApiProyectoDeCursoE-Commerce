@@ -54,12 +54,12 @@ namespace APIProyectoDeCursoE_commerce.Controllers
             new RolesEnum[] { RolesEnum.Administrador, RolesEnum.Vendedor }
         })]
         [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarVendedor(int id, VendedoresUpdateDTO dto)
+        public async Task<IActionResult> ActualizarIngresosVendedor(int id, VendedoresUpdateDTO dto)
         {
             var vendedorExistente = await _vendedoresRepository.GetById(id);
             if (vendedorExistente == null) return NotFound();
 
-            var filasAfectadas = await _vendedoresRepository.Update(dto, id);
+            var filasAfectadas = await _vendedoresRepository.UpdateIngresos(id, dto.Ingresos);
 
             return NoContent();
         }

@@ -5,10 +5,11 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs
 {
     public class LoginDTO
     {
-        public required string Correo { get; set; }
-        public required string Contraseña { get; set; }
-        public required string Rol { get; set; }
+        public int IdUsuario { get; set; }
+        public string? Correo { get; set; }
+        public string? Contraseña { get; set; }
         public string? Token { get; set; }
+        public string? RefreshToken { get; set; }
 
     }
 }
