@@ -28,7 +28,12 @@ namespace FormApiE_Commerce
         }
 
 
-        private void BtnRegistro_Vendedor_Click(object sender, EventArgs e)
+        private void BtnRegistro_Vendedor_Click(object sender, EventArgs e ) 
+        {
+
+        }
+
+        private void cuiButton5_Click(object sender, EventArgs e)
         {
 
         }

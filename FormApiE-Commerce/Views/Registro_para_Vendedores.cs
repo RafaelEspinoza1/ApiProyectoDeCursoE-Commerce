@@ -31,5 +31,10 @@ namespace FormApiE_Commerce.Views
         {
 
         }
+
+        private void cuiLabel9_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

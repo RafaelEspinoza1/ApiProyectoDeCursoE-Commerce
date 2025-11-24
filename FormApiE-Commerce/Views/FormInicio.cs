@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace FormApiE_Commerce
 {
@@ -178,9 +179,14 @@ namespace FormApiE_Commerce
             var registro = new Registrarse();
             registro.Dock = DockStyle.Fill;
 
-            // Limpiar panel y agregar el nuevo
-            pnlForms_Login_Regis.Controls.Clear();
-            pnlForms_Login_Regis.Controls.Add(registro);
+            // Ahora cargamos en Panel1 del SplitContainer
+            splCon_Separador.Panel1.Controls.Clear();
+            splCon_Separador.Panel1.Controls.Add(registro);
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
 

@@ -63,7 +63,8 @@
             cuiButton3.ImageAutoCenter = true;
             cuiButton3.ImageExpand = new Point(0, 0);
             cuiButton3.ImageOffset = new Point(0, 0);
-            cuiButton3.Location = new Point(238, 534);
+            cuiButton3.Location = new Point(182, 400);
+            cuiButton3.Margin = new Padding(3, 2, 3, 2);
             cuiButton3.Name = "cuiButton3";
             cuiButton3.NormalBackground = Color.DarkGray;
             cuiButton3.NormalForeColor = Color.Black;
@@ -75,7 +76,7 @@
             cuiButton3.PressedImageTint = Color.White;
             cuiButton3.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton3.Rounding = new Padding(8);
-            cuiButton3.Size = new Size(191, 33);
+            cuiButton3.Size = new Size(129, 25);
             cuiButton3.TabIndex = 15;
             cuiButton3.TextAlignment = StringAlignment.Center;
             cuiButton3.TextOffset = new Point(0, 0);
@@ -84,11 +85,11 @@
             // 
             cuiLabel2.Content = "Contactanos\\ aqui:";
             cuiLabel2.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiLabel2.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel2.Location = new Point(23, 540);
-            cuiLabel2.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel2.HorizontalAlignment = StringAlignment.Near;
+            cuiLabel2.Location = new Point(0, 400);
+            cuiLabel2.Margin = new Padding(4, 4, 4, 4);
             cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(208, 25);
+            cuiLabel2.Size = new Size(138, 19);
             cuiLabel2.TabIndex = 14;
             cuiLabel2.VerticalAlignment = StringAlignment.Near;
             // 
@@ -99,11 +100,12 @@
             cuiGroupBox2.Controls.Add(txtContraseña);
             cuiGroupBox2.Font = new Font("Garamond", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiGroupBox2.ForeColor = Color.DarkOliveGreen;
-            cuiGroupBox2.Location = new Point(32, 234);
+            cuiGroupBox2.Location = new Point(28, 176);
+            cuiGroupBox2.Margin = new Padding(3, 2, 3, 2);
             cuiGroupBox2.Name = "cuiGroupBox2";
-            cuiGroupBox2.Padding = new Padding(10, 33, 10, 15);
+            cuiGroupBox2.Padding = new Padding(10, 28, 10, 15);
             cuiGroupBox2.Rounding = new Padding(10, 10, 10, 15);
-            cuiGroupBox2.Size = new Size(356, 72);
+            cuiGroupBox2.Size = new Size(283, 54);
             cuiGroupBox2.TabIndex = 12;
             // 
             // txtContraseña
@@ -118,18 +120,18 @@
             txtContraseña.Image = null;
             txtContraseña.ImageExpand = new Point(0, 0);
             txtContraseña.ImageOffset = new Point(0, 0);
-            txtContraseña.Location = new Point(11, 26);
-            txtContraseña.Margin = new Padding(4);
+            txtContraseña.Location = new Point(10, 20);
+            txtContraseña.Margin = new Padding(4, 3, 4, 3);
             txtContraseña.Multiline = false;
             txtContraseña.Name = "txtContraseña";
             txtContraseña.NormalImageTint = Color.White;
             txtContraseña.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtContraseña.Padding = new Padding(18, 8, 18, 0);
+            txtContraseña.Padding = new Padding(15, 6, 15, 0);
             txtContraseña.PasswordChar = false;
             txtContraseña.PlaceholderColor = SystemColors.WindowText;
             txtContraseña.PlaceholderText = "";
             txtContraseña.Rounding = new Padding(8);
-            txtContraseña.Size = new Size(332, 35);
+            txtContraseña.Size = new Size(264, 26);
             txtContraseña.TabIndex = 1;
             txtContraseña.TextOffset = new Size(0, 0);
             txtContraseña.UnderlinedStyle = true;
@@ -141,11 +143,12 @@
             cuiGroupBox1.Controls.Add(txtCorreo);
             cuiGroupBox1.Font = new Font("Garamond", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiGroupBox1.ForeColor = Color.DarkOliveGreen;
-            cuiGroupBox1.Location = new Point(32, 146);
+            cuiGroupBox1.Location = new Point(28, 110);
+            cuiGroupBox1.Margin = new Padding(3, 2, 3, 2);
             cuiGroupBox1.Name = "cuiGroupBox1";
-            cuiGroupBox1.Padding = new Padding(10, 34, 10, 15);
+            cuiGroupBox1.Padding = new Padding(10, 29, 10, 15);
             cuiGroupBox1.Rounding = new Padding(10, 10, 10, 15);
-            cuiGroupBox1.Size = new Size(356, 69);
+            cuiGroupBox1.Size = new Size(283, 52);
             cuiGroupBox1.TabIndex = 11;
             // 
             // txtCorreo
@@ -160,18 +163,18 @@
             txtCorreo.Image = null;
             txtCorreo.ImageExpand = new Point(0, 0);
             txtCorreo.ImageOffset = new Point(0, 0);
-            txtCorreo.Location = new Point(10, 25);
-            txtCorreo.Margin = new Padding(4);
+            txtCorreo.Location = new Point(9, 19);
+            txtCorreo.Margin = new Padding(4, 3, 4, 3);
             txtCorreo.Multiline = false;
             txtCorreo.Name = "txtCorreo";
             txtCorreo.NormalImageTint = Color.White;
             txtCorreo.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtCorreo.Padding = new Padding(18, 8, 18, 0);
+            txtCorreo.Padding = new Padding(15, 6, 15, 0);
             txtCorreo.PasswordChar = false;
             txtCorreo.PlaceholderColor = SystemColors.WindowText;
             txtCorreo.PlaceholderText = "";
             txtCorreo.Rounding = new Padding(8);
-            txtCorreo.Size = new Size(332, 35);
+            txtCorreo.Size = new Size(265, 26);
             txtCorreo.TabIndex = 0;
             txtCorreo.TextOffset = new Size(0, 0);
             txtCorreo.UnderlinedStyle = true;
@@ -180,14 +183,14 @@
             // 
             cuiPictureBox2.Content = Properties.Resources.LRR_removebg_preview;
             cuiPictureBox2.ImageTint = Color.White;
-            cuiPictureBox2.Location = new Point(16, -14);
-            cuiPictureBox2.Margin = new Padding(4, 5, 4, 5);
+            cuiPictureBox2.Location = new Point(14, -10);
+            cuiPictureBox2.Margin = new Padding(4, 4, 4, 4);
             cuiPictureBox2.Name = "cuiPictureBox2";
             cuiPictureBox2.OutlineThickness = 1F;
             cuiPictureBox2.PanelOutlineColor = Color.Empty;
             cuiPictureBox2.Rotation = 0;
             cuiPictureBox2.Rounding = new Padding(8);
-            cuiPictureBox2.Size = new Size(227, 214);
+            cuiPictureBox2.Size = new Size(167, 160);
             cuiPictureBox2.TabIndex = 13;
             // 
             // cuiLabel1
@@ -195,10 +198,10 @@
             cuiLabel1.Content = "Todavia\\ no\\ tienes\\ una\\ cuenta\\?";
             cuiLabel1.Font = new Font("Garamond", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             cuiLabel1.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel1.Location = new Point(38, 439);
-            cuiLabel1.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel1.Location = new Point(61, 336);
+            cuiLabel1.Margin = new Padding(4, 4, 4, 4);
             cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(350, 21);
+            cuiLabel1.Size = new Size(213, 16);
             cuiLabel1.TabIndex = 10;
             cuiLabel1.VerticalAlignment = StringAlignment.Near;
             // 
@@ -222,7 +225,8 @@
             btnRegistrar.ImageAutoCenter = true;
             btnRegistrar.ImageExpand = new Point(0, 0);
             btnRegistrar.ImageOffset = new Point(0, 0);
-            btnRegistrar.Location = new Point(62, 468);
+            btnRegistrar.Location = new Point(54, 358);
+            btnRegistrar.Margin = new Padding(3, 2, 3, 2);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.NormalBackground = Color.Olive;
             btnRegistrar.NormalForeColor = Color.Black;
@@ -234,7 +238,7 @@
             btnRegistrar.PressedImageTint = Color.White;
             btnRegistrar.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnRegistrar.Rounding = new Padding(8);
-            btnRegistrar.Size = new Size(314, 32);
+            btnRegistrar.Size = new Size(229, 24);
             btnRegistrar.TabIndex = 9;
             btnRegistrar.TextAlignment = StringAlignment.Center;
             btnRegistrar.TextOffset = new Point(0, 0);
@@ -259,7 +263,8 @@
             btnLogin.ImageAutoCenter = true;
             btnLogin.ImageExpand = new Point(0, 0);
             btnLogin.ImageOffset = new Point(0, 0);
-            btnLogin.Location = new Point(105, 391);
+            btnLogin.Location = new Point(92, 300);
+            btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
             btnLogin.NormalBackground = Color.Orange;
             btnLogin.NormalForeColor = Color.Black;
@@ -271,14 +276,14 @@
             btnLogin.PressedImageTint = Color.White;
             btnLogin.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnLogin.Rounding = new Padding(8);
-            btnLogin.Size = new Size(223, 40);
+            btnLogin.Size = new Size(149, 30);
             btnLogin.TabIndex = 8;
             btnLogin.TextAlignment = StringAlignment.Center;
             btnLogin.TextOffset = new Point(0, 0);
             // 
             // Inicio_de_Sesion
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(cuiButton3);
             Controls.Add(cuiLabel2);
@@ -288,8 +293,9 @@
             Controls.Add(cuiLabel1);
             Controls.Add(btnRegistrar);
             Controls.Add(btnLogin);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Inicio_de_Sesion";
-            Size = new Size(444, 580);
+            Size = new Size(341, 435);
             cuiGroupBox2.ResumeLayout(false);
             cuiGroupBox1.ResumeLayout(false);
             ResumeLayout(false);

@@ -63,6 +63,16 @@ namespace FormApiE_Commerce.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_image_1990252_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("add-image_1990252-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap browser_735828 {
             get {
                 object obj = ResourceManager.GetObject("browser_735828", resourceCulture);
