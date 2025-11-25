@@ -91,7 +91,6 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
         // -------------------------------------------
         // CREAR NUEVO REFRESH TOKEN
-        // SQL generar NEWID(), pero TAMBIÉN puedes enviarlo
         // -------------------------------------------
         public async Task<int> Create(RefreshToken token, SqlConnection connection, SqlTransaction? transaction)
         {

@@ -3,6 +3,7 @@ using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.DTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.RefreshTokenDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
@@ -70,8 +71,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 if (registeredAdmin == null)
                     throw new Exception("No pudo crearse el administrador.");
 
-                // Crear refresh token dentro de la transacción
-                var refresh = new RefreshToken
+                var refreshToken = new RefreshTokenCreateDTO
                 {
                     IdUsuario = registeredUser.IdUsuario,
                     Token = Guid.NewGuid(),
@@ -79,7 +79,8 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     FechaExpiracion = DateTime.UtcNow.AddDays(7),
                     Revoked = false
                 };
-                await _refreshRepository.Create(refresh, connection, transaction);
+
+                var createdRefreshToken = await _authRepository.CreateRefreshTokenAsync(refreshToken, connection, transaction);
 
                 transaction.Commit();
 
@@ -88,7 +89,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 {
                     IdUsuario = registeredUser.IdUsuario,
                     JwtToken = jwt,
-                    RefreshToken = refresh.Token.ToString()
+                    RefreshToken = refreshToken.Token.ToString()
                 };
             }
             catch
@@ -136,7 +137,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 if (registeredSeller == null)
                     throw new Exception("No pudo crearse el vendedor.");
 
-                var refresh = new RefreshToken
+                var refreshToken = new RefreshTokenCreateDTO
                 {
                     IdUsuario = registeredUser.IdUsuario,
                     Token = Guid.NewGuid(),
@@ -144,7 +145,11 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     FechaExpiracion = DateTime.UtcNow.AddDays(7),
                     Revoked = false
                 };
-                await _refreshRepository.Create(refresh, connection, transaction);
+
+                var createdRefreshToken = await _authRepository.CreateRefreshTokenAsync(refreshToken, connection, transaction);
+
+                if (createdRefreshToken == null)
+                    throw new Exception("No pudo crearse el refresh token.");
 
                 transaction.Commit();
 
@@ -153,7 +158,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 {
                     IdUsuario = registeredUser.IdUsuario,
                     JwtToken = jwt,
-                    RefreshToken = refresh.Token.ToString()
+                    RefreshToken = refreshToken.Token.ToString()
                 };
             }
             catch
@@ -200,7 +205,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 if (registeredBuyer == null)
                     throw new Exception("No pudo crearse el comprador.");
 
-                var refresh = new RefreshToken
+                var refreshToken = new RefreshTokenCreateDTO
                 {
                     IdUsuario = registeredUser.IdUsuario,
                     Token = Guid.NewGuid(),
@@ -208,7 +213,8 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     FechaExpiracion = DateTime.UtcNow.AddDays(7),
                     Revoked = false
                 };
-                await _refreshRepository.Create(refresh, connection, transaction);
+
+                var createdRefreshToken = await _authRepository.CreateRefreshTokenAsync(refreshToken, connection, transaction);
 
                 transaction.Commit();
 
@@ -217,7 +223,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 {
                     IdUsuario = registeredUser.IdUsuario,
                     JwtToken = jwt,
-                    RefreshToken = refresh.Token.ToString()
+                    RefreshToken = refreshToken.Token.ToString()
                 };
             }
             catch

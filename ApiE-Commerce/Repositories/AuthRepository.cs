@@ -3,6 +3,7 @@ using ApiProyectoDeCursoE_Commerce.DAOs;
 using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.RefreshTokenDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
@@ -16,9 +17,12 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
     public class AuthRepository : IAuthRepository
     {
         private readonly UsuarioDAO _usuarioDAO;
+
         private readonly AdminDAO _adminDAO;
         private readonly VendedorDAO _vendedorDAO;
         private readonly CompradorDAO _compradorDAO;
+
+        private readonly RefreshTokenDAO _refreshTokenDAO;
 
         private readonly UsuariosRepository _usuariosRepository;
         private readonly VendedoresRepository _vendedoresRepository;
@@ -30,6 +34,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             AdminDAO adminDAO,
             VendedorDAO vendedorDAO,
             CompradorDAO compradorDAO,
+            RefreshTokenDAO refreshTokenDAO,
             UsuariosRepository usuariosRepository,
             VendedoresRepository vendedoresRepository,
             CompradoresRepository compradoresRepository,
@@ -39,6 +44,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             _adminDAO = adminDAO;
             _vendedorDAO = vendedorDAO;
             _compradorDAO = compradorDAO;
+            _refreshTokenDAO = refreshTokenDAO;
             _usuariosRepository = usuariosRepository;
             _vendedoresRepository = vendedoresRepository;
             _compradoresRepository = compradoresRepository;
@@ -103,6 +109,19 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
             var compradorCreado = await _compradorDAO.GetByIdAsync(comprador.IdUsuario, connection, transaction);
             return compradorCreado;
+        }
+
+
+        // ============================================================
+        // REFRESH TOKEN
+        // ============================================================
+        public async Task<RefreshToken?> CreateRefreshTokenAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction)
+        {
+            var filasAfectadas = await _refreshTokenDAO.CreateAsync(refreshToken, connection, transaction);
+            if (filasAfectadas == 0) return null;
+
+            var refreshTokenCreado = await _refreshTokenDAO.GetByIdAsync(refreshToken.IdUsuario, connection, transaction);
+            return refreshTokenCreado;
         }
 
 
