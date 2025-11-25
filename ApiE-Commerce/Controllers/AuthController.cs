@@ -1,27 +1,42 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Configuration;
+using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.DTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.VendedoresDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories;
+using ApiProyectoDeCursoE_Commerce.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 [Route("api/[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {
+    private readonly AuthService _authService;
+
     private readonly AuthRepository _authRepository;
     private readonly RefreshTokenRepository _refreshRepository;
     private readonly JwtService _jwtService;
 
+    private readonly ECommerceContext _context;
+
     public AuthController(
+        AuthService authService,
         AuthRepository authRepository,
         RefreshTokenRepository resfreshRepository,
-        JwtService jwtService)
+        JwtService jwtService,
+        ECommerceContext context)
     {
+        _authService = authService;
         _authRepository = authRepository;
         _refreshRepository = resfreshRepository;
         _jwtService = jwtService;
+        _context = context;
     }
 
     [AllowAnonymous]
@@ -30,6 +45,9 @@ public class AuthController : ControllerBase
     {
         RefreshToken refreshToUse;
         Usuario? user;
+
+        using var connection = _context.GetConnection();
+        await connection.OpenAsync();
 
         // -----------------------------------------
         // 0. Login rápido con JWT válido
@@ -51,8 +69,8 @@ public class AuthController : ControllerBase
                         return Ok(new AuthResponseDTO
                         {
                             IdUsuario = user.IdUsuario,
-                            JwtToken = login.Token, // JWT aún válido, se retorna igual
-                            RefreshToken = null     // Aquí no necesitamos refresh token
+                            JwtToken = login.Token,
+                            RefreshToken = ""
                         });
                     }
                 }
@@ -132,7 +150,7 @@ public class AuthController : ControllerBase
                 FechaExpiracion = DateTime.UtcNow.AddDays(7),
                 Revoked = false
             };
-            await _refreshRepository.Create(refreshToUse);
+            await _refreshRepository.Create(refreshToUse, connection, null);
         }
         else
         {
@@ -163,34 +181,103 @@ public class AuthController : ControllerBase
     // REGISTRO
     // ============================================================
     [AllowAnonymous]
-    [HttpPost("register")]
-    public async Task<ActionResult<AuthResponseDTO>> Register([FromBody] UsuariosCreateDTO usuario)
+    [HttpPost("register/admin")]
+    public async Task<ActionResult<AuthResponseDTO>> RegisterAuthAdminAsync([FromBody] AdministradorCreateDTO admin)
     {
-        var registeredUser = await _authRepository.RegisterUser(usuario);
-
-        if (registeredUser == null)
-            return BadRequest("El correo ya está siendo utilizado.");
-
-        // Crear ambos tokens
-        var jwt = _jwtService.GenerateToken(registeredUser);
-
-        var refresh = new RefreshToken
+        try
         {
-            IdUsuario = registeredUser.IdUsuario,
-            Token = Guid.NewGuid(),
-            FechaCreacion = DateTime.UtcNow,
-            FechaExpiracion = DateTime.UtcNow.AddDays(7),
-            Revoked = false
-        };
-
-        await _refreshRepository.Create(refresh);
-
-        return Ok(new AuthResponseDTO
+            var response = await _authService.RegisterAdminAsync(admin);
+            return Ok(response);
+        }
+        catch (ArgumentException ex)
         {
-            IdUsuario = registeredUser.IdUsuario,
-            JwtToken = jwt,
-            RefreshToken = refresh.Token.ToString()
-        });
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
+
+    [AllowAnonymous]
+    [HttpPost("register/buyer")]
+    public async Task<ActionResult<AuthResponseDTO>> RegisterAuthBuyerAsync([FromBody] CompradorCreateDTO comprador)
+    {
+        try
+        {
+            var response = await _authService.RegisterBuyerAsync(comprador);
+            return Ok(response);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpPost("register/seller")]
+    public async Task<ActionResult<AuthResponseDTO>> RegisterAuthSellerAsync([FromBody] VendedorCreateDTO vendedor)
+    {
+        try
+        {
+            var response = await _authService.RegisterSellerAsync(vendedor);
+            return Ok(response);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+
+    //[AllowAnonymous]
+    //[HttpPost("register")]
+    //public async Task<ActionResult<AuthResponseDTO>> Register([FromBody] UsuariosCreateDTO usuario)
+    //{
+    //    var registeredUser = await _authRepository.RegisterUser(usuario, transaction: null);
+
+    //    if (registeredUser == null)
+    //        return BadRequest("El correo ya está siendo utilizado.");
+
+    //    // Crear ambos tokens
+    //    var jwt = _jwtService.GenerateToken(registeredUser);
+
+    //    var refresh = new RefreshToken
+    //    {
+    //        IdUsuario = registeredUser.IdUsuario,
+    //        Token = Guid.NewGuid(),
+    //        FechaCreacion = DateTime.UtcNow,
+    //        FechaExpiracion = DateTime.UtcNow.AddDays(7),
+    //        Revoked = false
+    //    };
+
+    //    await _refreshRepository.Create(refresh, null);
+
+    //    return Ok(new AuthResponseDTO
+    //    {
+    //        IdUsuario = registeredUser.IdUsuario,
+    //        JwtToken = jwt,
+    //        RefreshToken = refresh.Token.ToString()
+    //    });
+    //}
 }
 

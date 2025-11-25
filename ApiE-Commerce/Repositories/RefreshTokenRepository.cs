@@ -1,4 +1,5 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.Executor;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
@@ -8,10 +9,12 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
     public class RefreshTokenRepository : IRefreshTokenRepository
     {
         private readonly ECommerceContext _context;
+        private readonly SqlExecutor _sqlExecutor;
 
-        public RefreshTokenRepository(ECommerceContext context)
+        public RefreshTokenRepository(ECommerceContext context, SqlExecutor sqlExecutor)
         {
             _context = context;
+            _sqlExecutor = sqlExecutor;
         }
 
         // -------------------------------------------
@@ -90,7 +93,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
         // CREAR NUEVO REFRESH TOKEN
         // SQL generar NEWID(), pero TAMBIÉN puedes enviarlo
         // -------------------------------------------
-        public async Task<int> Create(RefreshToken token)
+        public async Task<int> Create(RefreshToken token, SqlConnection connection, SqlTransaction? transaction)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
@@ -102,7 +105,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             cmd.Parameters.AddWithValue("@FechaCreacion", token.FechaCreacion);
             cmd.Parameters.AddWithValue("@FechaExpiracion", token.FechaExpiracion);
 
-            return await ExecuteNonQuery(cmd);
+            return await _sqlExecutor.ExecuteNonQueryAsync(cmd, connection, transaction);
         }
 
         // -------------------------------------------

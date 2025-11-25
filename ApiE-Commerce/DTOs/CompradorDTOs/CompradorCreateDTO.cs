@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs
+namespace ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs
 {
-    public class AdministradorCreateDTO
+    public class CompradorCreateDTO
     {
         [Required(ErrorMessage = "El rol es obligatorio")]
         public required int IdRol { get; set; }

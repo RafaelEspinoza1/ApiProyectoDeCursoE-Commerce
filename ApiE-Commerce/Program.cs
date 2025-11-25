@@ -1,14 +1,16 @@
 using ApiProyectoDeCursoE_Commerce.Configuration;
+using ApiProyectoDeCursoE_Commerce.DAO;
+using ApiProyectoDeCursoE_Commerce.DAOs;
 using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.Executor;
 using ApiProyectoDeCursoE_Commerce.Extensions;
 using ApiProyectoDeCursoE_Commerce.Repositories;
+using ApiProyectoDeCursoE_Commerce.Services;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ======= Servicios =======
-
-// Inyectar ECommerceContext (ADO.NET)
+// ======= Contexto =======
 builder.Services.AddSingleton(sp =>
 {
     var configuration = sp.GetRequiredService<IConfiguration>();
@@ -16,33 +18,39 @@ builder.Services.AddSingleton(sp =>
     return new ECommerceContext(connectionString);
 });
 
-// Repositorios de autenticación
+// ======= Executor =======
+builder.Services.AddSingleton<SqlExecutor>();
+
+// ======= DAOs =======
+builder.Services.AddScoped<AdminDAO>();
+builder.Services.AddScoped<UsuarioDAO>();
+builder.Services.AddScoped<VendedorDAO>();
+builder.Services.AddScoped<CompradorDAO>();
+
+// ======= Repositorios =======
 builder.Services.AddScoped<AuthRepository>();
 builder.Services.AddScoped<RefreshTokenRepository>();
-
-// Repositorios
 builder.Services.AddScoped<UsuariosRepository>();
 builder.Services.AddScoped<VendedoresRepository>();
 builder.Services.AddScoped<CompradoresRepository>();
 builder.Services.AddScoped<AdministradoresRepository>();
 
-// Cargar configuración de JwtSettings desde appsettings.json
+// ======= Servicios =======
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
-
-// Registrar JwtService inyectando JwtSettings
-builder.Services.AddSingleton<JwtService>(sp =>
+builder.Services.AddSingleton(sp =>
 {
     var settings = sp.GetRequiredService<IOptions<JwtSettings>>().Value;
     return new JwtService(settings);
 });
+builder.Services.AddScoped<AuthService>();
 
-// Autenticación JWT
+// ======= Autenticación JWT =======
 builder.Services.AddJwtAuthentication(builder.Configuration);
 
-// Controladores
+// ======= Controladores =======
 builder.Services.AddControllers();
 
-// Swagger/OpenAPI
+// ======= Swagger/OpenAPI =======
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

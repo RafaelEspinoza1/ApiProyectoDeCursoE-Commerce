@@ -6,7 +6,8 @@ using Microsoft.Data.SqlClient;
 namespace ApiProyectoDeCursoE_Commerce.Repositories
 {
     public class AdministradoresRepository
-    {// Contexto de la base de datos
+    {
+        // Contexto de la base de datos
         private readonly ECommerceContext _context;
 
         // Contexto con la conexión a la base de datos

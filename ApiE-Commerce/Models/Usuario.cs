@@ -25,12 +25,5 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         public required string Correo { get; set; }
         [Required]
         public byte[] Contraseña { get; set; } = null!;
-        // Relaciones
-        public ICollection<Vendedor>? Vendedores { get; set; }
-        public ICollection<Comprador>? Compradores { get; set; }
-        public ICollection<Administrador>? Administradores { get; set; }
-        public ICollection<Mensaje>? Mensajes { get; set; }
-        public ICollection<ParticipanEnChat>? Participaciones { get; set; }
-        public ICollection<PasswordReset>? PasswordResets { get; set; }
     }
 }

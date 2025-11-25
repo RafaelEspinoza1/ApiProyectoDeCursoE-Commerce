@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs
+namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs
 {
-    public class AdministradorCreateDTO
+    public class VendedorCreateDTO
     {
         [Required(ErrorMessage = "El rol es obligatorio")]
         public required int IdRol { get; set; }
@@ -32,5 +33,9 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs
 
         [Required(ErrorMessage = "La contraseña es obligatoria")]
         public required string Contraseña { get; set; }
+
+        [Required(ErrorMessage = "Los ingresos son obligatorios")]
+        [Column(TypeName = "decimal(10,2)")]
+        public required decimal Ingresos { get; set; }
     }
 }
