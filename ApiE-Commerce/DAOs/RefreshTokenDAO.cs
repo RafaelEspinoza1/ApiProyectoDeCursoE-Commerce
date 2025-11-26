@@ -82,6 +82,25 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             return await Get(cmd, connection);
         }
 
+        public async Task<RefreshToken?> GetActiveAsync(int idUsuario, Guid refreshToken, SqlConnection connection)
+        {
+            using var cmd = new SqlCommand();
+            cmd.CommandText = @"
+                SELECT
+                    IdRefreshToken, IdUsuario, Token, FechaCreacion, FechaExpiracion, Revoked
+                FROM RefreshToken
+                WHERE Revoked = 0 
+                  AND IdUsuario = @IdUsuario
+                  AND Token = @Token";
+
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+            cmd.Parameters.AddWithValue("@Token", refreshToken);
+
+            // Llama al método Get para ejecutar y mapear
+            return await Get(cmd, connection);
+        }
+
         public async Task<int> CreateAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction)
         {
             using var cmd = new SqlCommand();
@@ -97,6 +116,22 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             cmd.Parameters.AddWithValue("@Revoked", refreshToken.Revoked);
 
             return await _sqlExecutor.ExecuteNonQueryAsync(cmd, connection, transaction);
+        }
+
+        public async Task<int> UpdateAsync(RefreshToken refreshToken, SqlConnection connection)
+        {
+            using var cmd = new SqlCommand();
+            cmd.CommandText = @"
+                UPDATE RefreshToken
+                SET FechaExpiracion = @FechaExpiracion,
+                    Revoked = @Revoked
+                WHERE IdRefreshToken = @IdRefreshToken";
+
+            cmd.Parameters.AddWithValue("@FechaExpiracion", refreshToken.FechaExpiracion);
+            cmd.Parameters.AddWithValue("@Revoked", refreshToken.Revoked);
+            cmd.Parameters.AddWithValue("@IdRefreshToken", refreshToken.IdRefreshToken);
+
+            return await _sqlExecutor.ExecuteNonQueryAsync(cmd, connection, transaction: null);
         }
 
         public async Task<int> DeleteAsync(int idUsuario, SqlConnection connection)

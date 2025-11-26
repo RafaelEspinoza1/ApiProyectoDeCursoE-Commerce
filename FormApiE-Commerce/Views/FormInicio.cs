@@ -79,7 +79,7 @@ namespace FormApiE_Commerce
                         }
                         else
                         {
-                            
+
                             MessageBox.Show("Error al leer credenciales. ERROR: " + response.StatusCode);
                         }
                     }

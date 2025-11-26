@@ -19,6 +19,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
         private readonly ECommerceContext _context;
 
         private readonly UsuarioDAO _usuarioDAO;
+        private readonly RefreshTokenDAO _refreshTokenDAO;
 
         private readonly AuthRepository _authRepository;
         private readonly RefreshTokenRepository _refreshRepository;
@@ -27,12 +28,14 @@ namespace ApiProyectoDeCursoE_Commerce.Services
         public AuthService(
             ECommerceContext context,
             UsuarioDAO usuarioDAO,
+            RefreshTokenDAO refreshTokenDAO,
             AuthRepository authRepository,
             RefreshTokenRepository resfreshRepository,
             JwtService jwtService)
         {
             _context = context;
             _usuarioDAO = usuarioDAO;
+            _refreshTokenDAO = refreshTokenDAO;
             _authRepository = authRepository;
             _refreshRepository = resfreshRepository;
             _jwtService = jwtService;
@@ -88,7 +91,14 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
                     return null;
 
-                var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
+
+                user = await _authRepository.LoginUserById(login.IdUsuario, connection);
+
+                if (user == null)
+                    return null;
+                
+
+                var refreshToken = await _refreshTokenDAO.GetActiveAsync(login.IdUsuario, refreshGuid, connection);
 
                 if (refreshToken == null || refreshToken.Revoked)
                     return null;
@@ -96,18 +106,14 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 if (refreshToken.FechaExpiracion < DateTime.UtcNow)
                 {
                     refreshToken.Revoked = true;
-                    await _refreshRepository.Update(refreshToken);
+                    await _refreshTokenDAO.UpdateAsync(refreshToken, connection);
                     return null;
                 }
 
-                user = await _authRepository.LoginUserById(login.IdUsuario, connection);
-
-                if (user == null)
-                    return null;
 
                 // renovar refresh token
                 refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
-                await _refreshRepository.Update(refreshToken);
+                await _refreshTokenDAO.UpdateAsync(refreshToken, connection);
 
                 var jwt = _jwtService.GenerateToken(user);
 
