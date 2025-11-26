@@ -22,10 +22,11 @@ builder.Services.AddSingleton(sp =>
 builder.Services.AddSingleton<SqlExecutor>();
 
 // ======= DAOs =======
-builder.Services.AddScoped<AdminDAO>();
 builder.Services.AddScoped<UsuarioDAO>();
+builder.Services.AddScoped<AdminDAO>();
 builder.Services.AddScoped<VendedorDAO>();
 builder.Services.AddScoped<CompradorDAO>();
+builder.Services.AddScoped<RefreshTokenDAO>();
 
 // ======= Repositorios =======
 builder.Services.AddScoped<AuthRepository>();

@@ -69,7 +69,11 @@ public class AuthController : ControllerBase
                         return Ok(new AuthResponseDTO
                         {
                             IdUsuario = user.IdUsuario,
-                            JwtToken = login.Token,
+                            PrimerNombre = user.PrimerNombre,
+                            PrimerApellido = user.PrimerApellido,
+                            Correo = user.Correo,
+                            Telefono = Convert.ToInt32(user.Telefono),
+                            Token = login.Token,
                             RefreshToken = ""
                         });
                     }
@@ -113,8 +117,12 @@ public class AuthController : ControllerBase
             return Ok(new AuthResponseDTO
             {
                 IdUsuario = user.IdUsuario,
-                JwtToken = jwt,
-                RefreshToken = refreshToken.Token.ToString()
+                PrimerNombre = user.PrimerNombre,
+                PrimerApellido = user.PrimerApellido,
+                Correo = user.Correo,
+                Telefono = Convert.ToInt32(user.Telefono),
+                Token = login.Token!,
+                RefreshToken = ""
             });
         }
 
@@ -167,8 +175,12 @@ public class AuthController : ControllerBase
         return Ok(new AuthResponseDTO
         {
             IdUsuario = user.IdUsuario,
-            JwtToken = jwtNormal,
-            RefreshToken = refreshToUse.Token.ToString()
+            PrimerNombre = user.PrimerNombre,
+            PrimerApellido = user.PrimerApellido,
+            Correo = user.Correo,
+            Telefono = Convert.ToInt32(user.Telefono),
+            Token = login.Token!,
+            RefreshToken = ""
         });
     }
 

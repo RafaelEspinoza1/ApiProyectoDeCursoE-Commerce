@@ -88,7 +88,11 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 return new AuthResponseDTO
                 {
                     IdUsuario = registeredUser.IdUsuario,
-                    JwtToken = jwt,
+                    Token = jwt,
+                    PrimerNombre = registeredUser.PrimerNombre,
+                    PrimerApellido = registeredUser.PrimerApellido,
+                    Correo = registeredUser.Correo,
+                    Telefono = Convert.ToInt32(registeredUser.Telefono),
                     RefreshToken = refreshToken.Token.ToString()
                 };
             }
@@ -157,7 +161,11 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 return new AuthResponseDTO
                 {
                     IdUsuario = registeredUser.IdUsuario,
-                    JwtToken = jwt,
+                    Token = jwt,
+                    PrimerNombre = registeredUser.PrimerNombre,
+                    PrimerApellido = registeredUser.PrimerApellido,
+                    Correo = registeredUser.Correo,
+                    Telefono = Convert.ToInt32(registeredUser.Telefono),
                     RefreshToken = refreshToken.Token.ToString()
                 };
             }
@@ -222,7 +230,11 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 return new AuthResponseDTO
                 {
                     IdUsuario = registeredUser.IdUsuario,
-                    JwtToken = jwt,
+                    Token = jwt,
+                    PrimerNombre = registeredUser.PrimerNombre,
+                    PrimerApellido = registeredUser.PrimerApellido,
+                    Correo = registeredUser.Correo,
+                    Telefono = Convert.ToInt32(registeredUser.Telefono),
                     RefreshToken = refreshToken.Token.ToString()
                 };
             }

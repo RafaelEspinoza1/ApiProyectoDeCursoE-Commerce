@@ -92,7 +92,7 @@ namespace FormApiE_Commerce.UsersControls
 
 
 
-        private async Task<AuthResponse?> RegistrarUsuario(UsuariosCreateDTO data)
+        private async Task<TokenData?> RegistrarUsuario(UsuariosCreateDTO data)
         {
             try
             {
@@ -113,9 +113,8 @@ namespace FormApiE_Commerce.UsersControls
                 }
 
                 // Deserializar la respuesta correctamente
-                var authResponse = System.Text.Json.JsonSerializer.Deserialize<AuthResponse>(
-                    responseJson,
-                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                var authResponse = System.Text.Json.JsonSerializer.Deserialize<TokenData>(
+                    responseJson
                 );
 
                 return authResponse;
@@ -164,7 +163,7 @@ namespace FormApiE_Commerce.UsersControls
                 return;
 
             // Guardar token automáticamente
-            TokenStorage.Save(authResponse);
+            TokenDataStorage.Save(authResponse);
 
             MessageBox.Show("Registro exitoso. ¡Bienvenido!");
 

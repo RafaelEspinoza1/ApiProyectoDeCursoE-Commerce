@@ -22,22 +22,22 @@ namespace FormApiE_Commerce
             {
                 var url = "http://localhost:5028/api/Auth/login";
 
-                var tokenData = TokenStorage.Load();
+                var tokenData = TokenDataStorage.Load();
 
                 var idUsuario = tokenData?.IdUsuario;
-                var jwtToken = tokenData?.JwtToken;
+                var token = tokenData?.Token;
                 var refreshToken = tokenData?.RefreshToken;
 
                 // --------------------------------------------------
                 // Inicio rápido: JWT solo, o Refresh Token + IdUsuario
                 // --------------------------------------------------
-                if (!string.IsNullOrEmpty(jwtToken) ||
+                if (!string.IsNullOrEmpty(token) ||
                     (!string.IsNullOrEmpty(refreshToken) && idUsuario != null && idUsuario > 0))
                 {
                     var loginData = new Dictionary<string, object>();
 
-                    if (!string.IsNullOrEmpty(jwtToken))
-                        loginData["Token"] = jwtToken;
+                    if (!string.IsNullOrEmpty(token))
+                        loginData["Token"] = token;
 
                     if (!string.IsNullOrEmpty(refreshToken) && idUsuario != null && idUsuario > 0)
                     {
@@ -55,7 +55,7 @@ namespace FormApiE_Commerce
                         if (response.IsSuccessStatusCode)
                         {
                             var nuevoToken = await response.Content.ReadAsStringAsync();
-                            var authResponse = JsonSerializer.Deserialize<AuthResponse>(nuevoToken);
+                            var authResponse = JsonSerializer.Deserialize<TokenData>(nuevoToken);
 
                             if (authResponse == null)
                             {
@@ -64,7 +64,7 @@ namespace FormApiE_Commerce
                             }
 
                             // Guardar el nuevo token
-                            TokenStorage.Save(authResponse);
+                            TokenDataStorage.Save(authResponse);
 
                             MessageBox.Show("¡Bienvenido de nuevo!");
 
@@ -91,7 +91,7 @@ namespace FormApiE_Commerce
         }
 
 
-        private async Task<AuthResponse?> LoginUser(string correo, string contraseña)
+        private async Task<TokenData?> LoginUser(string correo, string contraseña)
         {
             using var httpClient = new HttpClient();
             var url = "http://localhost:5028/api/Auth/login";
@@ -117,9 +117,8 @@ namespace FormApiE_Commerce
                 }
 
                 var responseJson = await response.Content.ReadAsStringAsync();
-                var authResponse = JsonSerializer.Deserialize<AuthResponse>(
-                    responseJson,
-                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                var authResponse = JsonSerializer.Deserialize<TokenData>(
+                    responseJson
                 );
 
                 return authResponse;
@@ -144,7 +143,7 @@ namespace FormApiE_Commerce
             if (tokenData != null)
             {
                 // Guardar IdUsuario y token
-                TokenStorage.Save(
+                TokenDataStorage.Save(
                     tokenData
                 );
 

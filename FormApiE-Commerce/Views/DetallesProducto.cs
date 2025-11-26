@@ -56,34 +56,34 @@ namespace FormApiE_Commerce
         //}
         }
 
-        private void MostrarImagen()
-        {
-            using (var ms = new MemoryStream(imagenes[imagenActual]))
-            {
-                pictureBoxImagenesProducto.Image = Image.FromStream(ms);
-            }
+        //private void MostrarImagen()
+        //{
+        //    using (var ms = new MemoryStream(imagenes[imagenActual]))
+        //    {
+        //        pictureBoxImagenesProducto.Image = Image.FromStream(ms);
+        //    }
 
-            // Habilita/deshabilita botones
-            btnAnteriorImagen.Enabled = imagenActual > 0;
-            btnSiguienteImagen.Enabled = imagenActual < imagenes.Count - 1;
-        }
+        //    // Habilita/deshabilita botones
+        //    btnAnteriorImagen.Enabled = imagenActual > 0;
+        //    btnSiguienteImagen.Enabled = imagenActual < imagenes.Count - 1;
+        //}
 
-        private void btnAnterior_Click(object sender, EventArgs e)
-        {
-            if (imagenActual > 0)
-            {
-                imagenActual--;
-                MostrarImagen();
-            }
-        }
+        //private void btnAnterior_Click(object sender, EventArgs e)
+        //{
+        //    if (imagenActual > 0)
+        //    {
+        //        imagenActual--;
+        //        MostrarImagen();
+        //    }
+        //}
 
-        private void btnSiguiente_Click(object sender, EventArgs e)
-        {
-            if (imagenActual < imagenes.Count - 1)
-            {
-                imagenActual++;
-                MostrarImagen();
-            }
-        }
+        //private void btnSiguiente_Click(object sender, EventArgs e)
+        //{
+        //    if (imagenActual < imagenes.Count - 1)
+        //    {
+        //        imagenActual++;
+        //        MostrarImagen();
+        //    }
+        //}
     }
 }

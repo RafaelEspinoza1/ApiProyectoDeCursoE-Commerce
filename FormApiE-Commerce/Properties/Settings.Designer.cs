@@ -38,12 +38,60 @@ namespace FormApiE_Commerce.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string JwtToken {
+        public string PrimerNombre {
             get {
-                return ((string)(this["JwtToken"]));
+                return ((string)(this["PrimerNombre"]));
             }
             set {
-                this["JwtToken"] = value;
+                this["PrimerNombre"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PrimerApellido {
+            get {
+                return ((string)(this["PrimerApellido"]));
+            }
+            set {
+                this["PrimerApellido"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Correo {
+            get {
+                return ((string)(this["Correo"]));
+            }
+            set {
+                this["Correo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Telefono {
+            get {
+                return ((int)(this["Telefono"]));
+            }
+            set {
+                this["Telefono"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Token {
+            get {
+                return ((string)(this["Token"]));
+            }
+            set {
+                this["Token"] = value;
             }
         }
         
