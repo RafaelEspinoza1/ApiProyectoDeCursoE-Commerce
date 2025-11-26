@@ -175,7 +175,7 @@ namespace FormApiE_Commerce
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            var registro = new Registrarse();
+            UserControl registro = new Registrarse();
             registro.Dock = DockStyle.Fill;
 
             // Ahora cargamos en Panel1 del SplitContainer
