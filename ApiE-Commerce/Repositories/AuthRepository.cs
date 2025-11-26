@@ -66,8 +66,13 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             byte[] passwordIngresadaHash = HashPassword(contraseña);
 
             // Comparar con la contraseña almacenada
-            byte[] hashAlmacenado = Convert.FromBase64String(usuarioEnDb.Contraseña);
+            byte[] hashAlmacenado = Convert.FromBase64String(usuarioEnDb.Contraseña.Trim());
             bool contraseñaCorrecta = CryptographicOperations.FixedTimeEquals(hashAlmacenado, passwordIngresadaHash);
+
+            //Console.WriteLine($"Hash DB  : '{Convert.ToBase64String(hashAlmacenado)}'");
+            //Console.WriteLine($"Hash Ing : '{Convert.ToBase64String(passwordIngresadaHash)}'");
+            //Console.WriteLine($"Contraseña correcta? {contraseñaCorrecta}");
+
 
             if (!contraseñaCorrecta) return null;
 
@@ -76,7 +81,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             bool existe = rol switch
             {
                 "Administrador" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
-                "Vendedor" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                "Vendedor" => await _vendedorDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
                 "Comprador" => await _compradorDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
                 _ => false
             };
@@ -95,7 +100,7 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             bool existe = rol switch
             {
                 "Administrador" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
-                "Vendedor" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                "Vendedor" => await _vendedorDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
                 "Comprador" => await _compradorDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
                 _ => false
             };
