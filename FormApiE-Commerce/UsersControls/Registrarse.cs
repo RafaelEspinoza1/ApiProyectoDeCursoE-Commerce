@@ -97,7 +97,7 @@ namespace FormApiE_Commerce.UsersControls
             try
             {
                 using var httpClient = new HttpClient();
-                var url = "http://localhost:5028/api/Auth/register";
+                var url = "http://localhost:5028/api/Auth/register/admin";
 
                 // Serializar el objeto con Newtonsoft.Json
                 var json = JsonConvert.SerializeObject(data);
@@ -113,9 +113,7 @@ namespace FormApiE_Commerce.UsersControls
                 }
 
                 // Deserializar la respuesta correctamente
-                var authResponse = System.Text.Json.JsonSerializer.Deserialize<TokenData>(
-                    responseJson
-                );
+                var authResponse = JsonConvert.DeserializeObject<TokenData>(responseJson);
 
                 return authResponse;
             }
