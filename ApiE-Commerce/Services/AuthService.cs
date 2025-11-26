@@ -1,4 +1,5 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Configuration;
+using ApiProyectoDeCursoE_Commerce.DAOs;
 using ApiProyectoDeCursoE_Commerce.Data;
 using ApiProyectoDeCursoE_Commerce.DTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
@@ -8,6 +9,7 @@ using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
 using ApiProyectoDeCursoE_Commerce.Models;
 using ApiProyectoDeCursoE_Commerce.Repositories;
+using NetTopologySuite.IO;
 using System.Data.SqlClient;
 
 namespace ApiProyectoDeCursoE_Commerce.Services
@@ -16,21 +18,174 @@ namespace ApiProyectoDeCursoE_Commerce.Services
     {
         private readonly ECommerceContext _context;
 
+        private readonly UsuarioDAO _usuarioDAO;
+
         private readonly AuthRepository _authRepository;
         private readonly RefreshTokenRepository _refreshRepository;
         private readonly JwtService _jwtService;
 
         public AuthService(
             ECommerceContext context,
+            UsuarioDAO usuarioDAO,
             AuthRepository authRepository,
             RefreshTokenRepository resfreshRepository,
             JwtService jwtService)
         {
             _context = context;
+            _usuarioDAO = usuarioDAO;
             _authRepository = authRepository;
             _refreshRepository = resfreshRepository;
             _jwtService = jwtService;
         }
+
+
+        // ============================================================
+        // LOGIN GENERAL (JWT + Refresh + Correo/Contraseña)
+        // ============================================================
+        //public async Task<AuthResponseDTO?> LoginAsync(LoginDTO login)
+        //{
+        //    using var connection = _context.GetConnection();
+        //    await connection.OpenAsync();
+
+        //    Usuario? user;
+
+        //    // ============================================================
+        //    // 0. LOGIN RÁPIDO CON JWT VÁLIDO
+        //    // ============================================================
+        //    if (!string.IsNullOrWhiteSpace(login.Token))
+        //    {
+        //        var principal = _jwtService.ValidateToken(login.Token);
+        //        if (principal != null)
+        //        {
+        //            var idUsuarioClaim = principal.FindFirst("id")?.Value;
+
+        //            if (int.TryParse(idUsuarioClaim, out int idJwt))
+        //            {
+        //                user = await _authRepository.LoginUserById(idJwt);
+
+        //                if (user != null)
+        //                {
+        //                    return new AuthResponseDTO
+        //                    {
+        //                        IdUsuario = user.IdUsuario,
+        //                        PrimerNombre = user.PrimerNombre,
+        //                        PrimerApellido = user.PrimerApellido,
+        //                        Correo = user.Correo,
+        //                        Telefono = Convert.ToInt32(user.Telefono),
+        //                        Token = login.Token,
+        //                        RefreshToken = ""
+        //                    };
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    // ============================================================
+        //    // 1. LOGIN RÁPIDO CON REFRESH TOKEN
+        //    // ============================================================
+        //    if (!string.IsNullOrWhiteSpace(login.RefreshToken))
+        //    {
+        //        if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
+        //            return null;
+
+        //        var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
+
+        //        if (refreshToken == null || refreshToken.Revoked)
+        //            return null;
+
+        //        if (refreshToken.FechaExpiracion < DateTime.UtcNow)
+        //        {
+        //            refreshToken.Revoked = true;
+        //            await _refreshRepository.Update(refreshToken);
+        //            return null;
+        //        }
+
+        //        user = await _authRepository.LoginUserById(login.IdUsuario);
+
+        //        if (user == null)
+        //            return null;
+
+        //        // renovar refresh token
+        //        refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+        //        await _refreshRepository.Update(refreshToken);
+
+        //        var jwt = _jwtService.GenerateToken(user);
+
+        //        return new AuthResponseDTO
+        //        {
+        //            IdUsuario = user.IdUsuario,
+        //            PrimerNombre = user.PrimerNombre,
+        //            PrimerApellido = user.PrimerApellido,
+        //            Correo = user.Correo,
+        //            Telefono = Convert.ToInt32(user.Telefono),
+        //            Token = jwt,
+        //            RefreshToken = refreshToken.Token.ToString()
+        //        };
+        //    }
+
+        //    // ============================================================
+        //    // 2. LOGIN NORMAL (CORREO + CONTRASEÑA)
+        //    // ============================================================
+        //    if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
+        //        return null;
+
+        //    user = await _authRepository.LoginUser(login.Correo, login.Contraseña);
+
+        //    if (user == null)
+        //        return null;
+
+        //    // ============================================================
+        //    // 3. MANEJO DEL REFRESH TOKEN
+        //    // ============================================================
+        //    var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
+
+        //    RefreshToken refreshToUse;
+
+        //    if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
+        //    {
+        //        existingToken.Revoked = true;
+        //        await _refreshRepository.Update(existingToken);
+        //        existingToken = null;
+        //    }
+
+        //    if (existingToken == null)
+        //    {
+        //        refreshToUse = new RefreshToken
+        //        {
+        //            IdUsuario = user.IdUsuario,
+        //            Token = Guid.NewGuid(),
+        //            FechaCreacion = DateTime.UtcNow,
+        //            FechaExpiracion = DateTime.UtcNow.AddDays(7),
+        //            Revoked = false
+        //        };
+
+        //        await _refreshRepository.Create(refreshToUse, connection, null);
+        //    }
+        //    else
+        //    {
+        //        existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+        //        await _refreshRepository.Update(existingToken);
+
+        //        refreshToUse = existingToken;
+        //    }
+
+        //    // ============================================================
+        //    // 4. GENERAR JWT
+        //    // ============================================================
+        //    var jwtNormal = _jwtService.GenerateToken(user);
+
+        //    return new AuthResponseDTO
+        //    {
+        //        IdUsuario = user.IdUsuario,
+        //        PrimerNombre = user.PrimerNombre,
+        //        PrimerApellido = user.PrimerApellido,
+        //        Correo = user.Correo,
+        //        Telefono = Convert.ToInt32(user.Telefono),
+        //        Token = jwtNormal,
+        //        RefreshToken = refreshToUse.Token.ToString()
+        //    };
+        //}
+
 
         // ============================================================
         // ADMINISTRADOR
@@ -44,10 +199,20 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             await connection.OpenAsync();
             using var transaction = connection.BeginTransaction();
 
+            int registeredUserId = 0;
+            var refreshToken = new RefreshTokenCreateDTO
+            {
+                IdUsuario = registeredUserId,
+                Token = Guid.NewGuid(),
+                FechaCreacion = DateTime.UtcNow,
+                FechaExpiracion = DateTime.UtcNow.AddDays(7),
+                Revoked = false
+            };
+
             try
             {
                 // Registrar usuario
-                var registeredUser = await _authRepository.RegisterUser(new UsuariosCreateDTO
+                registeredUserId = await _authRepository.RegisterUser(new UsuariosCreateDTO
                 {
                     IdRol = admin.IdRol,
                     PrimerNombre = admin.PrimerNombre,
@@ -59,48 +224,51 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     Contraseña = admin.Contraseña
                 }, connection, transaction);
 
-                if (registeredUser == null)
-                    throw new InvalidOperationException("El correo ya está siendo utilizado.");
+                if (registeredUserId == 0)
+                    throw new InvalidOperationException("Ha ocurrido un error al tratar de crear el usuario.");
+                
 
                 // Registrar administrador
                 var registeredAdmin = await _authRepository.RegisterAdminAsync(new AdministradorRegisterDTO
                 {
-                    IdUsuario = registeredUser.IdUsuario
+                    IdUsuario = registeredUserId
                 }, connection, transaction);
 
                 if (registeredAdmin == null)
                     throw new Exception("No pudo crearse el administrador.");
 
-                var refreshToken = new RefreshTokenCreateDTO
-                {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Token = Guid.NewGuid(),
-                    FechaCreacion = DateTime.UtcNow,
-                    FechaExpiracion = DateTime.UtcNow.AddDays(7),
-                    Revoked = false
-                };
-
+                refreshToken.IdUsuario = registeredUserId;
                 var createdRefreshToken = await _authRepository.CreateRefreshTokenAsync(refreshToken, connection, transaction);
 
-                transaction.Commit();
+                if (createdRefreshToken == null)
+                    throw new Exception("No pudo crearse el refresh token.");
 
-                var jwt = _jwtService.GenerateToken(registeredUser);
-                return new AuthResponseDTO
-                {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Token = jwt,
-                    PrimerNombre = registeredUser.PrimerNombre,
-                    PrimerApellido = registeredUser.PrimerApellido,
-                    Correo = registeredUser.Correo,
-                    Telefono = Convert.ToInt32(registeredUser.Telefono),
-                    RefreshToken = refreshToken.Token.ToString()
-                };
+                transaction.Commit();
             }
             catch
             {
                 transaction.Rollback();
                 throw;
             }
+
+            var registeredUser = await _usuarioDAO.GetByIdAsync(registeredUserId, connection);
+
+            if (registeredUser == null)
+            {
+                throw new Exception("El usuario no se encuentra registrado.");
+            }
+
+            var jwt = _jwtService.GenerateToken(registeredUser);
+            return new AuthResponseDTO
+            {
+                IdUsuario = registeredUser.IdUsuario,
+                Token = jwt,
+                PrimerNombre = registeredUser.PrimerNombre,
+                PrimerApellido = registeredUser.PrimerApellido,
+                Correo = registeredUser.Correo,
+                Telefono = Convert.ToInt32(registeredUser.Telefono),
+                RefreshToken = refreshToken.Token.ToString()
+            };
         }
 
         // ============================================================
@@ -114,10 +282,21 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             using var connection = _context.GetConnection();
             await connection.OpenAsync();
             using var transaction = connection.BeginTransaction();
-            
+
+            int registeredUserId = 0;
+            var refreshToken = new RefreshTokenCreateDTO
+            {
+                IdUsuario = registeredUserId,
+                Token = Guid.NewGuid(),
+                FechaCreacion = DateTime.UtcNow,
+                FechaExpiracion = DateTime.UtcNow.AddDays(7),
+                Revoked = false
+            };
+
             try
             {
-                var registeredUser = await _authRepository.RegisterUser(new UsuariosCreateDTO
+                // Registrar usuario
+                registeredUserId = await _authRepository.RegisterUser(new UsuariosCreateDTO
                 {
                     IdRol = vendedor.IdRol,
                     PrimerNombre = vendedor.PrimerNombre,
@@ -129,51 +308,53 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     Contraseña = vendedor.Contraseña
                 }, connection, transaction);
 
-                if (registeredUser == null)
-                    throw new InvalidOperationException("El correo ya está siendo utilizado.");
+                if (registeredUserId == 0)
+                    throw new InvalidOperationException("Ha ocurrido un error al tratar de crear el usuario.");
 
                 var registeredSeller = await _authRepository.RegisterSellerAsync(new VendedorRegisterDTO
                 {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Ingresos = vendedor.Ingresos
+                    IdUsuario = registeredUserId,
+                    NombreNegocio = vendedor.NombreNegocio!,
+                    LogoNegocio = vendedor.LogoNegocio,
+                    DescripcionNegocio = vendedor.DescripcionNegocio,
+                    EsContribuyente = vendedor.EsContribuyente
                 }, connection, transaction);
 
                 if (registeredSeller == null)
                     throw new Exception("No pudo crearse el vendedor.");
 
-                var refreshToken = new RefreshTokenCreateDTO
-                {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Token = Guid.NewGuid(),
-                    FechaCreacion = DateTime.UtcNow,
-                    FechaExpiracion = DateTime.UtcNow.AddDays(7),
-                    Revoked = false
-                };
-
+                refreshToken.IdUsuario = registeredUserId;
                 var createdRefreshToken = await _authRepository.CreateRefreshTokenAsync(refreshToken, connection, transaction);
 
                 if (createdRefreshToken == null)
                     throw new Exception("No pudo crearse el refresh token.");
 
                 transaction.Commit();
-
-                var jwt = _jwtService.GenerateToken(registeredUser);
-                return new AuthResponseDTO
-                {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Token = jwt,
-                    PrimerNombre = registeredUser.PrimerNombre,
-                    PrimerApellido = registeredUser.PrimerApellido,
-                    Correo = registeredUser.Correo,
-                    Telefono = Convert.ToInt32(registeredUser.Telefono),
-                    RefreshToken = refreshToken.Token.ToString()
-                };
             }
             catch
             {
                 transaction.Rollback();
                 throw;
             }
+
+            var registeredUser = await _usuarioDAO.GetByIdAsync(registeredUserId, connection);
+
+            if (registeredUser == null)
+            {
+                throw new Exception("El usuario no se encuentra registrado.");
+            }
+
+            var jwt = _jwtService.GenerateToken(registeredUser);
+            return new AuthResponseDTO
+            {
+                IdUsuario = registeredUser.IdUsuario,
+                Token = jwt,
+                PrimerNombre = registeredUser.PrimerNombre,
+                PrimerApellido = registeredUser.PrimerApellido,
+                Correo = registeredUser.Correo,
+                Telefono = Convert.ToInt32(registeredUser.Telefono),
+                RefreshToken = refreshToken.Token.ToString()
+            };
         }
 
         // ============================================================
@@ -188,9 +369,20 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             await connection.OpenAsync();
             using var transaction = connection.BeginTransaction();
 
+            int registeredUserId = 0;
+
+            var refreshToken = new RefreshTokenCreateDTO
+            {
+                IdUsuario = registeredUserId,
+                Token = Guid.NewGuid(),
+                FechaCreacion = DateTime.UtcNow,
+                FechaExpiracion = DateTime.UtcNow.AddDays(7),
+                Revoked = false
+            };
+
             try
             {
-                var registeredUser = await _authRepository.RegisterUser(new UsuariosCreateDTO
+                registeredUserId = await _authRepository.RegisterUser(new UsuariosCreateDTO
                 {
                     IdRol = comprador.IdRol,
                     PrimerNombre = comprador.PrimerNombre,
@@ -202,47 +394,49 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     Contraseña = comprador.Contraseña
                 }, connection, transaction);
 
-                if (registeredUser == null)
-                    throw new InvalidOperationException("El correo ya está siendo utilizado.");
+                if (registeredUserId == 0)
+                    throw new InvalidOperationException("Ha ocurrido un error al tratar de crear el usuario.");
 
                 var registeredBuyer = await _authRepository.RegisterBuyerAsync(new CompradorRegisterDTO
                 {
-                    IdUsuario = registeredUser.IdUsuario
+                    IdUsuario = registeredUserId
                 }, connection, transaction);
 
                 if (registeredBuyer == null)
                     throw new Exception("No pudo crearse el comprador.");
 
-                var refreshToken = new RefreshTokenCreateDTO
-                {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Token = Guid.NewGuid(),
-                    FechaCreacion = DateTime.UtcNow,
-                    FechaExpiracion = DateTime.UtcNow.AddDays(7),
-                    Revoked = false
-                };
-
+                refreshToken.IdUsuario = registeredUserId;
                 var createdRefreshToken = await _authRepository.CreateRefreshTokenAsync(refreshToken, connection, transaction);
 
-                transaction.Commit();
+                if (createdRefreshToken == null)
+                    throw new Exception("No pudo crearse el refresh token.");
 
-                var jwt = _jwtService.GenerateToken(registeredUser);
-                return new AuthResponseDTO
-                {
-                    IdUsuario = registeredUser.IdUsuario,
-                    Token = jwt,
-                    PrimerNombre = registeredUser.PrimerNombre,
-                    PrimerApellido = registeredUser.PrimerApellido,
-                    Correo = registeredUser.Correo,
-                    Telefono = Convert.ToInt32(registeredUser.Telefono),
-                    RefreshToken = refreshToken.Token.ToString()
-                };
+                transaction.Commit();
             }
             catch
             {
                 transaction.Rollback();
                 throw;
             }
+
+            var registeredUser = await _usuarioDAO.GetByIdAsync(registeredUserId, connection);
+
+            if (registeredUser == null)
+            {
+                throw new Exception("El usuario no se encuentra registrado.");
+            }
+
+            var jwt = _jwtService.GenerateToken(registeredUser);
+            return new AuthResponseDTO
+            {
+                IdUsuario = registeredUser.IdUsuario,
+                Token = jwt,
+                PrimerNombre = registeredUser.PrimerNombre,
+                PrimerApellido = registeredUser.PrimerApellido,
+                Correo = registeredUser.Correo,
+                Telefono = Convert.ToInt32(registeredUser.Telefono),
+                RefreshToken = refreshToken.Token.ToString()
+            };
         }
 
     }

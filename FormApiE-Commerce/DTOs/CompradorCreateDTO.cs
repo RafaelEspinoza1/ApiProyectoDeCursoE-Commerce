@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs
+namespace FormApiE_Commerce.DTOs
 {
-    public class VendedorCreateDTO
+    public class CompradorCreateDTO
     {
         [Required(ErrorMessage = "El rol es obligatorio")]
         public required int IdRol { get; set; }
@@ -33,17 +32,5 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs
 
         [Required(ErrorMessage = "La contraseña es obligatoria")]
         public required string Contraseña { get; set; }
-
-        [MaxLength(100)]
-        public string? NombreNegocio { get; set; }
-
-        [MaxLength(255)]
-        public string? LogoNegocio { get; set; }
-
-        [MaxLength(300)]
-        public string? DescripcionNegocio { get; set; }
-
-        [Required(ErrorMessage = "El campo EsContribuyente es obligatorio")]
-        public required bool EsContribuyente { get; set; }
     }
 }

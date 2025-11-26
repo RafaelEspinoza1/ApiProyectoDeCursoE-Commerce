@@ -42,10 +42,8 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                     SegundoApellido = reader.IsDBNull(reader.GetOrdinal("SegundoApellido")) ? null : reader.GetString(reader.GetOrdinal("SegundoApellido")),
                     Telefono = reader.GetString(reader.GetOrdinal("Telefono")),
                     Correo = reader.GetString(reader.GetOrdinal("Correo")),
-                    Contraseña = reader.IsDBNull(reader.GetOrdinal("Contraseña"))
-                        ? Array.Empty<byte>()
-                        : (byte[])reader["Contraseña"]
-                        };
+                    Contraseña = reader.GetString(reader.GetOrdinal("Contraseña"))
+                };
             }
 
             return null;

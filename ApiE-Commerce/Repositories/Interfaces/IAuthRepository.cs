@@ -11,14 +11,14 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
     public interface IAuthRepository
     {
         // Comandos de autenticación
-        Task<Usuario?> LoginUser(string correo, string password);
+        //Task<Usuario?> LoginUser(string correo, string password);
         Task<Usuario?> LoginUserById(int idUsuario);
 
-        Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario, SqlConnection connection, SqlTransaction? transaction);
-        Task<Administrador?> RegisterAdminAsync(AdministradorRegisterDTO admin, SqlConnection connection, SqlTransaction? transaction);
-        Task<Vendedor?> RegisterSellerAsync(VendedorRegisterDTO vendedor, SqlConnection connection, SqlTransaction? transaction);
-        Task<Comprador?> RegisterBuyerAsync(CompradorRegisterDTO comprador, SqlConnection connection, SqlTransaction? transaction);
+        Task<int> RegisterUser(UsuariosCreateDTO usuario, SqlConnection connection, SqlTransaction? transaction);
+        Task<bool?> RegisterAdminAsync(AdministradorRegisterDTO admin, SqlConnection connection, SqlTransaction? transaction);
+        Task<bool?> RegisterSellerAsync(VendedorRegisterDTO vendedor, SqlConnection connection, SqlTransaction? transaction);
+        Task<bool?> RegisterBuyerAsync(CompradorRegisterDTO comprador, SqlConnection connection, SqlTransaction? transaction);
 
-        Task<RefreshToken?> CreateRefreshTokenAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction);
+        Task<bool?> CreateRefreshTokenAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction);
     }
 }

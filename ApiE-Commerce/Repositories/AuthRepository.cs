@@ -55,73 +55,60 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
         // ============================================================
         // USUARIO
         // ============================================================
-        public async Task<Usuario?> RegisterUser(UsuariosCreateDTO usuario, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<int> RegisterUser(UsuariosCreateDTO usuario, SqlConnection connection, SqlTransaction? transaction)
         {
-            // Verificar si el correo ya existe
-            var usuarioEnDb = await _usuarioDAO.GetByEmailAsync(usuario.Correo, connection, transaction);
-            if (usuarioEnDb != null) return null;
-
             // Crear usuario
-            int filasAfectadas = await _usuarioDAO.CreateAsync(usuario, connection, transaction);
-            if (filasAfectadas == 0) return null;
+            var idUsuario = await _usuarioDAO.CreateAsync(usuario, connection, transaction);
 
-            // Obtener IdUsuario generado
-            var usuarioCreado = await _usuarioDAO.GetByEmailAsync(usuario.Correo, connection, transaction);
-            if (usuarioCreado == null) return null;
-
-            return usuarioCreado;
+            return idUsuario;
         }
 
 
         // ============================================================
         // ADMINISTRADOR
         // ============================================================
-        public async Task<Administrador?> RegisterAdminAsync(AdministradorRegisterDTO admin, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<bool?> RegisterAdminAsync(AdministradorRegisterDTO admin, SqlConnection connection, SqlTransaction? transaction)
         {
             var filasAfectadas = await _adminDAO.CreateAsync(admin, connection, transaction);
-            if (filasAfectadas == 0) return null;
+            if (filasAfectadas == 0) return false;
 
-            var administradorCreado = await _adminDAO.GetByIdAsync(admin.IdUsuario, connection, transaction);
-            return administradorCreado;
+            return true;
         }
 
 
         // ============================================================
         // VENDEDOR
         // ============================================================
-        public async Task<Vendedor?> RegisterSellerAsync(VendedorRegisterDTO vendedor, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<bool?> RegisterSellerAsync(VendedorRegisterDTO vendedor, SqlConnection connection, SqlTransaction? transaction)
         {
             var filasAfectadas = await _vendedorDAO.CreateAsync(vendedor, connection, transaction);
-            if (filasAfectadas == 0) return null;
+            if (filasAfectadas == 0) return false;
 
-            var vendedorCreado = await _vendedorDAO.GetByIdAsync(vendedor.IdUsuario, connection, transaction);
-            return vendedorCreado;
+            return true;
         }
 
 
         // ============================================================
         // COMPRADOR
         // ============================================================
-        public async Task<Comprador?> RegisterBuyerAsync(CompradorRegisterDTO comprador, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<bool?> RegisterBuyerAsync(CompradorRegisterDTO comprador, SqlConnection connection, SqlTransaction? transaction)
         {
             var filasAfectadas = await _compradorDAO.CreateAsync(comprador, connection, transaction);
-            if (filasAfectadas == 0) return null;
+            if (filasAfectadas == 0) return false;
 
-            var compradorCreado = await _compradorDAO.GetByIdAsync(comprador.IdUsuario, connection, transaction);
-            return compradorCreado;
+            return true;
         }
 
 
         // ============================================================
         // REFRESH TOKEN
         // ============================================================
-        public async Task<RefreshToken?> CreateRefreshTokenAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<bool?> CreateRefreshTokenAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction)
         {
             var filasAfectadas = await _refreshTokenDAO.CreateAsync(refreshToken, connection, transaction);
-            if (filasAfectadas == 0) return null;
+            if (filasAfectadas == 0) return false;
 
-            var refreshTokenCreado = await _refreshTokenDAO.GetByIdAsync(refreshToken.IdUsuario, connection, transaction);
-            return refreshTokenCreado;
+            return true;
         }
 
 
@@ -133,30 +120,30 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             }
         }
 
-        public async Task<Usuario?> LoginUser(string correo, string contraseña)
-        {
-            var usuarioEnDb = await _usuariosRepository.GetByEmail(correo);
-            if (usuarioEnDb == null) return null;
+        //public async Task<Usuario?> LoginUser(string correo, string contraseña)
+        //{
+        //    var usuarioEnDb = await _usuariosRepository.GetByEmail(correo);
+        //    if (usuarioEnDb == null) return null;
 
-            // Hash de la contraseña ingresada
-            byte[] passwordIngresadaHash = HashPassword(contraseña);
+        //    // Hash de la contraseña ingresada
+        //    byte[] passwordIngresadaHash = HashPassword(contraseña);
 
-            // Comparar con la contraseña almacenada
-            bool contraseñaCorrecta = usuarioEnDb.Contraseña.SequenceEqual(passwordIngresadaHash);
-            if (!contraseñaCorrecta) return null;
+        //    // Comparar con la contraseña almacenada
+        //    bool contraseñaCorrecta = usuarioEnDb.Contraseña.SequenceEqual(passwordIngresadaHash);
+        //    if (!contraseñaCorrecta) return null;
 
-            // Validar rol
-            string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
-            bool existe = rol switch
-            {
-                "Administrador" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
-                "Vendedor" => await _vendedoresRepository.GetById(usuarioEnDb.IdUsuario) != null,
-                "Comprador" => await _compradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
-                _ => false
-            };
+        //    // Validar rol
+        //    string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
+        //    bool existe = rol switch
+        //    {
+        //        "Administrador" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
+        //        "Vendedor" => await _vendedoresRepository.GetById(usuarioEnDb.IdUsuario) != null,
+        //        "Comprador" => await _compradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
+        //        _ => false
+        //    };
 
-            return existe ? usuarioEnDb : null;
-        }
+        //    return existe ? usuarioEnDb : null;
+        //}
 
 
         public async Task<Usuario?> LoginUserById(int idUsuario)

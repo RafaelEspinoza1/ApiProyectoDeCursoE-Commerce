@@ -17,12 +17,9 @@ namespace ApiProyectoDeCursoE_Commerce.Executor
         }
 
         // Ejecuta comandos que retornan un solo objeto
-        public async Task<T?> ExecuteReaderAsync<T>(SqlCommand cmd, SqlConnection connection, SqlTransaction? transaction, Func<SqlDataReader, T> map)
+        public async Task<T?> ExecuteReaderAsync<T>(SqlCommand cmd, SqlConnection connection, Func<SqlDataReader, T> map)
         {
             cmd.Connection = connection;
-
-            if (transaction != null)
-                cmd.Transaction = transaction;
 
             using var reader = await cmd.ExecuteReaderAsync();
 

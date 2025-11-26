@@ -12,8 +12,16 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         [Required]
         public int IdUsuario { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(10,2)")]
-        public decimal Ingresos { get; set; } = 0;
+        [MaxLength(100)]
+        public string? NombreNegocio { get; set; }
+
+        [MaxLength(255)]
+        public string? LogoNegocio { get; set; }
+
+        [MaxLength(300)]
+        public string? DescripcionNegocio { get; set; }
+
+        [Required(ErrorMessage = "El campo EsContribuyente es obligatorio")]
+        public required bool EsContribuyente { get; set; }
     }
 }

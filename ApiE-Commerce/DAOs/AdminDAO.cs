@@ -16,17 +16,17 @@ namespace ApiProyectoDeCursoE_Commerce.DAO
             _sqlExecutor = sqlExecutor;
         }
 
-        private async Task<Administrador?> Get(SqlCommand cmd, SqlConnection connection, SqlTransaction? transaction)
+        private async Task<Administrador?> Get(SqlCommand cmd, SqlConnection connection)
         {
             // Llama al SqlExecutor para ejecutar y mapear
-            return await _sqlExecutor.ExecuteReaderAsync(cmd, connection, transaction, reader => new Administrador
+            return await _sqlExecutor.ExecuteReaderAsync(cmd, connection, reader => new Administrador
             {
                 IdAdministrador = reader.GetInt32(reader.GetOrdinal("IdAdministrador")),
                 IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario"))
             });
         }
 
-        public async Task<Administrador?> GetAllAsync(SqlConnection connection, SqlTransaction? transaction)
+        public async Task<Administrador?> GetAllAsync(SqlConnection connection)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -36,10 +36,10 @@ namespace ApiProyectoDeCursoE_Commerce.DAO
                 FROM Administradores";
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
-        public async Task<Administrador?> GetByIdAsync(int idUsuario, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<Administrador?> GetByIdAsync(int idUsuario, SqlConnection connection)
         {
             // Crea el comando SQL
             using var cmd = new SqlCommand();
@@ -51,7 +51,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAO
             cmd.Parameters.AddWithValue("@Id", idUsuario);
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
         public async Task<int> CreateAsync(AdministradorRegisterDTO admin, SqlConnection connection, SqlTransaction? transaction)

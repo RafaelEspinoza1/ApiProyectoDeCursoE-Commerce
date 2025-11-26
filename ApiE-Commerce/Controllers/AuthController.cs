@@ -39,151 +39,184 @@ public class AuthController : ControllerBase
         _context = context;
     }
 
-    [AllowAnonymous]
-    [HttpPost("login")]
-    public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] LoginDTO login)
-    {
-        RefreshToken refreshToUse;
-        Usuario? user;
+    //[AllowAnonymous]
+    //[HttpPost("login")]
+    //public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] LoginDTO login)
+    //{
+    //    RefreshToken refreshToUse;
+    //    Usuario? user;
 
-        using var connection = _context.GetConnection();
-        await connection.OpenAsync();
+    //    using var connection = _context.GetConnection();
+    //    await connection.OpenAsync();
 
-        // -----------------------------------------
-        // 0. Login rápido con JWT válido
-        // -----------------------------------------
-        if (!string.IsNullOrWhiteSpace(login.Token))
-        {
-            // Verificar si el JWT es válido y no ha expirado
-            var principal = _jwtService.ValidateToken(login.Token);
-            if (principal != null)
-            {
-                // Extraer IdUsuario del JWT
-                var idUsuarioClaim = principal.FindFirst("id")?.Value;
-                if (int.TryParse(idUsuarioClaim, out int idUsuarioJwt))
-                {
-                    user = await _authRepository.LoginUserById(idUsuarioJwt);
+    //    // -----------------------------------------
+    //    // 0. Login rápido con JWT válido
+    //    // -----------------------------------------
+    //    if (!string.IsNullOrWhiteSpace(login.Token))
+    //    {
+    //        // Verificar si el JWT es válido y no ha expirado
+    //        var principal = _jwtService.ValidateToken(login.Token);
+    //        if (principal != null)
+    //        {
+    //            // Extraer IdUsuario del JWT
+    //            var idUsuarioClaim = principal.FindFirst("id")?.Value;
+    //            if (int.TryParse(idUsuarioClaim, out int idUsuarioJwt))
+    //            {
+    //                user = await _authRepository.LoginUserById(idUsuarioJwt);
 
-                    if (user != null)
-                    {
-                        return Ok(new AuthResponseDTO
-                        {
-                            IdUsuario = user.IdUsuario,
-                            PrimerNombre = user.PrimerNombre,
-                            PrimerApellido = user.PrimerApellido,
-                            Correo = user.Correo,
-                            Telefono = Convert.ToInt32(user.Telefono),
-                            Token = login.Token,
-                            RefreshToken = ""
-                        });
-                    }
-                }
-            }
-            // Si JWT inválido, continuar al login normal
-        }
+    //                if (user != null)
+    //                {
+    //                    return Ok(new AuthResponseDTO
+    //                    {
+    //                        IdUsuario = user.IdUsuario,
+    //                        PrimerNombre = user.PrimerNombre,
+    //                        PrimerApellido = user.PrimerApellido,
+    //                        Correo = user.Correo,
+    //                        Telefono = Convert.ToInt32(user.Telefono),
+    //                        Token = login.Token,
+    //                        RefreshToken = ""
+    //                    });
+    //                }
+    //            }
+    //        }
+    //        // Si JWT inválido, continuar al login normal
+    //    }
 
-        // -----------------------------------------
-        // 1. Login rápido con refresh token
-        // -----------------------------------------
-        if (!string.IsNullOrWhiteSpace(login.RefreshToken))
-        {
-            if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
-                return Unauthorized("Refresh token inválido");
+    //    // -----------------------------------------
+    //    // 1. Login rápido con refresh token
+    //    // -----------------------------------------
+    //    if (!string.IsNullOrWhiteSpace(login.RefreshToken))
+    //    {
+    //        if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
+    //            return Unauthorized("Refresh token inválido");
 
-            var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
+    //        var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
 
-            if (refreshToken == null || refreshToken.Revoked)
-                return Unauthorized("Refresh token inválido o revocado");
+    //        if (refreshToken == null || refreshToken.Revoked)
+    //            return Unauthorized("Refresh token inválido o revocado");
 
-            if (refreshToken.FechaExpiracion < DateTime.UtcNow)
-            {
-                refreshToken.Revoked = true;
-                await _refreshRepository.Update(refreshToken);
-                return Unauthorized("Refresh token expirado. Inicia sesión con correo y contraseña.");
-            }
+    //        if (refreshToken.FechaExpiracion < DateTime.UtcNow)
+    //        {
+    //            refreshToken.Revoked = true;
+    //            await _refreshRepository.Update(refreshToken);
+    //            return Unauthorized("Refresh token expirado. Inicia sesión con correo y contraseña.");
+    //        }
 
-            // Token válido → login rápido usando refresh
-            user = await _authRepository.LoginUserById(login.IdUsuario);
+    //        // Token válido → login rápido usando refresh
+    //        user = await _authRepository.LoginUserById(login.IdUsuario);
 
-            if (user == null)
-                return NotFound("Usuario no encontrado.");
+    //        if (user == null)
+    //            return NotFound("Usuario no encontrado.");
 
-            var jwt = _jwtService.GenerateToken(user);
+    //        var jwt = _jwtService.GenerateToken(user);
 
-            // Renovar expiración del refresh token
-            refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
-            await _refreshRepository.Update(refreshToken);
+    //        // Renovar expiración del refresh token
+    //        refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+    //        await _refreshRepository.Update(refreshToken);
 
-            return Ok(new AuthResponseDTO
-            {
-                IdUsuario = user.IdUsuario,
-                PrimerNombre = user.PrimerNombre,
-                PrimerApellido = user.PrimerApellido,
-                Correo = user.Correo,
-                Telefono = Convert.ToInt32(user.Telefono),
-                Token = login.Token!,
-                RefreshToken = ""
-            });
-        }
+    //        return Ok(new AuthResponseDTO
+    //        {
+    //            IdUsuario = user.IdUsuario,
+    //            PrimerNombre = user.PrimerNombre,
+    //            PrimerApellido = user.PrimerApellido,
+    //            Correo = user.Correo,
+    //            Telefono = Convert.ToInt32(user.Telefono),
+    //            Token = login.Token!,
+    //            RefreshToken = ""
+    //        });
+    //    }
 
-        // -----------------------------------------
-        // 2. Login normal con correo y contraseña
-        // -----------------------------------------
-        if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
-            return BadRequest("Correo y contraseña son requeridos.");
+    //    // -----------------------------------------
+    //    // 2. Login normal con correo y contraseña
+    //    // -----------------------------------------
+    //    if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
+    //        return BadRequest("Correo y contraseña son requeridos.");
 
-        user = await _authRepository.LoginUser(login.Correo, login.Contraseña);
-        if (user == null)
-            return Unauthorized("Usuario o contraseña incorrectos.");
+    //    user = await _authRepository.LoginUser(login.Correo, login.Contraseña);
+    //    if (user == null)
+    //        return Unauthorized("Usuario o contraseña incorrectos.");
 
-        // -----------------------------------------
-        // 3. Manejo del refresh token
-        // -----------------------------------------
-        var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
+    //    // -----------------------------------------
+    //    // 3. Manejo del refresh token
+    //    // -----------------------------------------
+    //    var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
 
-        if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
-        {
-            existingToken.Revoked = true;
-            await _refreshRepository.Update(existingToken);
-            existingToken = null;
-        }
+    //    if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
+    //    {
+    //        existingToken.Revoked = true;
+    //        await _refreshRepository.Update(existingToken);
+    //        existingToken = null;
+    //    }
 
-        if (existingToken == null)
-        {
-            refreshToUse = new RefreshToken
-            {
-                IdUsuario = user.IdUsuario,
-                Token = Guid.NewGuid(),
-                FechaCreacion = DateTime.UtcNow,
-                FechaExpiracion = DateTime.UtcNow.AddDays(7),
-                Revoked = false
-            };
-            await _refreshRepository.Create(refreshToUse, connection, null);
-        }
-        else
-        {
-            existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
-            await _refreshRepository.Update(existingToken);
-            refreshToUse = existingToken;
-        }
+    //    if (existingToken == null)
+    //    {
+    //        refreshToUse = new RefreshToken
+    //        {
+    //            IdUsuario = user.IdUsuario,
+    //            Token = Guid.NewGuid(),
+    //            FechaCreacion = DateTime.UtcNow,
+    //            FechaExpiracion = DateTime.UtcNow.AddDays(7),
+    //            Revoked = false
+    //        };
+    //        await _refreshRepository.Create(refreshToUse, connection, null);
+    //    }
+    //    else
+    //    {
+    //        existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+    //        await _refreshRepository.Update(existingToken);
+    //        refreshToUse = existingToken;
+    //    }
 
-        // -----------------------------------------
-        // 4. Generar JWT
-        // -----------------------------------------
-        var jwtNormal = _jwtService.GenerateToken(user);
+    //    // -----------------------------------------
+    //    // 4. Generar JWT
+    //    // -----------------------------------------
+    //    var jwtNormal = _jwtService.GenerateToken(user);
 
-        return Ok(new AuthResponseDTO
-        {
-            IdUsuario = user.IdUsuario,
-            PrimerNombre = user.PrimerNombre,
-            PrimerApellido = user.PrimerApellido,
-            Correo = user.Correo,
-            Telefono = Convert.ToInt32(user.Telefono),
-            Token = login.Token!,
-            RefreshToken = ""
-        });
-    }
+    //    return Ok(new AuthResponseDTO
+    //    {
+    //        IdUsuario = user.IdUsuario,
+    //        PrimerNombre = user.PrimerNombre,
+    //        PrimerApellido = user.PrimerApellido,
+    //        Correo = user.Correo,
+    //        Telefono = Convert.ToInt32(user.Telefono),
+    //        Token = login.Token!,
+    //        RefreshToken = ""
+    //    });
+    //}
 
+
+    // ============================================================
+    // INICIO DE SESIÓN
+    // ============================================================
+    //[AllowAnonymous]
+    //[HttpPost("login")]
+    //public async Task<IActionResult> Login([FromBody] LoginDTO login)
+    //{
+    //    try
+    //    {
+    //        if (login == null)
+    //            return BadRequest("Datos inválidos");
+
+    //        var response = await _authService.LoginAsync(login);
+
+    //        if (response == null)
+    //            return Unauthorized("Usuario o contraseña incorrectos.");
+
+    //        return Ok(response);
+    //    }
+    //    catch (ArgumentException ex)
+    //    {
+    //        return BadRequest(ex.Message);
+    //    }
+    //    catch (InvalidOperationException ex)
+    //    {
+    //        return BadRequest(ex.Message);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return StatusCode(500, ex.Message);
+    //    }
+    //}
 
 
 

@@ -16,10 +16,10 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             _sqlExecutor = sqlExecutor;
         }
 
-        private async Task<RefreshToken?> Get(SqlCommand cmd, SqlConnection connection, SqlTransaction? transaction)
+        private async Task<RefreshToken?> Get(SqlCommand cmd, SqlConnection connection)
         {
             // Llama al SqlExecutor para ejecutar y mapear
-            return await _sqlExecutor.ExecuteReaderAsync(cmd, connection, transaction, reader => new RefreshToken
+            return await _sqlExecutor.ExecuteReaderAsync(cmd, connection, reader => new RefreshToken
             {
                 IdRefreshToken = reader.GetInt32(reader.GetOrdinal("IdRefreshToken")),
                 IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario")),
@@ -30,7 +30,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             });
         }
 
-        public async Task<RefreshToken?> GetAllAsync(SqlConnection connection, SqlTransaction? transaction)
+        public async Task<RefreshToken?> GetAllAsync(SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
@@ -39,36 +39,36 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
                 FROM RefreshToken";
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
-        public async Task<RefreshToken?> GetAllActiveAsync(SqlConnection connection, SqlTransaction? transaction)
+        public async Task<RefreshToken?> GetAllActiveAsync(SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
                 IdRefreshToken, IdUsuario, Token, FechaCreacion, FechaExpiracion, Revoked
                 FROM RefreshToken
-                WHERE Token = 0";
+                WHERE Revoked = 0";
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
-        public async Task<RefreshToken?> GetAllRevokedAsync(SqlConnection connection, SqlTransaction? transaction)
+        public async Task<RefreshToken?> GetAllRevokedAsync(SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
                 SELECT
                 IdRefreshToken, IdUsuario, Token, FechaCreacion, FechaExpiracion, Revoked
                 FROM RefreshToken
-                WHERE Token = 1";
+                WHERE Revoked = 1";
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
-        public async Task<RefreshToken?> GetByIdAsync(int idUsuario, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<RefreshToken?> GetByIdAsync(int idUsuario, SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
@@ -79,7 +79,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             cmd.Parameters.AddWithValue("@Id", idUsuario);
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
         public async Task<int> CreateAsync(RefreshTokenCreateDTO refreshToken, SqlConnection connection, SqlTransaction? transaction)

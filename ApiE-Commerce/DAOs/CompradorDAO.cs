@@ -16,17 +16,17 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             _sqlExecutor = sqlExecutor;
         }
 
-        private async Task<Comprador?> Get(SqlCommand cmd, SqlConnection connection, SqlTransaction? transaction)
+        private async Task<Comprador?> Get(SqlCommand cmd, SqlConnection connection)
         {
             // Llama al SqlExecutor para ejecutar y mapear
-            return await _sqlExecutor.ExecuteReaderAsync(cmd, connection, transaction, reader => new Comprador
+            return await _sqlExecutor.ExecuteReaderAsync(cmd, connection, reader => new Comprador
             {
                 IdComprador = reader.GetInt32(reader.GetOrdinal("IdComprador")),
                 IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario"))
             });
         }
 
-        public async Task<Comprador?> GetAllAsync(SqlConnection connection, SqlTransaction? transaction)
+        public async Task<Comprador?> GetAllAsync(SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
@@ -35,10 +35,10 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
                 FROM Compradores";
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
-        public async Task<Comprador?> GetByIdAsync(int idUsuario, SqlConnection connection, SqlTransaction? transaction)
+        public async Task<Comprador?> GetByIdAsync(int idUsuario, SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
@@ -49,7 +49,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             cmd.Parameters.AddWithValue("@Id", idUsuario);
 
             // Llama al método Get para ejecutar y mapear
-            return await Get(cmd, connection, transaction);
+            return await Get(cmd, connection);
         }
 
         public async Task<int> CreateAsync(CompradorRegisterDTO comprador, SqlConnection connection, SqlTransaction? transaction)

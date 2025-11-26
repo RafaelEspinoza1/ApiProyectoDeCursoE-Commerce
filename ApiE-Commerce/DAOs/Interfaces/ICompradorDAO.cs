@@ -7,8 +7,8 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs.Interfaces
 {
     public interface ICompradorDAO
     {
-        Task<Comprador?> GetAllAsync(SqlConnection connection, SqlTransaction? transaction);
-        Task<Comprador?> GetByIdAsync(int idComprador, SqlConnection connection, SqlTransaction? transaction);
+        Task<Comprador?> GetAllAsync(SqlConnection connection);
+        Task<Comprador?> GetByIdAsync(int idComprador, SqlConnection connection);
         Task<int> CreateAsync(CompradorRegisterDTO comprador, SqlConnection connection, SqlTransaction? transaction);
         Task<int> DeleteAsync(int idComprador, SqlConnection connection);
     }

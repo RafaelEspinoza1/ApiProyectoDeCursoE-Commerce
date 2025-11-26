@@ -7,15 +7,15 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs.Interfaces
 {
     public interface IUsuarioDAO
     {
-        Task<Usuario?> Get(SqlCommand cmd, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetAllAsync(SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetByIdAsync(int idUsuario, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetByFirstNameAsync(string firstName, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetBySecondNameAsync(string secondName, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetByFirstSurnameAsync(string firstSurname, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetBySecondSurnameAsync(string secondSurname, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetByTelephoneAsync(string telephone, SqlConnection connection, SqlTransaction? transaction);
-        Task<Usuario?> GetByEmailAsync(string email, SqlConnection connection, SqlTransaction? transaction);
+        Task<Usuario?> Get(SqlCommand cmd, SqlConnection connection);
+        Task<Usuario?> GetAllAsync(SqlConnection connection);
+        Task<Usuario?> GetByIdAsync(int idUsuario, SqlConnection connection);
+        Task<Usuario?> GetByFirstNameAsync(string firstName, SqlConnection connection);
+        Task<Usuario?> GetBySecondNameAsync(string secondName, SqlConnection connection);
+        Task<Usuario?> GetByFirstSurnameAsync(string firstSurname, SqlConnection connection);
+        Task<Usuario?> GetBySecondSurnameAsync(string secondSurname, SqlConnection connection);
+        Task<Usuario?> GetByTelephoneAsync(string telephone, SqlConnection connection);
+        Task<Usuario?> GetByEmailAsync(string email, SqlConnection connection);
 
         Task<int> CreateAsync(UsuariosCreateDTO usuario, SqlConnection connection, SqlTransaction? transaction);
         Task<int> UpdateAsync(int idUsuario, UsuariosUpdateDTO usuario, SqlConnection connection);

@@ -24,6 +24,6 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         [EmailAddress]
         public required string Correo { get; set; }
         [Required]
-        public byte[] Contraseña { get; set; } = null!;
+        public string Contraseña { get; set; } = null!;
     }
 }

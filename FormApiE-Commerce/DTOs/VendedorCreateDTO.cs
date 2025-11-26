@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs
+namespace FormApiE_Commerce.DTOs
 {
     public class VendedorCreateDTO
     {
@@ -34,8 +34,10 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs
         [Required(ErrorMessage = "La contraseña es obligatoria")]
         public required string Contraseña { get; set; }
 
+
+        [Required(ErrorMessage = "El nombre del negocio es obligatorio")]
         [MaxLength(100)]
-        public string? NombreNegocio { get; set; }
+        public required string NombreNegocio { get; set; }
 
         [MaxLength(255)]
         public string? LogoNegocio { get; set; }

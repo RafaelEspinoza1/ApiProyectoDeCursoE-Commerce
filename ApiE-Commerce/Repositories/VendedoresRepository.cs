@@ -29,7 +29,10 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                 {
                     IdVendedor = reader.GetInt32(reader.GetOrdinal("IdVendedor")),
                     IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario")),
-                    Ingresos = reader.GetDecimal(reader.GetOrdinal("Ingresos"))
+                    NombreNegocio = reader.IsDBNull(reader.GetOrdinal("NombreNegocio")) ? null : reader.GetString(reader.GetOrdinal("NombreNegocio")),
+                    LogoNegocio = reader.IsDBNull(reader.GetOrdinal("LogoNegocio")) ? null : reader.GetString(reader.GetOrdinal("LogoNegocio")),
+                    DescripcionNegocio = reader.IsDBNull(reader.GetOrdinal("DescripcionNegocio")) ? null : reader.GetString(reader.GetOrdinal("DescripcionNegocio")),
+                    EsContribuyente = reader.GetBoolean(reader.GetOrdinal("EsContribuyente"))
                 };
             }
             return null;
@@ -51,7 +54,10 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
                 {
                     IdVendedor = reader.GetInt32(reader.GetOrdinal("IdVendedor")),
                     IdUsuario = reader.GetInt32(reader.GetOrdinal("IdUsuario")),
-                    Ingresos = reader.GetDecimal(reader.GetOrdinal("Ingresos"))
+                    NombreNegocio = reader.IsDBNull(reader.GetOrdinal("NombreNegocio")) ? null : reader.GetString(reader.GetOrdinal("NombreNegocio")),
+                    LogoNegocio = reader.IsDBNull(reader.GetOrdinal("LogoNegocio")) ? null : reader.GetString(reader.GetOrdinal("LogoNegocio")),
+                    DescripcionNegocio = reader.IsDBNull(reader.GetOrdinal("DescripcionNegocio")) ? null : reader.GetString(reader.GetOrdinal("DescripcionNegocio")),
+                    EsContribuyente = reader.GetBoolean(reader.GetOrdinal("EsContribuyente"))
                 });
             }
             return vendedores;

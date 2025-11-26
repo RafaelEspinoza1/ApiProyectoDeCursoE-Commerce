@@ -1,5 +1,4 @@
-﻿
-using FormApiE_Commerce.DTOs.UsuariosDTOs;
+﻿using FormApiE_Commerce.DTOs;
 using FormApiE_Commerce.Enums;
 using Newtonsoft.Json;
 using System;
@@ -89,18 +88,31 @@ namespace FormApiE_Commerce.UsersControls
 
             return true;
         }
+        private async Task<TokenData?> RegistrarAdmin(AdministradorCreateDTO admin)
+        {
+            string url = "http://localhost:5028/api/Auth/register/admin";
+            return await EnviarRegistro(url, admin);
+        }
 
+        private async Task<TokenData?> RegistrarSeller(VendedorCreateDTO seller)
+        {
+            string url = "http://localhost:5028/api/Auth/register/seller";
+            return await EnviarRegistro(url, seller);
+        }
 
+        private async Task<TokenData?> RegistrarBuyer(CompradorCreateDTO buyer)
+        {
+            string url = "http://localhost:5028/api/Auth/register/buyer";
+            return await EnviarRegistro(url, buyer);
+        }
 
-        private async Task<TokenData?> RegistrarUsuario(UsuariosCreateDTO data)
+        private async Task<TokenData?> EnviarRegistro(string url, object dto)
         {
             try
             {
                 using var httpClient = new HttpClient();
-                var url = "http://localhost:5028/api/Auth/register/admin";
 
-                // Serializar el objeto con Newtonsoft.Json
-                var json = JsonConvert.SerializeObject(data);
+                var json = JsonConvert.SerializeObject(dto);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var response = await httpClient.PostAsync(url, content);
@@ -108,23 +120,90 @@ namespace FormApiE_Commerce.UsersControls
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"Error del servidor: {response.StatusCode}\n{responseJson}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error del servidor: {response.StatusCode}\n{responseJson}",
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
 
-                // Deserializar la respuesta correctamente
-                var authResponse = JsonConvert.DeserializeObject<TokenData>(responseJson);
-
-                return authResponse;
+                return JsonConvert.DeserializeObject<TokenData>(responseJson);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error de conexión:\n{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error de conexión:\n{ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
 
+        private async Task<TokenData?> RegistrarUsuarioPorRol(int idRol)
+        {
+            switch (idRol)
+            {
+                case 1:
+                    var adminDto = ObtenerAdminDTO();
+                    return await RegistrarAdmin(adminDto);
 
+                case 2:
+                    var sellerDto = ObtenerSellerDTO();
+                    return await RegistrarSeller(sellerDto);
+
+                case 3:
+                    var buyerDto = ObtenerBuyerDTO();
+                    return await RegistrarBuyer(buyerDto);
+
+                default:
+                    throw new ArgumentException("Rol inválido");
+            }
+        }
+
+        private AdministradorCreateDTO ObtenerAdminDTO()
+        {
+            return new AdministradorCreateDTO
+            {
+                IdRol = (int)cmbRol.SelectedValue!,
+                PrimerNombre = txtP_Nombre_Regis.contentTextField.Text,
+                SegundoNombre = txtS_Nombre_Regis.contentTextField.Text,
+                PrimerApellido = txtP_Apellido_Regis.contentTextField.Text,
+                SegundoApellido = txtS_Apellido_Regis.contentTextField.Text,
+                Correo = txtCorreo_Regis.contentTextField.Text,
+                Telefono = txtTelefono_Regis.contentTextField.Text,
+                Contraseña = txtContraseña_Regis.contentTextField.Text
+            };
+        }
+
+        private VendedorCreateDTO ObtenerSellerDTO()
+        {
+            return new VendedorCreateDTO
+            {
+                IdRol = (int)cmbRol.SelectedValue!,
+                PrimerNombre = txtP_Nombre_Regis.contentTextField.Text,
+                SegundoNombre = txtS_Nombre_Regis.contentTextField.Text,
+                PrimerApellido = txtP_Apellido_Regis.contentTextField.Text,
+                SegundoApellido = txtS_Apellido_Regis.contentTextField.Text,
+                Correo = txtCorreo_Regis.contentTextField.Text,
+                Telefono = txtTelefono_Regis.contentTextField.Text,
+                Contraseña = txtContraseña_Regis.contentTextField.Text,
+                NombreNegocio = "",
+                LogoNegocio = "",
+                DescripcionNegocio = "",
+                EsContribuyente = false
+            };
+        }
+
+        private CompradorCreateDTO ObtenerBuyerDTO()
+        {
+            return new CompradorCreateDTO
+            {
+                IdRol = (int)cmbRol.SelectedValue!,
+                PrimerNombre = txtP_Nombre_Regis.contentTextField.Text,
+                SegundoNombre = txtS_Nombre_Regis.contentTextField.Text,
+                PrimerApellido = txtP_Apellido_Regis.contentTextField.Text,
+                SegundoApellido = txtS_Apellido_Regis.contentTextField.Text,
+                Correo = txtCorreo_Regis.contentTextField.Text,
+                Telefono = txtTelefono_Regis.contentTextField.Text,
+                Contraseña = txtContraseña_Regis.contentTextField.Text
+            };
+        }
 
         private async void btnRegistrarse_Click(object sender, EventArgs e)
         {
@@ -140,22 +219,8 @@ namespace FormApiE_Commerce.UsersControls
 
             int idRol = Convert.ToInt32(cmbRol.SelectedValue);
 
-
-            // Construir objeto con los datos que pide el backend
-            var data = new UsuariosCreateDTO
-            {
-                IdRol = idRol,
-                PrimerNombre = txtP_Nombre_Regis.Content.Trim(),
-                SegundoNombre = string.IsNullOrWhiteSpace(txtS_Nombre_Regis.Content) ? null : txtS_Nombre_Regis.Content.Trim(),
-                PrimerApellido = txtP_Apellido_Regis.Content.Trim(),
-                SegundoApellido = string.IsNullOrWhiteSpace(txtS_Apellido_Regis.Content) ? null : txtS_Apellido_Regis.Content.Trim(),
-                Telefono = txtTelefono_Regis.Content.Trim(),
-                Correo = txtCorreo_Regis.Content.Trim(),
-                Contraseña = txtContraseña_Regis.Content
-            };
-
-            // Registrar usuario
-            var authResponse = await RegistrarUsuario(data);
+            // Registrar según el rol
+            var authResponse = await RegistrarUsuarioPorRol(idRol);
 
             if (authResponse == null)
                 return;
@@ -167,13 +232,14 @@ namespace FormApiE_Commerce.UsersControls
 
             PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
             var formInicio = this.FindForm();
+
             if (formInicio != null)
-            {
                 paginaPrincipal.FormClosed += (s, args) => formInicio.Close();
-            }
+
             paginaPrincipal.Show();
             formInicio?.Hide();
         }
+
 
         private void cuiLabel9_Load(object sender, EventArgs e)
         {
