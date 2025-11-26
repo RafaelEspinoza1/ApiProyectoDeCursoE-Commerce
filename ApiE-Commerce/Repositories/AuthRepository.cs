@@ -11,6 +11,7 @@ using ApiProyectoDeCursoE_Commerce.Models.Enums;
 using ApiProyectoDeCursoE_Commerce.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories
 {
@@ -50,6 +51,64 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
             _compradoresRepository = compradoresRepository;
             _administradoresRepository = administradoresRepository;
         }
+
+
+        // =========================================================================================
+        // -----------------------------------------------------------------------------------------
+        // =========================================================================================
+
+        public async Task<Usuario?> LoginUser(string correo, string contraseña, SqlConnection connection)
+        {
+            var usuarioEnDb = await _usuarioDAO.GetByEmailAsync(correo, connection);
+            if (usuarioEnDb == null) return null;
+
+            // Hash de la contraseña ingresada
+            byte[] passwordIngresadaHash = HashPassword(contraseña);
+
+            // Comparar con la contraseña almacenada
+            byte[] hashAlmacenado = Convert.FromBase64String(usuarioEnDb.Contraseña);
+            bool contraseñaCorrecta = CryptographicOperations.FixedTimeEquals(hashAlmacenado, passwordIngresadaHash);
+
+            if (!contraseñaCorrecta) return null;
+
+            // Validar rol
+            string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
+            bool existe = rol switch
+            {
+                "Administrador" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                "Vendedor" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                "Comprador" => await _compradorDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                _ => false
+            };
+
+            return existe ? usuarioEnDb : null;
+        }
+
+
+        public async Task<Usuario?> LoginUserById(int idUsuario, SqlConnection connection)
+        {
+            var usuarioEnDb = await _usuarioDAO.GetByIdAsync(idUsuario, connection);
+            if (usuarioEnDb == null) return null;
+
+            // Validar rol
+            string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
+            bool existe = rol switch
+            {
+                "Administrador" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                "Vendedor" => await _adminDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                "Comprador" => await _compradorDAO.GetByIdAsync(usuarioEnDb.IdUsuario, connection) != null,
+                _ => false
+            };
+
+            return existe ? usuarioEnDb : null;
+        }
+
+
+        // =========================================================================================
+        // -----------------------------------------------------------------------------------------
+        // =========================================================================================
+
+
 
 
         // ============================================================
@@ -114,53 +173,10 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
         private byte[] HashPassword(string password)
         {
-            using (var sha = System.Security.Cryptography.SHA256.Create())
+            using (var sha = SHA256.Create())
             {
                 return sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
-        }
-
-        //public async Task<Usuario?> LoginUser(string correo, string contraseña)
-        //{
-        //    var usuarioEnDb = await _usuariosRepository.GetByEmail(correo);
-        //    if (usuarioEnDb == null) return null;
-
-        //    // Hash de la contraseña ingresada
-        //    byte[] passwordIngresadaHash = HashPassword(contraseña);
-
-        //    // Comparar con la contraseña almacenada
-        //    bool contraseñaCorrecta = usuarioEnDb.Contraseña.SequenceEqual(passwordIngresadaHash);
-        //    if (!contraseñaCorrecta) return null;
-
-        //    // Validar rol
-        //    string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
-        //    bool existe = rol switch
-        //    {
-        //        "Administrador" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
-        //        "Vendedor" => await _vendedoresRepository.GetById(usuarioEnDb.IdUsuario) != null,
-        //        "Comprador" => await _compradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
-        //        _ => false
-        //    };
-
-        //    return existe ? usuarioEnDb : null;
-        //}
-
-
-        public async Task<Usuario?> LoginUserById(int idUsuario)
-        {
-            var usuarioEnDb = await _usuariosRepository.GetById(idUsuario);
-            if (usuarioEnDb == null) return null;
-
-            string rol = ((RolesEnum)usuarioEnDb.IdRol).ToString();
-            bool existe = rol switch
-            {
-                "Administrador" => await _administradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
-                "Vendedor" => await _vendedoresRepository.GetById(usuarioEnDb.IdUsuario) != null,
-                "Comprador" => await _compradoresRepository.GetByIdUsuario(usuarioEnDb.IdUsuario) != null,
-                _ => false
-            };
-
-            return existe ? usuarioEnDb : null;
         }
     }
 }

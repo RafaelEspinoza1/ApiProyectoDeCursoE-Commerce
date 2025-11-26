@@ -188,35 +188,35 @@ public class AuthController : ControllerBase
     // ============================================================
     // INICIO DE SESIÓN
     // ============================================================
-    //[AllowAnonymous]
-    //[HttpPost("login")]
-    //public async Task<IActionResult> Login([FromBody] LoginDTO login)
-    //{
-    //    try
-    //    {
-    //        if (login == null)
-    //            return BadRequest("Datos inválidos");
+    [AllowAnonymous]
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDTO login)
+    {
+        try
+        {
+            if (login == null)
+                return BadRequest("Datos inválidos");
 
-    //        var response = await _authService.LoginAsync(login);
+            var response = await _authService.LoginAsync(login);
 
-    //        if (response == null)
-    //            return Unauthorized("Usuario o contraseña incorrectos.");
+            if (response == null)
+                return Unauthorized("Usuario o contraseña incorrectos.");
 
-    //        return Ok(response);
-    //    }
-    //    catch (ArgumentException ex)
-    //    {
-    //        return BadRequest(ex.Message);
-    //    }
-    //    catch (InvalidOperationException ex)
-    //    {
-    //        return BadRequest(ex.Message);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        return StatusCode(500, ex.Message);
-    //    }
-    //}
+            return Ok(response);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
 
 
 

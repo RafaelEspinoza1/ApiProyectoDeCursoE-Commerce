@@ -11,8 +11,8 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
     public interface IAuthRepository
     {
         // Comandos de autenticación
-        //Task<Usuario?> LoginUser(string correo, string password);
-        Task<Usuario?> LoginUserById(int idUsuario);
+        Task<Usuario?> LoginUser(string correo, string password, SqlConnection connection);
+        Task<Usuario?> LoginUserById(int idUsuario, SqlConnection connection);
 
         Task<int> RegisterUser(UsuariosCreateDTO usuario, SqlConnection connection, SqlTransaction? transaction);
         Task<bool?> RegisterAdminAsync(AdministradorRegisterDTO admin, SqlConnection connection, SqlTransaction? transaction);

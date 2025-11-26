@@ -42,149 +42,149 @@ namespace ApiProyectoDeCursoE_Commerce.Services
         // ============================================================
         // LOGIN GENERAL (JWT + Refresh + Correo/Contraseña)
         // ============================================================
-        //public async Task<AuthResponseDTO?> LoginAsync(LoginDTO login)
-        //{
-        //    using var connection = _context.GetConnection();
-        //    await connection.OpenAsync();
+        public async Task<AuthResponseDTO?> LoginAsync(LoginDTO login)
+        {
+            using var connection = _context.GetConnection();
+            await connection.OpenAsync();
 
-        //    Usuario? user;
+            Usuario? user;
 
-        //    // ============================================================
-        //    // 0. LOGIN RÁPIDO CON JWT VÁLIDO
-        //    // ============================================================
-        //    if (!string.IsNullOrWhiteSpace(login.Token))
-        //    {
-        //        var principal = _jwtService.ValidateToken(login.Token);
-        //        if (principal != null)
-        //        {
-        //            var idUsuarioClaim = principal.FindFirst("id")?.Value;
+            // ============================================================
+            // 0. LOGIN RÁPIDO CON JWT VÁLIDO
+            // ============================================================
+            if (!string.IsNullOrWhiteSpace(login.Token))
+            {
+                var principal = _jwtService.ValidateToken(login.Token);
+                if (principal != null)
+                {
+                    var idUsuarioClaim = principal.FindFirst("id")?.Value;
 
-        //            if (int.TryParse(idUsuarioClaim, out int idJwt))
-        //            {
-        //                user = await _authRepository.LoginUserById(idJwt);
+                    if (int.TryParse(idUsuarioClaim, out int tokenId))
+                    {
+                        user = await _authRepository.LoginUserById(tokenId, connection);
 
-        //                if (user != null)
-        //                {
-        //                    return new AuthResponseDTO
-        //                    {
-        //                        IdUsuario = user.IdUsuario,
-        //                        PrimerNombre = user.PrimerNombre,
-        //                        PrimerApellido = user.PrimerApellido,
-        //                        Correo = user.Correo,
-        //                        Telefono = Convert.ToInt32(user.Telefono),
-        //                        Token = login.Token,
-        //                        RefreshToken = ""
-        //                    };
-        //                }
-        //            }
-        //        }
-        //    }
+                        if (user != null)
+                        {
+                            return new AuthResponseDTO
+                            {
+                                IdUsuario = user.IdUsuario,
+                                PrimerNombre = user.PrimerNombre,
+                                PrimerApellido = user.PrimerApellido,
+                                Correo = user.Correo,
+                                Telefono = Convert.ToInt32(user.Telefono),
+                                Token = login.Token,
+                                RefreshToken = ""
+                            };
+                        }
+                    }
+                }
+            }
 
-        //    // ============================================================
-        //    // 1. LOGIN RÁPIDO CON REFRESH TOKEN
-        //    // ============================================================
-        //    if (!string.IsNullOrWhiteSpace(login.RefreshToken))
-        //    {
-        //        if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
-        //            return null;
+            // ============================================================
+            // 1. LOGIN PERSISTENTE CON REFRESH TOKEN
+            // ============================================================
+            if (!string.IsNullOrWhiteSpace(login.RefreshToken))
+            {
+                if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
+                    return null;
 
-        //        var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
+                var refreshToken = await _refreshRepository.GetActiveToken(login.IdUsuario, refreshGuid);
 
-        //        if (refreshToken == null || refreshToken.Revoked)
-        //            return null;
+                if (refreshToken == null || refreshToken.Revoked)
+                    return null;
 
-        //        if (refreshToken.FechaExpiracion < DateTime.UtcNow)
-        //        {
-        //            refreshToken.Revoked = true;
-        //            await _refreshRepository.Update(refreshToken);
-        //            return null;
-        //        }
+                if (refreshToken.FechaExpiracion < DateTime.UtcNow)
+                {
+                    refreshToken.Revoked = true;
+                    await _refreshRepository.Update(refreshToken);
+                    return null;
+                }
 
-        //        user = await _authRepository.LoginUserById(login.IdUsuario);
+                user = await _authRepository.LoginUserById(login.IdUsuario, connection);
 
-        //        if (user == null)
-        //            return null;
+                if (user == null)
+                    return null;
 
-        //        // renovar refresh token
-        //        refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
-        //        await _refreshRepository.Update(refreshToken);
+                // renovar refresh token
+                refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+                await _refreshRepository.Update(refreshToken);
 
-        //        var jwt = _jwtService.GenerateToken(user);
+                var jwt = _jwtService.GenerateToken(user);
 
-        //        return new AuthResponseDTO
-        //        {
-        //            IdUsuario = user.IdUsuario,
-        //            PrimerNombre = user.PrimerNombre,
-        //            PrimerApellido = user.PrimerApellido,
-        //            Correo = user.Correo,
-        //            Telefono = Convert.ToInt32(user.Telefono),
-        //            Token = jwt,
-        //            RefreshToken = refreshToken.Token.ToString()
-        //        };
-        //    }
+                return new AuthResponseDTO
+                {
+                    IdUsuario = user.IdUsuario,
+                    PrimerNombre = user.PrimerNombre,
+                    PrimerApellido = user.PrimerApellido,
+                    Correo = user.Correo,
+                    Telefono = Convert.ToInt32(user.Telefono),
+                    Token = jwt,
+                    RefreshToken = refreshToken.Token.ToString()
+                };
+            }
 
-        //    // ============================================================
-        //    // 2. LOGIN NORMAL (CORREO + CONTRASEÑA)
-        //    // ============================================================
-        //    if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
-        //        return null;
+            // ============================================================
+            // 2. LOGIN NORMAL (CORREO + CONTRASEÑA)
+            // ============================================================
+            if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
+                return null;
 
-        //    user = await _authRepository.LoginUser(login.Correo, login.Contraseña);
+            user = await _authRepository.LoginUser(login.Correo, login.Contraseña, connection);
 
-        //    if (user == null)
-        //        return null;
+            if (user == null)
+                return null;
 
-        //    // ============================================================
-        //    // 3. MANEJO DEL REFRESH TOKEN
-        //    // ============================================================
-        //    var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
+            // ============================================================
+            // 3. MANEJO DEL REFRESH TOKEN
+            // ============================================================
+            var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
 
-        //    RefreshToken refreshToUse;
+            RefreshToken refreshToUse;
 
-        //    if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
-        //    {
-        //        existingToken.Revoked = true;
-        //        await _refreshRepository.Update(existingToken);
-        //        existingToken = null;
-        //    }
+            if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
+            {
+                existingToken.Revoked = true;
+                await _refreshRepository.Update(existingToken);
+                existingToken = null;
+            }
 
-        //    if (existingToken == null)
-        //    {
-        //        refreshToUse = new RefreshToken
-        //        {
-        //            IdUsuario = user.IdUsuario,
-        //            Token = Guid.NewGuid(),
-        //            FechaCreacion = DateTime.UtcNow,
-        //            FechaExpiracion = DateTime.UtcNow.AddDays(7),
-        //            Revoked = false
-        //        };
+            if (existingToken == null)
+            {
+                refreshToUse = new RefreshToken
+                {
+                    IdUsuario = user.IdUsuario,
+                    Token = Guid.NewGuid(),
+                    FechaCreacion = DateTime.UtcNow,
+                    FechaExpiracion = DateTime.UtcNow.AddDays(7),
+                    Revoked = false
+                };
 
-        //        await _refreshRepository.Create(refreshToUse, connection, null);
-        //    }
-        //    else
-        //    {
-        //        existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
-        //        await _refreshRepository.Update(existingToken);
+                await _refreshRepository.Create(refreshToUse, connection, null);
+            }
+            else
+            {
+                existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
+                await _refreshRepository.Update(existingToken);
 
-        //        refreshToUse = existingToken;
-        //    }
+                refreshToUse = existingToken;
+            }
 
-        //    // ============================================================
-        //    // 4. GENERAR JWT
-        //    // ============================================================
-        //    var jwtNormal = _jwtService.GenerateToken(user);
+            // ============================================================
+            // 4. GENERAR JWT
+            // ============================================================
+            var jwtNormal = _jwtService.GenerateToken(user);
 
-        //    return new AuthResponseDTO
-        //    {
-        //        IdUsuario = user.IdUsuario,
-        //        PrimerNombre = user.PrimerNombre,
-        //        PrimerApellido = user.PrimerApellido,
-        //        Correo = user.Correo,
-        //        Telefono = Convert.ToInt32(user.Telefono),
-        //        Token = jwtNormal,
-        //        RefreshToken = refreshToUse.Token.ToString()
-        //    };
-        //}
+            return new AuthResponseDTO
+            {
+                IdUsuario = user.IdUsuario,
+                PrimerNombre = user.PrimerNombre,
+                PrimerApellido = user.PrimerApellido,
+                Correo = user.Correo,
+                Telefono = Convert.ToInt32(user.Telefono),
+                Token = jwtNormal,
+                RefreshToken = refreshToUse.Token.ToString()
+            };
+        }
 
 
         // ============================================================

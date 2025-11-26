@@ -139,6 +139,7 @@ namespace FormApiE_Commerce
             var correo = txtCorreo.contentTextField.Text;
             var contraseña = txtContraseña.contentTextField.Text;
 
+            MessageBox.Show("Intentando el inicio de sesión.");
             var tokenData = await LoginUser(correo, contraseña);
 
             if (tokenData != null)

@@ -161,11 +161,11 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             {
                 using var cmd = new SqlCommand();
                 cmd.CommandText = @"
-            INSERT INTO Usuarios
-            (IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña)
-            OUTPUT INSERTED.IdUsuario
-            VALUES
-            (@IdRol, @PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
+                    INSERT INTO Usuarios
+                    (IdRol, PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, Telefono, Correo, Contraseña)
+                    OUTPUT INSERTED.IdUsuario
+                    VALUES
+                    (@IdRol, @PrimerNombre, @SegundoNombre, @PrimerApellido, @SegundoApellido, @Telefono, @Correo, @Contraseña)";
 
                 cmd.Connection = connection;
                 if (transaction != null)
@@ -184,7 +184,8 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
                 {
                     hashedPassword = sha.ComputeHash(Encoding.UTF8.GetBytes(usuario.Contraseña));
                 }
-                cmd.Parameters.AddWithValue("@Contraseña", hashedPassword);
+                string hashedPasswordBase64 = Convert.ToBase64String(hashedPassword);
+                cmd.Parameters.AddWithValue("@Contraseña", hashedPasswordBase64);
 
                 var result = await cmd.ExecuteScalarAsync();
                 if (result == null)
