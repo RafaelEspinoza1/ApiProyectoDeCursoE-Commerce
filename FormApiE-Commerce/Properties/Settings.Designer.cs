@@ -73,10 +73,10 @@ namespace FormApiE_Commerce.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Telefono {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Telefono {
             get {
-                return ((int)(this["Telefono"]));
+                return ((string)(this["Telefono"]));
             }
             set {
                 this["Telefono"] = value;

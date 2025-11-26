@@ -14,8 +14,8 @@
     <Setting Name="Correo" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Telefono" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="Telefono" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Token" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

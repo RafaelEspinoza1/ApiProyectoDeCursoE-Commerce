@@ -53,7 +53,7 @@ namespace FormApiE_Commerce
             Properties.Settings.Default.PrimerNombre = authResponse.PrimerNombre ?? "";
             Properties.Settings.Default.PrimerApellido = authResponse.PrimerApellido ?? "";
             Properties.Settings.Default.Correo = authResponse.Correo ?? "";
-            Properties.Settings.Default.Telefono = authResponse.Telefono;
+            Properties.Settings.Default.Telefono = authResponse.Telefono ?? "";
 
             // Encriptar tokens antes de guardar
             Properties.Settings.Default.Token = Convert.ToBase64String(Encrypt(authResponse.Token ?? ""));
@@ -71,7 +71,7 @@ namespace FormApiE_Commerce
                 PrimerNombre = Properties.Settings.Default.PrimerNombre ?? "",
                 PrimerApellido = Properties.Settings.Default.PrimerApellido ?? "",
                 Correo = Properties.Settings.Default.Correo ?? "",
-                Telefono = Properties.Settings.Default.Telefono,
+                Telefono = Properties.Settings.Default.Telefono ?? "",
                 Token = DecryptSafe(Properties.Settings.Default.Token),
                 RefreshToken = DecryptSafe(Properties.Settings.Default.RefreshToken)
             };
@@ -84,7 +84,7 @@ namespace FormApiE_Commerce
             Properties.Settings.Default.PrimerNombre = "";
             Properties.Settings.Default.PrimerApellido = "";
             Properties.Settings.Default.Correo = "";
-            Properties.Settings.Default.Telefono = 0;
+            Properties.Settings.Default.Telefono = "";
             Properties.Settings.Default.Token = "";
             Properties.Settings.Default.RefreshToken = "";
 
