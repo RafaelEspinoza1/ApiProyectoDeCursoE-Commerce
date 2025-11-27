@@ -217,6 +217,8 @@ namespace FormApiE_Commerce.UsersControls
                 return;
             }
 
+
+
             int idRol = Convert.ToInt32(cmbRol.SelectedValue);
 
             // Registrar según el rol
