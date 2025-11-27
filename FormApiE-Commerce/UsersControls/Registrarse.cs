@@ -1,5 +1,6 @@
 ﻿using FormApiE_Commerce.DTOs;
-using FormApiE_Commerce.Enums;
+using FormApiE_Commerce.Views;
+using GMap.NET.MapProviders;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -94,13 +95,13 @@ namespace FormApiE_Commerce.UsersControls
             return await EnviarRegistro(url, admin);
         }
 
-        private async Task<TokenData?> RegistrarSeller(VendedorCreateDTO seller)
+        private async Task<TokenData?> RegistrarVendedor(VendedorCreateDTO seller)
         {
             string url = "http://localhost:5028/api/Auth/register/seller";
             return await EnviarRegistro(url, seller);
         }
 
-        private async Task<TokenData?> RegistrarBuyer(CompradorCreateDTO buyer)
+        private async Task<TokenData?> RegistrarComprador(CompradorCreateDTO buyer)
         {
             string url = "http://localhost:5028/api/Auth/register/buyer";
             return await EnviarRegistro(url, buyer);
@@ -135,7 +136,7 @@ namespace FormApiE_Commerce.UsersControls
             }
         }
 
-        private async Task<TokenData?> RegistrarUsuarioPorRol(int idRol)
+        private async Task<TokenData?> RegistrarUsuarioPorRol<T>(int idRol, T? usuario)
         {
             switch (idRol)
             {
@@ -144,12 +145,14 @@ namespace FormApiE_Commerce.UsersControls
                     return await RegistrarAdmin(adminDto);
 
                 case 2:
-                    var sellerDto = ObtenerSellerDTO();
-                    return await RegistrarSeller(sellerDto);
+                    if (usuario is not VendedorCreateDTO vendedor)
+                        throw new ArgumentException("El objeto no es un VendedorCreateDTO");
+
+                    return await RegistrarVendedor(vendedor);
 
                 case 3:
-                    var buyerDto = ObtenerBuyerDTO();
-                    return await RegistrarBuyer(buyerDto);
+                    var buyerDto = ObtenerCompradorDTO();
+                    return await RegistrarComprador(buyerDto);
 
                 default:
                     throw new ArgumentException("Rol inválido");
@@ -171,7 +174,7 @@ namespace FormApiE_Commerce.UsersControls
             };
         }
 
-        private VendedorCreateDTO ObtenerSellerDTO()
+        private VendedorCreateDTO ObtenerVendedorDTO(RegistrarVendedorDTO vendedor)
         {
             return new VendedorCreateDTO
             {
@@ -183,14 +186,14 @@ namespace FormApiE_Commerce.UsersControls
                 Correo = txtCorreo_Regis.contentTextField.Text,
                 Telefono = txtTelefono_Regis.contentTextField.Text,
                 Contraseña = txtContraseña_Regis.contentTextField.Text,
-                NombreNegocio = "",
-                LogoNegocio = "",
-                DescripcionNegocio = "",
-                EsContribuyente = false
+                NombreNegocio = vendedor?.NombreNegocio ?? "",
+                LogoNegocio = vendedor?.LogoNegocio ?? "",
+                DescripcionNegocio = vendedor?.DescripcionNegocio ?? "",
+                EsContribuyente = vendedor?.EsContribuyente ?? false
             };
         }
 
-        private CompradorCreateDTO ObtenerBuyerDTO()
+        private CompradorCreateDTO ObtenerCompradorDTO()
         {
             return new CompradorCreateDTO
             {
@@ -208,10 +211,10 @@ namespace FormApiE_Commerce.UsersControls
         private async void btnRegistrarse_Click(object sender, EventArgs e)
         {
             // Validación de campos
-            if (!ValidarCampos())
-                return;
+            //if (!ValidarCampos())
+            //    return;
 
-            MessageBox.Show(cmbRol.SelectedValue?.GetType().ToString() ?? "null");
+            MessageBox.Show(cmbRol.SelectedValue!.ToString());
 
             if (cmbRol.SelectedValue == null)
             {
@@ -219,12 +222,30 @@ namespace FormApiE_Commerce.UsersControls
                 return;
             }
 
-
-
             int idRol = Convert.ToInt32(cmbRol.SelectedValue);
 
+            object? usuario = null;
+
+            if (idRol == 2)
+            {
+                using var registro = new Registro_para_Vendedores();
+
+                var result = registro.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    var vendedor = registro.datosVendedor;
+                    MessageBox.Show("Los datos se cargaron con éxito.");
+                }
+                else
+                {
+                    MessageBox.Show("Se rechazó la solicitud.");
+                    return;
+                }
+            }
+
             // Registrar según el rol
-            var authResponse = await RegistrarUsuarioPorRol(idRol);
+            var authResponse = await RegistrarUsuarioPorRol(idRol, usuario);
 
             if (authResponse == null)
                 return;
