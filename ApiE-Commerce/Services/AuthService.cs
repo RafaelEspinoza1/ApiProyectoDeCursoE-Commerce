@@ -35,7 +35,6 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             _usuarioDAO = usuarioDAO;
             _refreshTokenDAO = refreshTokenDAO;
             _authRepository = authRepository;
-            _refreshRepository = resfreshRepository;
             _jwtService = jwtService;
         }
 
@@ -56,6 +55,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             if (!string.IsNullOrWhiteSpace(login.Token))
             {
                 var principal = _jwtService.ValidateToken(login.Token);
+
                 if (principal != null)
                 {
                     var idUsuarioClaim = principal.FindFirst("id")?.Value;
@@ -89,12 +89,10 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 if (!Guid.TryParse(login.RefreshToken, out Guid refreshGuid))
                     return null;
 
-
                 user = await _authRepository.LoginUserById(login.IdUsuario, connection);
 
                 if (user == null)
                     return null;
-                
 
                 var refreshToken = await _refreshTokenDAO.GetActiveAsync(login.IdUsuario, connection);
 
@@ -108,8 +106,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     return null;
                 }
 
-
-                // renovar refresh token
+                // Renovar Refresh Token
                 refreshToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
                 await _refreshTokenDAO.UpdateAsync(refreshToken, connection);
 
@@ -128,7 +125,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             }
 
             // ============================================================
-            // 2. LOGIN NORMAL (CORREO + CONTRASEÑA)
+            // 2. LOGIN NORMAL (Correo + Contraseña)
             // ============================================================
             if (string.IsNullOrWhiteSpace(login.Correo) || string.IsNullOrWhiteSpace(login.Contraseña))
                 return null;
@@ -143,18 +140,16 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             // ============================================================
             var existingToken = await _refreshTokenDAO.GetActiveAsync(user.IdUsuario, connection);
 
-            RefreshToken refreshToUse;
-
             if (existingToken != null && (existingToken.FechaExpiracion < DateTime.UtcNow || existingToken.Revoked))
             {
                 existingToken.Revoked = true;
-                await _refreshRepository.Update(existingToken);
+                await _refreshTokenDAO.UpdateAsync(existingToken, connection);
                 existingToken = null;
             }
 
             if (existingToken == null)
             {
-                refreshToUse = new RefreshToken
+                var newRefresh = new RefreshTokenCreateDTO
                 {
                     IdUsuario = user.IdUsuario,
                     Token = Guid.NewGuid(),
@@ -163,18 +158,17 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     Revoked = false
                 };
 
-                await _refreshRepository.Create(refreshToUse, connection, null);
+                await _refreshTokenDAO.CreateAsync(newRefresh, connection, null);
+                existingToken = await _refreshTokenDAO.GetActiveAsync(newRefresh.IdUsuario, connection);
             }
             else
             {
                 existingToken.FechaExpiracion = DateTime.UtcNow.AddDays(7);
-                await _refreshRepository.Update(existingToken);
-
-                refreshToUse = existingToken;
+                await _refreshTokenDAO.UpdateAsync(existingToken, connection);
             }
 
             // ============================================================
-            // 4. GENERAR JWT
+            // 4. GENERAR JWT Y RESPUESTA
             // ============================================================
             var jwtNormal = _jwtService.GenerateToken(user);
 
@@ -186,9 +180,10 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 Correo = user.Correo,
                 Telefono = Convert.ToInt32(user.Telefono),
                 Token = jwtNormal,
-                RefreshToken = refreshToUse.Token.ToString()
+                RefreshToken = existingToken.Token.ToString()
             };
         }
+
 
 
         // ============================================================

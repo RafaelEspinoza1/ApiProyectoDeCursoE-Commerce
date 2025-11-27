@@ -30,11 +30,6 @@ builder.Services.AddScoped<RefreshTokenDAO>();
 
 // ======= Repositorios =======
 builder.Services.AddScoped<AuthRepository>();
-builder.Services.AddScoped<RefreshTokenRepository>();
-builder.Services.AddScoped<UsuariosRepository>();
-builder.Services.AddScoped<VendedoresRepository>();
-builder.Services.AddScoped<CompradoresRepository>();
-builder.Services.AddScoped<AdministradoresRepository>();
 
 // ======= Servicios =======
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));

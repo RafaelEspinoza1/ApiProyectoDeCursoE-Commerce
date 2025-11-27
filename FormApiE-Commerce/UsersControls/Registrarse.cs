@@ -211,11 +211,15 @@ namespace FormApiE_Commerce.UsersControls
             if (!ValidarCampos())
                 return;
 
+            MessageBox.Show(cmbRol.SelectedValue?.GetType().ToString() ?? "null");
+
             if (cmbRol.SelectedValue == null)
             {
                 MessageBox.Show("Debes seleccionar un rol válido.");
                 return;
             }
+
+
 
             int idRol = Convert.ToInt32(cmbRol.SelectedValue);
 
