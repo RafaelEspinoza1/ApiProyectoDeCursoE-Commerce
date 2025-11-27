@@ -25,31 +25,18 @@ namespace ApiProyectoDeCursoE_Commerce.Repositories
 
         private readonly RefreshTokenDAO _refreshTokenDAO;
 
-        private readonly UsuariosRepository _usuariosRepository;
-        private readonly VendedoresRepository _vendedoresRepository;
-        private readonly CompradoresRepository _compradoresRepository;
-        private readonly AdministradoresRepository _administradoresRepository;
-
         public AuthRepository(
             UsuarioDAO usuarioDAO,
             AdminDAO adminDAO,
             VendedorDAO vendedorDAO,
             CompradorDAO compradorDAO,
-            RefreshTokenDAO refreshTokenDAO,
-            UsuariosRepository usuariosRepository,
-            VendedoresRepository vendedoresRepository,
-            CompradoresRepository compradoresRepository,
-            AdministradoresRepository administradoresRepository)
+            RefreshTokenDAO refreshTokenDAO)
         {
             _usuarioDAO = usuarioDAO;
             _adminDAO = adminDAO;
             _vendedorDAO = vendedorDAO;
             _compradorDAO = compradorDAO;
             _refreshTokenDAO = refreshTokenDAO;
-            _usuariosRepository = usuariosRepository;
-            _vendedoresRepository = vendedoresRepository;
-            _compradoresRepository = compradoresRepository;
-            _administradoresRepository = administradoresRepository;
         }
 
 
