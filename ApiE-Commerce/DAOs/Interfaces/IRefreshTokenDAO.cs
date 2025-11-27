@@ -9,6 +9,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs.Interfaces
     {
         Task<RefreshToken?> GetAllAsync(SqlConnection connection);
         Task<RefreshToken?> GetByIdAsync(int idUsuario, SqlConnection connection);
+        Task<RefreshToken?> GetActiveAsync(int idUsuario, SqlConnection connection);
         Task<RefreshToken?> GetAllActiveAsync(SqlConnection connection);
         Task<RefreshToken?> GetAllRevokedAsync(SqlConnection connection);
 

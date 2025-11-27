@@ -82,7 +82,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             return await Get(cmd, connection);
         }
 
-        public async Task<RefreshToken?> GetActiveAsync(int idUsuario, Guid refreshToken, SqlConnection connection)
+        public async Task<RefreshToken?> GetActiveAsync(int idUsuario, SqlConnection connection)
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = @"
@@ -90,12 +90,10 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
                     IdRefreshToken, IdUsuario, Token, FechaCreacion, FechaExpiracion, Revoked
                 FROM RefreshToken
                 WHERE Revoked = 0 
-                  AND IdUsuario = @IdUsuario
-                  AND Token = @Token";
+                  AND IdUsuario = @IdUsuario";
 
             cmd.Connection = connection;
             cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
-            cmd.Parameters.AddWithValue("@Token", refreshToken);
 
             // Llama al método Get para ejecutar y mapear
             return await Get(cmd, connection);

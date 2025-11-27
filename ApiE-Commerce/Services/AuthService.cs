@@ -22,7 +22,6 @@ namespace ApiProyectoDeCursoE_Commerce.Services
         private readonly RefreshTokenDAO _refreshTokenDAO;
 
         private readonly AuthRepository _authRepository;
-        private readonly RefreshTokenRepository _refreshRepository;
         private readonly JwtService _jwtService;
 
         public AuthService(
@@ -30,7 +29,6 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             UsuarioDAO usuarioDAO,
             RefreshTokenDAO refreshTokenDAO,
             AuthRepository authRepository,
-            RefreshTokenRepository resfreshRepository,
             JwtService jwtService)
         {
             _context = context;
@@ -98,7 +96,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     return null;
                 
 
-                var refreshToken = await _refreshTokenDAO.GetActiveAsync(login.IdUsuario, refreshGuid, connection);
+                var refreshToken = await _refreshTokenDAO.GetActiveAsync(login.IdUsuario, connection);
 
                 if (refreshToken == null || refreshToken.Revoked)
                     return null;
@@ -143,7 +141,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
             // ============================================================
             // 3. MANEJO DEL REFRESH TOKEN
             // ============================================================
-            var existingToken = await _refreshRepository.GetActiveTokenByUser(user.IdUsuario);
+            var existingToken = await _refreshTokenDAO.GetActiveAsync(user.IdUsuario, connection);
 
             RefreshToken refreshToUse;
 
