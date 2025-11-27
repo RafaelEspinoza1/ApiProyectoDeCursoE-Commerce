@@ -8,6 +8,9 @@ namespace ApiProyectoDeCursoE_Commerce.Models
     {
         [Key]
         public int IdChat { get; set; }
+        public int IdProducto { get; set; }
+        public int IdTransaccion { get; set; }
+
 
         [Required]
         public DateTime FechaInicio { get; set; } = DateTime.Now;

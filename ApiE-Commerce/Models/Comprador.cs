@@ -10,8 +10,6 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         public int IdComprador { get; set; }
         [Required]
         public int IdUsuario { set; get; }
-        //[Required, MaxLength(25)]
-        //public string NumeroDeCuentaComprador { get; set; } = null!;
         //// Relación con Usuario
         //[ForeignKey("IdUsuario")]
         //public Usuario Usuario { get; set; } = null!;

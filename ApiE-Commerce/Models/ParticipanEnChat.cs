@@ -12,6 +12,7 @@ namespace ApiProyectoDeCursoE_Commerce.Models
         [Key, Column(Order = 1)]
         public int IdChat { get; set; }
 
+        public string RolEnChat { get; set; } = null!;
         // Relaciones
         [ForeignKey("IdUsuario")]
         public Usuario Usuario { get; set; } = null!;
