@@ -65,7 +65,7 @@
             cuiGroupBox2.ForeColor = Color.Red;
             cuiGroupBox2.Location = new Point(574, 146);
             cuiGroupBox2.Name = "cuiGroupBox2";
-            cuiGroupBox2.Padding = new Padding(10, 28, 15, 15);
+            cuiGroupBox2.Padding = new Padding(10, 33, 15, 15);
             cuiGroupBox2.Rounding = new Padding(10, 10, 15, 15);
             cuiGroupBox2.Size = new Size(559, 444);
             cuiGroupBox2.TabIndex = 5;
@@ -125,7 +125,7 @@
             cuiPanel1.PanelColor = Color.FromArgb(255, 128, 0);
             cuiPanel1.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
             cuiPanel1.Rounding = new Padding(8);
-            cuiPanel1.Size = new Size(586, 55);
+            cuiPanel1.Size = new Size(1120, 55);
             cuiPanel1.TabIndex = 6;
             // 
             // cuiLabel2
@@ -251,7 +251,7 @@
             cuiGroupBox1.Location = new Point(26, 127);
             cuiGroupBox1.Margin = new Padding(3, 2, 3, 2);
             cuiGroupBox1.Name = "cuiGroupBox1";
-            cuiGroupBox1.Padding = new Padding(10, 29, 10, 15);
+            cuiGroupBox1.Padding = new Padding(10, 34, 10, 15);
             cuiGroupBox1.Rounding = new Padding(10, 10, 10, 15);
             cuiGroupBox1.Size = new Size(530, 502);
             cuiGroupBox1.TabIndex = 10;
@@ -333,7 +333,7 @@
             cuiTextBox1.Name = "cuiTextBox1";
             cuiTextBox1.NormalImageTint = Color.White;
             cuiTextBox1.OutlineColor = Color.Gray;
-            cuiTextBox1.Padding = new Padding(15, 5, 15, 5);
+            cuiTextBox1.Padding = new Padding(19, 6, 19, 6);
             cuiTextBox1.PasswordChar = false;
             cuiTextBox1.PlaceholderColor = SystemColors.WindowText;
             cuiTextBox1.PlaceholderText = "";
@@ -428,7 +428,7 @@
             txtCorreo.Name = "txtCorreo";
             txtCorreo.NormalImageTint = Color.White;
             txtCorreo.OutlineColor = Color.Gray;
-            txtCorreo.Padding = new Padding(15, 6, 15, 0);
+            txtCorreo.Padding = new Padding(19, 4, 19, 0);
             txtCorreo.PasswordChar = false;
             txtCorreo.PlaceholderColor = SystemColors.WindowText;
             txtCorreo.PlaceholderText = "";
@@ -440,9 +440,9 @@
             // 
             // Registro_para_Vendedores
             // 
-            AutoScaleDimensions = new SizeF(8F, 16F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(586, 739);
+            ClientSize = new Size(1120, 739);
             Controls.Add(cuiGroupBox1);
             Controls.Add(btnVendedor_rechazar);
             Controls.Add(btnVendedor_aceptar);
