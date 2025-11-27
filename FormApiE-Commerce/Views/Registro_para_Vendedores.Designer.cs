@@ -44,12 +44,12 @@
             cuiLabel9 = new CuoreUI.Controls.cuiLabel();
             cuiLabel8 = new CuoreUI.Controls.cuiLabel();
             cuiLabel7 = new CuoreUI.Controls.cuiLabel();
-            cuiTextBox1 = new CuoreUI.Controls.cuiTextBox();
+            txtDescripcionNegocio = new CuoreUI.Controls.cuiTextBox();
             cuiPictureBox1 = new CuoreUI.Controls.cuiPictureBox();
-            cuiFolderDropper1 = new CuoreUI.Controls.cuiFolderDropper();
+            cuiLogoNegocio = new CuoreUI.Controls.cuiFolderDropper();
             cuiLabel6 = new CuoreUI.Controls.cuiLabel();
             cuiLabel5 = new CuoreUI.Controls.cuiLabel();
-            txtCorreo = new CuoreUI.Controls.cuiTextBox();
+            txtNombreNegocio = new CuoreUI.Controls.cuiTextBox();
             cuiGroupBox2.SuspendLayout();
             cuiPanel2.SuspendLayout();
             cuiPanel1.SuspendLayout();
@@ -65,7 +65,7 @@
             cuiGroupBox2.ForeColor = Color.Red;
             cuiGroupBox2.Location = new Point(574, 146);
             cuiGroupBox2.Name = "cuiGroupBox2";
-            cuiGroupBox2.Padding = new Padding(10, 28, 15, 15);
+            cuiGroupBox2.Padding = new Padding(10, 38, 15, 15);
             cuiGroupBox2.Rounding = new Padding(10, 10, 15, 15);
             cuiGroupBox2.Size = new Size(559, 444);
             cuiGroupBox2.TabIndex = 5;
@@ -125,7 +125,7 @@
             cuiPanel1.PanelColor = Color.FromArgb(255, 128, 0);
             cuiPanel1.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
             cuiPanel1.Rounding = new Padding(8);
-            cuiPanel1.Size = new Size(586, 55);
+            cuiPanel1.Size = new Size(1163, 55);
             cuiPanel1.TabIndex = 6;
             // 
             // cuiLabel2
@@ -240,18 +240,18 @@
             cuiGroupBox1.Controls.Add(cuiLabel9);
             cuiGroupBox1.Controls.Add(cuiLabel8);
             cuiGroupBox1.Controls.Add(cuiLabel7);
-            cuiGroupBox1.Controls.Add(cuiTextBox1);
+            cuiGroupBox1.Controls.Add(txtDescripcionNegocio);
             cuiGroupBox1.Controls.Add(cuiPictureBox1);
-            cuiGroupBox1.Controls.Add(cuiFolderDropper1);
+            cuiGroupBox1.Controls.Add(cuiLogoNegocio);
             cuiGroupBox1.Controls.Add(cuiLabel6);
             cuiGroupBox1.Controls.Add(cuiLabel5);
-            cuiGroupBox1.Controls.Add(txtCorreo);
+            cuiGroupBox1.Controls.Add(txtNombreNegocio);
             cuiGroupBox1.Font = new Font("Garamond", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiGroupBox1.ForeColor = Color.DarkGreen;
             cuiGroupBox1.Location = new Point(26, 127);
             cuiGroupBox1.Margin = new Padding(3, 2, 3, 2);
             cuiGroupBox1.Name = "cuiGroupBox1";
-            cuiGroupBox1.Padding = new Padding(10, 29, 10, 15);
+            cuiGroupBox1.Padding = new Padding(10, 40, 10, 15);
             cuiGroupBox1.Rounding = new Padding(10, 10, 10, 15);
             cuiGroupBox1.Size = new Size(530, 502);
             cuiGroupBox1.TabIndex = 10;
@@ -310,81 +310,81 @@
             cuiLabel7.Location = new Point(13, 231);
             cuiLabel7.Margin = new Padding(4, 3, 4, 3);
             cuiLabel7.Name = "cuiLabel7";
-            cuiLabel7.Size = new Size(321, 30);
+            cuiLabel7.Size = new Size(448, 30);
             cuiLabel7.TabIndex = 6;
             cuiLabel7.VerticalAlignment = StringAlignment.Near;
             // 
-            // cuiTextBox1
+            // txtDescripcionNegocio
             // 
-            cuiTextBox1.AutoScroll = true;
-            cuiTextBox1.BackgroundColor = Color.LightGray;
-            cuiTextBox1.Content = "";
-            cuiTextBox1.FocusBackgroundColor = Color.White;
-            cuiTextBox1.FocusImageTint = Color.White;
-            cuiTextBox1.FocusOutlineColor = Color.FromArgb(255, 106, 0);
-            cuiTextBox1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cuiTextBox1.ForeColor = Color.Black;
-            cuiTextBox1.Image = null;
-            cuiTextBox1.ImageExpand = new Point(0, 0);
-            cuiTextBox1.ImageOffset = new Point(0, 0);
-            cuiTextBox1.Location = new Point(14, 267);
-            cuiTextBox1.Margin = new Padding(4, 3, 4, 3);
-            cuiTextBox1.Multiline = true;
-            cuiTextBox1.Name = "cuiTextBox1";
-            cuiTextBox1.NormalImageTint = Color.White;
-            cuiTextBox1.OutlineColor = Color.Gray;
-            cuiTextBox1.Padding = new Padding(15, 5, 15, 5);
-            cuiTextBox1.PasswordChar = false;
-            cuiTextBox1.PlaceholderColor = SystemColors.WindowText;
-            cuiTextBox1.PlaceholderText = "";
-            cuiTextBox1.Rounding = new Padding(8);
-            cuiTextBox1.Size = new Size(502, 103);
-            cuiTextBox1.TabIndex = 5;
-            cuiTextBox1.TextOffset = new Size(0, 0);
-            cuiTextBox1.UnderlinedStyle = true;
+            txtDescripcionNegocio.AutoScroll = true;
+            txtDescripcionNegocio.BackgroundColor = Color.LightGray;
+            txtDescripcionNegocio.Content = "";
+            txtDescripcionNegocio.FocusBackgroundColor = Color.White;
+            txtDescripcionNegocio.FocusImageTint = Color.White;
+            txtDescripcionNegocio.FocusOutlineColor = Color.FromArgb(255, 106, 0);
+            txtDescripcionNegocio.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtDescripcionNegocio.ForeColor = Color.Black;
+            txtDescripcionNegocio.Image = null;
+            txtDescripcionNegocio.ImageExpand = new Point(0, 0);
+            txtDescripcionNegocio.ImageOffset = new Point(0, 0);
+            txtDescripcionNegocio.Location = new Point(14, 267);
+            txtDescripcionNegocio.Margin = new Padding(4, 3, 4, 3);
+            txtDescripcionNegocio.Multiline = true;
+            txtDescripcionNegocio.Name = "txtDescripcionNegocio";
+            txtDescripcionNegocio.NormalImageTint = Color.White;
+            txtDescripcionNegocio.OutlineColor = Color.Gray;
+            txtDescripcionNegocio.Padding = new Padding(23, 6, 23, 6);
+            txtDescripcionNegocio.PasswordChar = false;
+            txtDescripcionNegocio.PlaceholderColor = SystemColors.WindowText;
+            txtDescripcionNegocio.PlaceholderText = "";
+            txtDescripcionNegocio.Rounding = new Padding(8);
+            txtDescripcionNegocio.Size = new Size(502, 103);
+            txtDescripcionNegocio.TabIndex = 5;
+            txtDescripcionNegocio.TextOffset = new Size(0, 0);
+            txtDescripcionNegocio.UnderlinedStyle = true;
             // 
             // cuiPictureBox1
             // 
             cuiPictureBox1.BackColor = Color.Transparent;
             cuiPictureBox1.Content = null;
             cuiPictureBox1.ImageTint = Color.DimGray;
-            cuiPictureBox1.Location = new Point(325, 43);
-            cuiPictureBox1.Margin = new Padding(4, 3, 4, 3);
+            cuiPictureBox1.Location = new Point(488, 53);
+            cuiPictureBox1.Margin = new Padding(6, 4, 6, 4);
             cuiPictureBox1.Name = "cuiPictureBox1";
             cuiPictureBox1.OutlineThickness = 1F;
             cuiPictureBox1.PanelOutlineColor = Color.Goldenrod;
             cuiPictureBox1.Rotation = 0;
             cuiPictureBox1.Rounding = new Padding(20);
-            cuiPictureBox1.Size = new Size(175, 173);
+            cuiPictureBox1.Size = new Size(262, 215);
             cuiPictureBox1.TabIndex = 4;
             // 
-            // cuiFolderDropper1
+            // cuiLogoNegocio
             // 
-            cuiFolderDropper1.AllowDrop = true;
-            cuiFolderDropper1.DashedOutline = false;
-            cuiFolderDropper1.DashedOutlineColor = Color.FromArgb(192, 64, 0);
-            cuiFolderDropper1.DashLength = 8;
-            cuiFolderDropper1.ForeColor = Color.Black;
-            cuiFolderDropper1.HoverContent = "Release to drop";
-            cuiFolderDropper1.HoverForeColor = Color.FromArgb(128, 128, 128, 128);
-            cuiFolderDropper1.HoverUploadForeColor = Color.FromArgb(255, 106, 0);
-            cuiFolderDropper1.Image = Properties.Resources.add_image_1990252_removebg_preview;
-            cuiFolderDropper1.ImagePadding = 2;
-            cuiFolderDropper1.ImageSize = new Size(24, 24);
-            cuiFolderDropper1.ImageTint = Color.Gray;
-            cuiFolderDropper1.Location = new Point(13, 123);
-            cuiFolderDropper1.Multiselect = false;
-            cuiFolderDropper1.Name = "cuiFolderDropper1";
-            cuiFolderDropper1.NormalContent = "arrastra tu logo aqui";
-            cuiFolderDropper1.NormalForeColor = Color.Black;
-            cuiFolderDropper1.NormalUploadForeColor = Color.OliveDrab;
-            cuiFolderDropper1.OutlineThickness = 1F;
-            cuiFolderDropper1.PanelColor = Color.FromArgb(16, 255, 255, 255);
-            cuiFolderDropper1.Rounding = new Padding(8);
-            cuiFolderDropper1.Size = new Size(291, 93);
-            cuiFolderDropper1.TabIndex = 3;
-            cuiFolderDropper1.UploadContent = "click para subir logo";
-            cuiFolderDropper1.UploadWithClick = true;
+            cuiLogoNegocio.AllowDrop = true;
+            cuiLogoNegocio.DashedOutline = false;
+            cuiLogoNegocio.DashedOutlineColor = Color.FromArgb(192, 64, 0);
+            cuiLogoNegocio.DashLength = 8;
+            cuiLogoNegocio.ForeColor = Color.Black;
+            cuiLogoNegocio.HoverContent = "Release to drop";
+            cuiLogoNegocio.HoverForeColor = Color.FromArgb(128, 128, 128, 128);
+            cuiLogoNegocio.HoverUploadForeColor = Color.FromArgb(255, 106, 0);
+            cuiLogoNegocio.Image = Properties.Resources.add_image_1990252_removebg_preview;
+            cuiLogoNegocio.ImagePadding = 2;
+            cuiLogoNegocio.ImageSize = new Size(24, 24);
+            cuiLogoNegocio.ImageTint = Color.Gray;
+            cuiLogoNegocio.Location = new Point(13, 123);
+            cuiLogoNegocio.Multiselect = false;
+            cuiLogoNegocio.Name = "cuiLogoNegocio";
+            cuiLogoNegocio.NormalContent = "arrastra tu logo aqui";
+            cuiLogoNegocio.NormalForeColor = Color.Black;
+            cuiLogoNegocio.NormalUploadForeColor = Color.OliveDrab;
+            cuiLogoNegocio.OutlineThickness = 1F;
+            cuiLogoNegocio.PanelColor = Color.FromArgb(16, 255, 255, 255);
+            cuiLogoNegocio.Rounding = new Padding(8);
+            cuiLogoNegocio.Size = new Size(291, 93);
+            cuiLogoNegocio.TabIndex = 3;
+            cuiLogoNegocio.UploadContent = "click para subir logo";
+            cuiLogoNegocio.UploadWithClick = true;
             // 
             // cuiLabel6
             // 
@@ -394,7 +394,7 @@
             cuiLabel6.Location = new Point(14, 87);
             cuiLabel6.Margin = new Padding(4, 3, 4, 3);
             cuiLabel6.Name = "cuiLabel6";
-            cuiLabel6.Size = new Size(164, 30);
+            cuiLabel6.Size = new Size(224, 30);
             cuiLabel6.TabIndex = 2;
             cuiLabel6.VerticalAlignment = StringAlignment.Near;
             // 
@@ -406,43 +406,43 @@
             cuiLabel5.Location = new Point(13, 22);
             cuiLabel5.Margin = new Padding(4, 3, 4, 3);
             cuiLabel5.Name = "cuiLabel5";
-            cuiLabel5.Size = new Size(290, 30);
+            cuiLabel5.Size = new Size(410, 30);
             cuiLabel5.TabIndex = 1;
             cuiLabel5.VerticalAlignment = StringAlignment.Near;
             // 
-            // txtCorreo
+            // txtNombreNegocio
             // 
-            txtCorreo.BackgroundColor = Color.LightGray;
-            txtCorreo.Content = "";
-            txtCorreo.FocusBackgroundColor = Color.White;
-            txtCorreo.FocusImageTint = Color.White;
-            txtCorreo.FocusOutlineColor = Color.FromArgb(255, 106, 0);
-            txtCorreo.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtCorreo.ForeColor = Color.Black;
-            txtCorreo.Image = null;
-            txtCorreo.ImageExpand = new Point(0, 0);
-            txtCorreo.ImageOffset = new Point(0, 0);
-            txtCorreo.Location = new Point(14, 55);
-            txtCorreo.Margin = new Padding(4, 3, 4, 3);
-            txtCorreo.Multiline = false;
-            txtCorreo.Name = "txtCorreo";
-            txtCorreo.NormalImageTint = Color.White;
-            txtCorreo.OutlineColor = Color.Gray;
-            txtCorreo.Padding = new Padding(15, 6, 15, 0);
-            txtCorreo.PasswordChar = false;
-            txtCorreo.PlaceholderColor = SystemColors.WindowText;
-            txtCorreo.PlaceholderText = "";
-            txtCorreo.Rounding = new Padding(8);
-            txtCorreo.Size = new Size(290, 26);
-            txtCorreo.TabIndex = 0;
-            txtCorreo.TextOffset = new Size(0, 0);
-            txtCorreo.UnderlinedStyle = true;
+            txtNombreNegocio.BackgroundColor = Color.LightGray;
+            txtNombreNegocio.Content = "";
+            txtNombreNegocio.FocusBackgroundColor = Color.White;
+            txtNombreNegocio.FocusImageTint = Color.White;
+            txtNombreNegocio.FocusOutlineColor = Color.FromArgb(255, 106, 0);
+            txtNombreNegocio.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtNombreNegocio.ForeColor = Color.Black;
+            txtNombreNegocio.Image = null;
+            txtNombreNegocio.ImageExpand = new Point(0, 0);
+            txtNombreNegocio.ImageOffset = new Point(0, 0);
+            txtNombreNegocio.Location = new Point(14, 55);
+            txtNombreNegocio.Margin = new Padding(4, 3, 4, 3);
+            txtNombreNegocio.Multiline = false;
+            txtNombreNegocio.Name = "txtNombreNegocio";
+            txtNombreNegocio.NormalImageTint = Color.White;
+            txtNombreNegocio.OutlineColor = Color.Gray;
+            txtNombreNegocio.Padding = new Padding(23, 2, 23, 0);
+            txtNombreNegocio.PasswordChar = false;
+            txtNombreNegocio.PlaceholderColor = SystemColors.WindowText;
+            txtNombreNegocio.PlaceholderText = "";
+            txtNombreNegocio.Rounding = new Padding(8);
+            txtNombreNegocio.Size = new Size(290, 26);
+            txtNombreNegocio.TabIndex = 0;
+            txtNombreNegocio.TextOffset = new Size(0, 0);
+            txtNombreNegocio.UnderlinedStyle = true;
             // 
             // Registro_para_Vendedores
             // 
-            AutoScaleDimensions = new SizeF(8F, 16F);
+            AutoScaleDimensions = new SizeF(12F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(586, 739);
+            ClientSize = new Size(1163, 739);
             Controls.Add(cuiGroupBox1);
             Controls.Add(btnVendedor_rechazar);
             Controls.Add(btnVendedor_aceptar);
@@ -472,14 +472,14 @@
         private CuoreUI.Controls.cuiButton btnVendedor_aceptar;
         private CuoreUI.Controls.cuiButton btnVendedor_rechazar;
         private CuoreUI.Controls.cuiGroupBox cuiGroupBox1;
-        private CuoreUI.Controls.cuiTextBox txtCorreo;
+        private CuoreUI.Controls.cuiTextBox txtNombreNegocio;
         private CuoreUI.Controls.cuiLabel cuiLabel6;
         private CuoreUI.Controls.cuiLabel cuiLabel5;
-        private CuoreUI.Controls.cuiFolderDropper cuiFolderDropper1;
+        private CuoreUI.Controls.cuiFolderDropper cuiLogoNegocio;
         private CuoreUI.Controls.cuiPictureBox cuiPictureBox1;
         private CuoreUI.Controls.cuiLabel cuiLabel8;
         private CuoreUI.Controls.cuiLabel cuiLabel7;
-        private CuoreUI.Controls.cuiTextBox cuiTextBox1;
+        private CuoreUI.Controls.cuiTextBox txtDescripcionNegocio;
         private CuoreUI.Controls.cuiLabel cuiLabel9;
         private CuoreUI.Controls.cuiLabel cuiLabel10;
         private CuoreUI.Controls.cuiLabel cuiLabel11;
