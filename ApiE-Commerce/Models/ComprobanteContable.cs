@@ -5,7 +5,7 @@ namespace ApiProyectoDeCursoE_Commerce.Models
 {
     public class ComprobanteContable
     {
-        [Key]
+        [[Key]
         public int IdComprobante { get; set; }
 
         [Required]
