@@ -44,6 +44,7 @@
             btnLogin = new CuoreUI.Controls.cuiButton();
             cuiPictureBox3 = new CuoreUI.Controls.cuiPictureBox();
             cuiFileDropper2 = new CuoreUI.Controls.cuiFileDropper();
+            BtnSalir = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)splCon_Separador).BeginInit();
             splCon_Separador.Panel1.SuspendLayout();
             splCon_Separador.Panel2.SuspendLayout();
@@ -56,7 +57,6 @@
             // 
             splCon_Separador.Dock = DockStyle.Fill;
             splCon_Separador.Location = new Point(0, 0);
-            splCon_Separador.Margin = new Padding(3, 4, 3, 4);
             splCon_Separador.Name = "splCon_Separador";
             // 
             // splCon_Separador.Panel1
@@ -74,11 +74,11 @@
             // splCon_Separador.Panel2
             // 
             splCon_Separador.Panel2.BackColor = Color.Chocolate;
+            splCon_Separador.Panel2.Controls.Add(BtnSalir);
             splCon_Separador.Panel2.Controls.Add(cuiPictureBox3);
             splCon_Separador.Panel2.Controls.Add(cuiFileDropper2);
-            splCon_Separador.Size = new Size(1055, 741);
-            splCon_Separador.SplitterDistance = 480;
-            splCon_Separador.SplitterWidth = 5;
+            splCon_Separador.Size = new Size(923, 556);
+            splCon_Separador.SplitterDistance = 419;
             splCon_Separador.TabIndex = 3;
             // 
             // cuiButton3
@@ -102,7 +102,8 @@
             cuiButton3.ImageAutoCenter = true;
             cuiButton3.ImageExpand = new Point(0, 0);
             cuiButton3.ImageOffset = new Point(0, 0);
-            cuiButton3.Location = new Point(200, 587);
+            cuiButton3.Location = new Point(175, 440);
+            cuiButton3.Margin = new Padding(3, 2, 3, 2);
             cuiButton3.Name = "cuiButton3";
             cuiButton3.NormalBackground = Color.DarkGray;
             cuiButton3.NormalForeColor = Color.Black;
@@ -114,7 +115,7 @@
             cuiButton3.PressedImageTint = Color.White;
             cuiButton3.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton3.Rounding = new Padding(8);
-            cuiButton3.Size = new Size(135, 33);
+            cuiButton3.Size = new Size(118, 25);
             cuiButton3.TabIndex = 15;
             cuiButton3.TextAlignment = StringAlignment.Center;
             cuiButton3.TextOffset = new Point(0, 0);
@@ -124,10 +125,10 @@
             cuiLabel2.Content = "Contactanos\\ aqui:";
             cuiLabel2.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel2.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel2.Location = new Point(29, 589);
-            cuiLabel2.Margin = new Padding(5);
+            cuiLabel2.Location = new Point(25, 442);
+            cuiLabel2.Margin = new Padding(4, 4, 4, 4);
             cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(163, 25);
+            cuiLabel2.Size = new Size(143, 19);
             cuiLabel2.TabIndex = 14;
             cuiLabel2.VerticalAlignment = StringAlignment.Near;
             // 
@@ -138,11 +139,12 @@
             gboxContraseña.Controls.Add(txtContraseña);
             gboxContraseña.Font = new Font("Garamond", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gboxContraseña.ForeColor = Color.DarkOliveGreen;
-            gboxContraseña.Location = new Point(45, 256);
+            gboxContraseña.Location = new Point(39, 192);
+            gboxContraseña.Margin = new Padding(3, 2, 3, 2);
             gboxContraseña.Name = "gboxContraseña";
-            gboxContraseña.Padding = new Padding(10, 33, 10, 15);
+            gboxContraseña.Padding = new Padding(10, 28, 10, 15);
             gboxContraseña.Rounding = new Padding(10, 10, 10, 15);
-            gboxContraseña.Size = new Size(327, 72);
+            gboxContraseña.Size = new Size(286, 54);
             gboxContraseña.TabIndex = 12;
             // 
             // txtContraseña
@@ -157,18 +159,18 @@
             txtContraseña.Image = null;
             txtContraseña.ImageExpand = new Point(0, 0);
             txtContraseña.ImageOffset = new Point(0, 0);
-            txtContraseña.Location = new Point(11, 27);
-            txtContraseña.Margin = new Padding(5, 4, 5, 4);
+            txtContraseña.Location = new Point(10, 20);
+            txtContraseña.Margin = new Padding(4, 3, 4, 3);
             txtContraseña.Multiline = false;
             txtContraseña.Name = "txtContraseña";
             txtContraseña.NormalImageTint = Color.White;
             txtContraseña.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtContraseña.Padding = new Padding(18, 8, 18, 0);
+            txtContraseña.Padding = new Padding(15, 6, 15, 0);
             txtContraseña.PasswordChar = false;
             txtContraseña.PlaceholderColor = SystemColors.WindowText;
             txtContraseña.PlaceholderText = "";
             txtContraseña.Rounding = new Padding(8);
-            txtContraseña.Size = new Size(299, 35);
+            txtContraseña.Size = new Size(262, 26);
             txtContraseña.TabIndex = 1;
             txtContraseña.TextOffset = new Size(0, 0);
             txtContraseña.UnderlinedStyle = true;
@@ -180,11 +182,12 @@
             gboxEmail.Controls.Add(txtCorreo);
             gboxEmail.Font = new Font("Garamond", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             gboxEmail.ForeColor = Color.DarkOliveGreen;
-            gboxEmail.Location = new Point(45, 168);
+            gboxEmail.Location = new Point(39, 126);
+            gboxEmail.Margin = new Padding(3, 2, 3, 2);
             gboxEmail.Name = "gboxEmail";
-            gboxEmail.Padding = new Padding(10, 34, 10, 15);
+            gboxEmail.Padding = new Padding(10, 29, 10, 15);
             gboxEmail.Rounding = new Padding(10, 10, 10, 15);
-            gboxEmail.Size = new Size(327, 69);
+            gboxEmail.Size = new Size(286, 52);
             gboxEmail.TabIndex = 11;
             // 
             // txtCorreo
@@ -199,18 +202,18 @@
             txtCorreo.Image = null;
             txtCorreo.ImageExpand = new Point(0, 0);
             txtCorreo.ImageOffset = new Point(0, 0);
-            txtCorreo.Location = new Point(10, 25);
-            txtCorreo.Margin = new Padding(5, 4, 5, 4);
+            txtCorreo.Location = new Point(9, 19);
+            txtCorreo.Margin = new Padding(4, 3, 4, 3);
             txtCorreo.Multiline = false;
             txtCorreo.Name = "txtCorreo";
             txtCorreo.NormalImageTint = Color.White;
             txtCorreo.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            txtCorreo.Padding = new Padding(18, 8, 18, 0);
+            txtCorreo.Padding = new Padding(15, 6, 15, 0);
             txtCorreo.PasswordChar = false;
             txtCorreo.PlaceholderColor = SystemColors.WindowText;
             txtCorreo.PlaceholderText = "";
             txtCorreo.Rounding = new Padding(8);
-            txtCorreo.Size = new Size(301, 35);
+            txtCorreo.Size = new Size(263, 26);
             txtCorreo.TabIndex = 0;
             txtCorreo.TextOffset = new Size(0, 0);
             txtCorreo.UnderlinedStyle = true;
@@ -219,14 +222,14 @@
             // 
             cuiPictureBox2.Content = Properties.Resources.LRR_removebg_preview;
             cuiPictureBox2.ImageTint = Color.White;
-            cuiPictureBox2.Location = new Point(29, 8);
-            cuiPictureBox2.Margin = new Padding(5);
+            cuiPictureBox2.Location = new Point(25, 6);
+            cuiPictureBox2.Margin = new Padding(4, 4, 4, 4);
             cuiPictureBox2.Name = "cuiPictureBox2";
             cuiPictureBox2.OutlineThickness = 1F;
             cuiPictureBox2.PanelOutlineColor = Color.Empty;
             cuiPictureBox2.Rotation = 0;
             cuiPictureBox2.Rounding = new Padding(8);
-            cuiPictureBox2.Size = new Size(227, 213);
+            cuiPictureBox2.Size = new Size(199, 160);
             cuiPictureBox2.TabIndex = 13;
             // 
             // cuiLabel1
@@ -234,10 +237,10 @@
             cuiLabel1.Content = "Todavia\\ no\\ tienes\\ una\\ cuenta\\?";
             cuiLabel1.Font = new Font("Garamond", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             cuiLabel1.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel1.Location = new Point(22, 476);
-            cuiLabel1.Margin = new Padding(5);
+            cuiLabel1.Location = new Point(19, 357);
+            cuiLabel1.Margin = new Padding(4, 4, 4, 4);
             cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(350, 21);
+            cuiLabel1.Size = new Size(306, 16);
             cuiLabel1.TabIndex = 10;
             cuiLabel1.VerticalAlignment = StringAlignment.Near;
             // 
@@ -261,7 +264,8 @@
             btnRegistrar.ImageAutoCenter = true;
             btnRegistrar.ImageExpand = new Point(0, 0);
             btnRegistrar.ImageOffset = new Point(0, 0);
-            btnRegistrar.Location = new Point(56, 505);
+            btnRegistrar.Location = new Point(49, 379);
+            btnRegistrar.Margin = new Padding(3, 2, 3, 2);
             btnRegistrar.Name = "btnRegistrar";
             btnRegistrar.NormalBackground = Color.Olive;
             btnRegistrar.NormalForeColor = Color.Black;
@@ -273,7 +277,7 @@
             btnRegistrar.PressedImageTint = Color.White;
             btnRegistrar.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnRegistrar.Rounding = new Padding(8);
-            btnRegistrar.Size = new Size(279, 32);
+            btnRegistrar.Size = new Size(244, 24);
             btnRegistrar.TabIndex = 9;
             btnRegistrar.TextAlignment = StringAlignment.Center;
             btnRegistrar.TextOffset = new Point(0, 0);
@@ -299,7 +303,8 @@
             btnLogin.ImageAutoCenter = true;
             btnLogin.ImageExpand = new Point(0, 0);
             btnLogin.ImageOffset = new Point(0, 0);
-            btnLogin.Location = new Point(86, 428);
+            btnLogin.Location = new Point(75, 321);
+            btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
             btnLogin.NormalBackground = Color.Orange;
             btnLogin.NormalForeColor = Color.Black;
@@ -311,7 +316,7 @@
             btnLogin.PressedImageTint = Color.White;
             btnLogin.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnLogin.Rounding = new Padding(8);
-            btnLogin.Size = new Size(223, 40);
+            btnLogin.Size = new Size(195, 30);
             btnLogin.TabIndex = 8;
             btnLogin.TextAlignment = StringAlignment.Center;
             btnLogin.TextOffset = new Point(0, 0);
@@ -321,14 +326,14 @@
             // 
             cuiPictureBox3.Content = Properties.Resources.browser_735828;
             cuiPictureBox3.ImageTint = Color.White;
-            cuiPictureBox3.Location = new Point(224, 276);
-            cuiPictureBox3.Margin = new Padding(5);
+            cuiPictureBox3.Location = new Point(196, 207);
+            cuiPictureBox3.Margin = new Padding(4, 4, 4, 4);
             cuiPictureBox3.Name = "cuiPictureBox3";
             cuiPictureBox3.OutlineThickness = 1F;
             cuiPictureBox3.PanelOutlineColor = Color.Empty;
             cuiPictureBox3.Rotation = 0;
             cuiPictureBox3.Rounding = new Padding(8);
-            cuiPictureBox3.Size = new Size(117, 111);
+            cuiPictureBox3.Size = new Size(102, 83);
             cuiPictureBox3.TabIndex = 4;
             // 
             // cuiFileDropper2
@@ -348,7 +353,8 @@
             cuiFileDropper2.ImagePadding = 2;
             cuiFileDropper2.ImageSize = new Size(24, 24);
             cuiFileDropper2.ImageTint = Color.White;
-            cuiFileDropper2.Location = new Point(80, 476);
+            cuiFileDropper2.Location = new Point(70, 357);
+            cuiFileDropper2.Margin = new Padding(3, 2, 3, 2);
             cuiFileDropper2.Multiselect = false;
             cuiFileDropper2.Name = "cuiFileDropper2";
             cuiFileDropper2.NormalContent = "Arrastra la foto de tu preferencia";
@@ -357,20 +363,33 @@
             cuiFileDropper2.OutlineThickness = 1F;
             cuiFileDropper2.PanelColor = Color.FromArgb(16, 255, 255, 255);
             cuiFileDropper2.Rounding = new Padding(8);
-            cuiFileDropper2.Size = new Size(399, 112);
+            cuiFileDropper2.Size = new Size(349, 84);
             cuiFileDropper2.TabIndex = 3;
             cuiFileDropper2.Text = "cuiFileDropper2";
             cuiFileDropper2.UploadContent = "Click to upload";
             cuiFileDropper2.UploadWithClick = true;
             // 
+            // BtnSalir
+            // 
+            BtnSalir.IconChar = FontAwesome.Sharp.IconChar.None;
+            BtnSalir.IconColor = Color.Black;
+            BtnSalir.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            BtnSalir.Location = new Point(3, 3);
+            BtnSalir.Name = "BtnSalir";
+            BtnSalir.Size = new Size(75, 23);
+            BtnSalir.TabIndex = 5;
+            BtnSalir.Text = "Salir";
+            BtnSalir.UseVisualStyleBackColor = true;
+            BtnSalir.Visible = false;
+            BtnSalir.Click += BtnSalir_Click;
+            // 
             // FormInicio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1055, 741);
+            ClientSize = new Size(923, 556);
             Controls.Add(splCon_Separador);
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "FormInicio";
             Text = "Incio de sesión";
             Load += FormInicio_Load;
@@ -399,5 +418,6 @@
         private CuoreUI.Controls.cuiButton btnLogin;
         private CuoreUI.Controls.cuiPictureBox cuiPictureBox3;
         private CuoreUI.Controls.cuiFileDropper cuiFileDropper2;
+        private FontAwesome.Sharp.IconButton BtnSalir;
     }
 }

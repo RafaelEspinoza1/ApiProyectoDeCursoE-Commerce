@@ -30,176 +30,39 @@ namespace FormApiE_Commerce
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Administracion));
-            lblContraseña1 = new Label();
-            txtContraseña1 = new TextBox();
-            btnContraseña1 = new Button();
-            groupBoxIngresar = new GroupBox();
-            checkBoxContraseñaCorreoVisible = new CheckBox();
-            btnIngresar = new Button();
-            txtContraseñaAdmin = new TextBox();
-            txtCorreoAdmin = new TextBox();
-            lblContraseñaAdmin = new Label();
-            lblCorreoAdmin = new Label();
-            lblUsuarios = new Label();
-            btnCerrar = new Button();
-            checkBoxContraseña1Visible = new CheckBox();
             lblTitulo = new Label();
-            btnCerrarSesion = new Button();
-            dgvUsuarios = new DataGridView();
-            dgvVendedores = new DataGridView();
-            dgvCompras = new DataGridView();
-            dgvProductos = new DataGridView();
-            lblVendedores = new Label();
-            lblCompras = new Label();
-            lblProductos = new Label();
-            dgvIngresosECommerce = new DataGridView();
-            lblIngresos = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            dataGridView2 = new DataGridView();
+            dataGridView1 = new DataGridView();
             tabPage2 = new TabPage();
-            lblImagenesProducto = new Label();
-            flpImagenes = new FlowLayoutPanel();
+            dataGridView3 = new DataGridView();
+            dataGridView4 = new DataGridView();
             tabPage3 = new TabPage();
+            dataGridView5 = new DataGridView();
             lblIngresosECommece = new Label();
+            tabPage4 = new TabPage();
+            tabPage5 = new TabPage();
+            tabPage6 = new TabPage();
+            dataGridView6 = new DataGridView();
+            dataGridView7 = new DataGridView();
             progressBarCarga = new ProgressBar();
-            btnRefrescar = new Button();
-            groupBoxIngresar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvVendedores).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvCompras).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvIngresosECommerce).BeginInit();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
             tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
+            tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView7).BeginInit();
             SuspendLayout();
-            // 
-            // lblContraseña1
-            // 
-            lblContraseña1.AutoSize = true;
-            lblContraseña1.Location = new Point(105, 40);
-            lblContraseña1.Name = "lblContraseña1";
-            lblContraseña1.Size = new Size(67, 15);
-            lblContraseña1.TabIndex = 0;
-            lblContraseña1.Text = "Contraseña";
-            // 
-            // txtContraseña1
-            // 
-            txtContraseña1.Location = new Point(90, 58);
-            txtContraseña1.Name = "txtContraseña1";
-            txtContraseña1.Size = new Size(100, 23);
-            txtContraseña1.TabIndex = 1;
-            // 
-            // btnContraseña1
-            // 
-            btnContraseña1.Location = new Point(105, 87);
-            btnContraseña1.Name = "btnContraseña1";
-            btnContraseña1.Size = new Size(75, 23);
-            btnContraseña1.TabIndex = 2;
-            btnContraseña1.Text = "Ingresar";
-            btnContraseña1.UseVisualStyleBackColor = true;
-            btnContraseña1.Click += btnContraseña1_Click;
-            // 
-            // groupBoxIngresar
-            // 
-            groupBoxIngresar.Controls.Add(checkBoxContraseñaCorreoVisible);
-            groupBoxIngresar.Controls.Add(btnIngresar);
-            groupBoxIngresar.Controls.Add(txtContraseñaAdmin);
-            groupBoxIngresar.Controls.Add(txtCorreoAdmin);
-            groupBoxIngresar.Controls.Add(lblContraseñaAdmin);
-            groupBoxIngresar.Controls.Add(lblCorreoAdmin);
-            groupBoxIngresar.Location = new Point(12, 40);
-            groupBoxIngresar.Name = "groupBoxIngresar";
-            groupBoxIngresar.Size = new Size(244, 100);
-            groupBoxIngresar.TabIndex = 3;
-            groupBoxIngresar.TabStop = false;
-            groupBoxIngresar.Text = "Admin";
-            groupBoxIngresar.Visible = false;
-            // 
-            // checkBoxContraseñaCorreoVisible
-            // 
-            checkBoxContraseñaCorreoVisible.AutoSize = true;
-            checkBoxContraseñaCorreoVisible.BackgroundImageLayout = ImageLayout.None;
-            checkBoxContraseñaCorreoVisible.Location = new Point(222, 49);
-            checkBoxContraseñaCorreoVisible.Name = "checkBoxContraseñaCorreoVisible";
-            checkBoxContraseñaCorreoVisible.Size = new Size(15, 14);
-            checkBoxContraseñaCorreoVisible.TabIndex = 19;
-            checkBoxContraseñaCorreoVisible.UseVisualStyleBackColor = true;
-            checkBoxContraseñaCorreoVisible.CheckedChanged += checkBoxContraseñaCorreoVisible_CheckedChanged;
-            // 
-            // btnIngresar
-            // 
-            btnIngresar.Location = new Point(78, 71);
-            btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(75, 23);
-            btnIngresar.TabIndex = 4;
-            btnIngresar.Text = "Ingresar";
-            btnIngresar.UseVisualStyleBackColor = true;
-            btnIngresar.Click += btnIngresar_Click;
-            // 
-            // txtContraseñaAdmin
-            // 
-            txtContraseñaAdmin.Location = new Point(116, 40);
-            txtContraseñaAdmin.Name = "txtContraseñaAdmin";
-            txtContraseñaAdmin.Size = new Size(100, 23);
-            txtContraseñaAdmin.TabIndex = 3;
-            // 
-            // txtCorreoAdmin
-            // 
-            txtCorreoAdmin.Location = new Point(116, 11);
-            txtCorreoAdmin.Name = "txtCorreoAdmin";
-            txtCorreoAdmin.Size = new Size(100, 23);
-            txtCorreoAdmin.TabIndex = 2;
-            // 
-            // lblContraseñaAdmin
-            // 
-            lblContraseñaAdmin.AutoSize = true;
-            lblContraseñaAdmin.Location = new Point(11, 48);
-            lblContraseñaAdmin.Name = "lblContraseñaAdmin";
-            lblContraseñaAdmin.Size = new Size(67, 15);
-            lblContraseñaAdmin.TabIndex = 1;
-            lblContraseñaAdmin.Text = "Contraseña";
-            // 
-            // lblCorreoAdmin
-            // 
-            lblCorreoAdmin.AutoSize = true;
-            lblCorreoAdmin.Location = new Point(11, 19);
-            lblCorreoAdmin.Name = "lblCorreoAdmin";
-            lblCorreoAdmin.Size = new Size(99, 15);
-            lblCorreoAdmin.TabIndex = 0;
-            lblCorreoAdmin.Text = "Correo del admin";
-            // 
-            // lblUsuarios
-            // 
-            lblUsuarios.AutoSize = true;
-            lblUsuarios.Location = new Point(19, 3);
-            lblUsuarios.Name = "lblUsuarios";
-            lblUsuarios.Size = new Size(52, 15);
-            lblUsuarios.TabIndex = 29;
-            lblUsuarios.Text = "Usuarios";
-            // 
-            // btnCerrar
-            // 
-            
-            btnCerrar.BackgroundImageLayout = ImageLayout.Stretch;
-            btnCerrar.Location = new Point(246, 9);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(31, 31);
-            btnCerrar.TabIndex = 13;
-            btnCerrar.UseVisualStyleBackColor = true;
-            btnCerrar.Click += btnCerrar_Click;
-            // 
-            // checkBoxContraseña1Visible
-            // 
-            checkBoxContraseña1Visible.AutoSize = true;
-            checkBoxContraseña1Visible.BackgroundImageLayout = ImageLayout.None;
-            checkBoxContraseña1Visible.Location = new Point(196, 67);
-            checkBoxContraseña1Visible.Name = "checkBoxContraseña1Visible";
-            checkBoxContraseña1Visible.Size = new Size(15, 14);
-            checkBoxContraseña1Visible.TabIndex = 18;
-            checkBoxContraseña1Visible.UseVisualStyleBackColor = true;
-            checkBoxContraseña1Visible.CheckedChanged += checkBoxContraseña1Visible_CheckedChanged;
             // 
             // lblTitulo
             // 
@@ -212,178 +75,159 @@ namespace FormApiE_Commerce
             lblTitulo.TabIndex = 19;
             lblTitulo.Text = "E-Commerce";
             // 
-            // btnCerrarSesion
-            // 
-            btnCerrarSesion.AutoSize = true;
-            btnCerrarSesion.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCerrarSesion.ForeColor = Color.Firebrick;
-            btnCerrarSesion.Location = new Point(576, 5);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(114, 27);
-            btnCerrarSesion.TabIndex = 20;
-            btnCerrarSesion.Text = "Cerrar sesión";
-            btnCerrarSesion.UseVisualStyleBackColor = true;
-            btnCerrarSesion.Click += btnCerrar_Click;
-            // 
-            // dgvUsuarios
-            // 
-            dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsuarios.Location = new Point(8, 21);
-            dgvUsuarios.Name = "dgvUsuarios";
-            dgvUsuarios.Size = new Size(651, 180);
-            dgvUsuarios.TabIndex = 21;
-            // 
-            // dgvVendedores
-            // 
-            dgvVendedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVendedores.Location = new Point(8, 222);
-            dgvVendedores.Name = "dgvVendedores";
-            dgvVendedores.Size = new Size(852, 180);
-            dgvVendedores.TabIndex = 23;
-            // 
-            // dgvCompras
-            // 
-            dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCompras.Location = new Point(8, 21);
-            dgvCompras.Name = "dgvCompras";
-            dgvCompras.Size = new Size(1346, 180);
-            dgvCompras.TabIndex = 24;
-            // 
-            // dgvProductos
-            // 
-            dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProductos.Location = new Point(8, 21);
-            dgvProductos.MultiSelect = false;
-            dgvProductos.Name = "dgvProductos";
-            dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProductos.Size = new Size(955, 180);
-            dgvProductos.TabIndex = 25;
-            dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
-            // 
-            // lblVendedores
-            // 
-            lblVendedores.AutoSize = true;
-            lblVendedores.Location = new Point(19, 204);
-            lblVendedores.Name = "lblVendedores";
-            lblVendedores.Size = new Size(68, 15);
-            lblVendedores.TabIndex = 26;
-            lblVendedores.Text = "Vendedores";
-            // 
-            // lblCompras
-            // 
-            lblCompras.AutoSize = true;
-            lblCompras.Location = new Point(19, 3);
-            lblCompras.Name = "lblCompras";
-            lblCompras.Size = new Size(55, 15);
-            lblCompras.TabIndex = 27;
-            lblCompras.Text = "Compras";
-            // 
-            // lblProductos
-            // 
-            lblProductos.AutoSize = true;
-            lblProductos.Location = new Point(19, 3);
-            lblProductos.Name = "lblProductos";
-            lblProductos.Size = new Size(61, 15);
-            lblProductos.TabIndex = 28;
-            lblProductos.Text = "Productos";
-            // 
-            // dgvIngresosECommerce
-            // 
-            dgvIngresosECommerce.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvIngresosECommerce.Location = new Point(8, 222);
-            dgvIngresosECommerce.Name = "dgvIngresosECommerce";
-            dgvIngresosECommerce.Size = new Size(651, 180);
-            dgvIngresosECommerce.TabIndex = 30;
-            // 
-            // lblIngresos
-            // 
-            lblIngresos.AutoSize = true;
-            lblIngresos.Location = new Point(19, 204);
-            lblIngresos.Name = "lblIngresos";
-            lblIngresos.Size = new Size(51, 15);
-            lblIngresos.TabIndex = 31;
-            lblIngresos.Text = "Ingresos";
-            // 
             // tabControl1
             // 
+            tabControl1.Appearance = TabAppearance.Buttons;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
+            tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage6);
             tabControl1.Dock = DockStyle.Bottom;
+            tabControl1.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tabControl1.Location = new Point(0, 38);
+            tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1370, 594);
+            tabControl1.Size = new Size(1018, 568);
             tabControl1.TabIndex = 32;
-            tabControl1.Visible = false;
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(lblVendedores);
-            tabPage1.Controls.Add(dgvUsuarios);
-            tabPage1.Controls.Add(lblUsuarios);
-            tabPage1.Controls.Add(dgvVendedores);
-            tabPage1.Location = new Point(4, 24);
+            tabPage1.Controls.Add(label2);
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(dataGridView2);
+            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Location = new Point(4, 30);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1362, 566);
+            tabPage1.Size = new Size(1010, 534);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Usuarios";
+            tabPage1.Text = "Estado de resultado";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(550, 42);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.Size = new Size(436, 150);
+            dataGridView2.TabIndex = 1;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(30, 42);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(445, 150);
+            dataGridView1.TabIndex = 0;
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(lblImagenesProducto);
-            tabPage2.Controls.Add(flpImagenes);
-            tabPage2.Controls.Add(dgvProductos);
-            tabPage2.Controls.Add(lblProductos);
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Controls.Add(label3);
+            tabPage2.Controls.Add(dataGridView3);
+            tabPage2.Controls.Add(dataGridView4);
+            tabPage2.Location = new Point(4, 30);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1362, 566);
+            tabPage2.Size = new Size(1010, 534);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Productos";
+            tabPage2.Text = "Balance General";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lblImagenesProducto
+            // dataGridView3
             // 
-            lblImagenesProducto.AutoSize = true;
-            lblImagenesProducto.Location = new Point(19, 227);
-            lblImagenesProducto.Name = "lblImagenesProducto";
-            lblImagenesProducto.Size = new Size(276, 15);
-            lblImagenesProducto.TabIndex = 30;
-            lblImagenesProducto.Text = "Seleccione un producto para mostrar sus imagenes";
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(542, 137);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.Size = new Size(436, 150);
+            dataGridView3.TabIndex = 3;
             // 
-            // flpImagenes
+            // dataGridView4
             // 
-            flpImagenes.Location = new Point(8, 245);
-            flpImagenes.Name = "flpImagenes";
-            flpImagenes.Size = new Size(522, 145);
-            flpImagenes.TabIndex = 29;
+            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView4.Location = new Point(32, 137);
+            dataGridView4.Name = "dataGridView4";
+            dataGridView4.Size = new Size(445, 150);
+            dataGridView4.TabIndex = 2;
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(dataGridView5);
             tabPage3.Controls.Add(lblIngresosECommece);
-            tabPage3.Controls.Add(dgvCompras);
-            tabPage3.Controls.Add(dgvIngresosECommerce);
-            tabPage3.Controls.Add(lblCompras);
-            tabPage3.Controls.Add(lblIngresos);
-            tabPage3.Location = new Point(4, 24);
+            tabPage3.Location = new Point(4, 30);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1362, 566);
+            tabPage3.Size = new Size(1010, 485);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "Transacciones";
+            tabPage3.Text = "Estado de origen y aplicacion";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView5
+            // 
+            dataGridView5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView5.Location = new Point(298, 69);
+            dataGridView5.Name = "dataGridView5";
+            dataGridView5.Size = new Size(436, 150);
+            dataGridView5.TabIndex = 34;
             // 
             // lblIngresosECommece
             // 
             lblIngresosECommece.AutoSize = true;
             lblIngresosECommece.Location = new Point(8, 415);
             lblIngresosECommece.Name = "lblIngresosECommece";
-            lblIngresosECommece.Size = new Size(181, 15);
+            lblIngresosECommece.Size = new Size(239, 18);
             lblIngresosECommece.TabIndex = 32;
             lblIngresosECommece.Text = "Ingresos totales de E-Commerce:";
+            // 
+            // tabPage4
+            // 
+            tabPage4.Location = new Point(4, 30);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(1010, 485);
+            tabPage4.TabIndex = 3;
+            tabPage4.Text = "Razones financieras";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            tabPage5.Location = new Point(4, 30);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(1010, 485);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Sistema Dupont";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            tabPage6.Controls.Add(dataGridView6);
+            tabPage6.Controls.Add(dataGridView7);
+            tabPage6.Location = new Point(4, 30);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new Size(1010, 485);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "Estados de flujo de efectivo";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView6
+            // 
+            dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView6.Location = new Point(545, 44);
+            dataGridView6.Name = "dataGridView6";
+            dataGridView6.Size = new Size(436, 150);
+            dataGridView6.TabIndex = 3;
+            // 
+            // dataGridView7
+            // 
+            dataGridView7.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView7.Location = new Point(35, 44);
+            dataGridView7.Name = "dataGridView7";
+            dataGridView7.Size = new Size(445, 150);
+            dataGridView7.TabIndex = 2;
             // 
             // progressBarCarga
             // 
@@ -395,88 +239,83 @@ namespace FormApiE_Commerce
             progressBarCarga.TabIndex = 33;
             progressBarCarga.Visible = false;
             // 
-            // btnRefrescar
+            // label1
             // 
-           
-            btnRefrescar.BackgroundImageLayout = ImageLayout.Stretch;
-            btnRefrescar.Location = new Point(539, 1);
-            btnRefrescar.Name = "btnRefrescar";
-            btnRefrescar.Size = new Size(31, 31);
-            btnRefrescar.TabIndex = 34;
-            btnRefrescar.UseVisualStyleBackColor = true;
-            btnRefrescar.Click += btnRefrescar_Click;
+            label1.AutoSize = true;
+            label1.Location = new Point(149, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(238, 18);
+            label1.TabIndex = 2;
+            label1.Text = "Estado resultado periodo anterior";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(683, 21);
+            label2.Name = "label2";
+            label2.Size = new Size(226, 18);
+            label2.TabIndex = 3;
+            label2.Text = "Estado resultado periodo actual";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(163, 75);
+            label3.Name = "label3";
+            label3.Size = new Size(231, 18);
+            label3.TabIndex = 4;
+            label3.Text = "Estado resultado primer periodo";
             // 
             // Administracion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1370, 632);
-            Controls.Add(btnRefrescar);
+            ClientSize = new Size(1018, 606);
             Controls.Add(progressBarCarga);
             Controls.Add(tabControl1);
-            Controls.Add(btnCerrarSesion);
             Controls.Add(lblTitulo);
-            Controls.Add(btnCerrar);
-            Controls.Add(groupBoxIngresar);
-            Controls.Add(btnContraseña1);
-            Controls.Add(txtContraseña1);
-            Controls.Add(lblContraseña1);
-            Controls.Add(checkBoxContraseña1Visible);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Administracion";
             Text = "Administrador";
-            groupBoxIngresar.ResumeLayout(false);
-            groupBoxIngresar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvVendedores).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvCompras).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvIngresosECommerce).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
+            tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView7).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label lblContraseña1;
-        private TextBox txtContraseña1;
-        private Button btnContraseña1;
-        private GroupBox groupBoxIngresar;
-        private TextBox txtContraseñaAdmin;
-        private TextBox txtCorreoAdmin;
-        private Label lblContraseñaAdmin;
-        private Label lblCorreoAdmin;
-        private Button btnIngresar;
-        private Button btnCerrar;
-        private CheckBox checkBoxContraseñaCorreoVisible;
-        private CheckBox checkBoxContraseña1Visible;
         private Label lblTitulo;
-        private Button btnCerrarSesion;
-        private DataGridView dgvUsuarios;
-        private DataGridView dgvVendedores;
-        private DataGridView dgvCompras;
-        private DataGridView dgvProductos;
-        private Label lblUsuarios;
-        private Label lblVendedores;
-        private Label lblCompras;
-        private Label lblProductos;
-        private DataGridView dgvIngresosECommerce;
-        private Label lblIngresos;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
         private TabPage tabPage3;
         private Label lblIngresosECommece;
         private ProgressBar progressBarCarga;
-        private Button btnRefrescar;
-        private Label lblImagenesProducto;
-        private FlowLayoutPanel flpImagenes;
+        private TabPage tabPage4;
+        private TabPage tabPage5;
+        private TabPage tabPage6;
+        private DataGridView dataGridView2;
+        private DataGridView dataGridView1;
+        private DataGridView dataGridView3;
+        private DataGridView dataGridView4;
+        private DataGridView dataGridView5;
+        private DataGridView dataGridView6;
+        private DataGridView dataGridView7;
+        private Label label2;
+        private Label label1;
+        private Label label3;
     }
 }

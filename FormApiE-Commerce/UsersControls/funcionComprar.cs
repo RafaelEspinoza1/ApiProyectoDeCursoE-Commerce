@@ -72,6 +72,11 @@ namespace FormApiE_Commerce.UsersControls
             FlwProductos.WrapContents = true;
             FlwProductos.FlowDirection = FlowDirection.LeftToRight;
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
