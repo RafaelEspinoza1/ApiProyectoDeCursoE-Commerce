@@ -20,7 +20,7 @@ namespace FormApiE_Commerce.UsersControls
         public Registrarse()
         {
             InitializeComponent();
-            cmbRol. DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRol.DropDownStyle = ComboBoxStyle.DropDownList;
             CargarRoles();
             cmbRol.SelectedIndex = 2;
         }
@@ -275,5 +275,7 @@ namespace FormApiE_Commerce.UsersControls
         {
 
         }
+
+        
     }
 }

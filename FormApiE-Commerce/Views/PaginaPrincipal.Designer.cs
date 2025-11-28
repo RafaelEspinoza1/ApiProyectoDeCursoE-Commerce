@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             Panel_BarradeTareas = new CuoreUI.Controls.cuiPanel();
+            BtnAdministracion = new CuoreUI.Controls.cuiButton();
             btnDashboard_Vendedor = new CuoreUI.Controls.cuiButton();
             btnSoporte = new CuoreUI.Controls.cuiButton();
             BtnCerrarSesion = new CuoreUI.Controls.cuiButton();
-            MenuIconButton = new FontAwesome.Sharp.IconButton();
             BtnInicio = new CuoreUI.Controls.cuiButton();
             pnlGenerico = new CuoreUI.Controls.cuiPanel();
             Panel_BarradeTareas.SuspendLayout();
@@ -40,10 +40,10 @@
             // 
             // Panel_BarradeTareas
             // 
+            Panel_BarradeTareas.Controls.Add(BtnAdministracion);
             Panel_BarradeTareas.Controls.Add(btnDashboard_Vendedor);
             Panel_BarradeTareas.Controls.Add(btnSoporte);
             Panel_BarradeTareas.Controls.Add(BtnCerrarSesion);
-            Panel_BarradeTareas.Controls.Add(MenuIconButton);
             Panel_BarradeTareas.Controls.Add(BtnInicio);
             Panel_BarradeTareas.Dock = DockStyle.Top;
             Panel_BarradeTareas.Location = new Point(0, 0);
@@ -55,6 +55,45 @@
             Panel_BarradeTareas.Rounding = new Padding(8);
             Panel_BarradeTareas.Size = new Size(1034, 56);
             Panel_BarradeTareas.TabIndex = 0;
+            // 
+            // BtnAdministracion
+            // 
+            BtnAdministracion.BackColor = Color.Transparent;
+            BtnAdministracion.CheckButton = false;
+            BtnAdministracion.Checked = false;
+            BtnAdministracion.CheckedBackground = Color.FromArgb(255, 106, 0);
+            BtnAdministracion.CheckedForeColor = Color.White;
+            BtnAdministracion.CheckedImageTint = Color.White;
+            BtnAdministracion.CheckedOutline = Color.FromArgb(255, 106, 0);
+            BtnAdministracion.Content = "Administracion";
+            BtnAdministracion.DialogResult = DialogResult.None;
+            BtnAdministracion.Font = new Font("Garamond", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnAdministracion.ForeColor = Color.Black;
+            BtnAdministracion.HoverBackground = Color.White;
+            BtnAdministracion.HoverForeColor = Color.Black;
+            BtnAdministracion.HoverImageTint = Color.White;
+            BtnAdministracion.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            BtnAdministracion.Image = null;
+            BtnAdministracion.ImageAutoCenter = true;
+            BtnAdministracion.ImageExpand = new Point(0, 0);
+            BtnAdministracion.ImageOffset = new Point(0, 0);
+            BtnAdministracion.Location = new Point(192, 16);
+            BtnAdministracion.Name = "BtnAdministracion";
+            BtnAdministracion.NormalBackground = Color.White;
+            BtnAdministracion.NormalForeColor = Color.Black;
+            BtnAdministracion.NormalImageTint = Color.White;
+            BtnAdministracion.NormalOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnAdministracion.OutlineThickness = 1F;
+            BtnAdministracion.PressedBackground = Color.WhiteSmoke;
+            BtnAdministracion.PressedForeColor = Color.FromArgb(32, 32, 32);
+            BtnAdministracion.PressedImageTint = Color.White;
+            BtnAdministracion.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnAdministracion.Rounding = new Padding(8);
+            BtnAdministracion.Size = new Size(147, 27);
+            BtnAdministracion.TabIndex = 10;
+            BtnAdministracion.TextAlignment = StringAlignment.Center;
+            BtnAdministracion.TextOffset = new Point(0, 0);
+            BtnAdministracion.Click += BtnAdministracion_Click;
             // 
             // btnDashboard_Vendedor
             // 
@@ -77,7 +116,7 @@
             btnDashboard_Vendedor.ImageAutoCenter = true;
             btnDashboard_Vendedor.ImageExpand = new Point(0, 0);
             btnDashboard_Vendedor.ImageOffset = new Point(0, 0);
-            btnDashboard_Vendedor.Location = new Point(186, 16);
+            btnDashboard_Vendedor.Location = new Point(484, 15);
             btnDashboard_Vendedor.Margin = new Padding(3, 2, 3, 2);
             btnDashboard_Vendedor.Name = "btnDashboard_Vendedor";
             btnDashboard_Vendedor.NormalBackground = Color.White;
@@ -94,6 +133,7 @@
             btnDashboard_Vendedor.TabIndex = 9;
             btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
             btnDashboard_Vendedor.TextOffset = new Point(0, 0);
+            btnDashboard_Vendedor.Visible = false;
             // 
             // btnSoporte
             // 
@@ -136,6 +176,7 @@
             // 
             // BtnCerrarSesion
             // 
+            BtnCerrarSesion.Anchor = AnchorStyles.None;
             BtnCerrarSesion.BackColor = Color.Transparent;
             BtnCerrarSesion.CheckButton = false;
             BtnCerrarSesion.Checked = false;
@@ -145,8 +186,7 @@
             BtnCerrarSesion.CheckedOutline = Color.FromArgb(255, 106, 0);
             BtnCerrarSesion.Content = "Cerrar sesion";
             BtnCerrarSesion.DialogResult = DialogResult.None;
-            BtnCerrarSesion.Dock = DockStyle.Right;
-            BtnCerrarSesion.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnCerrarSesion.Font = new Font("Garamond", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             BtnCerrarSesion.ForeColor = Color.Red;
             BtnCerrarSesion.HoverBackground = Color.White;
             BtnCerrarSesion.HoverForeColor = Color.Black;
@@ -156,7 +196,7 @@
             BtnCerrarSesion.ImageAutoCenter = true;
             BtnCerrarSesion.ImageExpand = new Point(0, 0);
             BtnCerrarSesion.ImageOffset = new Point(0, 0);
-            BtnCerrarSesion.Location = new Point(885, 0);
+            BtnCerrarSesion.Location = new Point(893, 15);
             BtnCerrarSesion.Margin = new Padding(3, 2, 3, 2);
             BtnCerrarSesion.Name = "BtnCerrarSesion";
             BtnCerrarSesion.NormalBackground = Color.Transparent;
@@ -169,23 +209,11 @@
             BtnCerrarSesion.PressedImageTint = Color.White;
             BtnCerrarSesion.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             BtnCerrarSesion.Rounding = new Padding(8);
-            BtnCerrarSesion.Size = new Size(149, 56);
+            BtnCerrarSesion.Size = new Size(118, 27);
             BtnCerrarSesion.TabIndex = 4;
             BtnCerrarSesion.TextAlignment = StringAlignment.Center;
             BtnCerrarSesion.TextOffset = new Point(0, 0);
             BtnCerrarSesion.Click += BtnCerrarSesion_Click;
-            // 
-            // MenuIconButton
-            // 
-            MenuIconButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            MenuIconButton.IconColor = Color.Black;
-            MenuIconButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            MenuIconButton.Location = new Point(31, 10);
-            MenuIconButton.Margin = new Padding(3, 2, 3, 2);
-            MenuIconButton.Name = "MenuIconButton";
-            MenuIconButton.Size = new Size(40, 34);
-            MenuIconButton.TabIndex = 1;
-            MenuIconButton.UseVisualStyleBackColor = true;
             // 
             // BtnInicio
             // 
@@ -236,14 +264,14 @@
             pnlGenerico.PanelColor = Color.White;
             pnlGenerico.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
             pnlGenerico.Rounding = new Padding(8);
-            pnlGenerico.Size = new Size(1034, 506);
+            pnlGenerico.Size = new Size(1034, 602);
             pnlGenerico.TabIndex = 1;
             // 
             // PaginaPrincipal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1034, 562);
+            ClientSize = new Size(1034, 658);
             Controls.Add(pnlGenerico);
             Controls.Add(Panel_BarradeTareas);
             Name = "PaginaPrincipal";
@@ -256,10 +284,10 @@
 
         private CuoreUI.Controls.cuiPanel Panel_BarradeTareas;
         private CuoreUI.Controls.cuiButton BtnInicio;
-        private FontAwesome.Sharp.IconButton MenuIconButton;
         private CuoreUI.Controls.cuiButton BtnCerrarSesion;
         private CuoreUI.Controls.cuiButton btnSoporte;
         private CuoreUI.Controls.cuiPanel pnlGenerico;
         private CuoreUI.Controls.cuiButton btnDashboard_Vendedor;
+        private CuoreUI.Controls.cuiButton BtnAdministracion;
     }
 }

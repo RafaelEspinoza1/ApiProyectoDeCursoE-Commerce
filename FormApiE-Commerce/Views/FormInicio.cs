@@ -1,4 +1,3 @@
-
 using Azure;
 using FormApiE_Commerce.DTOs;
 using FormApiE_Commerce.UsersControls;
@@ -182,11 +181,22 @@ namespace FormApiE_Commerce
             // Ahora cargamos en Panel1 del SplitContainer
             splCon_Separador.Panel1.Controls.Clear();
             splCon_Separador.Panel1.Controls.Add(registro);
+           // BtnSalir.Visible = true;
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void BtnSalir_Click(object sender, EventArgs e)
+        {
+            UserControl inicioSesion = new Inicio_de_Sesion();
+            inicioSesion.Dock = DockStyle.Fill;
+            // Ahora cargamos en Panel1 del SplitContainer
+            splCon_Separador.Panel1.Controls.Clear();
+           // splCon_Separador.Panel1.Controls.Add(inicioSesion);
+            BtnSalir.Visible = false;
         }
     }
 }
