@@ -37,10 +37,10 @@
             cuiPictureBox1 = new CuoreUI.Controls.cuiPictureBox();
             cuiPanel3 = new CuoreUI.Controls.cuiPanel();
             FlwProductos = new FlowLayoutPanel();
-            cuiPanel4 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel5 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel6 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel7 = new CuoreUI.Controls.cuiPanel();
+            pnlProducto1 = new CuoreUI.Controls.cuiPanel();
+            pnlProducto2 = new CuoreUI.Controls.cuiPanel();
+            pnlProducto3 = new CuoreUI.Controls.cuiPanel();
+            pnlProducto4 = new CuoreUI.Controls.cuiPanel();
             cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             cuiSeparator1 = new CuoreUI.Controls.cuiSeparator();
             cuiPanel8.SuspendLayout();
@@ -156,7 +156,7 @@
             cuiLabel1.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel1.ForeColor = SystemColors.ButtonShadow;
             cuiLabel1.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel1.Location = new Point(421, 185);
+            cuiLabel1.Location = new Point(382, 188);
             cuiLabel1.Margin = new Padding(5, 6, 5, 6);
             cuiLabel1.Name = "cuiLabel1";
             cuiLabel1.Size = new Size(431, 34);
@@ -196,63 +196,63 @@
             // 
             // FlwProductos
             // 
-            FlwProductos.Controls.Add(cuiPanel4);
-            FlwProductos.Controls.Add(cuiPanel5);
-            FlwProductos.Controls.Add(cuiPanel6);
-            FlwProductos.Controls.Add(cuiPanel7);
+            FlwProductos.Controls.Add(pnlProducto1);
+            FlwProductos.Controls.Add(pnlProducto2);
+            FlwProductos.Controls.Add(pnlProducto3);
+            FlwProductos.Controls.Add(pnlProducto4);
             FlwProductos.Location = new Point(35, 66);
             FlwProductos.Margin = new Padding(3, 2, 3, 2);
             FlwProductos.Name = "FlwProductos";
             FlwProductos.Size = new Size(1126, 390);
             FlwProductos.TabIndex = 1;
             // 
-            // cuiPanel4
+            // pnlProducto1
             // 
-            cuiPanel4.Location = new Point(3, 2);
-            cuiPanel4.Margin = new Padding(3, 2, 3, 2);
-            cuiPanel4.Name = "cuiPanel4";
-            cuiPanel4.OutlineThickness = 1F;
-            cuiPanel4.PanelColor = Color.White;
-            cuiPanel4.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel4.Rounding = new Padding(8);
-            cuiPanel4.Size = new Size(273, 386);
-            cuiPanel4.TabIndex = 0;
+            pnlProducto1.Location = new Point(3, 2);
+            pnlProducto1.Margin = new Padding(3, 2, 3, 2);
+            pnlProducto1.Name = "pnlProducto1";
+            pnlProducto1.OutlineThickness = 1F;
+            pnlProducto1.PanelColor = Color.White;
+            pnlProducto1.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
+            pnlProducto1.Rounding = new Padding(8);
+            pnlProducto1.Size = new Size(273, 386);
+            pnlProducto1.TabIndex = 0;
             // 
-            // cuiPanel5
+            // pnlProducto2
             // 
-            cuiPanel5.Location = new Point(282, 2);
-            cuiPanel5.Margin = new Padding(3, 2, 3, 2);
-            cuiPanel5.Name = "cuiPanel5";
-            cuiPanel5.OutlineThickness = 1F;
-            cuiPanel5.PanelColor = Color.White;
-            cuiPanel5.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel5.Rounding = new Padding(8);
-            cuiPanel5.Size = new Size(273, 386);
-            cuiPanel5.TabIndex = 1;
+            pnlProducto2.Location = new Point(282, 2);
+            pnlProducto2.Margin = new Padding(3, 2, 3, 2);
+            pnlProducto2.Name = "pnlProducto2";
+            pnlProducto2.OutlineThickness = 1F;
+            pnlProducto2.PanelColor = Color.White;
+            pnlProducto2.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
+            pnlProducto2.Rounding = new Padding(8);
+            pnlProducto2.Size = new Size(273, 386);
+            pnlProducto2.TabIndex = 1;
             // 
-            // cuiPanel6
+            // pnlProducto3
             // 
-            cuiPanel6.Location = new Point(561, 2);
-            cuiPanel6.Margin = new Padding(3, 2, 3, 2);
-            cuiPanel6.Name = "cuiPanel6";
-            cuiPanel6.OutlineThickness = 1F;
-            cuiPanel6.PanelColor = Color.White;
-            cuiPanel6.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel6.Rounding = new Padding(8);
-            cuiPanel6.Size = new Size(273, 386);
-            cuiPanel6.TabIndex = 2;
+            pnlProducto3.Location = new Point(561, 2);
+            pnlProducto3.Margin = new Padding(3, 2, 3, 2);
+            pnlProducto3.Name = "pnlProducto3";
+            pnlProducto3.OutlineThickness = 1F;
+            pnlProducto3.PanelColor = Color.White;
+            pnlProducto3.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
+            pnlProducto3.Rounding = new Padding(8);
+            pnlProducto3.Size = new Size(273, 386);
+            pnlProducto3.TabIndex = 2;
             // 
-            // cuiPanel7
+            // pnlProducto4
             // 
-            cuiPanel7.Location = new Point(840, 2);
-            cuiPanel7.Margin = new Padding(3, 2, 3, 2);
-            cuiPanel7.Name = "cuiPanel7";
-            cuiPanel7.OutlineThickness = 1F;
-            cuiPanel7.PanelColor = Color.White;
-            cuiPanel7.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel7.Rounding = new Padding(8);
-            cuiPanel7.Size = new Size(273, 386);
-            cuiPanel7.TabIndex = 3;
+            pnlProducto4.Location = new Point(840, 2);
+            pnlProducto4.Margin = new Padding(3, 2, 3, 2);
+            pnlProducto4.Name = "pnlProducto4";
+            pnlProducto4.OutlineThickness = 1F;
+            pnlProducto4.PanelColor = Color.White;
+            pnlProducto4.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
+            pnlProducto4.Rounding = new Padding(8);
+            pnlProducto4.Size = new Size(273, 386);
+            pnlProducto4.TabIndex = 3;
             // 
             // cuiLabel2
             // 
@@ -307,10 +307,10 @@
         private CuoreUI.Controls.cuiPictureBox cuiPictureBox1;
         private CuoreUI.Controls.cuiPanel cuiPanel3;
         private FlowLayoutPanel FlwProductos;
-        private CuoreUI.Controls.cuiPanel cuiPanel4;
-        private CuoreUI.Controls.cuiPanel cuiPanel5;
-        private CuoreUI.Controls.cuiPanel cuiPanel6;
-        private CuoreUI.Controls.cuiPanel cuiPanel7;
+        private CuoreUI.Controls.cuiPanel pnlProducto1;
+        private CuoreUI.Controls.cuiPanel pnlProducto2;
+        private CuoreUI.Controls.cuiPanel pnlProducto3;
+        private CuoreUI.Controls.cuiPanel pnlProducto4;
         private CuoreUI.Controls.cuiLabel cuiLabel2;
         private CuoreUI.Controls.cuiSeparator cuiSeparator1;
     }

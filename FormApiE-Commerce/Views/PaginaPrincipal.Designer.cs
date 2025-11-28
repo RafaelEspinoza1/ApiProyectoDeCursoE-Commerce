@@ -30,10 +30,8 @@
         {
             Panel_BarradeTareas = new CuoreUI.Controls.cuiPanel();
             btnDashboard_Vendedor = new CuoreUI.Controls.cuiButton();
-            btnfavorito = new CuoreUI.Controls.cuiButton();
             btnSoporte = new CuoreUI.Controls.cuiButton();
             Btnconfiguracion = new CuoreUI.Controls.cuiButton();
-            btnAnalisis = new CuoreUI.Controls.cuiButton();
             MenuIconButton = new FontAwesome.Sharp.IconButton();
             BtnInicio = new CuoreUI.Controls.cuiButton();
             pnlGenerico = new CuoreUI.Controls.cuiPanel();
@@ -43,10 +41,8 @@
             // Panel_BarradeTareas
             // 
             Panel_BarradeTareas.Controls.Add(btnDashboard_Vendedor);
-            Panel_BarradeTareas.Controls.Add(btnfavorito);
             Panel_BarradeTareas.Controls.Add(btnSoporte);
             Panel_BarradeTareas.Controls.Add(Btnconfiguracion);
-            Panel_BarradeTareas.Controls.Add(btnAnalisis);
             Panel_BarradeTareas.Controls.Add(MenuIconButton);
             Panel_BarradeTareas.Controls.Add(BtnInicio);
             Panel_BarradeTareas.Dock = DockStyle.Top;
@@ -81,7 +77,7 @@
             btnDashboard_Vendedor.ImageAutoCenter = true;
             btnDashboard_Vendedor.ImageExpand = new Point(0, 0);
             btnDashboard_Vendedor.ImageOffset = new Point(0, 0);
-            btnDashboard_Vendedor.Location = new Point(421, 20);
+            btnDashboard_Vendedor.Location = new Point(212, 21);
             btnDashboard_Vendedor.Margin = new Padding(3, 2, 3, 2);
             btnDashboard_Vendedor.Name = "btnDashboard_Vendedor";
             btnDashboard_Vendedor.NormalBackground = Color.White;
@@ -98,45 +94,6 @@
             btnDashboard_Vendedor.TabIndex = 9;
             btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
             btnDashboard_Vendedor.TextOffset = new Point(0, 0);
-            // 
-            // btnfavorito
-            // 
-            btnfavorito.BackColor = Color.Transparent;
-            btnfavorito.CheckButton = false;
-            btnfavorito.Checked = false;
-            btnfavorito.CheckedBackground = Color.FromArgb(255, 106, 0);
-            btnfavorito.CheckedForeColor = Color.White;
-            btnfavorito.CheckedImageTint = Color.White;
-            btnfavorito.CheckedOutline = Color.FromArgb(255, 106, 0);
-            btnfavorito.Content = "Favoritos";
-            btnfavorito.DialogResult = DialogResult.None;
-            btnfavorito.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnfavorito.ForeColor = Color.Black;
-            btnfavorito.HoverBackground = Color.White;
-            btnfavorito.HoverForeColor = Color.Black;
-            btnfavorito.HoverImageTint = Color.White;
-            btnfavorito.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            btnfavorito.Image = null;
-            btnfavorito.ImageAutoCenter = true;
-            btnfavorito.ImageExpand = new Point(0, 0);
-            btnfavorito.ImageOffset = new Point(0, 0);
-            btnfavorito.Location = new Point(308, 20);
-            btnfavorito.Margin = new Padding(3, 2, 3, 2);
-            btnfavorito.Name = "btnfavorito";
-            btnfavorito.NormalBackground = Color.White;
-            btnfavorito.NormalForeColor = Color.Black;
-            btnfavorito.NormalImageTint = Color.White;
-            btnfavorito.NormalOutline = Color.White;
-            btnfavorito.OutlineThickness = 1F;
-            btnfavorito.PressedBackground = Color.WhiteSmoke;
-            btnfavorito.PressedForeColor = Color.FromArgb(32, 32, 32);
-            btnfavorito.PressedImageTint = Color.White;
-            btnfavorito.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            btnfavorito.Rounding = new Padding(8);
-            btnfavorito.Size = new Size(95, 36);
-            btnfavorito.TabIndex = 8;
-            btnfavorito.TextAlignment = StringAlignment.Center;
-            btnfavorito.TextOffset = new Point(0, 0);
             // 
             // btnSoporte
             // 
@@ -216,46 +173,6 @@
             Btnconfiguracion.TabIndex = 4;
             Btnconfiguracion.TextAlignment = StringAlignment.Center;
             Btnconfiguracion.TextOffset = new Point(0, 0);
-            // 
-            // btnAnalisis
-            // 
-            btnAnalisis.BackColor = Color.Transparent;
-            btnAnalisis.CheckButton = false;
-            btnAnalisis.Checked = false;
-            btnAnalisis.CheckedBackground = Color.FromArgb(255, 106, 0);
-            btnAnalisis.CheckedForeColor = Color.White;
-            btnAnalisis.CheckedImageTint = Color.White;
-            btnAnalisis.CheckedOutline = Color.FromArgb(255, 106, 0);
-            btnAnalisis.Content = "Analisis ";
-            btnAnalisis.DialogResult = DialogResult.None;
-            btnAnalisis.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAnalisis.ForeColor = Color.Black;
-            btnAnalisis.HoverBackground = Color.White;
-            btnAnalisis.HoverForeColor = Color.Black;
-            btnAnalisis.HoverImageTint = Color.White;
-            btnAnalisis.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            btnAnalisis.Image = null;
-            btnAnalisis.ImageAutoCenter = true;
-            btnAnalisis.ImageExpand = new Point(0, 0);
-            btnAnalisis.ImageOffset = new Point(0, 0);
-            btnAnalisis.Location = new Point(196, 20);
-            btnAnalisis.Margin = new Padding(3, 2, 3, 2);
-            btnAnalisis.Name = "btnAnalisis";
-            btnAnalisis.NormalBackground = Color.White;
-            btnAnalisis.NormalForeColor = Color.Black;
-            btnAnalisis.NormalImageTint = Color.White;
-            btnAnalisis.NormalOutline = Color.White;
-            btnAnalisis.OutlineThickness = 1F;
-            btnAnalisis.PressedBackground = Color.WhiteSmoke;
-            btnAnalisis.PressedForeColor = Color.FromArgb(32, 32, 32);
-            btnAnalisis.PressedImageTint = Color.White;
-            btnAnalisis.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            btnAnalisis.Rounding = new Padding(8);
-            btnAnalisis.Size = new Size(97, 36);
-            btnAnalisis.TabIndex = 3;
-            btnAnalisis.TextAlignment = StringAlignment.Center;
-            btnAnalisis.TextOffset = new Point(0, 0);
-            btnAnalisis.Click += btnAnalisis_Click;
             // 
             // MenuIconButton
             // 
@@ -340,11 +257,9 @@
 
         private CuoreUI.Controls.cuiPanel Panel_BarradeTareas;
         private CuoreUI.Controls.cuiButton BtnInicio;
-        private CuoreUI.Controls.cuiButton btnAnalisis;
         private FontAwesome.Sharp.IconButton MenuIconButton;
         private CuoreUI.Controls.cuiButton Btnconfiguracion;
         private CuoreUI.Controls.cuiButton btnSoporte;
-        private CuoreUI.Controls.cuiButton btnfavorito;
         private CuoreUI.Controls.cuiPanel pnlGenerico;
         private CuoreUI.Controls.cuiButton btnDashboard_Vendedor;
     }
