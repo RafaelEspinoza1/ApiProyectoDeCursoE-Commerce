@@ -143,10 +143,10 @@ namespace FormApiE_Commerce
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             var correo = txtCorreo.contentTextField.Text;
-            var contrase鎙 = txtContrase鎙.contentTextField.Text;
+            var contraseña = txtContraseña.contentTextField.Text;
 
             MessageBox.Show("Intentando el inicio de sesi鏮.");
-            var tokenData = await LoginUser(correo, contrase鎙);
+            var tokenData = await LoginUser(correo, contraseña);
 
             if (tokenData != null)
             {
