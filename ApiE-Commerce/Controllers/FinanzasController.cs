@@ -20,7 +20,7 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
             _finanzasService = finanzasService;
         }
 
-        [AllowAnonymous]
+        /*[AllowAnonymous]
         [HttpPost("get")]
         public async Task<IActionResult> GetCuentas()
         {
@@ -45,7 +45,7 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
-        }
+        }*/
 
         [AllowAnonymous]
         [HttpPost("create")]

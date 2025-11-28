@@ -38,12 +38,16 @@ namespace FormApiE_Commerce
             switch (rolId)
             {
                 case 1: // Administrador
-                    btnDashboard_Vendedor.Visible = false;
+                  //  btnDashboard_Vendedor.Visible = false;
+                    BtnAdministracion.Visible = true;
                     break;
                 case 2: // Vendedor
+                    //btnDashboard_Vendedor.Visible = true;
+                    BtnAdministracion.Visible = false;
                     break;
                 case 3: // Comprador
-                    btnDashboard_Vendedor.Visible = false;
+                    //btnDashboard_Vendedor.Visible = false;
+                    BtnAdministracion.Visible = false;
                     break;
             }
         }
@@ -189,5 +193,40 @@ namespace FormApiE_Commerce
             // Cerrar o esconder la página principal
             this.Hide(); // si prefieres mantenerlo en memoria
         }
+
+        private void BtnAdministracion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Buscar una instancia ya agregada
+                var existente = pnlGenerico.Controls.OfType<Administracion>().FirstOrDefault();
+                if (existente != null)
+                {
+                    // Si ya existe, traer al frente y asegurarse de que esté visible
+                    existente.BringToFront();
+                    return;
+                }
+
+                // Limpiar panel (opcional, evita múltiples formularios)
+                pnlGenerico.Controls.Clear();
+
+                // Crear y configurar el formulario hijo correctamente
+                Administracion administracion = new Administracion();
+                administracion.TopLevel = false;
+                administracion.FormBorderStyle = FormBorderStyle.None;
+                administracion.Dock = DockStyle.Fill;
+
+                // Agregar al panel y mostrar
+                pnlGenerico.Controls.Add(administracion);
+                administracion.Show();
+                administracion.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir Administracion: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }
+
