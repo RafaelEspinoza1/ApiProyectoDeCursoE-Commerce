@@ -1,15 +1,10 @@
-﻿using ApiProyectoDeCursoE_Commerce.Models.Auth;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ApiProyectoDeCursoE_Commerce.Models.ECommerce
+namespace ApiProyectoDeCursoE_Commerce.DTOs.TransaccionDTOs
 {
-    [Table("Transacciones")]
-    public class Transaccion
+    public class TransaccionCreateDTO
     {
-        [Key]
-        public int IdTransaccion { get; set; }
-
         [Required]
         public int IdProducto { get; set; }
 
@@ -24,7 +19,7 @@ namespace ApiProyectoDeCursoE_Commerce.Models.ECommerce
 
         [Required]
         public int IdMetodoDePago { get; set; }
-        
+
         [Required, Column(TypeName = "decimal(10,2)")]
         public decimal PrecioUnitario { get; set; }
 

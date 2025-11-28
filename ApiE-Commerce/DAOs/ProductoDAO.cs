@@ -95,7 +95,7 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
         {
             using var cmd = new SqlCommand();
             cmd.CommandText = "DELETE FROM Productos WHERE IdVendedor = @IdVendedor";
-            cmd.Parameters.AddWithValue("@IdAdministrador", idVendedor);
+            cmd.Parameters.AddWithValue("@IdVendedor", idVendedor);
 
             return await _sqlExecutor.ExecuteNonQueryAsync(cmd, connection, transaction: null);
         }

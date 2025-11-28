@@ -29,6 +29,7 @@ builder.Services.AddScoped<CompradorDAO>();
 builder.Services.AddScoped<RefreshTokenDAO>();
 
 builder.Services.AddScoped<ProductoDAO>();
+builder.Services.AddScoped<TransaccionDAO>();
 
 // ======= Repositorios =======
 builder.Services.AddScoped<AuthRepository>();
