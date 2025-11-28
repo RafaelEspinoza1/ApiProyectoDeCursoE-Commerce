@@ -1,9 +1,9 @@
-﻿using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.RefreshTokenDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
-using ApiProyectoDeCursoE_Commerce.Models;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.Auth.AdministradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.CompradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.RefreshTokenDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.VendedorDTOs;
+using ApiProyectoDeCursoE_Commerce.Models.Auth;
 using Microsoft.Data.SqlClient;
 
 namespace ApiProyectoDeCursoE_Commerce.Repositories.Interfaces
