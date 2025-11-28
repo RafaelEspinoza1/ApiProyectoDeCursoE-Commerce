@@ -1,7 +1,8 @@
 ﻿using ApiProyectoDeCursoE_Commerce.DAOs;
 using ApiProyectoDeCursoE_Commerce.Data;
-using ApiProyectoDeCursoE_Commerce.DTOs.Auth.ProductoDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Finance;
 using ApiProyectoDeCursoE_Commerce.DTOs.TransaccionDTOs;
+using ApiProyectoDeCursoE_Commerce.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,13 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransaccionController : Controller
+    public class FinanzasController : Controller
     {
-        public TransaccionDAO _transaccionDAO;
+        public FinanzasService _finanzasService;
 
-        public ECommerceContext _context;
-
-        public TransaccionController(TransaccionDAO transaccionDAO, ECommerceContext context)
+        public FinanzasController(FinanzasService finanzasService)
         {
-            _transaccionDAO = transaccionDAO;
-            _context = context;
+            _finanzasService = finanzasService;
         }
 
         [AllowAnonymous]
@@ -28,10 +26,7 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
         {
             try
             {
-                using var connection = _context.GetConnection();
-                await connection.OpenAsync();
-
-                var response = await _transaccionDAO.GetAllAsync(connection);
+                var response = await _finanzasService.();
 
                 if (response == null || response.Count == 0)
                     return NotFound("No se encontró ninguna transacción registrada.");
@@ -54,17 +49,14 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
         [AllowAnonymous]
         [HttpPost("create")]
-        public async Task<IActionResult> CreateTransaccion([FromBody] TransaccionCreateDTO transaccion)
+        public async Task<IActionResult> CreateCuenta([FromBody] CuentaCreateDTO transaccion)
         {
             try
             {
-                using var connection = _context.GetConnection();
-                await connection.OpenAsync();
-
                 if (transaccion == null)
                     return BadRequest("Datos inválidos");
 
-                var response = await _transaccionDAO.CreateAsync(transaccion, connection, transaction: null);
+                var response = await _finanzasService.CrearCuenta(transaccion);
 
                 return Ok(response);
             }
