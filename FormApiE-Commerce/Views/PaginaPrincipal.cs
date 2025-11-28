@@ -12,7 +12,7 @@ using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
 using System.Net.Http.Json;
-using FormApiE_Commerce.Models;
+using FormApiE_Commerce.DTOs;
 using FormApiE_Commerce.Views;
 using FormApiE_Commerce.UsersControls;
 
