@@ -46,7 +46,6 @@
             cuiButton3 = new CuoreUI.Controls.cuiButton();
             numericUpDown1 = new NumericUpDown();
             cuiLabel11 = new CuoreUI.Controls.cuiLabel();
-            cuiButton4 = new CuoreUI.Controls.cuiButton();
             cuiPanel1.SuspendLayout();
             cuiGroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -377,51 +376,11 @@
             cuiLabel11.TabIndex = 17;
             cuiLabel11.VerticalAlignment = StringAlignment.Near;
             // 
-            // cuiButton4
-            // 
-            cuiButton4.BackColor = Color.Transparent;
-            cuiButton4.CheckButton = false;
-            cuiButton4.Checked = false;
-            cuiButton4.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton4.CheckedForeColor = Color.White;
-            cuiButton4.CheckedImageTint = Color.White;
-            cuiButton4.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton4.Content = "Añadir al carrito";
-            cuiButton4.DialogResult = DialogResult.None;
-            cuiButton4.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiButton4.ForeColor = Color.Black;
-            cuiButton4.HoverBackground = Color.White;
-            cuiButton4.HoverForeColor = Color.Black;
-            cuiButton4.HoverImageTint = Color.White;
-            cuiButton4.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            cuiButton4.Image = null;
-            cuiButton4.ImageAutoCenter = true;
-            cuiButton4.ImageExpand = new Point(0, 0);
-            cuiButton4.ImageOffset = new Point(0, 0);
-            cuiButton4.Location = new Point(213, 757);
-            cuiButton4.Margin = new Padding(3, 4, 3, 4);
-            cuiButton4.Name = "cuiButton4";
-            cuiButton4.NormalBackground = Color.Peru;
-            cuiButton4.NormalForeColor = Color.Black;
-            cuiButton4.NormalImageTint = Color.White;
-            cuiButton4.NormalOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton4.OutlineThickness = 1F;
-            cuiButton4.PressedBackground = Color.WhiteSmoke;
-            cuiButton4.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton4.PressedImageTint = Color.White;
-            cuiButton4.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton4.Rounding = new Padding(8);
-            cuiButton4.Size = new Size(146, 60);
-            cuiButton4.TabIndex = 18;
-            cuiButton4.TextAlignment = StringAlignment.Center;
-            cuiButton4.TextOffset = new Point(0, 0);
-            // 
             // DetallesProducto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(486, 829);
-            Controls.Add(cuiButton4);
             Controls.Add(cuiLabel11);
             Controls.Add(numericUpDown1);
             Controls.Add(cuiButton3);
@@ -457,6 +416,5 @@
         private CuoreUI.Controls.cuiButton cuiButton3;
         private NumericUpDown numericUpDown1;
         private CuoreUI.Controls.cuiLabel cuiLabel11;
-        private CuoreUI.Controls.cuiButton cuiButton4;
     }
 }

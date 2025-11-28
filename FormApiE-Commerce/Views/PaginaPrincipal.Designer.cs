@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             cuiPanel1 = new CuoreUI.Controls.cuiPanel();
+            btnDashboard_Vendedor = new CuoreUI.Controls.cuiButton();
             btnfavorito = new CuoreUI.Controls.cuiButton();
             btnSoporte = new CuoreUI.Controls.cuiButton();
             Btnconfiguracion = new CuoreUI.Controls.cuiButton();
@@ -51,7 +52,6 @@
             tbxbuscarProducto = new CuoreUI.Controls.cuiTextBox();
             cuiLabel1 = new CuoreUI.Controls.cuiLabel();
             cuiPictureBox1 = new CuoreUI.Controls.cuiPictureBox();
-            btnDashboard_Vendedor = new CuoreUI.Controls.cuiButton();
             cuiPanel1.SuspendLayout();
             panel_Analisis.SuspendLayout();
             cuiPanel3.SuspendLayout();
@@ -79,6 +79,45 @@
             cuiPanel1.Size = new Size(1182, 74);
             cuiPanel1.TabIndex = 0;
             // 
+            // btnDashboard_Vendedor
+            // 
+            btnDashboard_Vendedor.BackColor = Color.Transparent;
+            btnDashboard_Vendedor.CheckButton = false;
+            btnDashboard_Vendedor.Checked = false;
+            btnDashboard_Vendedor.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnDashboard_Vendedor.CheckedForeColor = Color.White;
+            btnDashboard_Vendedor.CheckedImageTint = Color.White;
+            btnDashboard_Vendedor.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnDashboard_Vendedor.Content = "Mi negocio";
+            btnDashboard_Vendedor.DialogResult = DialogResult.None;
+            btnDashboard_Vendedor.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDashboard_Vendedor.ForeColor = Color.Black;
+            btnDashboard_Vendedor.HoverBackground = Color.White;
+            btnDashboard_Vendedor.HoverForeColor = Color.Black;
+            btnDashboard_Vendedor.HoverImageTint = Color.White;
+            btnDashboard_Vendedor.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            btnDashboard_Vendedor.Image = null;
+            btnDashboard_Vendedor.ImageAutoCenter = true;
+            btnDashboard_Vendedor.ImageExpand = new Point(0, 0);
+            btnDashboard_Vendedor.ImageOffset = new Point(0, 0);
+            btnDashboard_Vendedor.Location = new Point(421, 20);
+            btnDashboard_Vendedor.Margin = new Padding(3, 2, 3, 2);
+            btnDashboard_Vendedor.Name = "btnDashboard_Vendedor";
+            btnDashboard_Vendedor.NormalBackground = Color.White;
+            btnDashboard_Vendedor.NormalForeColor = Color.Black;
+            btnDashboard_Vendedor.NormalImageTint = Color.White;
+            btnDashboard_Vendedor.NormalOutline = Color.White;
+            btnDashboard_Vendedor.OutlineThickness = 1F;
+            btnDashboard_Vendedor.PressedBackground = Color.WhiteSmoke;
+            btnDashboard_Vendedor.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnDashboard_Vendedor.PressedImageTint = Color.White;
+            btnDashboard_Vendedor.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnDashboard_Vendedor.Rounding = new Padding(8);
+            btnDashboard_Vendedor.Size = new Size(130, 36);
+            btnDashboard_Vendedor.TabIndex = 9;
+            btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
+            btnDashboard_Vendedor.TextOffset = new Point(0, 0);
+            // 
             // btnfavorito
             // 
             btnfavorito.BackColor = Color.Transparent;
@@ -100,7 +139,7 @@
             btnfavorito.ImageAutoCenter = true;
             btnfavorito.ImageExpand = new Point(0, 0);
             btnfavorito.ImageOffset = new Point(0, 0);
-            btnfavorito.Location = new Point(311, 20);
+            btnfavorito.Location = new Point(308, 20);
             btnfavorito.Margin = new Padding(3, 2, 3, 2);
             btnfavorito.Name = "btnfavorito";
             btnfavorito.NormalBackground = Color.White;
@@ -537,45 +576,6 @@
             cuiPictureBox1.Rounding = new Padding(8);
             cuiPictureBox1.Size = new Size(315, 298);
             cuiPictureBox1.TabIndex = 0;
-            // 
-            // btnDashboard_Vendedor
-            // 
-            btnDashboard_Vendedor.BackColor = Color.Transparent;
-            btnDashboard_Vendedor.CheckButton = false;
-            btnDashboard_Vendedor.Checked = false;
-            btnDashboard_Vendedor.CheckedBackground = Color.FromArgb(255, 106, 0);
-            btnDashboard_Vendedor.CheckedForeColor = Color.White;
-            btnDashboard_Vendedor.CheckedImageTint = Color.White;
-            btnDashboard_Vendedor.CheckedOutline = Color.FromArgb(255, 106, 0);
-            btnDashboard_Vendedor.Content = "Mi negocio";
-            btnDashboard_Vendedor.DialogResult = DialogResult.None;
-            btnDashboard_Vendedor.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDashboard_Vendedor.ForeColor = Color.Black;
-            btnDashboard_Vendedor.HoverBackground = Color.White;
-            btnDashboard_Vendedor.HoverForeColor = Color.Black;
-            btnDashboard_Vendedor.HoverImageTint = Color.White;
-            btnDashboard_Vendedor.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            btnDashboard_Vendedor.Image = null;
-            btnDashboard_Vendedor.ImageAutoCenter = true;
-            btnDashboard_Vendedor.ImageExpand = new Point(0, 0);
-            btnDashboard_Vendedor.ImageOffset = new Point(0, 0);
-            btnDashboard_Vendedor.Location = new Point(421, 20);
-            btnDashboard_Vendedor.Margin = new Padding(3, 2, 3, 2);
-            btnDashboard_Vendedor.Name = "btnDashboard_Vendedor";
-            btnDashboard_Vendedor.NormalBackground = Color.White;
-            btnDashboard_Vendedor.NormalForeColor = Color.Black;
-            btnDashboard_Vendedor.NormalImageTint = Color.White;
-            btnDashboard_Vendedor.NormalOutline = Color.White;
-            btnDashboard_Vendedor.OutlineThickness = 1F;
-            btnDashboard_Vendedor.PressedBackground = Color.WhiteSmoke;
-            btnDashboard_Vendedor.PressedForeColor = Color.FromArgb(32, 32, 32);
-            btnDashboard_Vendedor.PressedImageTint = Color.White;
-            btnDashboard_Vendedor.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            btnDashboard_Vendedor.Rounding = new Padding(8);
-            btnDashboard_Vendedor.Size = new Size(130, 36);
-            btnDashboard_Vendedor.TabIndex = 9;
-            btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
-            btnDashboard_Vendedor.TextOffset = new Point(0, 0);
             // 
             // PaginaPrincipal
             // 

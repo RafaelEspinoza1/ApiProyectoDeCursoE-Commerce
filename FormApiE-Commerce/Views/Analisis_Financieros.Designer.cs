@@ -29,89 +29,268 @@
         private void InitializeComponent()
         {
             cuiPanel1 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel2 = new CuoreUI.Controls.cuiPanel();
-            cuiButton2 = new CuoreUI.Controls.cuiButton();
-            cuiButton1 = new CuoreUI.Controls.cuiButton();
+            Tbcontrol_Finanzas = new CuoreUI.Controls.cuiTabControl();
             cuiLabel1 = new CuoreUI.Controls.cuiLabel();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            cuiPanel8 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel7 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel6 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel5 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel4 = new CuoreUI.Controls.cuiPanel();
-            cuiPanel3 = new CuoreUI.Controls.cuiPanel();
-            cuiChartLine1 = new CuoreUI.Controls.Charts.cuiChartLine();
+            BtnEstadodeResultado = new CuoreUI.Controls.cuiButton();
+            BtnBalanceGeneral = new CuoreUI.Controls.cuiButton();
+            BtnRazonesFinancieras = new CuoreUI.Controls.cuiButton();
+            btnSistemaDupont = new CuoreUI.Controls.cuiButton();
+            BtnFlujosEfectivo = new CuoreUI.Controls.cuiButton();
+            cuiButton1 = new CuoreUI.Controls.cuiButton();
             cuiPanel1.SuspendLayout();
-            cuiPanel2.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
-            cuiPanel3.SuspendLayout();
             SuspendLayout();
             // 
             // cuiPanel1
             // 
-            cuiPanel1.Controls.Add(cuiPanel2);
+            cuiPanel1.BackColor = Color.Transparent;
+            cuiPanel1.Controls.Add(cuiButton1);
+            cuiPanel1.Controls.Add(BtnFlujosEfectivo);
+            cuiPanel1.Controls.Add(btnSistemaDupont);
+            cuiPanel1.Controls.Add(BtnRazonesFinancieras);
+            cuiPanel1.Controls.Add(BtnBalanceGeneral);
+            cuiPanel1.Controls.Add(BtnEstadodeResultado);
+            cuiPanel1.Controls.Add(cuiLabel1);
             cuiPanel1.Dock = DockStyle.Top;
             cuiPanel1.Location = new Point(0, 0);
+            cuiPanel1.Margin = new Padding(3, 4, 3, 4);
             cuiPanel1.Name = "cuiPanel1";
-            cuiPanel1.OutlineThickness = 1F;
+            cuiPanel1.OutlineThickness = 2F;
             cuiPanel1.PanelColor = Color.White;
-            cuiPanel1.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel1.Rounding = new Padding(8);
-            cuiPanel1.Size = new Size(1040, 113);
+            cuiPanel1.PanelOutlineColor = Color.Black;
+            cuiPanel1.Rounding = new Padding(20);
+            cuiPanel1.Size = new Size(1189, 194);
             cuiPanel1.TabIndex = 0;
             // 
-            // cuiPanel2
+            // Tbcontrol_Finanzas
             // 
-            cuiPanel2.BackColor = Color.Transparent;
-            cuiPanel2.Controls.Add(cuiButton2);
-            cuiPanel2.Controls.Add(cuiButton1);
-            cuiPanel2.Controls.Add(cuiLabel1);
-            cuiPanel2.Location = new Point(27, 12);
-            cuiPanel2.Name = "cuiPanel2";
-            cuiPanel2.OutlineThickness = 1F;
-            cuiPanel2.PanelColor = Color.LightGray;
-            cuiPanel2.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel2.Rounding = new Padding(8);
-            cuiPanel2.Size = new Size(987, 91);
-            cuiPanel2.TabIndex = 0;
+            Tbcontrol_Finanzas.Dock = DockStyle.Fill;
+            Tbcontrol_Finanzas.HoverBackgroundColor = Color.FromArgb(252, 252, 252);
+            Tbcontrol_Finanzas.HoverDeleteColor = Color.FromArgb(32, 32, 32);
+            Tbcontrol_Finanzas.HoverImageTint = Color.FromArgb(32, 32, 32);
+            Tbcontrol_Finanzas.HoverTextColor = Color.FromArgb(32, 32, 32);
+            Tbcontrol_Finanzas.ImageExpand = new Size(-4, -4);
+            Tbcontrol_Finanzas.Location = new Point(0, 194);
+            Tbcontrol_Finanzas.Name = "Tbcontrol_Finanzas";
+            Tbcontrol_Finanzas.NamingConvention = "TabPage";
+            Tbcontrol_Finanzas.PlusColor = Color.Gray;
+            Tbcontrol_Finanzas.Rounding = 8;
+            Tbcontrol_Finanzas.ScrollbarColor = Color.FromArgb(128, 128, 128);
+            Tbcontrol_Finanzas.ScrollbarHeight = 8;
+            Tbcontrol_Finanzas.ScrollOffset = 0;
+            Tbcontrol_Finanzas.SelectedBackgroundColor = Color.White;
+            Tbcontrol_Finanzas.SelectedDeleteColor = Color.Crimson;
+            Tbcontrol_Finanzas.SelectedImageTint = Color.Black;
+            Tbcontrol_Finanzas.SelectedIndex = -1;
+            Tbcontrol_Finanzas.SelectedTab = null;
+            Tbcontrol_Finanzas.SelectedTextColor = Color.Black;
+            Tbcontrol_Finanzas.ShowDelete = true;
+            Tbcontrol_Finanzas.ShowPlus = true;
+            Tbcontrol_Finanzas.Size = new Size(1189, 658);
+            Tbcontrol_Finanzas.TabHeight = 42;
+            Tbcontrol_Finanzas.TabIndex = 1;
+            Tbcontrol_Finanzas.TabWidth = 104;
+            Tbcontrol_Finanzas.TextOffset = new Size(0, 0);
+            Tbcontrol_Finanzas.UnselectedBackgroundColor = Color.FromArgb(244, 244, 244);
+            Tbcontrol_Finanzas.UnselectedDeleteColor = Color.Gray;
+            Tbcontrol_Finanzas.UnselectedImageTint = Color.FromArgb(64, 64, 64);
+            Tbcontrol_Finanzas.UnselectedTextColor = Color.FromArgb(64, 64, 64);
             // 
-            // cuiButton2
+            // cuiLabel1
             // 
-            cuiButton2.CheckButton = false;
-            cuiButton2.Checked = false;
-            cuiButton2.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton2.CheckedForeColor = Color.White;
-            cuiButton2.CheckedImageTint = Color.White;
-            cuiButton2.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton2.Content = "Configuracion";
-            cuiButton2.DialogResult = DialogResult.None;
-            cuiButton2.Font = new Font("Garamond", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiButton2.ForeColor = Color.Black;
-            cuiButton2.HoverBackground = Color.White;
-            cuiButton2.HoverForeColor = Color.Black;
-            cuiButton2.HoverImageTint = Color.White;
-            cuiButton2.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            cuiButton2.Image = null;
-            cuiButton2.ImageAutoCenter = true;
-            cuiButton2.ImageExpand = new Point(0, 0);
-            cuiButton2.ImageOffset = new Point(0, 0);
-            cuiButton2.Location = new Point(751, 23);
-            cuiButton2.Name = "cuiButton2";
-            cuiButton2.NormalBackground = Color.White;
-            cuiButton2.NormalForeColor = Color.Black;
-            cuiButton2.NormalImageTint = Color.White;
-            cuiButton2.NormalOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton2.OutlineThickness = 1F;
-            cuiButton2.PressedBackground = Color.WhiteSmoke;
-            cuiButton2.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton2.PressedImageTint = Color.White;
-            cuiButton2.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton2.RightToLeft = RightToLeft.No;
-            cuiButton2.Rounding = new Padding(8);
-            cuiButton2.Size = new Size(170, 45);
-            cuiButton2.TabIndex = 2;
-            cuiButton2.TextAlignment = StringAlignment.Center;
-            cuiButton2.TextOffset = new Point(0, 0);
+            cuiLabel1.Content = "Funciones\\ Financieras";
+            cuiLabel1.Font = new Font("Garamond", 28.2F, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point, 0);
+            cuiLabel1.HorizontalAlignment = StringAlignment.Center;
+            cuiLabel1.Location = new Point(13, 33);
+            cuiLabel1.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel1.Name = "cuiLabel1";
+            cuiLabel1.Size = new Size(482, 54);
+            cuiLabel1.TabIndex = 0;
+            cuiLabel1.VerticalAlignment = StringAlignment.Near;
+            // 
+            // BtnEstadodeResultado
+            // 
+            BtnEstadodeResultado.CheckButton = false;
+            BtnEstadodeResultado.Checked = false;
+            BtnEstadodeResultado.CheckedBackground = Color.FromArgb(255, 106, 0);
+            BtnEstadodeResultado.CheckedForeColor = Color.White;
+            BtnEstadodeResultado.CheckedImageTint = Color.White;
+            BtnEstadodeResultado.CheckedOutline = Color.FromArgb(255, 106, 0);
+            BtnEstadodeResultado.Content = "Estado de resultado";
+            BtnEstadodeResultado.DialogResult = DialogResult.None;
+            BtnEstadodeResultado.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnEstadodeResultado.ForeColor = Color.Black;
+            BtnEstadodeResultado.HoverBackground = Color.White;
+            BtnEstadodeResultado.HoverForeColor = Color.Black;
+            BtnEstadodeResultado.HoverImageTint = Color.White;
+            BtnEstadodeResultado.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            BtnEstadodeResultado.Image = null;
+            BtnEstadodeResultado.ImageAutoCenter = true;
+            BtnEstadodeResultado.ImageExpand = new Point(0, 0);
+            BtnEstadodeResultado.ImageOffset = new Point(0, 0);
+            BtnEstadodeResultado.Location = new Point(32, 119);
+            BtnEstadodeResultado.Name = "BtnEstadodeResultado";
+            BtnEstadodeResultado.NormalBackground = Color.White;
+            BtnEstadodeResultado.NormalForeColor = Color.Black;
+            BtnEstadodeResultado.NormalImageTint = Color.White;
+            BtnEstadodeResultado.NormalOutline = Color.Black;
+            BtnEstadodeResultado.OutlineThickness = 1F;
+            BtnEstadodeResultado.PressedBackground = Color.WhiteSmoke;
+            BtnEstadodeResultado.PressedForeColor = Color.FromArgb(32, 32, 32);
+            BtnEstadodeResultado.PressedImageTint = Color.White;
+            BtnEstadodeResultado.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnEstadodeResultado.Rounding = new Padding(8);
+            BtnEstadodeResultado.Size = new Size(191, 56);
+            BtnEstadodeResultado.TabIndex = 1;
+            BtnEstadodeResultado.TextAlignment = StringAlignment.Center;
+            BtnEstadodeResultado.TextOffset = new Point(0, 0);
+            // 
+            // BtnBalanceGeneral
+            // 
+            BtnBalanceGeneral.CheckButton = false;
+            BtnBalanceGeneral.Checked = false;
+            BtnBalanceGeneral.CheckedBackground = Color.FromArgb(255, 106, 0);
+            BtnBalanceGeneral.CheckedForeColor = Color.White;
+            BtnBalanceGeneral.CheckedImageTint = Color.White;
+            BtnBalanceGeneral.CheckedOutline = Color.FromArgb(255, 106, 0);
+            BtnBalanceGeneral.Content = "Balance general";
+            BtnBalanceGeneral.DialogResult = DialogResult.None;
+            BtnBalanceGeneral.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnBalanceGeneral.ForeColor = Color.Black;
+            BtnBalanceGeneral.HoverBackground = Color.White;
+            BtnBalanceGeneral.HoverForeColor = Color.Black;
+            BtnBalanceGeneral.HoverImageTint = Color.White;
+            BtnBalanceGeneral.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            BtnBalanceGeneral.Image = null;
+            BtnBalanceGeneral.ImageAutoCenter = true;
+            BtnBalanceGeneral.ImageExpand = new Point(0, 0);
+            BtnBalanceGeneral.ImageOffset = new Point(0, 0);
+            BtnBalanceGeneral.Location = new Point(241, 119);
+            BtnBalanceGeneral.Name = "BtnBalanceGeneral";
+            BtnBalanceGeneral.NormalBackground = Color.White;
+            BtnBalanceGeneral.NormalForeColor = Color.Black;
+            BtnBalanceGeneral.NormalImageTint = Color.White;
+            BtnBalanceGeneral.NormalOutline = Color.Black;
+            BtnBalanceGeneral.OutlineThickness = 1F;
+            BtnBalanceGeneral.PressedBackground = Color.WhiteSmoke;
+            BtnBalanceGeneral.PressedForeColor = Color.FromArgb(32, 32, 32);
+            BtnBalanceGeneral.PressedImageTint = Color.White;
+            BtnBalanceGeneral.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnBalanceGeneral.Rounding = new Padding(8);
+            BtnBalanceGeneral.Size = new Size(191, 56);
+            BtnBalanceGeneral.TabIndex = 2;
+            BtnBalanceGeneral.TextAlignment = StringAlignment.Center;
+            BtnBalanceGeneral.TextOffset = new Point(0, 0);
+            // 
+            // BtnRazonesFinancieras
+            // 
+            BtnRazonesFinancieras.CheckButton = false;
+            BtnRazonesFinancieras.Checked = false;
+            BtnRazonesFinancieras.CheckedBackground = Color.FromArgb(255, 106, 0);
+            BtnRazonesFinancieras.CheckedForeColor = Color.White;
+            BtnRazonesFinancieras.CheckedImageTint = Color.White;
+            BtnRazonesFinancieras.CheckedOutline = Color.FromArgb(255, 106, 0);
+            BtnRazonesFinancieras.Content = "Razones Financieras";
+            BtnRazonesFinancieras.DialogResult = DialogResult.None;
+            BtnRazonesFinancieras.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnRazonesFinancieras.ForeColor = Color.Black;
+            BtnRazonesFinancieras.HoverBackground = Color.White;
+            BtnRazonesFinancieras.HoverForeColor = Color.Black;
+            BtnRazonesFinancieras.HoverImageTint = Color.White;
+            BtnRazonesFinancieras.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            BtnRazonesFinancieras.Image = null;
+            BtnRazonesFinancieras.ImageAutoCenter = true;
+            BtnRazonesFinancieras.ImageExpand = new Point(0, 0);
+            BtnRazonesFinancieras.ImageOffset = new Point(0, 0);
+            BtnRazonesFinancieras.Location = new Point(451, 119);
+            BtnRazonesFinancieras.Name = "BtnRazonesFinancieras";
+            BtnRazonesFinancieras.NormalBackground = Color.White;
+            BtnRazonesFinancieras.NormalForeColor = Color.Black;
+            BtnRazonesFinancieras.NormalImageTint = Color.White;
+            BtnRazonesFinancieras.NormalOutline = Color.Black;
+            BtnRazonesFinancieras.OutlineThickness = 1F;
+            BtnRazonesFinancieras.PressedBackground = Color.WhiteSmoke;
+            BtnRazonesFinancieras.PressedForeColor = Color.FromArgb(32, 32, 32);
+            BtnRazonesFinancieras.PressedImageTint = Color.White;
+            BtnRazonesFinancieras.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnRazonesFinancieras.Rounding = new Padding(8);
+            BtnRazonesFinancieras.Size = new Size(191, 56);
+            BtnRazonesFinancieras.TabIndex = 3;
+            BtnRazonesFinancieras.TextAlignment = StringAlignment.Center;
+            BtnRazonesFinancieras.TextOffset = new Point(0, 0);
+            // 
+            // btnSistemaDupont
+            // 
+            btnSistemaDupont.CheckButton = false;
+            btnSistemaDupont.Checked = false;
+            btnSistemaDupont.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnSistemaDupont.CheckedForeColor = Color.White;
+            btnSistemaDupont.CheckedImageTint = Color.White;
+            btnSistemaDupont.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnSistemaDupont.Content = "Sistema Dupont";
+            btnSistemaDupont.DialogResult = DialogResult.None;
+            btnSistemaDupont.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSistemaDupont.ForeColor = Color.Black;
+            btnSistemaDupont.HoverBackground = Color.White;
+            btnSistemaDupont.HoverForeColor = Color.Black;
+            btnSistemaDupont.HoverImageTint = Color.White;
+            btnSistemaDupont.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            btnSistemaDupont.Image = null;
+            btnSistemaDupont.ImageAutoCenter = true;
+            btnSistemaDupont.ImageExpand = new Point(0, 0);
+            btnSistemaDupont.ImageOffset = new Point(0, 0);
+            btnSistemaDupont.Location = new Point(668, 119);
+            btnSistemaDupont.Name = "btnSistemaDupont";
+            btnSistemaDupont.NormalBackground = Color.White;
+            btnSistemaDupont.NormalForeColor = Color.Black;
+            btnSistemaDupont.NormalImageTint = Color.White;
+            btnSistemaDupont.NormalOutline = Color.Black;
+            btnSistemaDupont.OutlineThickness = 1F;
+            btnSistemaDupont.PressedBackground = Color.WhiteSmoke;
+            btnSistemaDupont.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnSistemaDupont.PressedImageTint = Color.White;
+            btnSistemaDupont.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnSistemaDupont.Rounding = new Padding(8);
+            btnSistemaDupont.Size = new Size(191, 56);
+            btnSistemaDupont.TabIndex = 4;
+            btnSistemaDupont.TextAlignment = StringAlignment.Center;
+            btnSistemaDupont.TextOffset = new Point(0, 0);
+            // 
+            // BtnFlujosEfectivo
+            // 
+            BtnFlujosEfectivo.CheckButton = false;
+            BtnFlujosEfectivo.Checked = false;
+            BtnFlujosEfectivo.CheckedBackground = Color.FromArgb(255, 106, 0);
+            BtnFlujosEfectivo.CheckedForeColor = Color.White;
+            BtnFlujosEfectivo.CheckedImageTint = Color.White;
+            BtnFlujosEfectivo.CheckedOutline = Color.FromArgb(255, 106, 0);
+            BtnFlujosEfectivo.Content = "Estado de Flujos de efectivo";
+            BtnFlujosEfectivo.DialogResult = DialogResult.None;
+            BtnFlujosEfectivo.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BtnFlujosEfectivo.ForeColor = Color.Black;
+            BtnFlujosEfectivo.HoverBackground = Color.White;
+            BtnFlujosEfectivo.HoverForeColor = Color.Black;
+            BtnFlujosEfectivo.HoverImageTint = Color.White;
+            BtnFlujosEfectivo.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            BtnFlujosEfectivo.Image = null;
+            BtnFlujosEfectivo.ImageAutoCenter = true;
+            BtnFlujosEfectivo.ImageExpand = new Point(0, 0);
+            BtnFlujosEfectivo.ImageOffset = new Point(0, 0);
+            BtnFlujosEfectivo.Location = new Point(883, 119);
+            BtnFlujosEfectivo.Name = "BtnFlujosEfectivo";
+            BtnFlujosEfectivo.NormalBackground = Color.White;
+            BtnFlujosEfectivo.NormalForeColor = Color.Black;
+            BtnFlujosEfectivo.NormalImageTint = Color.White;
+            BtnFlujosEfectivo.NormalOutline = Color.Black;
+            BtnFlujosEfectivo.OutlineThickness = 1F;
+            BtnFlujosEfectivo.PressedBackground = Color.WhiteSmoke;
+            BtnFlujosEfectivo.PressedForeColor = Color.FromArgb(32, 32, 32);
+            BtnFlujosEfectivo.PressedImageTint = Color.White;
+            BtnFlujosEfectivo.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            BtnFlujosEfectivo.Rounding = new Padding(8);
+            BtnFlujosEfectivo.Size = new Size(264, 56);
+            BtnFlujosEfectivo.TabIndex = 5;
+            BtnFlujosEfectivo.TextAlignment = StringAlignment.Center;
+            BtnFlujosEfectivo.TextOffset = new Point(0, 0);
             // 
             // cuiButton1
             // 
@@ -121,9 +300,9 @@
             cuiButton1.CheckedForeColor = Color.White;
             cuiButton1.CheckedImageTint = Color.White;
             cuiButton1.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton1.Content = "Exportar";
+            cuiButton1.Content = "Estado de origen y aplicacion";
             cuiButton1.DialogResult = DialogResult.None;
-            cuiButton1.Font = new Font("Garamond", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cuiButton1.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiButton1.ForeColor = Color.Black;
             cuiButton1.HoverBackground = Color.White;
             cuiButton1.HoverForeColor = Color.Black;
@@ -133,189 +312,48 @@
             cuiButton1.ImageAutoCenter = true;
             cuiButton1.ImageExpand = new Point(0, 0);
             cuiButton1.ImageOffset = new Point(0, 0);
-            cuiButton1.Location = new Point(566, 23);
+            cuiButton1.Location = new Point(766, 57);
             cuiButton1.Name = "cuiButton1";
             cuiButton1.NormalBackground = Color.White;
             cuiButton1.NormalForeColor = Color.Black;
             cuiButton1.NormalImageTint = Color.White;
-            cuiButton1.NormalOutline = Color.FromArgb(64, 128, 128, 128);
+            cuiButton1.NormalOutline = Color.Black;
             cuiButton1.OutlineThickness = 1F;
             cuiButton1.PressedBackground = Color.WhiteSmoke;
             cuiButton1.PressedForeColor = Color.FromArgb(32, 32, 32);
             cuiButton1.PressedImageTint = Color.White;
             cuiButton1.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton1.Rounding = new Padding(8);
-            cuiButton1.Size = new Size(153, 45);
-            cuiButton1.TabIndex = 1;
+            cuiButton1.Size = new Size(276, 56);
+            cuiButton1.TabIndex = 6;
             cuiButton1.TextAlignment = StringAlignment.Center;
             cuiButton1.TextOffset = new Point(0, 0);
             // 
-            // cuiLabel1
-            // 
-            cuiLabel1.Content = "Funcion\\ de\\ analisis\\ financieros";
-            cuiLabel1.Font = new Font("Garamond", 27.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            cuiLabel1.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel1.Location = new Point(4, 24);
-            cuiLabel1.Margin = new Padding(4, 3, 4, 3);
-            cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(441, 33);
-            cuiLabel1.TabIndex = 0;
-            cuiLabel1.VerticalAlignment = StringAlignment.Near;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.BackColor = Color.LightGoldenrodYellow;
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.Controls.Add(cuiPanel8, 2, 1);
-            tableLayoutPanel1.Controls.Add(cuiPanel7, 1, 1);
-            tableLayoutPanel1.Controls.Add(cuiPanel6, 0, 1);
-            tableLayoutPanel1.Controls.Add(cuiPanel5, 2, 0);
-            tableLayoutPanel1.Controls.Add(cuiPanel4, 1, 0);
-            tableLayoutPanel1.Controls.Add(cuiPanel3, 0, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.GrowStyle = TableLayoutPanelGrowStyle.FixedSize;
-            tableLayoutPanel1.Location = new Point(0, 113);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RightToLeft = RightToLeft.No;
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(1040, 526);
-            tableLayoutPanel1.TabIndex = 1;
-            // 
-            // cuiPanel8
-            // 
-            cuiPanel8.Location = new Point(695, 266);
-            cuiPanel8.Name = "cuiPanel8";
-            cuiPanel8.OutlineThickness = 1F;
-            cuiPanel8.PanelColor = Color.White;
-            cuiPanel8.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel8.Rounding = new Padding(8);
-            cuiPanel8.Size = new Size(340, 233);
-            cuiPanel8.TabIndex = 1;
-            // 
-            // cuiPanel7
-            // 
-            cuiPanel7.Location = new Point(349, 266);
-            cuiPanel7.Name = "cuiPanel7";
-            cuiPanel7.OutlineThickness = 1F;
-            cuiPanel7.PanelColor = Color.Chocolate;
-            cuiPanel7.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel7.Rounding = new Padding(8);
-            cuiPanel7.Size = new Size(340, 233);
-            cuiPanel7.TabIndex = 1;
-            // 
-            // cuiPanel6
-            // 
-            cuiPanel6.BackColor = Color.Transparent;
-            cuiPanel6.Location = new Point(3, 266);
-            cuiPanel6.Name = "cuiPanel6";
-            cuiPanel6.OutlineThickness = 1F;
-            cuiPanel6.PanelColor = Color.White;
-            cuiPanel6.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel6.Rounding = new Padding(8);
-            cuiPanel6.Size = new Size(340, 233);
-            cuiPanel6.TabIndex = 1;
-            // 
-            // cuiPanel5
-            // 
-            cuiPanel5.Location = new Point(695, 3);
-            cuiPanel5.Name = "cuiPanel5";
-            cuiPanel5.OutlineThickness = 1F;
-            cuiPanel5.PanelColor = Color.Chocolate;
-            cuiPanel5.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel5.Rounding = new Padding(8);
-            cuiPanel5.Size = new Size(340, 233);
-            cuiPanel5.TabIndex = 1;
-            // 
-            // cuiPanel4
-            // 
-            cuiPanel4.Location = new Point(349, 3);
-            cuiPanel4.Name = "cuiPanel4";
-            cuiPanel4.OutlineThickness = 1F;
-            cuiPanel4.PanelColor = Color.White;
-            cuiPanel4.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel4.Rounding = new Padding(8);
-            cuiPanel4.Size = new Size(340, 233);
-            cuiPanel4.TabIndex = 1;
-            // 
-            // cuiPanel3
-            // 
-            cuiPanel3.Controls.Add(cuiChartLine1);
-            cuiPanel3.Location = new Point(3, 3);
-            cuiPanel3.Name = "cuiPanel3";
-            cuiPanel3.OutlineThickness = 1F;
-            cuiPanel3.PanelColor = Color.Chocolate;
-            cuiPanel3.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
-            cuiPanel3.Rounding = new Padding(8);
-            cuiPanel3.Size = new Size(340, 233);
-            cuiPanel3.TabIndex = 0;
-            // 
-            // cuiChartLine1
-            // 
-            cuiChartLine1.AutoMaxValue = false;
-            cuiChartLine1.AxisColor = Color.Gray;
-            cuiChartLine1.ChartLineColor = Color.FromArgb(255, 106, 0);
-            cuiChartLine1.ChartPadding = 40;
-            cuiChartLine1.DataPoints = new float[]
-    {
-    100F,
-    90F,
-    80F,
-    75F,
-    70F,
-    65F,
-    60F
-    };
-            cuiChartLine1.DayColor = Color.DarkGray;
-            cuiChartLine1.Font = new Font("Microsoft YaHei UI", 8.25F);
-            cuiChartLine1.GradientBackground = true;
-            cuiChartLine1.Location = new Point(10, 3);
-            cuiChartLine1.Margin = new Padding(4, 3, 4, 3);
-            cuiChartLine1.MaxValue = 100F;
-            cuiChartLine1.Name = "cuiChartLine1";
-            cuiChartLine1.PointColor = Color.FromArgb(255, 106, 0);
-            cuiChartLine1.ShortDates = true;
-            cuiChartLine1.ShowLines = true;
-            cuiChartLine1.Size = new Size(250, 186);
-            cuiChartLine1.TabIndex = 0;
-            cuiChartLine1.UseBezier = false;
-            cuiChartLine1.UsePercent = true;
-            // 
             // Analisis_Financieros
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1040, 639);
-            Controls.Add(tableLayoutPanel1);
+            ClientSize = new Size(1189, 852);
+            Controls.Add(Tbcontrol_Finanzas);
             Controls.Add(cuiPanel1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Analisis_Financieros";
             Text = "Analisis_Financieros";
             cuiPanel1.ResumeLayout(false);
-            cuiPanel2.ResumeLayout(false);
-            tableLayoutPanel1.ResumeLayout(false);
-            cuiPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private CuoreUI.Controls.cuiPanel cuiPanel1;
-        private TableLayoutPanel tableLayoutPanel1;
-        private CuoreUI.Controls.cuiPanel cuiPanel2;
+        private CuoreUI.Controls.cuiTabControl Tbcontrol_Finanzas;
         private CuoreUI.Controls.cuiLabel cuiLabel1;
-        private CuoreUI.Controls.cuiPanel cuiPanel8;
-        private CuoreUI.Controls.cuiPanel cuiPanel7;
-        private CuoreUI.Controls.cuiPanel cuiPanel6;
-        private CuoreUI.Controls.cuiPanel cuiPanel5;
-        private CuoreUI.Controls.cuiPanel cuiPanel4;
-        private CuoreUI.Controls.cuiPanel cuiPanel3;
+        private CuoreUI.Controls.cuiButton BtnFlujosEfectivo;
+        private CuoreUI.Controls.cuiButton btnSistemaDupont;
+        private CuoreUI.Controls.cuiButton BtnRazonesFinancieras;
+        private CuoreUI.Controls.cuiButton BtnBalanceGeneral;
+        private CuoreUI.Controls.cuiButton BtnEstadodeResultado;
         private CuoreUI.Controls.cuiButton cuiButton1;
-        private CuoreUI.Controls.Charts.cuiChartLine cuiChartLine1;
-        private CuoreUI.Controls.cuiButton cuiButton2;
     }
 }
