@@ -30,6 +30,8 @@ builder.Services.AddScoped<RefreshTokenDAO>();
 
 builder.Services.AddScoped<ProductoDAO>();
 builder.Services.AddScoped<TransaccionDAO>();
+builder.Services.AddScoped<CuentaDAO>();
+builder.Services.AddScoped<ComprobanteContableDAO>();
 
 // ======= Repositorios =======
 builder.Services.AddScoped<AuthRepository>();
@@ -42,6 +44,9 @@ builder.Services.AddSingleton(sp =>
     return new JwtService(settings);
 });
 builder.Services.AddScoped<AuthService>();
+
+builder.Services.AddScoped<FinanzasService>();
+
 
 // ======= Autenticación JWT =======
 builder.Services.AddJwtAuthentication(builder.Configuration);

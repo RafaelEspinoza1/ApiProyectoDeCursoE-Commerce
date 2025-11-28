@@ -20,8 +20,8 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
             _finanzasService = finanzasService;
         }
 
-        /*[AllowAnonymous]
-        [HttpPost("get")]
+        [AllowAnonymous]
+        [HttpGet("get/cuentas")]
         public async Task<IActionResult> GetCuentas()
         {
             try
@@ -30,6 +30,25 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
                 if (response == null || response.Count == 0)
                     return NotFound("No se encontró ninguna transacción registrada.");
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("create/cuenta")]
+        public async Task<IActionResult> CreateCuenta([FromBody] CuentaCreateDTO transaccion)
+        {
+            try
+            {
+                if (transaccion == null)
+                    return BadRequest("Datos inválidos");
+
+                var response = await _finanzasService.CrearCuenta(transaccion);
 
                 return Ok(response);
             }
@@ -45,18 +64,37 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
-        }*/
+        }
 
         [AllowAnonymous]
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateCuenta([FromBody] CuentaCreateDTO transaccion)
+        [HttpGet("get/comprobantesContables")]
+        public async Task<IActionResult> GetComprobantesContables()
         {
             try
             {
-                if (transaccion == null)
+                var response = await _finanzasService.ObtenerComprobantesContables();
+
+                if (response == null || response.Count == 0)
+                    return NotFound("No se encontró ningun comprobante registrada.");
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("create/comprobanteContable")]
+        public async Task<IActionResult> CreateComprobanteContable([FromBody] ComprobanteContableCreateDTO comprobanteContable)
+        {
+            try
+            {
+                if (comprobanteContable == null)
                     return BadRequest("Datos inválidos");
 
-                var response = await _finanzasService.CrearCuenta(transaccion);
+                var response = await _finanzasService.CrearComprobanteContable(comprobanteContable);
 
                 return Ok(response);
             }

@@ -2,6 +2,7 @@
 using ApiProyectoDeCursoE_Commerce.DTOs.Finance;
 using ApiProyectoDeCursoE_Commerce.Executor;
 using ApiProyectoDeCursoE_Commerce.Models.ECommerce;
+using ApiProyectoDeCursoE_Commerce.Models.Finance;
 using Microsoft.Data.SqlClient;
 
 namespace ApiProyectoDeCursoE_Commerce.DAOs
@@ -22,13 +23,13 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
             {
                 IdCuenta = reader.GetInt32(reader.GetOrdinal("IdCuenta")),
                 IdTipoCuenta = reader.GetInt32(reader.GetOrdinal("IdTipoCuenta")),
-                IdVendedor = reader.GetInt32(reader.GetOrdinal("IdVendedor")),
+                IdVendedor = reader.IsDBNull(reader.GetOrdinal("IdVendedor")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("IdVendedor")),
                 EsCuentaPlataforma = reader.GetBoolean(reader.GetOrdinal("EsCuentaPlataforma")),
                 NombreCuenta = reader.GetString(reader.GetOrdinal("NombreCuenta")),
                 CodigoCuenta = reader.GetString(reader.GetOrdinal("CodigoCuenta")),
                 EsAfectable = reader.GetBoolean(reader.GetOrdinal("EsAfectable")),
                 EsCuentaDeSistema = reader.GetBoolean(reader.GetOrdinal("EsCuentaDeSistema")),
-                Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
+                Descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion")) ? null : reader.GetString(reader.GetOrdinal("Descripcion")),
                 SaldoActual = reader.GetDecimal(reader.GetOrdinal("SaldoActual"))
             });
         }
@@ -50,13 +51,17 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
                 {
                     IdCuenta = reader.GetInt32(reader.GetOrdinal("IdCuenta")),
                     IdTipoCuenta = reader.GetInt32(reader.GetOrdinal("IdTipoCuenta")),
-                    IdVendedor = reader.GetInt32(reader.GetOrdinal("IdVendedor")),
+                    IdVendedor = reader.IsDBNull(reader.GetOrdinal("IdVendedor"))
+            ? (int?)null
+            : reader.GetInt32(reader.GetOrdinal("IdVendedor")),
                     EsCuentaPlataforma = reader.GetBoolean(reader.GetOrdinal("EsCuentaPlataforma")),
                     NombreCuenta = reader.GetString(reader.GetOrdinal("NombreCuenta")),
                     CodigoCuenta = reader.GetString(reader.GetOrdinal("CodigoCuenta")),
                     EsAfectable = reader.GetBoolean(reader.GetOrdinal("EsAfectable")),
                     EsCuentaDeSistema = reader.GetBoolean(reader.GetOrdinal("EsCuentaDeSistema")),
-                    Descripcion = reader.GetString(reader.GetOrdinal("Descripcion")),
+                    Descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion"))
+            ? null
+            : reader.GetString(reader.GetOrdinal("Descripcion")),
                     SaldoActual = reader.GetDecimal(reader.GetOrdinal("SaldoActual"))
                 });
             }
@@ -92,7 +97,15 @@ namespace ApiProyectoDeCursoE_Commerce.DAOs
                 VALUES
                 (@IdTipoCuenta, @IdVendedor, @EsCuentaPlataforma, @NombreCuenta, @CodigoCuenta,
                 @EsAfectable, @EsCuentaDeSistema, @Descripcion, @SaldoActual)";
+            cmd.Parameters.AddWithValue("@IdTipoCuenta", cuenta.IdTipoCuenta);
             cmd.Parameters.AddWithValue("@IdVendedor", cuenta.IdVendedor);
+            cmd.Parameters.AddWithValue("@EsCuentaPlataforma", cuenta.EsCuentaPlataforma);
+            cmd.Parameters.AddWithValue("@NombreCuenta", cuenta.NombreCuenta);
+            cmd.Parameters.AddWithValue("@CodigoCuenta", cuenta.CodigoCuenta);
+            cmd.Parameters.AddWithValue("@EsAfectable", cuenta.EsAfectable);
+            cmd.Parameters.AddWithValue("@EsCuentaDeSistema", cuenta.EsCuentaDeSistema);
+            cmd.Parameters.AddWithValue("@Descripcion", cuenta.Descripcion);
+            cmd.Parameters.AddWithValue("@SaldoActual", cuenta.SaldoActual);
 
             return await _sqlExecutor.ExecuteNonQueryAsync(cmd, connection, transaction);
         }

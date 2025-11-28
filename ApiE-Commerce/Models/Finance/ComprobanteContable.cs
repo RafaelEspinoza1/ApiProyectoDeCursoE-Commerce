@@ -23,9 +23,5 @@ namespace ApiProyectoDeCursoE_Commerce.Models.Finance
 
         [Required]
         public bool EsComprobantePlataforma { get; set; } = false;
-
-        // Propiedad de navegación para la relación FK_Comprobantes_Vendedores
-        [ForeignKey("IdVendedor")]
-        public Vendedor? Vendedor { get; set; }
     }
 }

@@ -133,6 +133,7 @@
             btnDashboard_Vendedor.TabIndex = 9;
             btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
             btnDashboard_Vendedor.TextOffset = new Point(0, 0);
+            btnDashboard_Vendedor.Visible = false;
             btnDashboard_Vendedor.Click += btnDashboard_Vendedor_Click;
             // 
             // btnSoporte
