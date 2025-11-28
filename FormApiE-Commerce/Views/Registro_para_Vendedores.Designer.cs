@@ -280,14 +280,14 @@
             // 
             cuiPictureBox2.Content = null;
             cuiPictureBox2.ImageTint = Color.White;
-            cuiPictureBox2.Location = new Point(371, 56);
+            cuiPictureBox2.Location = new Point(371, 82);
             cuiPictureBox2.Margin = new Padding(4, 5, 4, 5);
             cuiPictureBox2.Name = "cuiPictureBox2";
             cuiPictureBox2.OutlineThickness = 1F;
             cuiPictureBox2.PanelOutlineColor = Color.Empty;
             cuiPictureBox2.Rotation = 0;
             cuiPictureBox2.Rounding = new Padding(15);
-            cuiPictureBox2.Size = new Size(208, 220);
+            cuiPictureBox2.Size = new Size(208, 194);
             cuiPictureBox2.TabIndex = 11;
             // 
             // cuiLabel11
@@ -344,7 +344,7 @@
             cuiLabel7.Location = new Point(24, 284);
             cuiLabel7.Margin = new Padding(4, 3, 4, 3);
             cuiLabel7.Name = "cuiLabel7";
-            cuiLabel7.Size = new Size(382, 30);
+            cuiLabel7.Size = new Size(471, 30);
             cuiLabel7.TabIndex = 6;
             cuiLabel7.VerticalAlignment = StringAlignment.Near;
             // 
@@ -440,7 +440,7 @@
             cuiLabel5.Location = new Point(24, 46);
             cuiLabel5.Margin = new Padding(4, 3, 4, 3);
             cuiLabel5.Name = "cuiLabel5";
-            cuiLabel5.Size = new Size(351, 30);
+            cuiLabel5.Size = new Size(397, 30);
             cuiLabel5.TabIndex = 1;
             cuiLabel5.VerticalAlignment = StringAlignment.Near;
             // 

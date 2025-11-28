@@ -79,6 +79,45 @@ namespace FormApiE_Commerce
 
         }
 
+        private void CargarInicio()
+        {
+            try
+            {
+                // Verificar si ya hay una instancia de FuncionComprar en el panel
+                var existente = pnlGenerico.Controls.OfType<funcionComprar>().FirstOrDefault();
+                if (existente != null)
+                {
+                    existente.BringToFront();
+                    return;
+                }
+
+                // Si hay cualquier otro control (otro formulario), sustituirlo
+                if (pnlGenerico.Controls.Count > 0)
+                {
+                    // Dispose y limpiar para liberar recursos
+                    foreach (Control c in pnlGenerico.Controls.OfType<Control>().ToList())
+                    {
+                        pnlGenerico.Controls.Remove(c);
+                        c.Dispose();
+                    }
+                }
+
+                // Crear y configurar el formulario FuncionComprar
+                funcionComprar compraForm = new funcionComprar
+                {
+                    Dock = DockStyle.Fill
+                };
+
+                // Agregar al panel y mostrar
+                pnlGenerico.Controls.Add(compraForm);
+                compraForm.Show();
+                compraForm.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir la función Comprar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void btnAnalisis_Click(object sender, EventArgs e)
         {
@@ -117,42 +156,12 @@ namespace FormApiE_Commerce
 
         private void BtnInicio_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Verificar si ya hay una instancia de FuncionComprar en el panel
-                var existente = pnlGenerico.Controls.OfType<funcionComprar>().FirstOrDefault();
-                if (existente != null)
-                {
-                    existente.BringToFront();
-                    return;
-                }
+            CargarInicio();
+        }
 
-                // Si hay cualquier otro control (otro formulario), sustituirlo
-                if (pnlGenerico.Controls.Count > 0)
-                {
-                    // Dispose y limpiar para liberar recursos
-                    foreach (Control c in pnlGenerico.Controls.OfType<Control>().ToList())
-                    {
-                        pnlGenerico.Controls.Remove(c);
-                        c.Dispose();
-                    }
-                }
+        private void btnDashboard_Vendedor_Click(object sender, EventArgs e)
+        {
 
-                // Crear y configurar el formulario FuncionComprar
-                funcionComprar compraForm = new funcionComprar
-                {
-                    Dock = DockStyle.Fill
-                };
-
-                // Agregar al panel y mostrar
-                pnlGenerico.Controls.Add(compraForm);
-                compraForm.Show();
-                compraForm.BringToFront();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al abrir la función Comprar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)

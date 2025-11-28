@@ -31,7 +31,7 @@ namespace FormApiE_Commerce
                 var refreshToken = tokenData?.RefreshToken;
 
                 // --------------------------------------------------
-                // Inicio rápido: JWT solo, o Refresh Token + IdUsuario
+                // Inicio rå«šido: JWT solo, o Refresh Token + IdUsuario
                 // --------------------------------------------------
                 if (!string.IsNullOrEmpty(token) ||
                     (!string.IsNullOrEmpty(refreshToken) && idUsuario != null && idUsuario > 0))
@@ -57,7 +57,10 @@ namespace FormApiE_Commerce
                         if (response.IsSuccessStatusCode)
                         {
                             var nuevoToken = await response.Content.ReadAsStringAsync();
-                            var authResponse = JsonSerializer.Deserialize<TokenData>(nuevoToken);
+                            var authResponse = JsonSerializer.Deserialize<TokenData>(
+                                nuevoToken,
+                                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                            );
 
                             if (authResponse == null)
                             {
@@ -68,7 +71,7 @@ namespace FormApiE_Commerce
                             // Guardar el nuevo token
                             TokenDataStorage.Save(authResponse);
 
-                            MessageBox.Show("¡Bienvenido de nuevo!");
+                            MessageBox.Show("ã€ienvenido de nuevo!");
 
                             PaginaPrincipal paginaPrincipal = new PaginaPrincipal(tokenData);
                             var formInicio = this.FindForm();
@@ -76,6 +79,7 @@ namespace FormApiE_Commerce
                             {
                                 paginaPrincipal.FormClosed += (s, args) => formInicio.Close();
                             }
+
                             paginaPrincipal.Show();
                             formInicio?.Hide();
                         }
@@ -87,14 +91,14 @@ namespace FormApiE_Commerce
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error de conexión: " + ex.Message);
+                        MessageBox.Show("Error de conexié®: " + ex.Message);
                     }
                 }
             }
         }
 
 
-        private async Task<TokenData?> LoginUser(string correo, string contraseña)
+        private async Task<TokenData?> LoginUser(string correo, string contraseé™)
         {
             using var httpClient = new HttpClient();
             var url = "http://localhost:5028/api/Auth/login";
@@ -102,7 +106,7 @@ namespace FormApiE_Commerce
             var loginData = new
             {
                 Correo = correo,
-                Contraseña = contraseña,
+                Contraseé™ = contraseé™,
                 Token = "" // En este flujo, no usamos token previo
             };
 
@@ -115,20 +119,24 @@ namespace FormApiE_Commerce
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"Inicio de sesión fallido. ERROR: {response.StatusCode}");
+                    MessageBox.Show($"Inicio de sesié® fallido. ERROR: {response.StatusCode}");
                     return null;
                 }
 
                 var responseJson = await response.Content.ReadAsStringAsync();
                 var authResponse = JsonSerializer.Deserialize<TokenData>(
-                    responseJson
+                    responseJson,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }
                 );
 
                 return authResponse;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"No hay conexión, intente nuevamente.\n{ex.Message}", "Error de conexión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No hay conexié®, intente nuevamente.\n{ex.Message}", "Error de conexié®", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -136,10 +144,10 @@ namespace FormApiE_Commerce
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             var correo = txtCorreo.contentTextField.Text;
-            var contraseña = txtContraseña.contentTextField.Text;
+            var contraseé™ = txtContraseé™.contentTextField.Text;
 
-            MessageBox.Show("Intentando el inicio de sesión.");
-            var tokenData = await LoginUser(correo, contraseña);
+            MessageBox.Show("Intentando el inicio de sesié®.");
+            var tokenData = await LoginUser(correo, contraseé™);
 
             if (tokenData != null)
             {
@@ -148,7 +156,7 @@ namespace FormApiE_Commerce
                     tokenData
                 );
 
-                MessageBox.Show("Inicio de sesión exitoso. ¡Bienvenido de nuevo!");
+                MessageBox.Show("Inicio de sesié® exitoso. ã€ienvenido de nuevo!");
 
                 PaginaPrincipal paginaPrincipal = new PaginaPrincipal(tokenData);
                 var formInicio = this.FindForm();
@@ -168,7 +176,7 @@ namespace FormApiE_Commerce
             }
             else
             {
-                MessageBox.Show("Correo o contraseña incorrectos.");
+                MessageBox.Show("Correo o contraseé™ incorrectos.");
             }
         }
 

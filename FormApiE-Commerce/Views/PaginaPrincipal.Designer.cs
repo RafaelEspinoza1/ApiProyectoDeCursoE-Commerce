@@ -47,7 +47,7 @@
             Panel_BarradeTareas.Controls.Add(BtnInicio);
             Panel_BarradeTareas.Dock = DockStyle.Top;
             Panel_BarradeTareas.Location = new Point(0, 0);
-            Panel_BarradeTareas.Margin = new Padding(3, 2, 3, 2);
+            Panel_BarradeTareas.Margin = new Padding(4, 2, 4, 2);
             Panel_BarradeTareas.Name = "Panel_BarradeTareas";
             Panel_BarradeTareas.OutlineThickness = 1F;
             Panel_BarradeTareas.PanelColor = Color.White;
@@ -94,6 +94,7 @@
             btnDashboard_Vendedor.TabIndex = 9;
             btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
             btnDashboard_Vendedor.TextOffset = new Point(0, 0);
+            btnDashboard_Vendedor.Click += btnDashboard_Vendedor_Click;
             // 
             // btnSoporte
             // 
