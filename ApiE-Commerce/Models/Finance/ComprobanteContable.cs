@@ -6,7 +6,7 @@ namespace ApiProyectoDeCursoE_Commerce.Models.Finance
 {
     public class ComprobanteContable
     {
-        [[Key]
+        [Key]
         public int IdComprobante { get; set; }
 
         [Required]
