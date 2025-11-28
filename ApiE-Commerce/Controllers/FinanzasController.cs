@@ -22,11 +22,11 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
 
         /*[AllowAnonymous]
         [HttpPost("get")]
-        public async Task<IActionResult> GetTransacciones()
+        public async Task<IActionResult> GetCuentas()
         {
             try
             {
-                var response = await _finanzasService.();
+                var response = await _finanzasService.ObtenerCuentas();
 
                 if (response == null || response.Count == 0)
                     return NotFound("No se encontró ninguna transacción registrada.");

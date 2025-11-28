@@ -47,20 +47,20 @@ namespace FormApiE_Commerce.UsersControls
             // SuspendLayout evita el parpadeo visual mientras se agregan los controles
             FlwProductos.SuspendLayout();
 
-            foreach (var item in listaBarajada)
-            {
-                // Instanciamos el control
-                TargetaDeProducto tarjeta = new TargetaDeProducto();
+            //foreach (var item in listaBarajada)
+            //{
+            //    // Instanciamos el control
+            //    TargetaDeProducto tarjeta = new TargetaDeProducto();
 
-                // Le inyectamos los datos
-                tarjeta.CargarDatos(item);
+            //    // Le inyectamos los datos
+            //    tarjeta.CargarDatos(item);
 
-                // Márgenes para separación visual
-                tarjeta.Margin = new Padding(10);
+            //    // Márgenes para separación visual
+            //    tarjeta.Margin = new Padding(10);
 
-                // Agregamos al contenedor
-                FlwProductos.Controls.Add(tarjeta);
-            }
+            //    // Agregamos al contenedor
+            //    FlwProductos.Controls.Add(tarjeta);
+            //}
 
             // Reactivamos el dibujado
             FlwProductos.ResumeLayout();

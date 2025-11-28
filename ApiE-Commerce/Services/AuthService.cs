@@ -72,7 +72,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                                 PrimerNombre = user.PrimerNombre,
                                 PrimerApellido = user.PrimerApellido,
                                 Correo = user.Correo,
-                                Telefono = Convert.ToInt32(user.Telefono),
+                                Telefono = user.Telefono,
                                 Token = login.Token,
                                 RefreshToken = ""
                             };
@@ -118,7 +118,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                     PrimerNombre = user.PrimerNombre,
                     PrimerApellido = user.PrimerApellido,
                     Correo = user.Correo,
-                    Telefono = Convert.ToInt32(user.Telefono),
+                    Telefono = user.Telefono,
                     Token = jwt,
                     RefreshToken = refreshToken.Token.ToString()
                 };
@@ -178,9 +178,9 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 PrimerNombre = user.PrimerNombre,
                 PrimerApellido = user.PrimerApellido,
                 Correo = user.Correo,
-                Telefono = Convert.ToInt32(user.Telefono),
+                Telefono = user.Telefono,
                 Token = jwtNormal,
-                RefreshToken = existingToken.Token.ToString()
+                RefreshToken = existingToken!.Token.ToString()
             };
         }
 
@@ -265,7 +265,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 PrimerNombre = registeredUser.PrimerNombre,
                 PrimerApellido = registeredUser.PrimerApellido,
                 Correo = registeredUser.Correo,
-                Telefono = Convert.ToInt32(registeredUser.Telefono),
+                Telefono = registeredUser.Telefono,
                 RefreshToken = refreshToken.Token.ToString()
             };
         }
@@ -351,7 +351,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 PrimerNombre = registeredUser.PrimerNombre,
                 PrimerApellido = registeredUser.PrimerApellido,
                 Correo = registeredUser.Correo,
-                Telefono = Convert.ToInt32(registeredUser.Telefono),
+                Telefono = registeredUser.Telefono,
                 RefreshToken = refreshToken.Token.ToString()
             };
         }
@@ -433,7 +433,7 @@ namespace ApiProyectoDeCursoE_Commerce.Services
                 PrimerNombre = registeredUser.PrimerNombre,
                 PrimerApellido = registeredUser.PrimerApellido,
                 Correo = registeredUser.Correo,
-                Telefono = Convert.ToInt32(registeredUser.Telefono),
+                Telefono = registeredUser.Telefono,
                 RefreshToken = refreshToken.Token.ToString()
             };
         }

@@ -77,42 +77,13 @@ namespace FormApiE_Commerce
 
             return rolId;
         }
-        private void btnAnalisis_Click(object sender, EventArgs e)
+
+        private void BtnRegistro_Vendedor_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Buscar una instancia ya agregada
-                var existente = pnlGenerico.Controls.OfType<Analisis_Financieros>().FirstOrDefault();
-                if (existente != null)
-                {
-                    // Si ya existe, traer al frente y asegurarse de que esté visible
-                    existente.BringToFront();
-                    return;
-                }
 
-                // Limpiar panel (opcional, evita múltiples formularios)
-                pnlGenerico.Controls.Clear();
-
-                // Crear y configurar el formulario hijo
-                Analisis_Financieros analisisForm = new Analisis_Financieros
-                {
-                    TopLevel = false,
-                    FormBorderStyle = FormBorderStyle.None,
-                    Dock = DockStyle.Fill
-                };
-
-                // Agregar al panel y mostrar
-                pnlGenerico.Controls.Add(analisisForm);
-                analisisForm.Show();
-                analisisForm.BringToFront();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al abrir Análisis Financieros: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
-        private void BtnInicio_Click(object sender, EventArgs e)
+        private void CargarInicio()
         {
             try
             {
@@ -150,6 +121,51 @@ namespace FormApiE_Commerce
             {
                 MessageBox.Show("Error al abrir la función Comprar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnAnalisis_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Buscar una instancia ya agregada
+                var existente = pnlGenerico.Controls.OfType<Analisis_Financieros>().FirstOrDefault();
+                if (existente != null)
+                {
+                    // Si ya existe, traer al frente y asegurarse de que esté visible
+                    existente.BringToFront();
+                    return;
+                }
+
+                // Limpiar panel (opcional, evita múltiples formularios)
+                pnlGenerico.Controls.Clear();
+
+                // Crear y configurar el formulario hijo
+                Analisis_Financieros analisisForm = new Analisis_Financieros
+                {
+                    TopLevel = false,
+                    FormBorderStyle = FormBorderStyle.None,
+                    Dock = DockStyle.Fill
+                };
+
+                // Agregar al panel y mostrar
+                pnlGenerico.Controls.Add(analisisForm);
+                analisisForm.Show();
+                analisisForm.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir Análisis Financieros: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnInicio_Click(object sender, EventArgs e)
+        {
+            CargarInicio();
+        }
+
+        private void btnDashboard_Vendedor_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void BtnCerrarSesion_Click(object sender, EventArgs e)
