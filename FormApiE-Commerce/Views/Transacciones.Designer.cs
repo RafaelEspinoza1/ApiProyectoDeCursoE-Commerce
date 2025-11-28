@@ -53,21 +53,21 @@
             cuiLabel1.Content = "Estas\\ apunto\\ de\\ comprar\\ un\\ articulo";
             cuiLabel1.Font = new Font("Garamond", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel1.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel1.Location = new Point(13, 12);
-            cuiLabel1.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel1.Location = new Point(15, 16);
+            cuiLabel1.Margin = new Padding(5, 4, 5, 4);
             cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(353, 34);
+            cuiLabel1.Size = new Size(570, 45);
             cuiLabel1.TabIndex = 0;
             cuiLabel1.VerticalAlignment = StringAlignment.Near;
             // 
             // cuiSeparator1
             // 
             cuiSeparator1.ForeColor = Color.Sienna;
-            cuiSeparator1.Location = new Point(13, 102);
-            cuiSeparator1.Margin = new Padding(4, 3, 4, 3);
+            cuiSeparator1.Location = new Point(15, 136);
+            cuiSeparator1.Margin = new Padding(5, 4, 5, 4);
             cuiSeparator1.Name = "cuiSeparator1";
             cuiSeparator1.SeparatorMargin = 8;
-            cuiSeparator1.Size = new Size(598, 47);
+            cuiSeparator1.Size = new Size(683, 63);
             cuiSeparator1.TabIndex = 1;
             cuiSeparator1.Thickness = 0.5F;
             cuiSeparator1.Vertical = false;
@@ -77,10 +77,10 @@
             cuiLabel2.Content = "Precio\\ Unitario\\ del\\ producto";
             cuiLabel2.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel2.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel2.Location = new Point(13, 147);
-            cuiLabel2.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel2.Location = new Point(15, 196);
+            cuiLabel2.Margin = new Padding(5, 4, 5, 4);
             cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(245, 26);
+            cuiLabel2.Size = new Size(310, 35);
             cuiLabel2.TabIndex = 2;
             cuiLabel2.VerticalAlignment = StringAlignment.Near;
             // 
@@ -96,18 +96,18 @@
             cuiTextBox1.Image = null;
             cuiTextBox1.ImageExpand = new Point(0, 0);
             cuiTextBox1.ImageOffset = new Point(0, 0);
-            cuiTextBox1.Location = new Point(336, 141);
-            cuiTextBox1.Margin = new Padding(4);
+            cuiTextBox1.Location = new Point(384, 188);
+            cuiTextBox1.Margin = new Padding(5, 5, 5, 5);
             cuiTextBox1.Multiline = false;
             cuiTextBox1.Name = "cuiTextBox1";
             cuiTextBox1.NormalImageTint = Color.White;
             cuiTextBox1.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            cuiTextBox1.Padding = new Padding(16, 10, 16, 0);
+            cuiTextBox1.Padding = new Padding(20, 14, 20, 0);
             cuiTextBox1.PasswordChar = false;
             cuiTextBox1.PlaceholderColor = Color.LightGray;
             cuiTextBox1.PlaceholderText = "Placeholder text..";
             cuiTextBox1.Rounding = new Padding(8);
-            cuiTextBox1.Size = new Size(266, 36);
+            cuiTextBox1.Size = new Size(304, 48);
             cuiTextBox1.TabIndex = 3;
             cuiTextBox1.TextOffset = new Size(0, 0);
             cuiTextBox1.UnderlinedStyle = true;
@@ -124,18 +124,18 @@
             cuiTextBox2.Image = null;
             cuiTextBox2.ImageExpand = new Point(0, 0);
             cuiTextBox2.ImageOffset = new Point(0, 0);
-            cuiTextBox2.Location = new Point(336, 195);
-            cuiTextBox2.Margin = new Padding(4);
+            cuiTextBox2.Location = new Point(384, 260);
+            cuiTextBox2.Margin = new Padding(5, 5, 5, 5);
             cuiTextBox2.Multiline = false;
             cuiTextBox2.Name = "cuiTextBox2";
             cuiTextBox2.NormalImageTint = Color.White;
             cuiTextBox2.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            cuiTextBox2.Padding = new Padding(16, 10, 16, 0);
+            cuiTextBox2.Padding = new Padding(20, 14, 20, 0);
             cuiTextBox2.PasswordChar = false;
             cuiTextBox2.PlaceholderColor = Color.LightGray;
             cuiTextBox2.PlaceholderText = "Placeholder text..";
             cuiTextBox2.Rounding = new Padding(8);
-            cuiTextBox2.Size = new Size(266, 37);
+            cuiTextBox2.Size = new Size(304, 49);
             cuiTextBox2.TabIndex = 4;
             cuiTextBox2.TextOffset = new Size(0, 0);
             cuiTextBox2.UnderlinedStyle = true;
@@ -152,18 +152,18 @@
             cuiTextBox3.Image = null;
             cuiTextBox3.ImageExpand = new Point(0, 0);
             cuiTextBox3.ImageOffset = new Point(0, 0);
-            cuiTextBox3.Location = new Point(336, 249);
-            cuiTextBox3.Margin = new Padding(4);
+            cuiTextBox3.Location = new Point(384, 332);
+            cuiTextBox3.Margin = new Padding(5, 5, 5, 5);
             cuiTextBox3.Multiline = false;
             cuiTextBox3.Name = "cuiTextBox3";
             cuiTextBox3.NormalImageTint = Color.White;
             cuiTextBox3.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            cuiTextBox3.Padding = new Padding(16, 11, 16, 0);
+            cuiTextBox3.Padding = new Padding(20, 16, 20, 0);
             cuiTextBox3.PasswordChar = false;
             cuiTextBox3.PlaceholderColor = Color.LightGray;
             cuiTextBox3.PlaceholderText = "Placeholder text..";
             cuiTextBox3.Rounding = new Padding(8);
-            cuiTextBox3.Size = new Size(266, 39);
+            cuiTextBox3.Size = new Size(304, 52);
             cuiTextBox3.TabIndex = 5;
             cuiTextBox3.TextOffset = new Size(0, 0);
             cuiTextBox3.UnderlinedStyle = true;
@@ -180,18 +180,18 @@
             cuiTextBox4.Image = null;
             cuiTextBox4.ImageExpand = new Point(0, 0);
             cuiTextBox4.ImageOffset = new Point(0, 0);
-            cuiTextBox4.Location = new Point(336, 305);
-            cuiTextBox4.Margin = new Padding(4);
+            cuiTextBox4.Location = new Point(384, 407);
+            cuiTextBox4.Margin = new Padding(5, 5, 5, 5);
             cuiTextBox4.Multiline = false;
             cuiTextBox4.Name = "cuiTextBox4";
             cuiTextBox4.NormalImageTint = Color.White;
             cuiTextBox4.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            cuiTextBox4.Padding = new Padding(16, 12, 16, 0);
+            cuiTextBox4.Padding = new Padding(20, 17, 20, 0);
             cuiTextBox4.PasswordChar = false;
             cuiTextBox4.PlaceholderColor = Color.LightGray;
             cuiTextBox4.PlaceholderText = "Placeholder text..";
             cuiTextBox4.Rounding = new Padding(8);
-            cuiTextBox4.Size = new Size(266, 41);
+            cuiTextBox4.Size = new Size(304, 55);
             cuiTextBox4.TabIndex = 6;
             cuiTextBox4.TextOffset = new Size(0, 0);
             cuiTextBox4.UnderlinedStyle = true;
@@ -201,10 +201,10 @@
             cuiLabel3.Content = "Unidades\\ compradas";
             cuiLabel3.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel3.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel3.Location = new Point(13, 201);
-            cuiLabel3.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel3.Location = new Point(15, 268);
+            cuiLabel3.Margin = new Padding(5, 4, 5, 4);
             cuiLabel3.Name = "cuiLabel3";
-            cuiLabel3.Size = new Size(245, 26);
+            cuiLabel3.Size = new Size(280, 35);
             cuiLabel3.TabIndex = 7;
             cuiLabel3.VerticalAlignment = StringAlignment.Near;
             // 
@@ -213,10 +213,10 @@
             cuiLabel4.Content = "Tarifa\\ de\\ envio";
             cuiLabel4.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel4.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel4.Location = new Point(13, 255);
-            cuiLabel4.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel4.Location = new Point(15, 340);
+            cuiLabel4.Margin = new Padding(5, 4, 5, 4);
             cuiLabel4.Name = "cuiLabel4";
-            cuiLabel4.Size = new Size(245, 26);
+            cuiLabel4.Size = new Size(280, 35);
             cuiLabel4.TabIndex = 8;
             cuiLabel4.VerticalAlignment = StringAlignment.Near;
             // 
@@ -225,10 +225,10 @@
             cuiLabel5.Content = "Descuentos\\ o\\ cupones";
             cuiLabel5.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel5.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel5.Location = new Point(13, 311);
-            cuiLabel5.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel5.Location = new Point(15, 415);
+            cuiLabel5.Margin = new Padding(5, 4, 5, 4);
             cuiLabel5.Name = "cuiLabel5";
-            cuiLabel5.Size = new Size(245, 26);
+            cuiLabel5.Size = new Size(280, 35);
             cuiLabel5.TabIndex = 9;
             cuiLabel5.VerticalAlignment = StringAlignment.Near;
             // 
@@ -237,10 +237,10 @@
             cuiLabel6.Content = "Precio\\ total";
             cuiLabel6.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel6.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel6.Location = new Point(13, 370);
-            cuiLabel6.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel6.Location = new Point(15, 493);
+            cuiLabel6.Margin = new Padding(5, 4, 5, 4);
             cuiLabel6.Name = "cuiLabel6";
-            cuiLabel6.Size = new Size(245, 26);
+            cuiLabel6.Size = new Size(280, 35);
             cuiLabel6.TabIndex = 10;
             cuiLabel6.VerticalAlignment = StringAlignment.Near;
             // 
@@ -256,18 +256,18 @@
             cuiTextBox5.Image = null;
             cuiTextBox5.ImageExpand = new Point(0, 0);
             cuiTextBox5.ImageOffset = new Point(0, 0);
-            cuiTextBox5.Location = new Point(336, 364);
-            cuiTextBox5.Margin = new Padding(4);
+            cuiTextBox5.Location = new Point(384, 485);
+            cuiTextBox5.Margin = new Padding(5, 5, 5, 5);
             cuiTextBox5.Multiline = false;
             cuiTextBox5.Name = "cuiTextBox5";
             cuiTextBox5.NormalImageTint = Color.White;
             cuiTextBox5.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            cuiTextBox5.Padding = new Padding(16, 12, 16, 0);
+            cuiTextBox5.Padding = new Padding(20, 17, 20, 0);
             cuiTextBox5.PasswordChar = false;
             cuiTextBox5.PlaceholderColor = Color.LightGray;
             cuiTextBox5.PlaceholderText = "Placeholder text..";
             cuiTextBox5.Rounding = new Padding(8);
-            cuiTextBox5.Size = new Size(266, 41);
+            cuiTextBox5.Size = new Size(304, 55);
             cuiTextBox5.TabIndex = 11;
             cuiTextBox5.TextOffset = new Size(0, 0);
             cuiTextBox5.UnderlinedStyle = true;
@@ -293,7 +293,8 @@
             cuiButton1.ImageAutoCenter = true;
             cuiButton1.ImageExpand = new Point(0, 0);
             cuiButton1.ImageOffset = new Point(0, 0);
-            cuiButton1.Location = new Point(251, 71);
+            cuiButton1.Location = new Point(287, 95);
+            cuiButton1.Margin = new Padding(3, 4, 3, 4);
             cuiButton1.Name = "cuiButton1";
             cuiButton1.NormalBackground = Color.Peru;
             cuiButton1.NormalForeColor = SystemColors.Control;
@@ -305,7 +306,7 @@
             cuiButton1.PressedImageTint = Color.White;
             cuiButton1.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton1.Rounding = new Padding(8);
-            cuiButton1.Size = new Size(153, 45);
+            cuiButton1.Size = new Size(175, 60);
             cuiButton1.TabIndex = 12;
             cuiButton1.TextAlignment = StringAlignment.Center;
             cuiButton1.TextOffset = new Point(0, 0);
@@ -315,10 +316,10 @@
             cuiLabel7.Content = "Ingrese\\ metodo\\ de\\ pago";
             cuiLabel7.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel7.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel7.Location = new Point(25, 81);
-            cuiLabel7.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel7.Location = new Point(29, 108);
+            cuiLabel7.Margin = new Padding(5, 4, 5, 4);
             cuiLabel7.Name = "cuiLabel7";
-            cuiLabel7.Size = new Size(203, 26);
+            cuiLabel7.Size = new Size(232, 35);
             cuiLabel7.TabIndex = 13;
             cuiLabel7.VerticalAlignment = StringAlignment.Near;
             // 
@@ -342,7 +343,8 @@
             cuiButton2.ImageAutoCenter = true;
             cuiButton2.ImageExpand = new Point(0, 0);
             cuiButton2.ImageOffset = new Point(0, 0);
-            cuiButton2.Location = new Point(421, 71);
+            cuiButton2.Location = new Point(481, 95);
+            cuiButton2.Margin = new Padding(3, 4, 3, 4);
             cuiButton2.Name = "cuiButton2";
             cuiButton2.NormalBackground = Color.Olive;
             cuiButton2.NormalForeColor = SystemColors.Control;
@@ -354,7 +356,7 @@
             cuiButton2.PressedImageTint = Color.White;
             cuiButton2.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton2.Rounding = new Padding(8);
-            cuiButton2.Size = new Size(153, 45);
+            cuiButton2.Size = new Size(175, 60);
             cuiButton2.TabIndex = 14;
             cuiButton2.TextAlignment = StringAlignment.Center;
             cuiButton2.TextOffset = new Point(0, 0);
@@ -364,10 +366,10 @@
             cuiLabel8.Content = "Ingresar\\ monto\\ a\\ pagar";
             cuiLabel8.Font = new Font("Garamond", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiLabel8.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel8.Location = new Point(25, 427);
-            cuiLabel8.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel8.Location = new Point(29, 569);
+            cuiLabel8.Margin = new Padding(5, 4, 5, 4);
             cuiLabel8.Name = "cuiLabel8";
-            cuiLabel8.Size = new Size(233, 26);
+            cuiLabel8.Size = new Size(266, 35);
             cuiLabel8.TabIndex = 15;
             cuiLabel8.VerticalAlignment = StringAlignment.Near;
             // 
@@ -383,18 +385,18 @@
             cuiTextBox6.Image = null;
             cuiTextBox6.ImageExpand = new Point(0, 0);
             cuiTextBox6.ImageOffset = new Point(0, 0);
-            cuiTextBox6.Location = new Point(336, 420);
-            cuiTextBox6.Margin = new Padding(4);
+            cuiTextBox6.Location = new Point(384, 560);
+            cuiTextBox6.Margin = new Padding(5, 5, 5, 5);
             cuiTextBox6.Multiline = false;
             cuiTextBox6.Name = "cuiTextBox6";
             cuiTextBox6.NormalImageTint = Color.White;
             cuiTextBox6.OutlineColor = Color.FromArgb(128, 128, 128, 128);
-            cuiTextBox6.Padding = new Padding(16, 12, 16, 0);
+            cuiTextBox6.Padding = new Padding(20, 17, 20, 0);
             cuiTextBox6.PasswordChar = false;
             cuiTextBox6.PlaceholderColor = Color.LightGray;
             cuiTextBox6.PlaceholderText = "Placeholder text..";
             cuiTextBox6.Rounding = new Padding(8);
-            cuiTextBox6.Size = new Size(266, 41);
+            cuiTextBox6.Size = new Size(304, 55);
             cuiTextBox6.TabIndex = 16;
             cuiTextBox6.TextOffset = new Size(0, 0);
             cuiTextBox6.UnderlinedStyle = true;
@@ -419,7 +421,8 @@
             cuiButton3.ImageAutoCenter = true;
             cuiButton3.ImageExpand = new Point(0, 0);
             cuiButton3.ImageOffset = new Point(0, 0);
-            cuiButton3.Location = new Point(350, 519);
+            cuiButton3.Location = new Point(400, 692);
+            cuiButton3.Margin = new Padding(3, 4, 3, 4);
             cuiButton3.Name = "cuiButton3";
             cuiButton3.NormalBackground = Color.White;
             cuiButton3.NormalForeColor = Color.Black;
@@ -431,16 +434,16 @@
             cuiButton3.PressedImageTint = Color.White;
             cuiButton3.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton3.Rounding = new Padding(8);
-            cuiButton3.Size = new Size(252, 45);
+            cuiButton3.Size = new Size(288, 60);
             cuiButton3.TabIndex = 17;
             cuiButton3.TextAlignment = StringAlignment.Center;
             cuiButton3.TextOffset = new Point(0, 0);
             // 
             // Transacciones
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(617, 587);
+            ClientSize = new Size(705, 783);
             Controls.Add(cuiButton3);
             Controls.Add(cuiTextBox6);
             Controls.Add(cuiLabel8);
@@ -459,6 +462,7 @@
             Controls.Add(cuiLabel2);
             Controls.Add(cuiSeparator1);
             Controls.Add(cuiLabel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Transacciones";
             Text = "Transacciones";
             ResumeLayout(false);
