@@ -7,6 +7,7 @@ namespace FormApiE_Commerce.Models
     {
         [Key]
         public int VendedorId { set; get; }
+        public int UsuarioId { set; get; }
         [Required]
         public string NumeroDeCuenta { set; get; }
         [Required]
@@ -17,9 +18,5 @@ namespace FormApiE_Commerce.Models
         public double LatitudOrigen { get; set; }
         [Required]
         public double LongitudOrigen { get; set; }
-
-        public int UsuarioId { set; get; }
-        [ForeignKey("UsuarioId")]
-        public Usuarios Usuario { set; get; }
     }
 }
