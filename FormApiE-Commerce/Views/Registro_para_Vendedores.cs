@@ -13,7 +13,8 @@ namespace FormApiE_Commerce.Views
 {
     public partial class Registro_para_Vendedores : Form
     {
-        public RegistrarVendedorDTO datosVendedor { get; private set; }
+        public RegistrarVendedorDTO? datosVendedor { get; private set; }
+        private bool esContribuyente = false;
 
         public Registro_para_Vendedores()
         {
@@ -25,7 +26,22 @@ namespace FormApiE_Commerce.Views
 
         }
 
-        private void btnVendedor_aceptar_Click(object sender, EventArgs e)
+        private void cuiLabel9_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEsContribuyente_Click(object sender, EventArgs e)
+        {
+            esContribuyente = true;
+        }
+
+        private void btnNoEsContribuyente_Click(object sender, EventArgs e)
+        {
+            esContribuyente = true;
+        }
+
+        private void btnRegistrarse_Click(object sender, EventArgs e)
         {
             // Crear el DTO con los datos ingresados
             datosVendedor = new RegistrarVendedorDTO
@@ -33,7 +49,7 @@ namespace FormApiE_Commerce.Views
                 NombreNegocio = txtNombreNegocio.contentTextField.Text,
                 DescripcionNegocio = txtDescripcionNegocio.contentTextField.Text,
                 LogoNegocio = "",
-                EsContribuyente = true
+                EsContribuyente = esContribuyente
             };
 
             // Marcar el resultado y cerrar el formulario
@@ -41,15 +57,10 @@ namespace FormApiE_Commerce.Views
             this.Close();
         }
 
-        private void btnVendedor_rechazar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
-        }
-
-        private void cuiLabel9_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
