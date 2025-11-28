@@ -1,8 +1,8 @@
 ﻿using ApiProyectoDeCursoE_Commerce.DAOs.Interfaces;
 using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.UsuariosDTOs;
 using ApiProyectoDeCursoE_Commerce.Executor;
-using ApiProyectoDeCursoE_Commerce.Models;
+using ApiProyectoDeCursoE_Commerce.Models.Auth;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 using Microsoft.Data.SqlClient;
 using NuGet.Common;

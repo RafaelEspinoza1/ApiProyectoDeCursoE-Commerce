@@ -1,5 +1,5 @@
-﻿using ApiProyectoDeCursoE_Commerce.DTOs.UsuariosDTOs;
-using ApiProyectoDeCursoE_Commerce.Models;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.Auth.UsuariosDTOs;
+using ApiProyectoDeCursoE_Commerce.Models.Auth;
 using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 

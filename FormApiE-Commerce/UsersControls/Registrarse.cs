@@ -1,4 +1,4 @@
-﻿using FormApiE_Commerce.DTOs;
+﻿using FormApiE_Commerce.DTOs.Auth;
 using FormApiE_Commerce.Views;
 using GMap.NET.MapProviders;
 using Newtonsoft.Json;

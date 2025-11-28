@@ -1,9 +1,9 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Configuration;
 using ApiProyectoDeCursoE_Commerce.Data;
-using ApiProyectoDeCursoE_Commerce.DTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.AdministradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.CompradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.VendedorDTOs;
 using ApiProyectoDeCursoE_Commerce.Repositories;
 using ApiProyectoDeCursoE_Commerce.Services;
 using Microsoft.AspNetCore.Authorization;
