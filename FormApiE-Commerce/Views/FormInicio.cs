@@ -70,7 +70,7 @@ namespace FormApiE_Commerce
                             // Guardar el nuevo token
                             TokenDataStorage.Save(authResponse);
 
-                            MessageBox.Show("、ienvenido de nuevo!");
+                            MessageBox.Show("Bienvenido de nuevo!");
 
                             PaginaPrincipal paginaPrincipal = new PaginaPrincipal(tokenData);
                             var formInicio = this.FindForm();
@@ -90,7 +90,7 @@ namespace FormApiE_Commerce
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error de conexi鏮: " + ex.Message);
+                        MessageBox.Show("Error de conexion: " + ex.Message);
                     }
                 }
             }
@@ -118,7 +118,7 @@ namespace FormApiE_Commerce
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"Inicio de sesi鏮 fallido. ERROR: {response.StatusCode}");
+                    MessageBox.Show($"Inicio de sesion fallido. ERROR: {response.StatusCode}");
                     return null;
                 }
 
@@ -135,7 +135,7 @@ namespace FormApiE_Commerce
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"No hay conexi鏮, intente nuevamente.\n{ex.Message}", "Error de conexi鏮", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No hay conexion, intente nuevamente.\n{ex.Message}", "Error de conexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -145,7 +145,7 @@ namespace FormApiE_Commerce
             var correo = txtCorreo.contentTextField.Text;
             var contraseña = txtContraseña.contentTextField.Text;
 
-            MessageBox.Show("Intentando el inicio de sesi鏮.");
+            MessageBox.Show("Intentando el inicio de sesion.");
             var tokenData = await LoginUser(correo, contraseña);
 
             if (tokenData != null)
@@ -155,7 +155,7 @@ namespace FormApiE_Commerce
                     tokenData
                 );
 
-                MessageBox.Show("Inicio de sesi鏮 exitoso. 、ienvenido de nuevo!");
+                MessageBox.Show("Inicio de sesion exitoso. Bienvenido de nuevo!");
 
                 PaginaPrincipal paginaPrincipal = new PaginaPrincipal(tokenData);
                 var formInicio = this.FindForm();
@@ -175,7 +175,7 @@ namespace FormApiE_Commerce
             }
             else
             {
-                MessageBox.Show("Correo o contrase鎙 incorrectos.");
+                MessageBox.Show("Correo o contraseña incorrectos.");
             }
         }
 
