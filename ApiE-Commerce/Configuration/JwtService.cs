@@ -1,9 +1,9 @@
 ﻿using ApiProyectoDeCursoE_Commerce.Models.Enums;
-using ApiProyectoDeCursoE_Commerce.Models;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using ApiProyectoDeCursoE_Commerce.Models.Auth;
 
 namespace ApiProyectoDeCursoE_Commerce.Configuration
 {

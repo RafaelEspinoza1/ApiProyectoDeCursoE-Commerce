@@ -1,8 +1,8 @@
 ﻿using ApiProyectoDeCursoE_Commerce.DAOs.Interfaces;
 using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.CompradorDTOs;
 using ApiProyectoDeCursoE_Commerce.Executor;
-using ApiProyectoDeCursoE_Commerce.Models;
+using ApiProyectoDeCursoE_Commerce.Models.Auth;
 using Microsoft.Data.SqlClient;
 
 namespace ApiProyectoDeCursoE_Commerce.DAOs
