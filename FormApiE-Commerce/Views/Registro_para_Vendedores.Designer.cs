@@ -31,6 +31,12 @@
             cuiPanel1 = new CuoreUI.Controls.cuiPanel();
             cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             cuiGroupBox1 = new CuoreUI.Controls.cuiGroupBox();
+            btnCancelar = new CuoreUI.Controls.cuiButton();
+            btnRegistrarse = new CuoreUI.Controls.cuiButton();
+            btnNoEsContribuyente = new CuoreUI.Controls.cuiButton();
+            btnEsContribuyente = new CuoreUI.Controls.cuiButton();
+            cuiLabel1 = new CuoreUI.Controls.cuiLabel();
+            cuiPictureBox2 = new CuoreUI.Controls.cuiPictureBox();
             cuiLabel11 = new CuoreUI.Controls.cuiLabel();
             cuiLabel10 = new CuoreUI.Controls.cuiLabel();
             cuiLabel9 = new CuoreUI.Controls.cuiLabel();
@@ -43,12 +49,6 @@
             cuiLabel5 = new CuoreUI.Controls.cuiLabel();
             txtNombreNegocio = new CuoreUI.Controls.cuiTextBox();
             PnlRegistro_de_vendedor = new CuoreUI.Controls.cuiPanel();
-            cuiPictureBox2 = new CuoreUI.Controls.cuiPictureBox();
-            cuiLabel1 = new CuoreUI.Controls.cuiLabel();
-            cuiButton1 = new CuoreUI.Controls.cuiButton();
-            cuiButton2 = new CuoreUI.Controls.cuiButton();
-            cuiButton3 = new CuoreUI.Controls.cuiButton();
-            cuiButton4 = new CuoreUI.Controls.cuiButton();
             cuiPanel1.SuspendLayout();
             cuiGroupBox1.SuspendLayout();
             PnlRegistro_de_vendedor.SuspendLayout();
@@ -85,10 +85,10 @@
             cuiGroupBox1.BackColor = Color.White;
             cuiGroupBox1.BorderColor = Color.OliveDrab;
             cuiGroupBox1.Content = "Registro";
-            cuiGroupBox1.Controls.Add(cuiButton4);
-            cuiGroupBox1.Controls.Add(cuiButton3);
-            cuiGroupBox1.Controls.Add(cuiButton2);
-            cuiGroupBox1.Controls.Add(cuiButton1);
+            cuiGroupBox1.Controls.Add(btnCancelar);
+            cuiGroupBox1.Controls.Add(btnRegistrarse);
+            cuiGroupBox1.Controls.Add(btnNoEsContribuyente);
+            cuiGroupBox1.Controls.Add(btnEsContribuyente);
             cuiGroupBox1.Controls.Add(cuiLabel1);
             cuiGroupBox1.Controls.Add(cuiPictureBox2);
             cuiGroupBox1.Controls.Add(cuiLabel11);
@@ -107,10 +107,188 @@
             cuiGroupBox1.Location = new Point(12, 5);
             cuiGroupBox1.Margin = new Padding(3, 2, 3, 2);
             cuiGroupBox1.Name = "cuiGroupBox1";
-            cuiGroupBox1.Padding = new Padding(10, 34, 10, 15);
+            cuiGroupBox1.Padding = new Padding(10, 40, 10, 15);
             cuiGroupBox1.Rounding = new Padding(10, 10, 10, 15);
             cuiGroupBox1.Size = new Size(593, 653);
             cuiGroupBox1.TabIndex = 10;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.CheckButton = false;
+            btnCancelar.Checked = false;
+            btnCancelar.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnCancelar.CheckedForeColor = Color.White;
+            btnCancelar.CheckedImageTint = Color.White;
+            btnCancelar.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnCancelar.Content = "Cancelar";
+            btnCancelar.DialogResult = DialogResult.None;
+            btnCancelar.Font = new Font("Garamond", 16.2F, FontStyle.Bold);
+            btnCancelar.ForeColor = Color.Black;
+            btnCancelar.HoverBackground = Color.White;
+            btnCancelar.HoverForeColor = Color.Black;
+            btnCancelar.HoverImageTint = Color.White;
+            btnCancelar.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            btnCancelar.Image = null;
+            btnCancelar.ImageAutoCenter = true;
+            btnCancelar.ImageExpand = new Point(0, 0);
+            btnCancelar.ImageOffset = new Point(0, 0);
+            btnCancelar.Location = new Point(381, 579);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.NormalBackground = Color.Olive;
+            btnCancelar.NormalForeColor = Color.Black;
+            btnCancelar.NormalImageTint = Color.White;
+            btnCancelar.NormalOutline = Color.FromArgb(64, 128, 128, 128);
+            btnCancelar.OutlineThickness = 1F;
+            btnCancelar.PressedBackground = Color.WhiteSmoke;
+            btnCancelar.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnCancelar.PressedImageTint = Color.White;
+            btnCancelar.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnCancelar.Rounding = new Padding(8);
+            btnCancelar.Size = new Size(191, 56);
+            btnCancelar.TabIndex = 16;
+            btnCancelar.TextAlignment = StringAlignment.Center;
+            btnCancelar.TextOffset = new Point(0, 0);
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnRegistrarse
+            // 
+            btnRegistrarse.CheckButton = false;
+            btnRegistrarse.Checked = false;
+            btnRegistrarse.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnRegistrarse.CheckedForeColor = Color.White;
+            btnRegistrarse.CheckedImageTint = Color.White;
+            btnRegistrarse.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnRegistrarse.Content = "Registrarte";
+            btnRegistrarse.DialogResult = DialogResult.None;
+            btnRegistrarse.Font = new Font("Garamond", 16.2F, FontStyle.Bold);
+            btnRegistrarse.ForeColor = Color.Black;
+            btnRegistrarse.HoverBackground = Color.White;
+            btnRegistrarse.HoverForeColor = Color.Black;
+            btnRegistrarse.HoverImageTint = Color.White;
+            btnRegistrarse.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            btnRegistrarse.Image = null;
+            btnRegistrarse.ImageAutoCenter = true;
+            btnRegistrarse.ImageExpand = new Point(0, 0);
+            btnRegistrarse.ImageOffset = new Point(0, 0);
+            btnRegistrarse.Location = new Point(184, 579);
+            btnRegistrarse.Name = "btnRegistrarse";
+            btnRegistrarse.NormalBackground = Color.Chocolate;
+            btnRegistrarse.NormalForeColor = Color.Black;
+            btnRegistrarse.NormalImageTint = Color.White;
+            btnRegistrarse.NormalOutline = Color.FromArgb(64, 128, 128, 128);
+            btnRegistrarse.OutlineThickness = 1F;
+            btnRegistrarse.PressedBackground = Color.WhiteSmoke;
+            btnRegistrarse.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnRegistrarse.PressedImageTint = Color.White;
+            btnRegistrarse.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnRegistrarse.Rounding = new Padding(8);
+            btnRegistrarse.Size = new Size(191, 56);
+            btnRegistrarse.TabIndex = 15;
+            btnRegistrarse.TextAlignment = StringAlignment.Center;
+            btnRegistrarse.TextOffset = new Point(0, 0);
+            btnRegistrarse.Click += btnRegistrarse_Click;
+            // 
+            // btnNoEsContribuyente
+            // 
+            btnNoEsContribuyente.CheckButton = false;
+            btnNoEsContribuyente.Checked = false;
+            btnNoEsContribuyente.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnNoEsContribuyente.CheckedForeColor = Color.White;
+            btnNoEsContribuyente.CheckedImageTint = Color.White;
+            btnNoEsContribuyente.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnNoEsContribuyente.Content = "No";
+            btnNoEsContribuyente.DialogResult = DialogResult.None;
+            btnNoEsContribuyente.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btnNoEsContribuyente.ForeColor = Color.Black;
+            btnNoEsContribuyente.HoverBackground = Color.White;
+            btnNoEsContribuyente.HoverForeColor = Color.Black;
+            btnNoEsContribuyente.HoverImageTint = Color.White;
+            btnNoEsContribuyente.HoverOutline = Color.Black;
+            btnNoEsContribuyente.Image = null;
+            btnNoEsContribuyente.ImageAutoCenter = true;
+            btnNoEsContribuyente.ImageExpand = new Point(0, 0);
+            btnNoEsContribuyente.ImageOffset = new Point(0, 0);
+            btnNoEsContribuyente.Location = new Point(130, 518);
+            btnNoEsContribuyente.Name = "btnNoEsContribuyente";
+            btnNoEsContribuyente.NormalBackground = Color.White;
+            btnNoEsContribuyente.NormalForeColor = Color.Black;
+            btnNoEsContribuyente.NormalImageTint = Color.White;
+            btnNoEsContribuyente.NormalOutline = Color.Black;
+            btnNoEsContribuyente.OutlineThickness = 1F;
+            btnNoEsContribuyente.PressedBackground = Color.WhiteSmoke;
+            btnNoEsContribuyente.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnNoEsContribuyente.PressedImageTint = Color.White;
+            btnNoEsContribuyente.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnNoEsContribuyente.Rounding = new Padding(8);
+            btnNoEsContribuyente.Size = new Size(92, 38);
+            btnNoEsContribuyente.TabIndex = 14;
+            btnNoEsContribuyente.TextAlignment = StringAlignment.Center;
+            btnNoEsContribuyente.TextOffset = new Point(0, 0);
+            btnNoEsContribuyente.Click += btnNoEsContribuyente_Click;
+            // 
+            // btnEsContribuyente
+            // 
+            btnEsContribuyente.CheckButton = false;
+            btnEsContribuyente.Checked = false;
+            btnEsContribuyente.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnEsContribuyente.CheckedForeColor = Color.White;
+            btnEsContribuyente.CheckedImageTint = Color.White;
+            btnEsContribuyente.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnEsContribuyente.Content = "Si";
+            btnEsContribuyente.DialogResult = DialogResult.None;
+            btnEsContribuyente.Font = new Font("Microsoft Sans Serif", 9.75F);
+            btnEsContribuyente.ForeColor = Color.Black;
+            btnEsContribuyente.HoverBackground = Color.White;
+            btnEsContribuyente.HoverForeColor = Color.Black;
+            btnEsContribuyente.HoverImageTint = Color.White;
+            btnEsContribuyente.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            btnEsContribuyente.Image = null;
+            btnEsContribuyente.ImageAutoCenter = true;
+            btnEsContribuyente.ImageExpand = new Point(0, 0);
+            btnEsContribuyente.ImageOffset = new Point(0, 0);
+            btnEsContribuyente.Location = new Point(32, 518);
+            btnEsContribuyente.Name = "btnEsContribuyente";
+            btnEsContribuyente.NormalBackground = Color.White;
+            btnEsContribuyente.NormalForeColor = Color.Black;
+            btnEsContribuyente.NormalImageTint = Color.White;
+            btnEsContribuyente.NormalOutline = Color.Black;
+            btnEsContribuyente.OutlineThickness = 1F;
+            btnEsContribuyente.PressedBackground = Color.WhiteSmoke;
+            btnEsContribuyente.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnEsContribuyente.PressedImageTint = Color.White;
+            btnEsContribuyente.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnEsContribuyente.Rounding = new Padding(8);
+            btnEsContribuyente.Size = new Size(92, 38);
+            btnEsContribuyente.TabIndex = 13;
+            btnEsContribuyente.TextAlignment = StringAlignment.Center;
+            btnEsContribuyente.TextOffset = new Point(0, 0);
+            btnEsContribuyente.Click += btnEsContribuyente_Click;
+            // 
+            // cuiLabel1
+            // 
+            cuiLabel1.Content = "Tu\\ negocio\\ esta\\ registrado\\ en\\ la\\ DGI\\?";
+            cuiLabel1.ForeColor = Color.Black;
+            cuiLabel1.HorizontalAlignment = StringAlignment.Near;
+            cuiLabel1.Location = new Point(23, 479);
+            cuiLabel1.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel1.Name = "cuiLabel1";
+            cuiLabel1.Size = new Size(451, 40);
+            cuiLabel1.TabIndex = 12;
+            cuiLabel1.VerticalAlignment = StringAlignment.Near;
+            // 
+            // cuiPictureBox2
+            // 
+            cuiPictureBox2.Content = null;
+            cuiPictureBox2.ImageTint = Color.White;
+            cuiPictureBox2.Location = new Point(371, 56);
+            cuiPictureBox2.Margin = new Padding(4, 5, 4, 5);
+            cuiPictureBox2.Name = "cuiPictureBox2";
+            cuiPictureBox2.OutlineThickness = 1F;
+            cuiPictureBox2.PanelOutlineColor = Color.Empty;
+            cuiPictureBox2.Rotation = 0;
+            cuiPictureBox2.Rounding = new Padding(15);
+            cuiPictureBox2.Size = new Size(208, 220);
+            cuiPictureBox2.TabIndex = 11;
             // 
             // cuiLabel11
             // 
@@ -189,7 +367,7 @@
             txtDescripcionNegocio.Name = "txtDescripcionNegocio";
             txtDescripcionNegocio.NormalImageTint = Color.White;
             txtDescripcionNegocio.OutlineColor = Color.Gray;
-            txtDescripcionNegocio.Padding = new Padding(19, 6, 19, 6);
+            txtDescripcionNegocio.Padding = new Padding(23, 6, 23, 6);
             txtDescripcionNegocio.PasswordChar = false;
             txtDescripcionNegocio.PlaceholderColor = SystemColors.WindowText;
             txtDescripcionNegocio.PlaceholderText = "";
@@ -284,7 +462,7 @@
             txtNombreNegocio.Name = "txtNombreNegocio";
             txtNombreNegocio.NormalImageTint = Color.White;
             txtNombreNegocio.OutlineColor = Color.Gray;
-            txtNombreNegocio.Padding = new Padding(19, 13, 19, 0);
+            txtNombreNegocio.Padding = new Padding(23, 11, 23, 0);
             txtNombreNegocio.PasswordChar = false;
             txtNombreNegocio.PlaceholderColor = SystemColors.WindowText;
             txtNombreNegocio.PlaceholderText = "";
@@ -307,183 +485,9 @@
             PnlRegistro_de_vendedor.Size = new Size(617, 684);
             PnlRegistro_de_vendedor.TabIndex = 11;
             // 
-            // cuiPictureBox2
-            // 
-            cuiPictureBox2.Content = null;
-            cuiPictureBox2.ImageTint = Color.White;
-            cuiPictureBox2.Location = new Point(371, 56);
-            cuiPictureBox2.Margin = new Padding(4, 5, 4, 5);
-            cuiPictureBox2.Name = "cuiPictureBox2";
-            cuiPictureBox2.OutlineThickness = 1F;
-            cuiPictureBox2.PanelOutlineColor = Color.Empty;
-            cuiPictureBox2.Rotation = 0;
-            cuiPictureBox2.Rounding = new Padding(15);
-            cuiPictureBox2.Size = new Size(208, 220);
-            cuiPictureBox2.TabIndex = 11;
-            // 
-            // cuiLabel1
-            // 
-            cuiLabel1.Content = "Tu\\ negocio\\ esta\\ registrado\\ en\\ la\\ DGI\\?";
-            cuiLabel1.ForeColor = Color.Black;
-            cuiLabel1.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel1.Location = new Point(23, 479);
-            cuiLabel1.Margin = new Padding(4, 5, 4, 5);
-            cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(397, 40);
-            cuiLabel1.TabIndex = 12;
-            cuiLabel1.VerticalAlignment = StringAlignment.Near;
-            // 
-            // cuiButton1
-            // 
-            cuiButton1.CheckButton = false;
-            cuiButton1.Checked = false;
-            cuiButton1.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton1.CheckedForeColor = Color.White;
-            cuiButton1.CheckedImageTint = Color.White;
-            cuiButton1.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton1.Content = "Si";
-            cuiButton1.DialogResult = DialogResult.None;
-            cuiButton1.Font = new Font("Microsoft Sans Serif", 9.75F);
-            cuiButton1.ForeColor = Color.Black;
-            cuiButton1.HoverBackground = Color.White;
-            cuiButton1.HoverForeColor = Color.Black;
-            cuiButton1.HoverImageTint = Color.White;
-            cuiButton1.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            cuiButton1.Image = null;
-            cuiButton1.ImageAutoCenter = true;
-            cuiButton1.ImageExpand = new Point(0, 0);
-            cuiButton1.ImageOffset = new Point(0, 0);
-            cuiButton1.Location = new Point(32, 518);
-            cuiButton1.Name = "cuiButton1";
-            cuiButton1.NormalBackground = Color.White;
-            cuiButton1.NormalForeColor = Color.Black;
-            cuiButton1.NormalImageTint = Color.White;
-            cuiButton1.NormalOutline = Color.Black;
-            cuiButton1.OutlineThickness = 1F;
-            cuiButton1.PressedBackground = Color.WhiteSmoke;
-            cuiButton1.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton1.PressedImageTint = Color.White;
-            cuiButton1.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton1.Rounding = new Padding(8);
-            cuiButton1.Size = new Size(92, 38);
-            cuiButton1.TabIndex = 13;
-            cuiButton1.TextAlignment = StringAlignment.Center;
-            cuiButton1.TextOffset = new Point(0, 0);
-            // 
-            // cuiButton2
-            // 
-            cuiButton2.CheckButton = false;
-            cuiButton2.Checked = false;
-            cuiButton2.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton2.CheckedForeColor = Color.White;
-            cuiButton2.CheckedImageTint = Color.White;
-            cuiButton2.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton2.Content = "No";
-            cuiButton2.DialogResult = DialogResult.None;
-            cuiButton2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            cuiButton2.ForeColor = Color.Black;
-            cuiButton2.HoverBackground = Color.White;
-            cuiButton2.HoverForeColor = Color.Black;
-            cuiButton2.HoverImageTint = Color.White;
-            cuiButton2.HoverOutline = Color.Black;
-            cuiButton2.Image = null;
-            cuiButton2.ImageAutoCenter = true;
-            cuiButton2.ImageExpand = new Point(0, 0);
-            cuiButton2.ImageOffset = new Point(0, 0);
-            cuiButton2.Location = new Point(130, 518);
-            cuiButton2.Name = "cuiButton2";
-            cuiButton2.NormalBackground = Color.White;
-            cuiButton2.NormalForeColor = Color.Black;
-            cuiButton2.NormalImageTint = Color.White;
-            cuiButton2.NormalOutline = Color.Black;
-            cuiButton2.OutlineThickness = 1F;
-            cuiButton2.PressedBackground = Color.WhiteSmoke;
-            cuiButton2.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton2.PressedImageTint = Color.White;
-            cuiButton2.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton2.Rounding = new Padding(8);
-            cuiButton2.Size = new Size(92, 38);
-            cuiButton2.TabIndex = 14;
-            cuiButton2.TextAlignment = StringAlignment.Center;
-            cuiButton2.TextOffset = new Point(0, 0);
-            // 
-            // cuiButton3
-            // 
-            cuiButton3.CheckButton = false;
-            cuiButton3.Checked = false;
-            cuiButton3.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton3.CheckedForeColor = Color.White;
-            cuiButton3.CheckedImageTint = Color.White;
-            cuiButton3.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton3.Content = "Registrarte";
-            cuiButton3.DialogResult = DialogResult.None;
-            cuiButton3.Font = new Font("Garamond", 16.2F, FontStyle.Bold);
-            cuiButton3.ForeColor = Color.Black;
-            cuiButton3.HoverBackground = Color.White;
-            cuiButton3.HoverForeColor = Color.Black;
-            cuiButton3.HoverImageTint = Color.White;
-            cuiButton3.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            cuiButton3.Image = null;
-            cuiButton3.ImageAutoCenter = true;
-            cuiButton3.ImageExpand = new Point(0, 0);
-            cuiButton3.ImageOffset = new Point(0, 0);
-            cuiButton3.Location = new Point(184, 579);
-            cuiButton3.Name = "cuiButton3";
-            cuiButton3.NormalBackground = Color.Chocolate;
-            cuiButton3.NormalForeColor = Color.Black;
-            cuiButton3.NormalImageTint = Color.White;
-            cuiButton3.NormalOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton3.OutlineThickness = 1F;
-            cuiButton3.PressedBackground = Color.WhiteSmoke;
-            cuiButton3.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton3.PressedImageTint = Color.White;
-            cuiButton3.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton3.Rounding = new Padding(8);
-            cuiButton3.Size = new Size(191, 56);
-            cuiButton3.TabIndex = 15;
-            cuiButton3.TextAlignment = StringAlignment.Center;
-            cuiButton3.TextOffset = new Point(0, 0);
-            // 
-            // cuiButton4
-            // 
-            cuiButton4.CheckButton = false;
-            cuiButton4.Checked = false;
-            cuiButton4.CheckedBackground = Color.FromArgb(255, 106, 0);
-            cuiButton4.CheckedForeColor = Color.White;
-            cuiButton4.CheckedImageTint = Color.White;
-            cuiButton4.CheckedOutline = Color.FromArgb(255, 106, 0);
-            cuiButton4.Content = "Cancelar";
-            cuiButton4.DialogResult = DialogResult.None;
-            cuiButton4.Font = new Font("Garamond", 16.2F, FontStyle.Bold);
-            cuiButton4.ForeColor = Color.Black;
-            cuiButton4.HoverBackground = Color.White;
-            cuiButton4.HoverForeColor = Color.Black;
-            cuiButton4.HoverImageTint = Color.White;
-            cuiButton4.HoverOutline = Color.FromArgb(32, 128, 128, 128);
-            cuiButton4.Image = null;
-            cuiButton4.ImageAutoCenter = true;
-            cuiButton4.ImageExpand = new Point(0, 0);
-            cuiButton4.ImageOffset = new Point(0, 0);
-            cuiButton4.Location = new Point(381, 579);
-            cuiButton4.Name = "cuiButton4";
-            cuiButton4.NormalBackground = Color.Olive;
-            cuiButton4.NormalForeColor = Color.Black;
-            cuiButton4.NormalImageTint = Color.White;
-            cuiButton4.NormalOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton4.OutlineThickness = 1F;
-            cuiButton4.PressedBackground = Color.WhiteSmoke;
-            cuiButton4.PressedForeColor = Color.FromArgb(32, 32, 32);
-            cuiButton4.PressedImageTint = Color.White;
-            cuiButton4.PressedOutline = Color.FromArgb(64, 128, 128, 128);
-            cuiButton4.Rounding = new Padding(8);
-            cuiButton4.Size = new Size(191, 56);
-            cuiButton4.TabIndex = 16;
-            cuiButton4.TextAlignment = StringAlignment.Center;
-            cuiButton4.TextOffset = new Point(0, 0);
-            // 
             // Registro_para_Vendedores
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(12F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(617, 739);
             Controls.Add(PnlRegistro_de_vendedor);
@@ -516,9 +520,9 @@
         private CuoreUI.Controls.cuiPanel PnlRegistro_de_vendedor;
         private CuoreUI.Controls.cuiPictureBox cuiPictureBox2;
         private CuoreUI.Controls.cuiLabel cuiLabel1;
-        private CuoreUI.Controls.cuiButton cuiButton2;
-        private CuoreUI.Controls.cuiButton cuiButton1;
-        private CuoreUI.Controls.cuiButton cuiButton4;
-        private CuoreUI.Controls.cuiButton cuiButton3;
+        private CuoreUI.Controls.cuiButton btnNoEsContribuyente;
+        private CuoreUI.Controls.cuiButton btnEsContribuyente;
+        private CuoreUI.Controls.cuiButton btnCancelar;
+        private CuoreUI.Controls.cuiButton btnRegistrarse;
     }
 }
