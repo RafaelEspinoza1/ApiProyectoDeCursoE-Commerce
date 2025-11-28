@@ -45,12 +45,13 @@
             cuiLabel2 = new CuoreUI.Controls.cuiLabel();
             cuiSeparator1 = new CuoreUI.Controls.cuiSeparator();
             cuiPanel8 = new CuoreUI.Controls.cuiPanel();
+            cuiLabel3 = new CuoreUI.Controls.cuiLabel();
+            CmbCategorias = new CuoreUI.Controls.cuiComboBox();
+            BtnBuscar = new FontAwesome.Sharp.IconButton();
             tbxbuscarProducto = new CuoreUI.Controls.cuiTextBox();
             cuiLabel1 = new CuoreUI.Controls.cuiLabel();
             cuiPictureBox1 = new CuoreUI.Controls.cuiPictureBox();
-            BtnBuscar = new FontAwesome.Sharp.IconButton();
-            CmbCategorias = new CuoreUI.Controls.cuiComboBox();
-            cuiLabel3 = new CuoreUI.Controls.cuiLabel();
+            btnDashboard_Vendedor = new CuoreUI.Controls.cuiButton();
             cuiPanel1.SuspendLayout();
             panel_Analisis.SuspendLayout();
             cuiPanel3.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // cuiPanel1
             // 
+            cuiPanel1.Controls.Add(btnDashboard_Vendedor);
             cuiPanel1.Controls.Add(btnfavorito);
             cuiPanel1.Controls.Add(btnSoporte);
             cuiPanel1.Controls.Add(Btnconfiguracion);
@@ -424,6 +426,59 @@
             cuiPanel8.Size = new Size(1182, 346);
             cuiPanel8.TabIndex = 5;
             // 
+            // cuiLabel3
+            // 
+            cuiLabel3.BackColor = Color.Transparent;
+            cuiLabel3.Content = "Categorias\\ ";
+            cuiLabel3.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            cuiLabel3.HorizontalAlignment = StringAlignment.Center;
+            cuiLabel3.Location = new Point(655, 260);
+            cuiLabel3.Margin = new Padding(4, 5, 4, 5);
+            cuiLabel3.Name = "cuiLabel3";
+            cuiLabel3.Size = new Size(123, 28);
+            cuiLabel3.TabIndex = 9;
+            cuiLabel3.VerticalAlignment = StringAlignment.Near;
+            // 
+            // CmbCategorias
+            // 
+            CmbCategorias.BackColor = Color.Transparent;
+            CmbCategorias.BackgroundColor = Color.FromArgb(255, 255, 255);
+            CmbCategorias.DropDownBackgroundColor = Color.White;
+            CmbCategorias.DropDownForeColor = Color.FromArgb(27, 27, 27);
+            CmbCategorias.ExpandArrowColor = Color.Gray;
+            CmbCategorias.Font = new Font("Garamond", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            CmbCategorias.ForeColor = Color.Black;
+            CmbCategorias.Items = new string[]
+    {
+    "Item 1",
+    "Item 2",
+    "Item 3"
+    };
+            CmbCategorias.Location = new Point(788, 250);
+            CmbCategorias.Margin = new Padding(6, 5, 6, 5);
+            CmbCategorias.Name = "CmbCategorias";
+            CmbCategorias.NoSelectionText = "None";
+            CmbCategorias.OutlineColor = Color.Black;
+            CmbCategorias.OutlineThickness = 1F;
+            CmbCategorias.Rounding = 8;
+            CmbCategorias.SelectedIndex = -1;
+            CmbCategorias.SelectedItem = "";
+            CmbCategorias.Size = new Size(310, 48);
+            CmbCategorias.SortAlphabetically = true;
+            CmbCategorias.TabIndex = 8;
+            // 
+            // BtnBuscar
+            // 
+            BtnBuscar.BackColor = Color.White;
+            BtnBuscar.IconChar = FontAwesome.Sharp.IconChar.Search;
+            BtnBuscar.IconColor = Color.Black;
+            BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            BtnBuscar.Location = new Point(598, 250);
+            BtnBuscar.Name = "BtnBuscar";
+            BtnBuscar.Size = new Size(50, 50);
+            BtnBuscar.TabIndex = 7;
+            BtnBuscar.UseVisualStyleBackColor = false;
+            // 
             // tbxbuscarProducto
             // 
             tbxbuscarProducto.BackColor = Color.Transparent;
@@ -483,58 +538,44 @@
             cuiPictureBox1.Size = new Size(315, 298);
             cuiPictureBox1.TabIndex = 0;
             // 
-            // BtnBuscar
+            // btnDashboard_Vendedor
             // 
-            BtnBuscar.BackColor = Color.White;
-            BtnBuscar.IconChar = FontAwesome.Sharp.IconChar.Search;
-            BtnBuscar.IconColor = Color.Black;
-            BtnBuscar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            BtnBuscar.Location = new Point(598, 250);
-            BtnBuscar.Name = "BtnBuscar";
-            BtnBuscar.Size = new Size(50, 50);
-            BtnBuscar.TabIndex = 7;
-            BtnBuscar.UseVisualStyleBackColor = false;
-            // 
-            // CmbCategorias
-            // 
-            CmbCategorias.BackColor = Color.Transparent;
-            CmbCategorias.BackgroundColor = Color.FromArgb(255, 255, 255);
-            CmbCategorias.DropDownBackgroundColor = Color.White;
-            CmbCategorias.DropDownForeColor = Color.FromArgb(27, 27, 27);
-            CmbCategorias.ExpandArrowColor = Color.Gray;
-            CmbCategorias.Font = new Font("Garamond", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            CmbCategorias.ForeColor = Color.Black;
-            CmbCategorias.Items = new string[]
-    {
-    "Item 1",
-    "Item 2",
-    "Item 3"
-    };
-            CmbCategorias.Location = new Point(788, 250);
-            CmbCategorias.Margin = new Padding(6, 5, 6, 5);
-            CmbCategorias.Name = "CmbCategorias";
-            CmbCategorias.NoSelectionText = "None";
-            CmbCategorias.OutlineColor = Color.Black;
-            CmbCategorias.OutlineThickness = 1F;
-            CmbCategorias.Rounding = 8;
-            CmbCategorias.SelectedIndex = -1;
-            CmbCategorias.SelectedItem = "";
-            CmbCategorias.Size = new Size(310, 48);
-            CmbCategorias.SortAlphabetically = true;
-            CmbCategorias.TabIndex = 8;
-            // 
-            // cuiLabel3
-            // 
-            cuiLabel3.BackColor = Color.Transparent;
-            cuiLabel3.Content = "Categorias\\ ";
-            cuiLabel3.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiLabel3.HorizontalAlignment = StringAlignment.Center;
-            cuiLabel3.Location = new Point(655, 260);
-            cuiLabel3.Margin = new Padding(4, 5, 4, 5);
-            cuiLabel3.Name = "cuiLabel3";
-            cuiLabel3.Size = new Size(123, 28);
-            cuiLabel3.TabIndex = 9;
-            cuiLabel3.VerticalAlignment = StringAlignment.Near;
+            btnDashboard_Vendedor.BackColor = Color.Transparent;
+            btnDashboard_Vendedor.CheckButton = false;
+            btnDashboard_Vendedor.Checked = false;
+            btnDashboard_Vendedor.CheckedBackground = Color.FromArgb(255, 106, 0);
+            btnDashboard_Vendedor.CheckedForeColor = Color.White;
+            btnDashboard_Vendedor.CheckedImageTint = Color.White;
+            btnDashboard_Vendedor.CheckedOutline = Color.FromArgb(255, 106, 0);
+            btnDashboard_Vendedor.Content = "Mi negocio";
+            btnDashboard_Vendedor.DialogResult = DialogResult.None;
+            btnDashboard_Vendedor.Font = new Font("Garamond", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDashboard_Vendedor.ForeColor = Color.Black;
+            btnDashboard_Vendedor.HoverBackground = Color.White;
+            btnDashboard_Vendedor.HoverForeColor = Color.Black;
+            btnDashboard_Vendedor.HoverImageTint = Color.White;
+            btnDashboard_Vendedor.HoverOutline = Color.FromArgb(32, 128, 128, 128);
+            btnDashboard_Vendedor.Image = null;
+            btnDashboard_Vendedor.ImageAutoCenter = true;
+            btnDashboard_Vendedor.ImageExpand = new Point(0, 0);
+            btnDashboard_Vendedor.ImageOffset = new Point(0, 0);
+            btnDashboard_Vendedor.Location = new Point(421, 20);
+            btnDashboard_Vendedor.Margin = new Padding(3, 2, 3, 2);
+            btnDashboard_Vendedor.Name = "btnDashboard_Vendedor";
+            btnDashboard_Vendedor.NormalBackground = Color.White;
+            btnDashboard_Vendedor.NormalForeColor = Color.Black;
+            btnDashboard_Vendedor.NormalImageTint = Color.White;
+            btnDashboard_Vendedor.NormalOutline = Color.White;
+            btnDashboard_Vendedor.OutlineThickness = 1F;
+            btnDashboard_Vendedor.PressedBackground = Color.WhiteSmoke;
+            btnDashboard_Vendedor.PressedForeColor = Color.FromArgb(32, 32, 32);
+            btnDashboard_Vendedor.PressedImageTint = Color.White;
+            btnDashboard_Vendedor.PressedOutline = Color.FromArgb(64, 128, 128, 128);
+            btnDashboard_Vendedor.Rounding = new Padding(8);
+            btnDashboard_Vendedor.Size = new Size(130, 36);
+            btnDashboard_Vendedor.TabIndex = 9;
+            btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
+            btnDashboard_Vendedor.TextOffset = new Point(0, 0);
             // 
             // PaginaPrincipal
             // 
@@ -579,5 +620,6 @@
         private FontAwesome.Sharp.IconButton BtnBuscar;
         private CuoreUI.Controls.cuiComboBox CmbCategorias;
         private CuoreUI.Controls.cuiLabel cuiLabel3;
+        private CuoreUI.Controls.cuiButton btnDashboard_Vendedor;
     }
 }

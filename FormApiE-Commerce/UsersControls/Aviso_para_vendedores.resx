@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cuiLabel3.Content" xml:space="preserve">
+    <value>\nExposición\ al\ público:\ interacción\ constante\ con\ clientes,\ tanto\ presencial\ como\ en\ línea\.\n\nPresión\ por\ objetivos:\ cumplir\ cuotas\ de\ venta\ y\ metas\ establecidas\ por\ la\ empresa\.\n\nConflictos\ o\ reclamaciones:\ manejar\ clientes\ insatisfechos\ o\ problemas\ con\ pedidos\.</value>
+  </data>
+  <data name="cuiLabel1.Content" xml:space="preserve">
+    <value>Un\ vendedor\ es\ responsable\ de\ promocionar\ y\ vender\ productos\ o\ servicios\ de\ la\ empresa,\ atendiendo\ a\ las\ necesidades\ de\ los\ clientes\ y\ asegurando\ que\ las\ transacciones\ se\ realicen\ de\ manera\ eficiente\ y\ satisfactoria\.\ Debe\ conocer\ los\ productos,\ brindar\ información\ clara,\ negociar\ precios\ y\ condiciones,\ y\ garantizar\ un\ servicio\ al\ cliente\ de\ calidad\.</value>
+  </data>
 </root>
