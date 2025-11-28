@@ -20,7 +20,9 @@ namespace FormApiE_Commerce.UsersControls
         public Registrarse()
         {
             InitializeComponent();
+            cmbRol. DropDownStyle = ComboBoxStyle.DropDownList;
             CargarRoles();
+            cmbRol.SelectedIndex = 2;
         }
 
         private void CargarRoles()
@@ -216,8 +218,6 @@ namespace FormApiE_Commerce.UsersControls
             if (!ValidarCampos())
                 return;
 
-            //MessageBox.Show(cmbRol.SelectedValue!.ToString());
-
             if (cmbRol.SelectedValue == null)
             {
                 MessageBox.Show("Debes seleccionar un rol válido.");
@@ -275,7 +275,7 @@ namespace FormApiE_Commerce.UsersControls
 
             MessageBox.Show("Registro exitoso. ¡Bienvenido!");
 
-            PaginaPrincipal paginaPrincipal = new PaginaPrincipal(true);
+            PaginaPrincipal paginaPrincipal = new PaginaPrincipal(authResponse);
             var formInicio = this.FindForm();
 
             if (formInicio != null)

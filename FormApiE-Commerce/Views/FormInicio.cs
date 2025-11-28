@@ -3,6 +3,7 @@ using Azure;
 using FormApiE_Commerce.DTOs;
 using FormApiE_Commerce.UsersControls;
 using Newtonsoft.Json.Linq;
+using System.Data.SqlClient;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -30,7 +31,7 @@ namespace FormApiE_Commerce
                 var refreshToken = tokenData?.RefreshToken;
 
                 // --------------------------------------------------
-                // Inicio r·pido: JWT solo, o Refresh Token + IdUsuario
+                // Inicio rÂ´öido: JWT solo, o Refresh Token + IdUsuario
                 // --------------------------------------------------
                 if (!string.IsNullOrEmpty(token) ||
                     (!string.IsNullOrEmpty(refreshToken) && idUsuario != null && idUsuario > 0))
@@ -70,9 +71,9 @@ namespace FormApiE_Commerce
                             // Guardar el nuevo token
                             TokenDataStorage.Save(authResponse);
 
-                            MessageBox.Show("°Bienvenido de nuevo!");
+                            MessageBox.Show("„ÄÅienvenido de nuevo!");
 
-                            PaginaPrincipal paginaPrincipal = new PaginaPrincipal(true);
+                            PaginaPrincipal paginaPrincipal = new PaginaPrincipal(tokenData);
                             var formInicio = this.FindForm();
                             if (formInicio != null)
                             {
@@ -90,14 +91,14 @@ namespace FormApiE_Commerce
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error de conexiÛn: " + ex.Message);
+                        MessageBox.Show("Error de conexiÈèÆ: " + ex.Message);
                     }
                 }
             }
         }
 
 
-        private async Task<TokenData?> LoginUser(string correo, string contraseÒa)
+        private async Task<TokenData?> LoginUser(string correo, string contraseÈéô)
         {
             using var httpClient = new HttpClient();
             var url = "http://localhost:5028/api/Auth/login";
@@ -105,7 +106,7 @@ namespace FormApiE_Commerce
             var loginData = new
             {
                 Correo = correo,
-                ContraseÒa = contraseÒa,
+                ContraseÈéô = contraseÈéô,
                 Token = "" // En este flujo, no usamos token previo
             };
 
@@ -118,7 +119,7 @@ namespace FormApiE_Commerce
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show($"Inicio de sesiÛn fallido. ERROR: {response.StatusCode}");
+                    MessageBox.Show($"Inicio de sesiÈèÆ fallido. ERROR: {response.StatusCode}");
                     return null;
                 }
 
@@ -135,21 +136,18 @@ namespace FormApiE_Commerce
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"No hay conexiÛn, intente nuevamente.\n{ex.Message}", "Error de conexiÛn", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"No hay conexiÈèÆ, intente nuevamente.\n{ex.Message}", "Error de conexiÈèÆ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
 
-
-
-
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             var correo = txtCorreo.contentTextField.Text;
-            var contraseÒa = txtContraseÒa.contentTextField.Text;
+            var contraseÈéô = txtContraseÈéô.contentTextField.Text;
 
-            MessageBox.Show("Intentando el inicio de sesiÛn.");
-            var tokenData = await LoginUser(correo, contraseÒa);
+            MessageBox.Show("Intentando el inicio de sesiÈèÆ.");
+            var tokenData = await LoginUser(correo, contraseÈéô);
 
             if (tokenData != null)
             {
@@ -158,9 +156,9 @@ namespace FormApiE_Commerce
                     tokenData
                 );
 
-                MessageBox.Show("Inicio de sesiÛn exitoso. °Bienvenido de nuevo!");
+                MessageBox.Show("Inicio de sesiÈèÆ exitoso. „ÄÅienvenido de nuevo!");
 
-                PaginaPrincipal paginaPrincipal = new PaginaPrincipal(true);
+                PaginaPrincipal paginaPrincipal = new PaginaPrincipal(tokenData);
                 var formInicio = this.FindForm();
                 if (formInicio != null)
                 {
@@ -178,7 +176,7 @@ namespace FormApiE_Commerce
             }
             else
             {
-                MessageBox.Show("Correo o contraseÒa incorrectos.");
+                MessageBox.Show("Correo o contraseÈéô incorrectos.");
             }
         }
 
@@ -198,300 +196,5 @@ namespace FormApiE_Commerce
         {
 
         }
-
-
-
-
-
-
-        //public Usuarios NuevoUsuario { get; private set; }
-        //public static int UsuarioId { get; private set; } // Para almacenar el ID del usuario actual
-
-        //public FormInicio()
-        //{
-        //    InitializeComponent();
-
-
-        //    toolTip1.SetToolTip(btnConfig, "Opciones");
-        //    toolTip1.SetToolTip(btnCerrarInicioSesion, "Cerrar");
-        //    toolTip1.SetToolTip(txtCorreo, "Correo electronico");
-        //    toolTip1.SetToolTip(btnCerrarOpciones, "Cerrar");
-        //    toolTip1.SetToolTip(btnAdmin, "Solo admin");
-        //    toolTip1.SetToolTip(btnCerrarRegistro, "Cerrar");
-        //    toolTip1.SetToolTip(txtCorreoRegistro, "Correo electronico");
-        //    toolTip1.SetToolTip(checkBoxContraseÒaRegistroVisible, "Hacer visible ContraseÒa");
-        //    toolTip1.SetToolTip(checkBoxContraseÒaInicioDeSesionVisible, "Hacer visible ContraseÒa");
-        //    // Esto sirve para que la contraseÒa se muestre como puntos
-        //    txtContraseÒaRegistro.UseSystemPasswordChar = true;
-        //    txtContraseÒaRegistro.ContextMenuStrip = null; // Desactiva click derecho
-        //    txtContraseÒaRegistro.ShortcutsEnabled = false; // Desactiva Ctrl+C, Ctrl+X, Ctrl+V
-        //    txtContraseÒa.UseSystemPasswordChar = true;
-        //    txtContraseÒa.ContextMenuStrip = null; // Desactiva click derecho
-        //    txtContraseÒa.ShortcutsEnabled = false; // Desactiva Ctrl+C, Ctrl+X, Ctrl+V
-        //}
-        //private void btnIniciarSesion_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        groupBoxInicioDeSesion.Visible = true;
-        //        btnIniciarSesion.Visible = false;
-        //        btnRegistrase.Visible = false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error inerperado al iniciar sesiÛn: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-
-        //}
-
-        //private void btnCerrar_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        groupBoxInicioDeSesion.Visible = false;
-        //        groupBoxRegristrarse.Visible = false;
-        //        btnIniciarSesion.Visible = true;
-        //        btnRegistrase.Visible = true;
-        //        flowLayoutPanelOpciones.Visible = false;
-        //        btnConfig.Visible = true;
-        //        txtApellido.Clear();
-        //        txtContraseÒaRegistro.Clear();
-        //        txtCorreoRegistro.Clear();
-        //        txtNombre.Clear();
-        //        mtxtTelefono.Clear();
-        //        txtCorreo.Clear();
-        //        txtContraseÒa.Clear();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error inesperado al cancelar inicio de sesiÛn: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-
-        // REDIRECCIONAR AL FORMULARIO DEL MEN⁄ PRINCIPAL DE E-COMMERCE
-        //private void btnRegistrase_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        groupBoxRegristrarse.Visible = true;
-        //        btnRegistrase.Visible = false;
-        //        btnIniciarSesion.Visible = false;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error inesperado al registrarte: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-
-
-
-        //}
-
-        //// Cierra el formulario y abre el formulario PaginaPrincipal.
-        //private async void btnEntrar_Click(object sender, EventArgs e)
-        //{
-        //    string correo = txtCorreo.Text.Trim();
-        //    string contraseÒa = txtContraseÒa.Text.Trim();
-
-        //    if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseÒa))
-        //    {
-        //        MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-
-        //    if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseÒa))
-        //    {
-        //        MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-        //    // ValidaciÛn: Formato general de correo con expresiÛn regular
-        //    var regexCorreo = new System.Text.RegularExpressions.Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-        //    if (!regexCorreo.IsMatch(correo))
-        //    {
-        //        MessageBox.Show("El formato del correo no es v·lido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        txtCorreo.Focus();
-        //        return;
-        //    }
-
-        //    // ValidaciÛn: Dominio permitido
-        //    string[] dominiosPermitidos = { "@gmail.com", "@hotmail.com", "@yahoo.com" };
-        //    bool dominioValido = dominiosPermitidos.Any(d => correo.EndsWith(d, StringComparison.OrdinalIgnoreCase));
-        //    if (!dominioValido)
-        //    {
-        //        MessageBox.Show("Solo se permiten correos de @gmail.com, @hotmail.com o @yahoo.com", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        txtCorreo.Focus();
-        //        return;
-        //    }
-
-        //    // ValidaciÛn: Que haya texto antes del @
-        //    if (correo.IndexOf('@') <= 0)
-        //    {
-        //        MessageBox.Show("Correo no v·lido. Falta el nombre de usuario antes del dominio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        txtCorreo.Focus();
-        //        return;
-        //    }
-
-        //    var api = new ApiService();
-        //    try
-        //    {
-        //        var usuario = await api.LoginAsync(correo, contraseÒa);
-        //        if (usuario == null)
-        //        {
-        //            MessageBox.Show("Correo o contraseÒa incorrectos.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //            return;
-        //        }
-
-        //        FormInicio.UsuarioId = usuario.UsuarioId;
-        //        MessageBox.Show($"Bienvenido {usuario.Nombre}", "Inicio de SesiÛn", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        this.Tag = "PaginaPrincipal";
-        //        this.DialogResult = DialogResult.OK;
-        //        this.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error al conectarse a la API: " + ex.Message);
-        //    }
-        //}
-
-
-
-
-        //private async void btnTerminarRegistro_Click(object sender, EventArgs e)
-        //{
-        //    string nombre = txtNombre.Text.Trim();
-        //    string apellido = txtApellido.Text.Trim();
-        //    string correo = txtCorreoRegistro.Text.Trim();
-        //    string contraseÒa = txtContraseÒaRegistro.Text.Trim();
-        //    string telefono = mtxtTelefono.Text.Trim();
-
-        //    // Validaciones locales (como campos vacÌos, longitud, dominio del correo, etc.)
-
-        //    // Pregunta por tÈrminos y condiciones
-        //    var aceptar = MessageBox.Show("øAceptas los tÈrminos y condiciones?", "TÈrminos y Condiciones", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-        //    if (aceptar != DialogResult.Yes) return;
-
-        //    var nuevoUsuario = new Usuarios
-        //    {
-        //        Nombre = nombre,
-        //        Apellido = apellido,
-        //        Correo = correo,
-        //        ContraseÒa = contraseÒa,
-        //        Telefono = telefono
-        //    };
-
-        //    try
-        //    {
-        //        var api = new ApiService();
-        //        bool registrado = await api.RegistroAsync(nuevoUsuario);
-
-        //        if (registrado)
-        //        {
-        //            MessageBox.Show("Registro exitoso. Bienvenido a E-Commerce", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            this.Tag = "PaginaPrincipal";
-        //            this.DialogResult = DialogResult.OK;
-        //            this.Close();
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("El correo o n˙mero de telÈfono ya est·n registrados.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            txtCorreoRegistro.Focus();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error al conectar con el servidor: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-
-
-        //private void btnConfig_Click(object sender, EventArgs e)
-        //{
-        //    flowLayoutPanelOpciones.Visible = true;
-        //    btnConfig.Visible = false;
-        //    groupBoxInicioDeSesion.Visible = false;
-        //    groupBoxRegristrarse.Visible = false;
-        //    btnIniciarSesion.Visible = true;
-        //    btnRegistrase.Visible = true;
-        //}
-
-        //private void btnEcommerce_Click(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("E-Commerce es una tienda en linea disponible para .....", "InformaciÛn", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //}
-
-        //private void btnPreguntas_Click(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("øQue puedes hacer en E-Commerce? Comprar, verder, ....", "InformaciÛn", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //}
-
-        //private void btnAdmin_Click(object sender, EventArgs e)
-        //{
-        //    this.Tag = "Administracion";
-        //    this.DialogResult = DialogResult.OK;
-        //    this.Close();
-
-        //}
-
-        //// Hace vicible la contraseÒa en el registro y viceversa
-        //private void checkBoxContraseÒaRegistroVisible_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (checkBoxContraseÒaRegistroVisible.Checked)
-        //    {
-        //        // Mostrar el texto
-        //        txtContraseÒaRegistro.UseSystemPasswordChar = false;
-        //    }
-        //    else
-        //    {
-        //        // Ocultar el texto
-        //        txtContraseÒaRegistro.UseSystemPasswordChar = true;
-        //    }
-        //}
-        //private void checkBoxContraseÒaInicioDeSesionVisible_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (checkBoxContraseÒaInicioDeSesionVisible.Checked)
-        //    {
-        //        // Mostrar el texto
-        //        txtContraseÒa.UseSystemPasswordChar = false;
-        //    }
-        //    else
-        //    {
-        //        // Ocultar el texto
-        //        txtContraseÒa.UseSystemPasswordChar = true;
-        //    }
-        //}
-
-        //public class ApiService
-        //{
-        //    private readonly HttpClient client;
-
-        //    public ApiService()
-        //    {
-        //        client = new HttpClient();
-        //        client.BaseAddress = new Uri("https://localhost:7221/api/Usuarios"); // tu URL base
-        //    }
-
-        //    public async Task<Usuarios> LoginAsync(string correo, string contraseÒa)
-        //    {
-        //        var loginData = new { correo, contraseÒa };
-        //        var response = await client.PostAsJsonAsync("api/usuarios/login", loginData);
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            return await response.Content.ReadFromJsonAsync<Usuarios>();
-        //        }
-
-        //        return null;
-        //    }
-
-        //    public async Task<bool> RegistroAsync(Usuarios usuario)
-        //    {
-        //        var response = await client.PostAsJsonAsync("api/usuarios", usuario);
-        //        return response.IsSuccessStatusCode;
-        //    }
-        //}
     }
 }
- 

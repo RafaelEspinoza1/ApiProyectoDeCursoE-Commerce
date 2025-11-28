@@ -1,20 +1,21 @@
-﻿using System;
+﻿using FormApiE_Commerce.DTOs;
+using FormApiE_Commerce.UsersControls;
+using FormApiE_Commerce.Views;
+using GMap.NET;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+using NuGet.Protocol.Plugins;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using GMap.NET.WindowsForms.Markers;
-using GMap.NET.WindowsForms;
-using GMap.NET;
-using System.Net.Http.Json;
-using FormApiE_Commerce.DTOs;
-using FormApiE_Commerce.Views;
-using FormApiE_Commerce.UsersControls;
 
 
 
@@ -22,16 +23,56 @@ namespace FormApiE_Commerce
 {
     public partial class PaginaPrincipal : Form
     {
-        public PaginaPrincipal(bool Inicio)
+        private TokenData tokenData; // <-- guarda los datos del login
+        public PaginaPrincipal(TokenData tokenData)
         {
             InitializeComponent();
+            this.tokenData = tokenData;
+            BtnInicio_Click(null, null);
+            ConfigurarBotonesPorRol();
+        }
+        private void ConfigurarBotonesPorRol()
+        {
+            int rolId = ObtenerRolUsuario(tokenData.IdUsuario);
 
-            if (Inicio)
+            switch (rolId)
             {
-                CargarInicio();
+                case 1: // Administrador
+                    btnDashboard_Vendedor.Visible = false;
+                    break;
+                case 2: // Vendedor
+                    break;
+                case 3: // Comprador
+                    btnDashboard_Vendedor.Visible = false;
+                    break;
             }
         }
+        private int ObtenerRolUsuario(int idUsuario)
+        {
+            int rolId = 0;
+            string connStr = "Server=RAFAELESPINOZA\\SQLSERVER2019;Database=ECommerce;Trusted_Connection=True;TrustServerCertificate=True;";
 
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT IdRol FROM Usuarios WHERE IdUsuario = @IdUsuario", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                        var result = cmd.ExecuteScalar();
+                        if (result != null)
+                            rolId = Convert.ToInt32(result);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el rol: " + ex.Message);
+            }
+
+            return rolId;
+        }
 
         private void BtnRegistro_Vendedor_Click(object sender, EventArgs e)
         {
@@ -113,8 +154,6 @@ namespace FormApiE_Commerce
             }
         }
 
-
-
         private void BtnInicio_Click(object sender, EventArgs e)
         {
             CargarInicio();
@@ -123,6 +162,32 @@ namespace FormApiE_Commerce
         private void btnDashboard_Vendedor_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            var resultado = MessageBox.Show(
+            "¿Estás seguro que deseas cerrar sesión?",
+            "Cerrar sesión",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.No)
+            {
+                // Cancelar acción
+                return;
+            }
+            // Sí: limpiar tokens y datos persistentes
+            TokenDataStorage.Clear();
+            // Mensaje de despedida
+            MessageBox.Show("¡Vuelve pronto!", "Sesión cerrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Abrir FormInicio
+            FormInicio formInicio = new FormInicio();
+            formInicio.Show();
+
+            // Cerrar o esconder la página principal
+            this.Hide(); // si prefieres mantenerlo en memoria
         }
     }
 }
