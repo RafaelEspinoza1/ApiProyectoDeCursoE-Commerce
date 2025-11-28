@@ -1,4 +1,4 @@
-﻿using FormApiE_Commerce.DTOs;
+﻿using FormApiE_Commerce.DTOs.Auth;
 using FormApiE_Commerce.Views;
 using GMap.NET.MapProviders;
 using Newtonsoft.Json;
@@ -211,8 +211,8 @@ namespace FormApiE_Commerce.UsersControls
         private async void btnRegistrarse_Click(object sender, EventArgs e)
         {
             // Validación de campos
-            //if (!ValidarCampos())
-            //    return;
+            if (!ValidarCampos())
+                return;
 
             MessageBox.Show(cmbRol.SelectedValue!.ToString());
 

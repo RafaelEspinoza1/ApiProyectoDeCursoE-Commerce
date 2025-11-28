@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             cuiPanel1 = new CuoreUI.Controls.cuiPanel();
-            cuiLabel3 = new CuoreUI.Controls.cuiLabel();
+            lblEstado = new CuoreUI.Controls.cuiLabel();
             cuiButton1 = new CuoreUI.Controls.cuiButton();
-            cuiLabel2 = new CuoreUI.Controls.cuiLabel();
-            cuiLabel1 = new CuoreUI.Controls.cuiLabel();
-            cuiPictureBox1 = new CuoreUI.Controls.cuiPictureBox();
+            lblPrecio = new CuoreUI.Controls.cuiLabel();
+            lblNombre = new CuoreUI.Controls.cuiLabel();
+            picImagen = new CuoreUI.Controls.cuiPictureBox();
             cuiPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // cuiPanel1
             // 
-            cuiPanel1.Controls.Add(cuiLabel3);
+            cuiPanel1.Controls.Add(lblEstado);
             cuiPanel1.Controls.Add(cuiButton1);
-            cuiPanel1.Controls.Add(cuiLabel2);
-            cuiPanel1.Controls.Add(cuiLabel1);
+            cuiPanel1.Controls.Add(lblPrecio);
+            cuiPanel1.Controls.Add(lblNombre);
             cuiPanel1.Dock = DockStyle.Bottom;
             cuiPanel1.Location = new Point(0, 210);
             cuiPanel1.Name = "cuiPanel1";
@@ -53,19 +53,19 @@
             cuiPanel1.Size = new Size(273, 175);
             cuiPanel1.TabIndex = 0;
             // 
-            // cuiLabel3
+            // lblEstado
             // 
-            cuiLabel3.BackColor = Color.Transparent;
-            cuiLabel3.Content = "\\(Estado\\)";
-            cuiLabel3.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiLabel3.ForeColor = Color.Black;
-            cuiLabel3.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel3.Location = new Point(15, 83);
-            cuiLabel3.Margin = new Padding(5, 5, 5, 5);
-            cuiLabel3.Name = "cuiLabel3";
-            cuiLabel3.Size = new Size(72, 29);
-            cuiLabel3.TabIndex = 3;
-            cuiLabel3.VerticalAlignment = StringAlignment.Near;
+            lblEstado.BackColor = Color.Transparent;
+            lblEstado.Content = "\\(Estado\\)";
+            lblEstado.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEstado.ForeColor = Color.Black;
+            lblEstado.HorizontalAlignment = StringAlignment.Near;
+            lblEstado.Location = new Point(15, 83);
+            lblEstado.Margin = new Padding(5);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(72, 29);
+            lblEstado.TabIndex = 3;
+            lblEstado.VerticalAlignment = StringAlignment.Near;
             // 
             // cuiButton1
             // 
@@ -105,54 +105,56 @@
             cuiButton1.TextAlignment = StringAlignment.Center;
             cuiButton1.TextOffset = new Point(0, 0);
             // 
-            // cuiLabel2
+            // lblPrecio
             // 
-            cuiLabel2.BackColor = Color.Transparent;
-            cuiLabel2.Content = "\\(Precio\\)";
-            cuiLabel2.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiLabel2.ForeColor = Color.Black;
-            cuiLabel2.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel2.Location = new Point(178, 45);
-            cuiLabel2.Margin = new Padding(5, 5, 5, 5);
-            cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(72, 29);
-            cuiLabel2.TabIndex = 1;
-            cuiLabel2.VerticalAlignment = StringAlignment.Near;
+            lblPrecio.BackColor = Color.Transparent;
+            lblPrecio.Content = "\\(Precio\\)";
+            lblPrecio.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrecio.ForeColor = Color.Black;
+            lblPrecio.HorizontalAlignment = StringAlignment.Near;
+            lblPrecio.Location = new Point(178, 45);
+            lblPrecio.Margin = new Padding(5);
+            lblPrecio.Name = "lblPrecio";
+            lblPrecio.Size = new Size(72, 29);
+            lblPrecio.TabIndex = 1;
+            lblPrecio.VerticalAlignment = StringAlignment.Near;
             // 
-            // cuiLabel1
+            // lblNombre
             // 
-            cuiLabel1.BackColor = Color.Transparent;
-            cuiLabel1.Content = "\\(nombre\\)";
-            cuiLabel1.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cuiLabel1.ForeColor = Color.Black;
-            cuiLabel1.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel1.Location = new Point(15, 5);
-            cuiLabel1.Margin = new Padding(5, 5, 5, 5);
-            cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(173, 29);
-            cuiLabel1.TabIndex = 0;
-            cuiLabel1.VerticalAlignment = StringAlignment.Near;
+            lblNombre.BackColor = Color.Transparent;
+            lblNombre.Content = "\\(nombre\\)";
+            lblNombre.Font = new Font("Garamond", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNombre.ForeColor = Color.Black;
+            lblNombre.HorizontalAlignment = StringAlignment.Near;
+            lblNombre.Location = new Point(15, 5);
+            lblNombre.Margin = new Padding(5);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(173, 29);
+            lblNombre.TabIndex = 0;
+            lblNombre.VerticalAlignment = StringAlignment.Near;
             // 
-            // cuiPictureBox1
+            // picImagen
             // 
-            cuiPictureBox1.Content = null;
-            cuiPictureBox1.Dock = DockStyle.Fill;
-            cuiPictureBox1.ImageTint = Color.White;
-            cuiPictureBox1.Location = new Point(0, 0);
-            cuiPictureBox1.Margin = new Padding(5, 5, 5, 5);
-            cuiPictureBox1.Name = "cuiPictureBox1";
-            cuiPictureBox1.OutlineThickness = 1F;
-            cuiPictureBox1.PanelOutlineColor = Color.Empty;
-            cuiPictureBox1.Rotation = 0;
-            cuiPictureBox1.Rounding = new Padding(8);
-            cuiPictureBox1.Size = new Size(273, 210);
-            cuiPictureBox1.TabIndex = 1;
+            picImagen.BackgroundImageLayout = ImageLayout.Stretch;
+            picImagen.Content = null;
+            picImagen.Dock = DockStyle.Fill;
+            picImagen.ImageTint = Color.White;
+            picImagen.ImeMode = ImeMode.NoControl;
+            picImagen.Location = new Point(0, 0);
+            picImagen.Margin = new Padding(5);
+            picImagen.Name = "picImagen";
+            picImagen.OutlineThickness = 1F;
+            picImagen.PanelOutlineColor = Color.Empty;
+            picImagen.Rotation = 0;
+            picImagen.Rounding = new Padding(8);
+            picImagen.Size = new Size(273, 210);
+            picImagen.TabIndex = 1;
             // 
             // TargetaDeProducto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(cuiPictureBox1);
+            Controls.Add(picImagen);
             Controls.Add(cuiPanel1);
             Name = "TargetaDeProducto";
             Size = new Size(273, 385);
@@ -163,10 +165,10 @@
         #endregion
 
         private CuoreUI.Controls.cuiPanel cuiPanel1;
-        private CuoreUI.Controls.cuiLabel cuiLabel1;
-        private CuoreUI.Controls.cuiPictureBox cuiPictureBox1;
+        private CuoreUI.Controls.cuiLabel lblNombre;
+        private CuoreUI.Controls.cuiPictureBox picImagen;
         private CuoreUI.Controls.cuiButton cuiButton1;
-        private CuoreUI.Controls.cuiLabel cuiLabel2;
-        private CuoreUI.Controls.cuiLabel cuiLabel3;
+        private CuoreUI.Controls.cuiLabel lblPrecio;
+        private CuoreUI.Controls.cuiLabel lblEstado;
     }
 }

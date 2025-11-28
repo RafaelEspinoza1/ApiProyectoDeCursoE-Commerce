@@ -125,7 +125,7 @@
             cuiLabel2.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel2.HorizontalAlignment = StringAlignment.Center;
             cuiLabel2.Location = new Point(29, 589);
-            cuiLabel2.Margin = new Padding(5, 5, 5, 5);
+            cuiLabel2.Margin = new Padding(5);
             cuiLabel2.Name = "cuiLabel2";
             cuiLabel2.Size = new Size(163, 25);
             cuiLabel2.TabIndex = 14;
@@ -220,7 +220,7 @@
             cuiPictureBox2.Content = Properties.Resources.LRR_removebg_preview;
             cuiPictureBox2.ImageTint = Color.White;
             cuiPictureBox2.Location = new Point(29, 8);
-            cuiPictureBox2.Margin = new Padding(5, 5, 5, 5);
+            cuiPictureBox2.Margin = new Padding(5);
             cuiPictureBox2.Name = "cuiPictureBox2";
             cuiPictureBox2.OutlineThickness = 1F;
             cuiPictureBox2.PanelOutlineColor = Color.Empty;
@@ -235,7 +235,7 @@
             cuiLabel1.Font = new Font("Garamond", 12F, FontStyle.Italic, GraphicsUnit.Point, 0);
             cuiLabel1.HorizontalAlignment = StringAlignment.Center;
             cuiLabel1.Location = new Point(22, 476);
-            cuiLabel1.Margin = new Padding(5, 5, 5, 5);
+            cuiLabel1.Margin = new Padding(5);
             cuiLabel1.Name = "cuiLabel1";
             cuiLabel1.Size = new Size(350, 21);
             cuiLabel1.TabIndex = 10;
@@ -321,14 +321,14 @@
             // 
             cuiPictureBox3.Content = Properties.Resources.browser_735828;
             cuiPictureBox3.ImageTint = Color.White;
-            cuiPictureBox3.Location = new Point(203, 256);
-            cuiPictureBox3.Margin = new Padding(5, 5, 5, 5);
+            cuiPictureBox3.Location = new Point(224, 276);
+            cuiPictureBox3.Margin = new Padding(5);
             cuiPictureBox3.Name = "cuiPictureBox3";
             cuiPictureBox3.OutlineThickness = 1F;
             cuiPictureBox3.PanelOutlineColor = Color.Empty;
             cuiPictureBox3.Rotation = 0;
             cuiPictureBox3.Rounding = new Padding(8);
-            cuiPictureBox3.Size = new Size(117, 131);
+            cuiPictureBox3.Size = new Size(117, 111);
             cuiPictureBox3.TabIndex = 4;
             // 
             // cuiFileDropper2
@@ -348,7 +348,7 @@
             cuiFileDropper2.ImagePadding = 2;
             cuiFileDropper2.ImageSize = new Size(24, 24);
             cuiFileDropper2.ImageTint = Color.White;
-            cuiFileDropper2.Location = new Point(58, 476);
+            cuiFileDropper2.Location = new Point(80, 476);
             cuiFileDropper2.Multiselect = false;
             cuiFileDropper2.Name = "cuiFileDropper2";
             cuiFileDropper2.NormalContent = "Arrastra la foto de tu preferencia";

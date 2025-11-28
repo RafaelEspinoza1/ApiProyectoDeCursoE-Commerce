@@ -1,7 +1,7 @@
-﻿using ApiProyectoDeCursoE_Commerce.DTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.CompradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.Auth;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.AdministradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.CompradorDTOs;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.VendedorDTOs;
 
 namespace ApiProyectoDeCursoE_Commerce.Services
 {

@@ -1,4 +1,4 @@
-﻿using FormApiE_Commerce.DTOs;
+﻿using FormApiE_Commerce.DTOs.Auth;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

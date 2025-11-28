@@ -12,7 +12,9 @@ using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsForms;
 using GMap.NET;
 using System.Net.Http.Json;
-using FormApiE_Commerce.Models;
+using FormApiE_Commerce.DTOs;
+using FormApiE_Commerce.Views;
+using FormApiE_Commerce.UsersControls;
 
 
 
@@ -33,93 +35,82 @@ namespace FormApiE_Commerce
 
         }
 
-        private void cuiButton5_Click(object sender, EventArgs e)
-        {
 
+        private void btnAnalisis_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Buscar una instancia ya agregada
+                var existente = pnlGenerico.Controls.OfType<Analisis_Financieros>().FirstOrDefault();
+                if (existente != null)
+                {
+                    // Si ya existe, traer al frente y asegurarse de que esté visible
+                    existente.BringToFront();
+                    return;
+                }
+
+                // Limpiar panel (opcional, evita múltiples formularios)
+                pnlGenerico.Controls.Clear();
+
+                // Crear y configurar el formulario hijo
+                Analisis_Financieros analisisForm = new Analisis_Financieros
+                {
+                    TopLevel = false,
+                    FormBorderStyle = FormBorderStyle.None,
+                    Dock = DockStyle.Fill
+                };
+
+                // Agregar al panel y mostrar
+                pnlGenerico.Controls.Add(analisisForm);
+                analisisForm.Show();
+                analisisForm.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir Análisis Financieros: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void cuiButton6_Click(object sender, EventArgs e)
+       
+
+        private void BtnInicio_Click(object sender, EventArgs e)
         {
+            try
+            {
+                // Verificar si ya hay una instancia de FuncionComprar en el panel
+                var existente = pnlGenerico.Controls.OfType<funcionComprar>().FirstOrDefault();
+                if (existente != null)
+                {
+                    existente.BringToFront();
+                    return;
+                }
+
+                // Si hay cualquier otro control (otro formulario), sustituirlo
+                if (pnlGenerico.Controls.Count > 0)
+                {
+                    // Dispose y limpiar para liberar recursos
+                    foreach (Control c in pnlGenerico.Controls.OfType<Control>().ToList())
+                    {
+                        pnlGenerico.Controls.Remove(c);
+                        c.Dispose();
+                    }
+                }
+
+                // Crear y configurar el formulario FuncionComprar
+                funcionComprar compraForm = new funcionComprar
+                {
+                    Dock = DockStyle.Fill
+                };
+
+                // Agregar al panel y mostrar
+                pnlGenerico.Controls.Add(compraForm);
+                compraForm.Show();
+                compraForm.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir la función Comprar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-
-        private void cuiButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-        //private void btnCerrar_Click(object sender, EventArgs e)
-        //{
-        //    flowLayoutPanel1.Visible = false;
-        //    btnMenu.Visible = true;
-        //}
-        //public async void MostrarFormularioEnTabPage()
-        //{
-        //    FormComprar formComprar = new FormComprar();
-        //    formComprar.Dock = DockStyle.Fill;
-        //    tabPageComprar.Controls.Clear();
-        //    tabPageComprar.Controls.Add(formComprar);
-        //    formComprar.Show();
-
-        //    try
-        //    {
-        //      //  int usuarioId = FormInicio.UsuarioId;
-        //        var api = new ApiService();
-
-        //        // Llamar a la API para obtener si es vendedor
-        //      //  var vendedor = await api.ObtenerVendedorPorUsuarioIdAsync(usuarioId);
-
-        //        tabPageVender.Controls.Clear();
-
-        //        if (vendedor != null)
-        //        {
-        //            // Ya es vendedor
-        //            FormVendedorRegistrado interfaz = new FormVendedorRegistrado(); // este es un UserControl
-        //            interfaz.Dock = DockStyle.Fill;
-        //            tabPageVender.Controls.Add(interfaz);
-        //        }
-        //        else
-        //        {
-        //            // No es vendedor
-        //            Vender registro = new Vender(); // este es el formulario de registro
-        //            registro.Dock = DockStyle.Fill;
-        //            tabPageVender.Controls.Add(registro);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Error al cargar la información del vendedor: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        //public class ApiService
-        //{
-        //    private readonly HttpClient client;
-
-        //    public ApiService()
-        //    {
-        //        client = new HttpClient();
-        //        client.BaseAddress = new Uri("https://localhost:5001/"); // cambia a tu base real
-        //    }
-
-        //    public async Task<VerificacioVendedorDTO> ObtenerVendedorPorUsuarioIdAsync(int usuarioId)
-        //    {
-        //        var response = await client.GetAsync($"api/vendedores/usuario/{usuarioId}");
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            return await response.Content.ReadFromJsonAsync<VerificacioVendedorDTO>();
-        //        }
-
-        //        return null;
-        //    }
-        //}
-
-
-        //private void pictureBox2_DoubleClick(object sender, EventArgs e)
-        //{
-        //    Chatbot chatbot = new Chatbot();
-        //    chatbot.Show();
-        //}
     }
 }
