@@ -9,6 +9,7 @@ namespace ApiProyectoDeCursoE_Commerce.Models.ECommerce
     {
         [Key]
         public int IdProducto { get; set; }
+
         [Required]
         public int IdVendedor { get; set; }
 
@@ -29,22 +30,5 @@ namespace ApiProyectoDeCursoE_Commerce.Models.ECommerce
 
         [Required]
         public int StockDisponible { get; set; }
-
-        [Required]
-        public DateTime FechaPublicacion { get; set; } = DateTime.Now;
-
-        // Relaciones
-        [ForeignKey("IdVendedor")]
-        public Vendedor Vendedor { get; set; } = null!;
-
-        [ForeignKey("IdCategoria")]
-        public Categoria Categoria { get; set; } = null!;
-
-        [ForeignKey("IdEstadoProducto")]
-        public EstadoProducto EstadoProducto { get; set; } = null!;
-
-        public ICollection<ImagenProducto>? Imagenes { get; set; }
-        public ICollection<Transaccion>? Transacciones { get; set; }
-        public ICollection<ReseñaProducto>? Reseñas { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ApiProyectoDeCursoE_Commerce.DTOs.Auth.RefreshTokenDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.VendedorDTOs;
 using ApiProyectoDeCursoE_Commerce.Models.Auth;
 using Microsoft.Data.SqlClient;
 
