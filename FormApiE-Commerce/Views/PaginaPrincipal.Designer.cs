@@ -47,13 +47,13 @@
             Panel_BarradeTareas.Controls.Add(BtnInicio);
             Panel_BarradeTareas.Dock = DockStyle.Top;
             Panel_BarradeTareas.Location = new Point(0, 0);
-            Panel_BarradeTareas.Margin = new Padding(3, 2, 3, 2);
+            Panel_BarradeTareas.Margin = new Padding(4, 2, 4, 2);
             Panel_BarradeTareas.Name = "Panel_BarradeTareas";
             Panel_BarradeTareas.OutlineThickness = 1F;
             Panel_BarradeTareas.PanelColor = Color.White;
             Panel_BarradeTareas.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
             Panel_BarradeTareas.Rounding = new Padding(8);
-            Panel_BarradeTareas.Size = new Size(1182, 74);
+            Panel_BarradeTareas.Size = new Size(1478, 92);
             Panel_BarradeTareas.TabIndex = 0;
             // 
             // btnDashboard_Vendedor
@@ -77,8 +77,8 @@
             btnDashboard_Vendedor.ImageAutoCenter = true;
             btnDashboard_Vendedor.ImageExpand = new Point(0, 0);
             btnDashboard_Vendedor.ImageOffset = new Point(0, 0);
-            btnDashboard_Vendedor.Location = new Point(212, 21);
-            btnDashboard_Vendedor.Margin = new Padding(3, 2, 3, 2);
+            btnDashboard_Vendedor.Location = new Point(265, 26);
+            btnDashboard_Vendedor.Margin = new Padding(4, 2, 4, 2);
             btnDashboard_Vendedor.Name = "btnDashboard_Vendedor";
             btnDashboard_Vendedor.NormalBackground = Color.White;
             btnDashboard_Vendedor.NormalForeColor = Color.Black;
@@ -90,10 +90,11 @@
             btnDashboard_Vendedor.PressedImageTint = Color.White;
             btnDashboard_Vendedor.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnDashboard_Vendedor.Rounding = new Padding(8);
-            btnDashboard_Vendedor.Size = new Size(130, 36);
+            btnDashboard_Vendedor.Size = new Size(162, 45);
             btnDashboard_Vendedor.TabIndex = 9;
             btnDashboard_Vendedor.TextAlignment = StringAlignment.Center;
             btnDashboard_Vendedor.TextOffset = new Point(0, 0);
+            btnDashboard_Vendedor.Click += btnDashboard_Vendedor_Click;
             // 
             // btnSoporte
             // 
@@ -116,8 +117,8 @@
             btnSoporte.ImageAutoCenter = true;
             btnSoporte.ImageExpand = new Point(0, 0);
             btnSoporte.ImageOffset = new Point(0, 0);
-            btnSoporte.Location = new Point(875, 21);
-            btnSoporte.Margin = new Padding(3, 2, 3, 2);
+            btnSoporte.Location = new Point(1094, 26);
+            btnSoporte.Margin = new Padding(4, 2, 4, 2);
             btnSoporte.Name = "btnSoporte";
             btnSoporte.NormalBackground = Color.White;
             btnSoporte.NormalForeColor = Color.Black;
@@ -129,7 +130,7 @@
             btnSoporte.PressedImageTint = Color.White;
             btnSoporte.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             btnSoporte.Rounding = new Padding(8);
-            btnSoporte.Size = new Size(78, 36);
+            btnSoporte.Size = new Size(98, 45);
             btnSoporte.TabIndex = 6;
             btnSoporte.TextAlignment = StringAlignment.Center;
             btnSoporte.TextOffset = new Point(0, 0);
@@ -156,8 +157,8 @@
             Btnconfiguracion.ImageAutoCenter = true;
             Btnconfiguracion.ImageExpand = new Point(0, 0);
             Btnconfiguracion.ImageOffset = new Point(0, 0);
-            Btnconfiguracion.Location = new Point(1012, 0);
-            Btnconfiguracion.Margin = new Padding(3, 2, 3, 2);
+            Btnconfiguracion.Location = new Point(1266, 0);
+            Btnconfiguracion.Margin = new Padding(4, 2, 4, 2);
             Btnconfiguracion.Name = "Btnconfiguracion";
             Btnconfiguracion.NormalBackground = Color.Transparent;
             Btnconfiguracion.NormalForeColor = Color.Black;
@@ -169,7 +170,7 @@
             Btnconfiguracion.PressedImageTint = Color.White;
             Btnconfiguracion.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             Btnconfiguracion.Rounding = new Padding(8);
-            Btnconfiguracion.Size = new Size(170, 74);
+            Btnconfiguracion.Size = new Size(212, 92);
             Btnconfiguracion.TabIndex = 4;
             Btnconfiguracion.TextAlignment = StringAlignment.Center;
             Btnconfiguracion.TextOffset = new Point(0, 0);
@@ -179,10 +180,10 @@
             MenuIconButton.IconChar = FontAwesome.Sharp.IconChar.None;
             MenuIconButton.IconColor = Color.Black;
             MenuIconButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            MenuIconButton.Location = new Point(35, 14);
-            MenuIconButton.Margin = new Padding(3, 2, 3, 2);
+            MenuIconButton.Location = new Point(44, 18);
+            MenuIconButton.Margin = new Padding(4, 2, 4, 2);
             MenuIconButton.Name = "MenuIconButton";
-            MenuIconButton.Size = new Size(46, 46);
+            MenuIconButton.Size = new Size(58, 58);
             MenuIconButton.TabIndex = 1;
             MenuIconButton.UseVisualStyleBackColor = true;
             // 
@@ -207,8 +208,8 @@
             BtnInicio.ImageAutoCenter = true;
             BtnInicio.ImageExpand = new Point(0, 0);
             BtnInicio.ImageOffset = new Point(0, 0);
-            BtnInicio.Location = new Point(103, 20);
-            BtnInicio.Margin = new Padding(3, 2, 3, 2);
+            BtnInicio.Location = new Point(129, 25);
+            BtnInicio.Margin = new Padding(4, 2, 4, 2);
             BtnInicio.Name = "BtnInicio";
             BtnInicio.NormalBackground = Color.White;
             BtnInicio.NormalForeColor = Color.Black;
@@ -220,7 +221,7 @@
             BtnInicio.PressedImageTint = Color.White;
             BtnInicio.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             BtnInicio.Rounding = new Padding(8);
-            BtnInicio.Size = new Size(78, 36);
+            BtnInicio.Size = new Size(98, 45);
             BtnInicio.TabIndex = 0;
             BtnInicio.TextAlignment = StringAlignment.Center;
             BtnInicio.TextOffset = new Point(0, 0);
@@ -229,24 +230,24 @@
             // pnlGenerico
             // 
             pnlGenerico.Dock = DockStyle.Fill;
-            pnlGenerico.Location = new Point(0, 74);
-            pnlGenerico.Margin = new Padding(3, 4, 3, 4);
+            pnlGenerico.Location = new Point(0, 92);
+            pnlGenerico.Margin = new Padding(4, 5, 4, 5);
             pnlGenerico.Name = "pnlGenerico";
             pnlGenerico.OutlineThickness = 1F;
             pnlGenerico.PanelColor = Color.White;
             pnlGenerico.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
             pnlGenerico.Rounding = new Padding(8);
-            pnlGenerico.Size = new Size(1182, 849);
+            pnlGenerico.Size = new Size(1478, 1062);
             pnlGenerico.TabIndex = 1;
             // 
             // PaginaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1182, 923);
+            ClientSize = new Size(1478, 1154);
             Controls.Add(pnlGenerico);
             Controls.Add(Panel_BarradeTareas);
-            Margin = new Padding(3, 4, 3, 4);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "PaginaPrincipal";
             Text = "PaginaPrincipal";
             Panel_BarradeTareas.ResumeLayout(false);

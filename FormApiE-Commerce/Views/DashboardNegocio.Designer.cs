@@ -90,6 +90,7 @@
             // 
             // tabEF
             // 
+            tabEF.BackColor = Color.LightSteelBlue;
             tabEF.Font = new Font("Garamond", 12F, FontStyle.Bold);
             tabEF.Location = new Point(4, 39);
             tabEF.Name = "tabEF";
@@ -97,10 +98,10 @@
             tabEF.Size = new Size(1478, 760);
             tabEF.TabIndex = 0;
             tabEF.Text = "Estados Financieros";
-            tabEF.UseVisualStyleBackColor = true;
             // 
             // tabAnalisis
             // 
+            tabAnalisis.BackColor = Color.LightSteelBlue;
             tabAnalisis.Font = new Font("Garamond", 12F, FontStyle.Bold);
             tabAnalisis.Location = new Point(4, 39);
             tabAnalisis.Name = "tabAnalisis";
@@ -108,7 +109,6 @@
             tabAnalisis.Size = new Size(1478, 760);
             tabAnalisis.TabIndex = 1;
             tabAnalisis.Text = "Análisis";
-            tabAnalisis.UseVisualStyleBackColor = true;
             // 
             // Analisis_Financieros
             // 

@@ -145,8 +145,10 @@ namespace FormApiE_Commerce.UsersControls
                     return await RegistrarAdmin(adminDto);
 
                 case 2:
-                    if (usuario is not VendedorCreateDTO vendedor)
+                    if (usuario is not RegistrarVendedorDTO datosVendedor)
                         throw new ArgumentException("El objeto no es un VendedorCreateDTO");
+
+                    var vendedor = ObtenerVendedorDTO(datosVendedor);
 
                     return await RegistrarVendedor(vendedor);
 
@@ -214,7 +216,7 @@ namespace FormApiE_Commerce.UsersControls
             if (!ValidarCampos())
                 return;
 
-            MessageBox.Show(cmbRol.SelectedValue!.ToString());
+            //MessageBox.Show(cmbRol.SelectedValue!.ToString());
 
             if (cmbRol.SelectedValue == null)
             {
@@ -236,6 +238,24 @@ namespace FormApiE_Commerce.UsersControls
                 {
                     var vendedor = registro.datosVendedor;
                     MessageBox.Show("Los datos se cargaron con éxito.");
+
+                    if (vendedor != null)
+                    {
+                        var nuevoVendedor = new RegistrarVendedorDTO
+                        {
+                            NombreNegocio = vendedor.NombreNegocio,
+                            LogoNegocio = vendedor.LogoNegocio,
+                            DescripcionNegocio = vendedor.DescripcionNegocio,
+                            EsContribuyente = vendedor.EsContribuyente
+                        };
+
+                        usuario = nuevoVendedor;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error al cargar los datos.");
+                        return;
+                    }
                 }
                 else
                 {
@@ -255,7 +275,7 @@ namespace FormApiE_Commerce.UsersControls
 
             MessageBox.Show("Registro exitoso. ¡Bienvenido!");
 
-            PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+            PaginaPrincipal paginaPrincipal = new PaginaPrincipal(true);
             var formInicio = this.FindForm();
 
             if (formInicio != null)

@@ -56,7 +56,10 @@ namespace FormApiE_Commerce
                         if (response.IsSuccessStatusCode)
                         {
                             var nuevoToken = await response.Content.ReadAsStringAsync();
-                            var authResponse = JsonSerializer.Deserialize<TokenData>(nuevoToken);
+                            var authResponse = JsonSerializer.Deserialize<TokenData>(
+                                nuevoToken,
+                                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                            );
 
                             if (authResponse == null)
                             {
@@ -69,12 +72,13 @@ namespace FormApiE_Commerce
 
                             MessageBox.Show("¡Bienvenido de nuevo!");
 
-                            PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+                            PaginaPrincipal paginaPrincipal = new PaginaPrincipal(true);
                             var formInicio = this.FindForm();
                             if (formInicio != null)
                             {
                                 paginaPrincipal.FormClosed += (s, args) => formInicio.Close();
                             }
+
                             paginaPrincipal.Show();
                             formInicio?.Hide();
                         }
@@ -120,7 +124,11 @@ namespace FormApiE_Commerce
 
                 var responseJson = await response.Content.ReadAsStringAsync();
                 var authResponse = JsonSerializer.Deserialize<TokenData>(
-                    responseJson
+                    responseJson,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }
                 );
 
                 return authResponse;
@@ -152,7 +160,7 @@ namespace FormApiE_Commerce
 
                 MessageBox.Show("Inicio de sesión exitoso. ¡Bienvenido de nuevo!");
 
-                PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
+                PaginaPrincipal paginaPrincipal = new PaginaPrincipal(true);
                 var formInicio = this.FindForm();
                 if (formInicio != null)
                 {
