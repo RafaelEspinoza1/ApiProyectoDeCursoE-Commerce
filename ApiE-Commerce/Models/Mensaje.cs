@@ -17,6 +17,10 @@ namespace ApiProyectoDeCursoE_Commerce.Models
 
         [Required]
         public string Contenido { get; set; } = null!;
+        [Required]
+        public DateTime FechaEnvio { get; set; } = DateTime.Now;
+        [Required]
+        public string EstadoMensaje { get; set; } = null!;
 
         // Relaciones
         [ForeignKey("IdChat")]

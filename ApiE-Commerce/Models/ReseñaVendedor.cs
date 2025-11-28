@@ -14,6 +14,9 @@ namespace ApiProyectoDeCursoE_Commerce.Models
 
         [Required]
         public int IdComprador { get; set; }
+        [Required]
+        public int IdTransaccion { get; set; }
+
 
         [Required, Column(TypeName = "decimal(3,1)")]
         [Range(1, 5)]
