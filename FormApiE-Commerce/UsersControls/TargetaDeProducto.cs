@@ -56,7 +56,7 @@ namespace FormApiE_Commerce.UsersControls
                  // picImagen.Image = Properties.Resources.placeholder; 
                  picImagen.BackColor = Color.LightGray; // O un color gris de fondo
              }*/
-        }
+       
 
         private string ObtenerNombreEstado(int idEstado)
         {
