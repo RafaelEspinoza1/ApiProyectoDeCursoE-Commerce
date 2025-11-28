@@ -1,5 +1,4 @@
-﻿using ApiProyectoDeCursoE_Commerce.DTOs.AdministradorDTOs;
-using ApiProyectoDeCursoE_Commerce.DTOs.Auth.CompradorDTOs;
+﻿using ApiProyectoDeCursoE_Commerce.DTOs.Auth.CompradorDTOs;
 using ApiProyectoDeCursoE_Commerce.Models.Auth;
 using Microsoft.Data.SqlClient;
 

@@ -4,6 +4,15 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.Auth.ProductoDTOs
 {
     public class ProductoCreateDTO
     {
+        [Required(ErrorMessage = "El ID del vendedor es obligatorio.")]
+        public int IdVendedor { get; set; }
+
+        [Required(ErrorMessage = "El ID de la categoria es obligatorio.")]
+        public int IdCategoria { get; set; }
+
+        [Required(ErrorMessage = "El ID del estado del producto es obligatorio.")]
+        public int IdEstadoProducto { get; set; }
+
         [Required(ErrorMessage = "El nombre del producto es obligatoria.")]
         [StringLength(100, ErrorMessage = "El nombre del producto no puede tener más de 100 caracteres")]
         public string NombreProducto { get; set; }
@@ -27,8 +36,5 @@ namespace ApiProyectoDeCursoE_Commerce.DTOs.Auth.ProductoDTOs
         [Required(ErrorMessage = "El estado del producto es obligatorio.")]
         [StringLength(50, ErrorMessage = "El estado no puede tener más de 50 caracteres.")]
         public string Estado { get; set; }
-
-        [Required(ErrorMessage = "El ID del vendedor es obligatorio.")]
-        public int VendedorId { get; set; }
     }
 }

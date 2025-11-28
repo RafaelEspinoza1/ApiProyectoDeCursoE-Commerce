@@ -1,4 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiProyectoDeCursoE_Commerce.DAOs;
+using ApiProyectoDeCursoE_Commerce.Data;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth;
+using ApiProyectoDeCursoE_Commerce.DTOs.Auth.ProductoDTOs;
+using ApiProyectoDeCursoE_Commerce.Models.ECommerce;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +15,74 @@ namespace ApiProyectoDeCursoE_Commerce.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        // GET: api/<ProductoController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public ProductoDAO _productoDAO;
+
+        public ECommerceContext _context;
+
+        public ProductoController(ProductoDAO productoDAO, ECommerceContext context)
         {
-            return new string[] { "value1", "value2" };
+            _productoDAO = productoDAO;
+            _context = context;
         }
 
-        // GET api/<ProductoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [AllowAnonymous]
+        [HttpPost("get")]
+        public async Task<IActionResult> GetProductos()
         {
-            return "value";
+            try
+            {
+                using var connection = _context.GetConnection();
+                await connection.OpenAsync();
+
+                var response = await _productoDAO.GetAllAsync(connection);
+
+                if (response == null || response.Count == 0)
+                    return NotFound("No se encontró ningún producto registrado.");
+
+                return Ok(response);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
-        // POST api/<ProductoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [AllowAnonymous]
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateProducto([FromBody] ProductoCreateDTO producto)
         {
-        }
+            try
+            {
+                using var connection = _context.GetConnection();
+                await connection.OpenAsync();
 
-        // PUT api/<ProductoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+                if (producto == null)
+                    return BadRequest("Datos inválidos");
 
-        // DELETE api/<ProductoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+                var response = await _productoDAO.CreateAsync(producto, connection, transaction: null);
+
+                return Ok(response);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }
