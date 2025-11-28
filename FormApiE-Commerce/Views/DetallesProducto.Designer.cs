@@ -57,14 +57,14 @@
             cuiPictureBox1.BackColor = Color.Transparent;
             cuiPictureBox1.Content = Properties.Resources.tokens_5172584;
             cuiPictureBox1.ImageTint = Color.Black;
-            cuiPictureBox1.Location = new Point(78, 12);
-            cuiPictureBox1.Margin = new Padding(4, 3, 4, 3);
+            cuiPictureBox1.Location = new Point(89, 16);
+            cuiPictureBox1.Margin = new Padding(5, 4, 5, 4);
             cuiPictureBox1.Name = "cuiPictureBox1";
             cuiPictureBox1.OutlineThickness = 1F;
             cuiPictureBox1.PanelOutlineColor = Color.Empty;
             cuiPictureBox1.Rotation = 0;
             cuiPictureBox1.Rounding = new Padding(10);
-            cuiPictureBox1.Size = new Size(271, 265);
+            cuiPictureBox1.Size = new Size(310, 353);
             cuiPictureBox1.TabIndex = 0;
             // 
             // cuiButton1
@@ -88,7 +88,8 @@
             cuiButton1.ImageAutoCenter = true;
             cuiButton1.ImageExpand = new Point(0, 0);
             cuiButton1.ImageOffset = new Point(0, 0);
-            cuiButton1.Location = new Point(238, 283);
+            cuiButton1.Location = new Point(272, 377);
+            cuiButton1.Margin = new Padding(3, 4, 3, 4);
             cuiButton1.Name = "cuiButton1";
             cuiButton1.NormalBackground = Color.DarkKhaki;
             cuiButton1.NormalForeColor = Color.Black;
@@ -100,7 +101,7 @@
             cuiButton1.PressedImageTint = Color.White;
             cuiButton1.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton1.Rounding = new Padding(8);
-            cuiButton1.Size = new Size(128, 34);
+            cuiButton1.Size = new Size(146, 45);
             cuiButton1.TabIndex = 1;
             cuiButton1.TextAlignment = StringAlignment.Center;
             cuiButton1.TextOffset = new Point(0, 0);
@@ -126,7 +127,8 @@
             cuiButton2.ImageAutoCenter = true;
             cuiButton2.ImageExpand = new Point(0, 0);
             cuiButton2.ImageOffset = new Point(0, 0);
-            cuiButton2.Location = new Point(57, 283);
+            cuiButton2.Location = new Point(65, 377);
+            cuiButton2.Margin = new Padding(3, 4, 3, 4);
             cuiButton2.Name = "cuiButton2";
             cuiButton2.NormalBackground = Color.DarkKhaki;
             cuiButton2.NormalForeColor = Color.Black;
@@ -138,7 +140,7 @@
             cuiButton2.PressedImageTint = Color.White;
             cuiButton2.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton2.Rounding = new Padding(8);
-            cuiButton2.Size = new Size(130, 34);
+            cuiButton2.Size = new Size(149, 45);
             cuiButton2.TabIndex = 2;
             cuiButton2.TextAlignment = StringAlignment.Center;
             cuiButton2.TextOffset = new Point(0, 0);
@@ -150,12 +152,13 @@
             cuiPanel1.Controls.Add(cuiButton1);
             cuiPanel1.Dock = DockStyle.Top;
             cuiPanel1.Location = new Point(0, 0);
+            cuiPanel1.Margin = new Padding(3, 4, 3, 4);
             cuiPanel1.Name = "cuiPanel1";
             cuiPanel1.OutlineThickness = 1F;
             cuiPanel1.PanelColor = Color.White;
             cuiPanel1.PanelOutlineColor = Color.FromArgb(64, 128, 128, 128);
             cuiPanel1.Rounding = new Padding(8);
-            cuiPanel1.Size = new Size(425, 327);
+            cuiPanel1.Size = new Size(486, 436);
             cuiPanel1.TabIndex = 3;
             // 
             // cuiLabel1
@@ -164,10 +167,10 @@
             cuiLabel1.Font = new Font("Garamond", 12F);
             cuiLabel1.ForeColor = Color.Black;
             cuiLabel1.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel1.Location = new Point(14, 31);
-            cuiLabel1.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel1.Location = new Point(16, 41);
+            cuiLabel1.Margin = new Padding(5, 4, 5, 4);
             cuiLabel1.Name = "cuiLabel1";
-            cuiLabel1.Size = new Size(71, 22);
+            cuiLabel1.Size = new Size(81, 29);
             cuiLabel1.TabIndex = 4;
             cuiLabel1.VerticalAlignment = StringAlignment.Near;
             // 
@@ -177,10 +180,10 @@
             cuiLabel2.Font = new Font("Garamond", 12F);
             cuiLabel2.ForeColor = Color.Black;
             cuiLabel2.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel2.Location = new Point(14, 59);
-            cuiLabel2.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel2.Location = new Point(16, 79);
+            cuiLabel2.Margin = new Padding(5, 4, 5, 4);
             cuiLabel2.Name = "cuiLabel2";
-            cuiLabel2.Size = new Size(62, 22);
+            cuiLabel2.Size = new Size(71, 29);
             cuiLabel2.TabIndex = 5;
             cuiLabel2.VerticalAlignment = StringAlignment.Near;
             // 
@@ -190,10 +193,10 @@
             cuiLabel3.Font = new Font("Garamond", 12F);
             cuiLabel3.ForeColor = Color.Black;
             cuiLabel3.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel3.Location = new Point(14, 87);
-            cuiLabel3.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel3.Location = new Point(16, 116);
+            cuiLabel3.Margin = new Padding(5, 4, 5, 4);
             cuiLabel3.Name = "cuiLabel3";
-            cuiLabel3.Size = new Size(93, 22);
+            cuiLabel3.Size = new Size(106, 29);
             cuiLabel3.TabIndex = 6;
             cuiLabel3.VerticalAlignment = StringAlignment.Near;
             // 
@@ -203,10 +206,10 @@
             cuiLabel4.Font = new Font("Garamond", 12F);
             cuiLabel4.ForeColor = Color.Black;
             cuiLabel4.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel4.Location = new Point(14, 191);
-            cuiLabel4.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel4.Location = new Point(16, 255);
+            cuiLabel4.Margin = new Padding(5, 4, 5, 4);
             cuiLabel4.Name = "cuiLabel4";
-            cuiLabel4.Size = new Size(93, 22);
+            cuiLabel4.Size = new Size(106, 29);
             cuiLabel4.TabIndex = 7;
             cuiLabel4.VerticalAlignment = StringAlignment.Near;
             // 
@@ -216,10 +219,10 @@
             cuiLabel5.Font = new Font("Garamond", 12F);
             cuiLabel5.ForeColor = Color.Black;
             cuiLabel5.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel5.Location = new Point(14, 163);
-            cuiLabel5.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel5.Location = new Point(16, 217);
+            cuiLabel5.Margin = new Padding(5, 4, 5, 4);
             cuiLabel5.Name = "cuiLabel5";
-            cuiLabel5.Size = new Size(62, 22);
+            cuiLabel5.Size = new Size(71, 29);
             cuiLabel5.TabIndex = 8;
             cuiLabel5.VerticalAlignment = StringAlignment.Near;
             // 
@@ -239,12 +242,11 @@
             cuiGroupBox2.Controls.Add(cuiLabel3);
             cuiGroupBox2.Font = new Font("Garamond", 13.2000008F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cuiGroupBox2.ForeColor = Color.Olive;
-            cuiGroupBox2.Location = new Point(12, 332);
-            cuiGroupBox2.Margin = new Padding(3, 2, 3, 2);
+            cuiGroupBox2.Location = new Point(14, 443);
             cuiGroupBox2.Name = "cuiGroupBox2";
-            cuiGroupBox2.Padding = new Padding(10, 28, 10, 15);
+            cuiGroupBox2.Padding = new Padding(10, 33, 10, 15);
             cuiGroupBox2.Rounding = new Padding(10, 10, 10, 15);
-            cuiGroupBox2.Size = new Size(401, 231);
+            cuiGroupBox2.Size = new Size(458, 308);
             cuiGroupBox2.TabIndex = 13;
             // 
             // cuiLabel9
@@ -253,10 +255,10 @@
             cuiLabel9.Font = new Font("Garamond", 12F);
             cuiLabel9.ForeColor = Color.Black;
             cuiLabel9.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel9.Location = new Point(239, 191);
-            cuiLabel9.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel9.Location = new Point(273, 255);
+            cuiLabel9.Margin = new Padding(5, 4, 5, 4);
             cuiLabel9.Name = "cuiLabel9";
-            cuiLabel9.Size = new Size(71, 22);
+            cuiLabel9.Size = new Size(81, 29);
             cuiLabel9.TabIndex = 16;
             cuiLabel9.VerticalAlignment = StringAlignment.Near;
             // 
@@ -266,10 +268,10 @@
             cuiLabel8.Font = new Font("Garamond", 12F);
             cuiLabel8.ForeColor = Color.Black;
             cuiLabel8.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel8.Location = new Point(239, 163);
-            cuiLabel8.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel8.Location = new Point(273, 217);
+            cuiLabel8.Margin = new Padding(5, 4, 5, 4);
             cuiLabel8.Name = "cuiLabel8";
-            cuiLabel8.Size = new Size(71, 22);
+            cuiLabel8.Size = new Size(81, 29);
             cuiLabel8.TabIndex = 15;
             cuiLabel8.VerticalAlignment = StringAlignment.Near;
             // 
@@ -279,10 +281,10 @@
             cuiLabel7.Font = new Font("Garamond", 12F);
             cuiLabel7.ForeColor = Color.Black;
             cuiLabel7.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel7.Location = new Point(239, 87);
-            cuiLabel7.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel7.Location = new Point(273, 116);
+            cuiLabel7.Margin = new Padding(5, 4, 5, 4);
             cuiLabel7.Name = "cuiLabel7";
-            cuiLabel7.Size = new Size(71, 22);
+            cuiLabel7.Size = new Size(81, 29);
             cuiLabel7.TabIndex = 14;
             cuiLabel7.VerticalAlignment = StringAlignment.Near;
             // 
@@ -292,10 +294,10 @@
             cuiLabel10.Font = new Font("Garamond", 12F);
             cuiLabel10.ForeColor = Color.Black;
             cuiLabel10.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel10.Location = new Point(239, 59);
-            cuiLabel10.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel10.Location = new Point(273, 79);
+            cuiLabel10.Margin = new Padding(5, 4, 5, 4);
             cuiLabel10.Name = "cuiLabel10";
-            cuiLabel10.Size = new Size(71, 22);
+            cuiLabel10.Size = new Size(81, 29);
             cuiLabel10.TabIndex = 13;
             cuiLabel10.VerticalAlignment = StringAlignment.Near;
             // 
@@ -305,10 +307,10 @@
             cuiLabel6.Font = new Font("Garamond", 12F);
             cuiLabel6.ForeColor = Color.Black;
             cuiLabel6.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel6.Location = new Point(239, 31);
-            cuiLabel6.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel6.Location = new Point(273, 41);
+            cuiLabel6.Margin = new Padding(5, 4, 5, 4);
             cuiLabel6.Name = "cuiLabel6";
-            cuiLabel6.Size = new Size(71, 22);
+            cuiLabel6.Size = new Size(81, 29);
             cuiLabel6.TabIndex = 9;
             cuiLabel6.VerticalAlignment = StringAlignment.Near;
             // 
@@ -333,7 +335,8 @@
             cuiButton3.ImageAutoCenter = true;
             cuiButton3.ImageExpand = new Point(0, 0);
             cuiButton3.ImageOffset = new Point(0, 0);
-            cuiButton3.Location = new Point(320, 568);
+            cuiButton3.Location = new Point(366, 757);
+            cuiButton3.Margin = new Padding(3, 4, 3, 4);
             cuiButton3.Name = "cuiButton3";
             cuiButton3.NormalBackground = Color.Olive;
             cuiButton3.NormalForeColor = Color.Black;
@@ -345,7 +348,7 @@
             cuiButton3.PressedImageTint = Color.White;
             cuiButton3.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton3.Rounding = new Padding(8);
-            cuiButton3.Size = new Size(84, 45);
+            cuiButton3.Size = new Size(96, 60);
             cuiButton3.TabIndex = 14;
             cuiButton3.TextAlignment = StringAlignment.Center;
             cuiButton3.TextOffset = new Point(0, 0);
@@ -353,10 +356,11 @@
             // numericUpDown1
             // 
             numericUpDown1.Font = new Font("Garamond", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            numericUpDown1.Location = new Point(91, 576);
+            numericUpDown1.Location = new Point(104, 768);
+            numericUpDown1.Margin = new Padding(3, 4, 3, 4);
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.RightToLeft = RightToLeft.Yes;
-            numericUpDown1.Size = new Size(49, 31);
+            numericUpDown1.Size = new Size(56, 37);
             numericUpDown1.TabIndex = 15;
             numericUpDown1.TextAlign = HorizontalAlignment.Center;
             // 
@@ -366,10 +370,10 @@
             cuiLabel11.Font = new Font("Garamond", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             cuiLabel11.ForeColor = Color.Black;
             cuiLabel11.HorizontalAlignment = StringAlignment.Near;
-            cuiLabel11.Location = new Point(13, 582);
-            cuiLabel11.Margin = new Padding(4, 3, 4, 3);
+            cuiLabel11.Location = new Point(15, 776);
+            cuiLabel11.Margin = new Padding(5, 4, 5, 4);
             cuiLabel11.Name = "cuiLabel11";
-            cuiLabel11.Size = new Size(71, 22);
+            cuiLabel11.Size = new Size(81, 29);
             cuiLabel11.TabIndex = 17;
             cuiLabel11.VerticalAlignment = StringAlignment.Near;
             // 
@@ -394,7 +398,8 @@
             cuiButton4.ImageAutoCenter = true;
             cuiButton4.ImageExpand = new Point(0, 0);
             cuiButton4.ImageOffset = new Point(0, 0);
-            cuiButton4.Location = new Point(186, 568);
+            cuiButton4.Location = new Point(213, 757);
+            cuiButton4.Margin = new Padding(3, 4, 3, 4);
             cuiButton4.Name = "cuiButton4";
             cuiButton4.NormalBackground = Color.Peru;
             cuiButton4.NormalForeColor = Color.Black;
@@ -406,16 +411,16 @@
             cuiButton4.PressedImageTint = Color.White;
             cuiButton4.PressedOutline = Color.FromArgb(64, 128, 128, 128);
             cuiButton4.Rounding = new Padding(8);
-            cuiButton4.Size = new Size(128, 45);
+            cuiButton4.Size = new Size(146, 60);
             cuiButton4.TabIndex = 18;
             cuiButton4.TextAlignment = StringAlignment.Center;
             cuiButton4.TextOffset = new Point(0, 0);
             // 
             // DetallesProducto
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(425, 622);
+            ClientSize = new Size(486, 829);
             Controls.Add(cuiButton4);
             Controls.Add(cuiLabel11);
             Controls.Add(numericUpDown1);
@@ -423,6 +428,7 @@
             Controls.Add(cuiGroupBox2);
             Controls.Add(cuiPanel1);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "DetallesProducto";
             Text = "DetallesProducto";
             cuiPanel1.ResumeLayout(false);
