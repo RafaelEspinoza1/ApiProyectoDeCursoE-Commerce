@@ -35,7 +35,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "RegistroFinanciero";
-            Size = new Size(989, 530);
+            Size = new Size(979, 590);
             ResumeLayout(false);
         }
 
